@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GWAS 分析入门：从群体设计到候选基因解析</title>
-    <meta name="description" content="一篇面向作物遗传和生物信息学研究者的 GWAS 分析博客，介绍群体设计、基因型质控、表型整理、群体结构校正、结果解读和候选基因挖掘。">
+    <title>GWAS Analysis: From Population Design to Candidate Gene Interpretation</title>
+    <meta name="description" content="A practical note on GWAS for crop genetics and bioinformatics researchers, covering population design, genotype QC, phenotype curation, population structure correction, result interpretation, and candidate gene mining.">
     <meta name="author" content="Jiwen Zhao">
     <link rel="canonical" href="https://cropcoder.github.io/blog/gwas-analysis.html">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="GWAS 分析入门：从群体设计到候选基因解析">
-    <meta property="og:description" content="面向作物遗传和生物信息学研究者的 GWAS 分析笔记，涵盖群体设计、基因型质控、模型选择、结果解读与候选基因挖掘。">
+    <meta property="og:title" content="GWAS Analysis: From Population Design to Candidate Gene Interpretation">
+    <meta property="og:description" content="A practical GWAS note for crop geneticists and bioinformaticians, covering population design, genotype QC, model selection, result interpretation, and candidate gene mining.">
     <meta property="og:url" content="https://cropcoder.github.io/blog/gwas-analysis.html">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
     <link rel="icon" href="../images/favicon.ico">
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
@@ -39,125 +39,125 @@
       <article class="blog-article">
         <header class="blog-hero">
           <p class="section-kicker">Bioinformatics Notes</p>
-          <h1>GWAS 分析入门：从群体设计到候选基因解析</h1>
-          <p class="blog-lead">全基因组关联分析（Genome-Wide Association Study, GWAS）是连接自然变异、复杂性状和候选基因的重要方法。对作物研究而言，GWAS 不只是画出 Manhattan plot，更关键的是把群体、表型、基因型、统计模型和生物学证据串成一条可解释的分析链。</p>
+          <h1>GWAS Analysis: From Population Design to Candidate Gene Interpretation</h1>
+          <p class="blog-lead">Genome-wide association studies (GWAS) bridge natural variation, complex traits, and candidate genes. For crop research, GWAS is far more than drawing a Manhattan plot — the key is to weave population design, phenotypes, genotypes, statistical models, and biological evidence into an interpretable analytical chain.</p>
           <div class="blog-meta">
-            <span>作者：Jiwen Zhao</span>
-            <span>主题：GWAS / 作物遗传 / 生物信息学</span>
-            <span>更新：2026-06-12</span>
+            <span>Author: Jiwen Zhao</span>
+            <span>Topic: GWAS / Crop Genetics / Bioinformatics</span>
+            <span>Updated: 2026-06-12</span>
           </div>
         </header>
 
         <section class="blog-section">
-          <h2>1. GWAS 解决什么问题？</h2>
-          <p>GWAS 的核心目标是寻找基因组变异与表型差异之间的统计关联。与双亲群体定位相比，自然群体或育种群体包含更丰富的历史重组事件，因此定位分辨率通常更高，适合挖掘控制株高、产量、抗病性、品质和环境适应性等复杂性状的关键位点。</p>
-          <p>但是，关联不等于因果。一个显著 SNP 可能只是与真正功能变异连锁，甚至可能受到群体结构、亲缘关系、批次效应或表型误差影响。因此，一次可靠的 GWAS 应该同时回答三个问题：统计信号是否可信、信号区域是否具有遗传学解释、候选基因是否有功能证据支持。</p>
+          <h2>1. What Problems Does GWAS Solve?</h2>
+          <p>The core goal of GWAS is to identify statistical associations between genomic variants and phenotypic differences. Compared to biparental population mapping, natural or breeding populations harbor richer historical recombination events, offering higher mapping resolution — ideal for dissecting complex traits such as plant height, yield, disease resistance, quality, and environmental adaptability.</p>
+          <p>However, association does not equal causation. A significant SNP may simply be in linkage disequilibrium with the true causal variant, or even be influenced by population structure, kinship, batch effects, or phenotypic errors. Therefore, a reliable GWAS should address three questions simultaneously: whether the statistical signal is credible, whether the signal region has a genetic explanation, and whether the candidate gene is supported by functional evidence.</p>
         </section>
 
         <section class="blog-section">
-          <h2>2. 分析前的关键准备</h2>
+          <h2>2. Key Preparations Before Analysis</h2>
           <div class="blog-grid">
             <div>
-              <h3>群体设计</h3>
-              <p>样本应尽量覆盖目标研究对象的遗传多样性，同时避免过强的亚群偏倚。作物中常见材料包括地方品种、育成品种、核心种质、重测序群体和区域育种群体。</p>
+              <h3>Population Design</h3>
+              <p>Samples should cover the genetic diversity of the target species as broadly as possible, while avoiding strong subpopulation bias. Common materials in crops include landraces, cultivars, core collections, resequencing panels, and regional breeding populations.</p>
             </div>
             <div>
-              <h3>表型质量</h3>
-              <p>表型是 GWAS 的上限。多环境、多重复和统一评分标准可以降低噪声。对抗病性状，应特别注意病圃压力、发病时期、环境互作和离群样本。</p>
+              <h3>Phenotype Quality</h3>
+              <p>Phenotype sets the upper limit for GWAS. Multi-environment trials, replicates, and standardized scoring criteria reduce noise. For disease resistance traits, pay special attention to nursery disease pressure, infection timing, genotype-by-environment interactions, and outlier samples.</p>
             </div>
             <div>
-              <h3>基因型数据</h3>
-              <p>SNP 芯片、GBS、外显子捕获和全基因组重测序都可用于 GWAS。不同平台的标记密度和缺失模式不同，会直接影响定位精度和候选区域大小。</p>
+              <h3>Genotype Data</h3>
+              <p>SNP arrays, GBS, exome capture, and whole-genome resequencing are all applicable to GWAS. Differences in marker density and missing data patterns across platforms directly affect mapping resolution and the size of candidate regions.</p>
             </div>
           </div>
         </section>
 
         <section class="blog-section">
-          <h2>3. 基因型质控：不要跳过的步骤</h2>
-          <p>质控的目的是减少低质量标记带来的假阳性和模型不稳定。常用过滤指标包括缺失率、最小等位基因频率（MAF）、杂合率、样本缺失率和重复样本一致性。对自交作物或高度纯合材料，还需要关注异常杂合位点；对多倍体作物，则要确认变异检测和剂量信息是否适合后续模型。</p>
-          <pre><code># 常见质控思路示例
+          <h2>3. Genotype QC: A Step You Cannot Skip</h2>
+          <p>Quality control reduces false positives and model instability caused by low-quality markers. Common filtering criteria include missing rate, minor allele frequency (MAF), heterozygosity rate, sample missing rate, and duplicate sample consistency. For self-pollinating crops or highly homozygous materials, pay extra attention to abnormal heterozygous sites; for polyploid crops, verify whether variant detection and dosage information are suitable for the chosen model.</p>
+          <pre><code># Example QC workflow
 plink --vcf input.vcf \
   --geno 0.1 \
   --mind 0.1 \
   --maf 0.05 \
   --make-bed \
   --out gwas_qc</code></pre>
-          <p>过滤阈值没有放之四海而皆准的标准。群体规模较小或目标是稀有变异时，MAF 阈值需要谨慎调整；群体结构复杂时，质控后还应重新检查 PCA 和亲缘关系矩阵。</p>
+          <p>No single set of filtering thresholds applies universally. When the population is small or the target involves rare variants, MAF thresholds need careful adjustment; after QC of populations with complex structure, re-check PCA and kinship matrices.</p>
         </section>
 
         <section class="blog-section">
-          <h2>4. 模型选择：校正结构与亲缘关系</h2>
-          <p>GWAS 中最常见的混杂因素是群体结构和个体间亲缘关系。如果不校正，某些群体特异的等位基因会被误判为性状相关位点。常用策略包括在模型中加入 PCA/Q 矩阵作为固定效应，并使用 Kinship 矩阵作为随机效应。</p>
+          <h2>4. Model Selection: Correcting for Structure and Kinship</h2>
+          <p>The most common confounding factors in GWAS are population structure and individual relatedness. Without correction, population-specific alleles can be misidentified as trait-associated. Common strategies include adding PCA/Q matrices as fixed effects and using a kinship matrix as a random effect in the model.</p>
           <table class="blog-table">
             <thead>
               <tr>
-                <th>模型</th>
-                <th>适用场景</th>
-                <th>注意点</th>
+                <th>Model</th>
+                <th>Applicable Scenario</th>
+                <th>Caveats</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>GLM</td>
-                <td>快速初筛，群体结构较弱</td>
-                <td>容易出现假阳性</td>
+                <td>Rapid screening, weak population structure</td>
+                <td>Prone to false positives</td>
               </tr>
               <tr>
                 <td>MLM</td>
-                <td>需要同时校正 PCA 和 Kinship</td>
-                <td>计算较慢，可能过度校正</td>
+                <td>Simultaneously correcting for PCA and Kinship</td>
+                <td>Slow computation, possible overcorrection</td>
               </tr>
               <tr>
                 <td>FarmCPU / BLINK</td>
-                <td>大规模标记和复杂性状</td>
-                <td>需要结合 QQ plot 和重复验证判断稳定性</td>
+                <td>Large marker sets and complex traits</td>
+                <td>Assess stability through QQ plots and replicate validation</td>
               </tr>
             </tbody>
           </table>
         </section>
 
         <section class="blog-section">
-          <h2>5. 结果解读：显著峰之后还要做什么？</h2>
-          <p>Manhattan plot 可以展示全基因组关联峰，QQ plot 可以帮助判断整体假阳性膨胀。拿到显著 SNP 后，建议继续做以下解析：</p>
+          <h2>5. Interpreting Results: What Comes After a Significant Peak?</h2>
+          <p>A Manhattan plot displays genome-wide association peaks, while the QQ plot helps assess overall false-positive inflation. After identifying significant SNPs, continue with the following analyses:</p>
           <ol>
-            <li>确定显著阈值，例如 Bonferroni 校正、FDR 或基于置换检验的经验阈值。</li>
-            <li>根据连锁不平衡衰减距离定义候选区间，而不是只看单个 SNP。</li>
-            <li>检查候选区间内的基因注释、结构变异、非同义突变、启动子变异和表达差异。</li>
-            <li>结合已发表 QTL、抗病基因、同源基因、转录组和单倍型证据进行优先级排序。</li>
-            <li>在独立群体、不同环境或功能实验中验证关键位点。</li>
+            <li>Determine the significance threshold — e.g., Bonferroni correction, FDR, or empirical thresholds based on permutation tests.</li>
+            <li>Define candidate intervals based on LD decay distance rather than looking at a single SNP.</li>
+            <li>Examine gene annotations, structural variants, nonsynonymous mutations, promoter variants, and expression differences within the candidate interval.</li>
+            <li>Prioritize candidates by integrating published QTL data, known resistance genes, homologous genes, transcriptome evidence, and haplotype effects.</li>
+            <li>Validate key loci in independent populations, across different environments, or through functional experiments.</li>
           </ol>
         </section>
 
         <section class="blog-section">
-          <h2>6. 作物抗病性 GWAS 的实践建议</h2>
-          <p>抗病性状往往受病原小种、环境条件和发育时期影响。对于小麦条锈病、叶锈病等病害，单环境显著信号可能只反映特定病圃或特定小种下的抗性表现。更稳健的做法是将多环境 BLUP、单环境表型、病情指数和抗感分类结果分别分析，再比较稳定重复出现的位点。</p>
-          <p>候选基因层面，NLR、RLK、RLP、转录因子、激素通路和细胞壁相关基因都值得关注。但不要只因注释像抗病基因就直接认定候选基因。更可靠的证据链应包括：显著位点、LD 区间、功能变异、表达响应、单倍型效应和已有文献支持。</p>
+          <h2>6. Practical Advice for GWAS on Crop Disease Resistance</h2>
+          <p>Disease resistance traits are often influenced by pathogen race, environmental conditions, and developmental stage. For diseases such as wheat stripe rust and leaf rust, a significant signal from a single environment may only reflect resistance under a specific nursery or race. A more robust approach is to analyze multi-environment BLUPs, single-environment phenotypes, disease severity indices, and resistant/susceptible classifications separately, then compare consistently recurring loci.</p>
+          <p>At the candidate gene level, NLRs, RLKs, RLPs, transcription factors, hormone pathway genes, and cell wall-related genes are all worth attention. However, do not immediately designate a candidate gene just because its annotation resembles a resistance gene. A more reliable chain of evidence should include: significant SNPs, LD interval delineation, functional variants, expression responses, haplotype effects, and supporting literature.</p>
         </section>
 
         <section class="blog-section">
-          <h2>7. 一个推荐的 GWAS 工作流</h2>
+          <h2>7. A Recommended GWAS Workflow</h2>
           <div class="workflow-list">
-            <span>表型整理与离群检测</span>
-            <span>基因型质控与缺失填补</span>
-            <span>PCA、群体结构和 Kinship 评估</span>
-            <span>多模型关联分析</span>
-            <span>Manhattan / QQ plot 可视化</span>
-            <span>LD 区间与候选基因注释</span>
-            <span>单倍型、表达和文献证据整合</span>
-            <span>独立群体验证或功能验证</span>
+            <span>Phenotype curation and outlier detection</span>
+            <span>Genotype QC and imputation</span>
+            <span>PCA, population structure, and Kinship assessment</span>
+            <span>Multi-model association analysis</span>
+            <span>Manhattan / QQ plot visualization</span>
+            <span>LD interval and candidate gene annotation</span>
+            <span>Integration of haplotypes, expression, and literature</span>
+            <span>Independent validation or functional testing</span>
           </div>
         </section>
 
         <section class="blog-section">
-          <h2>结语</h2>
-          <p>好的 GWAS 分析不是堆软件参数，而是围绕一个清晰的遗传问题建立证据链。对于作物遗传研究者来说，统计显著性只是起点，真正有价值的是找到可以解释表型、服务育种并能够被进一步验证的候选位点和候选基因。</p>
-          <p>如果把 GWAS 作为一个完整项目来设计，建议从一开始就同步规划表型采集、样本组成、测序深度、数据质控、统计模型、候选基因注释和后续验证方案。这样最终得到的结果才更容易从图表走向生物学解释。</p>
+          <h2>Closing Remarks</h2>
+          <p>A good GWAS is not about stacking software parameters — it is about building a chain of evidence around a clear genetic question. For crop genetics researchers, statistical significance is only the starting point; what truly matters are candidate loci and candidate genes that can explain the phenotype, serve breeding programs, and withstand further validation.</p>
+          <p>If you approach GWAS as a complete project, it is advisable to plan phenotype collection, sample composition, sequencing depth, data QC, statistical models, candidate gene annotation, and downstream validation from the very beginning. This way, the final results are more likely to progress from charts to biological interpretation.</p>
         </section>
 
         <footer class="blog-footer">
-          <a class="button button-secondary" href="rice-disease-resistance.html">水稻抗病研究进展</a>
-          <a class="button button-secondary" href="../index.html">返回首页</a>
-          <a class="button button-primary" href="mailto:zhaojiwen@yzwlab.cn">交流 GWAS 分析</a>
+          <a class="button button-secondary" href="rice-disease-resistance.html">Rice Disease Resistance Review</a>
+          <a class="button button-secondary" href="../index.html">Back to Home</a>
+          <a class="button button-primary" href="mailto:zhaojiwen@yzwlab.cn">Discuss GWAS</a>
         </footer>
       </article>
     </main>
