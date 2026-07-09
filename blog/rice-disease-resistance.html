@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>水稻抗病研究进展：从 R 基因克隆到分子设计育种</title>
+    <meta name="description" content="系统梳理水稻主要病害（稻瘟病、白叶枯病、纹枯病等）的抗病基因克隆、分子机制和育种应用进展。">
+    <meta name="author" content="Jiwen Zhao">
+    <link rel="canonical" href="https://cropcoder.github.io/blog/rice-disease-resistance.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="水稻抗病研究进展：从 R 基因克隆到分子设计育种">
+    <meta property="og:description" content="系统梳理水稻主要病害的抗病基因克隆、分子机制和育种应用进展。">
+    <meta property="og:url" content="https://cropcoder.github.io/blog/rice-disease-resistance.html">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="stylesheet" href="../assets/css/resume.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html" aria-label="Jiwen Zhao home">Jiwen Zhao</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" data-nav aria-label="Primary">
+        <a href="../index.html#home">Home</a>
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="gwas-analysis.html">Blog</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="blog-article">
+        <header class="blog-hero">
+          <p class="section-kicker">Crop Pathology Review</p>
+          <h1>水稻抗病研究进展：从 R 基因克隆到分子设计育种</h1>
+          <p class="blog-lead">水稻是全球最重要的粮食作物之一，但常年受到稻瘟病、白叶枯病、纹枯病等多种病害威胁。近年来，随着抗病基因克隆加速、基因组编辑工具成熟和多组学技术普及，水稻抗病研究正从单基因鉴定走向系统性的分子设计育种。</p>
+          <div class="blog-meta">
+            <span>作者：Jiwen Zhao</span>
+            <span>主题：水稻 / 抗病基因 / 分子育种</span>
+            <span>更新：2026-07-03</span>
+          </div>
+        </header>
+
+        <section class="blog-section">
+          <h2>1. 稻瘟病：研究最深入的作物-病原互作系统</h2>
+          <p>稻瘟病由真菌 <em>Magnaporthe oryzae</em> 引起，是世界范围内最具破坏性的水稻病害之一，每年造成的产量损失足以养活数千万人。经过数十年努力，已有超过 100 个稻瘟病抗性基因被定位，其中 38 个以上被成功克隆。</p>
+          <p>这些 R 基因绝大多数编码经典的核苷酸结合富亮氨酸重复受体（NLR），按结构域可以细分为 CC-NBS-LRR 和 TIR-NBS-LRR 两类。其中 <em>Pib</em> 是第一个被克隆的稻瘟病 R 基因（2001 年），<em>Pi-ta</em> 则是最早被证实通过直接识别病原效应蛋白发挥抗性的基因之一。</p>
+
+          <table class="blog-table">
+            <thead>
+              <tr>
+                <th>代表基因</th>
+                <th>编码蛋白类型</th>
+                <th>识别机制</th>
+                <th>抗谱特点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pib</td>
+                <td>NBS-LRR</td>
+                <td>间接识别</td>
+                <td>广谱、持久抗性</td>
+              </tr>
+              <tr>
+                <td>Pi-ta</td>
+                <td>NBS-LRR</td>
+                <td>直接识别 AVR-Pita</td>
+                <td>小种特异性</td>
+              </tr>
+              <tr>
+                <td>Piz-t / Pi9 / Pigm</td>
+                <td>NBS-LRR</td>
+                <td>多位点等位系列</td>
+                <td>广谱</td>
+              </tr>
+              <tr>
+                <td>Ptr</td>
+                <td>非典型 R 基因</td>
+                <td>辅助 NLR 功能</td>
+                <td>广谱持久</td>
+              </tr>
+              <tr>
+                <td>bsr-d1</td>
+                <td>转录因子</td>
+                <td>调控 H<sub>2</sub>O<sub>2</sub> 降解</td>
+                <td>非小种特异性</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>值得关注的是 <em>Pigm</em> 基因座：它包含一个发挥广谱抗性的 NLR 基因和一个通过表观调控抑制粒重损失的配对基因，实现了抗病与产量的协同平衡。这类"一箭双雕"的等位基因对复杂性状的遗传改良极具价值。另外，<em>bsr-d1</em> 等非经典抗病基因的发现表明，转录调控层面的防御重编程同样可以有效控制病害，且不易因病原效应蛋白变异而丧失功能。</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>2. 白叶枯病：从单基因到广谱持久策略</h2>
+          <p>白叶枯病由细菌 <em>Xanthomonas oryzae</em> pv. <em>oryzae</em>（Xoo）引起，是亚洲稻区最严重的细菌性病害。目前已克隆 15 个以上白叶枯病抗性基因，其中 <em>Xa21</em> 是植物中第一个被克隆的受体激酶类抗病基因，也是模式识别受体（PRR）介导抗性的经典案例。</p>
+
+          <div class="blog-grid">
+            <div>
+              <h3>Xa21 介导的 PTI 免疫</h3>
+              <p>Xa21 编码一个类受体激酶，识别 Xoo 的 RaxX 硫酸化肽段，激活下游 MAPK 级联和 WRKY 转录因子，诱导广谱防御反应。它的发现开启了植物 PRR 免疫研究的先河。</p>
+            </div>
+            <div>
+              <h3>TALE 类效应蛋白与隐性抗性</h3>
+              <p>Xoo 通过 III 型分泌系统注入 TAL 效应蛋白，劫持宿主 <em>SWEET</em> 糖转运基因促进病害发展。隐性抗性基因如 <em>xa13</em>、<em>xa25</em> 的启动子突变使 TAL 效应蛋白无法结合，从而阻断病原获取营养。</p>
+            </div>
+            <div>
+              <h3>基因聚合策略</h3>
+              <p>将 <em>Xa4</em> + <em>xa5</em> + <em>xa13</em> + <em>Xa21</em> 等数个基因通过分子标记辅助选择聚合到优良品种中，可以获得对多种 Xoo 生理小种的广谱、持久抗性。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>3. 纹枯病与稻曲病：数量抗性的难点</h2>
+          <p>与稻瘟病和白叶枯病不同，纹枯病（<em>Rhizoctonia solani</em>）和稻曲病（<em>Ustilaginoidea virens</em>）属于典型的多基因数量抗性病害，至今未克隆出主效 R 基因。纹枯病的坏死营养型病原通过侵染叶鞘和茎基部造成倒伏减产，而稻曲病不仅减产，还产生对人畜有毒的真菌毒素。</p>
+          <p>近年来通过 GWAS 和 BSA-seq 等方法，已定位到一批与纹枯病抗性相关的 QTL，涉及细胞壁强化、抗毒素积累和防御激素信号通路。但在这些病害上，基因组选择（GS）比单基因策略可能更为现实——通过全基因组标记预测个体的综合抗性水平，在育种群体中筛选耐病品系。</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>4. 水稻免疫调控的核心通路</h2>
+          <p>无论在哪种病原系统中，水稻的免疫应答都遵循保守的层级框架：</p>
+          <ol>
+            <li>细胞表面 PRR 识别病原相关分子模式（PAMP），启动 PTI（PAMP-Triggered Immunity），表现为活性氧爆发、胼胝质沉积和防御基因激活。</li>
+            <li>成功入侵的病原分泌效应蛋白抑制 PTI；宿主 R 蛋白识别效应蛋白或其修饰痕迹，启动更强的 ETI（Effector-Triggered Immunity），常伴随超敏反应（HR）。</li>
+            <li>水杨酸（SA）和茉莉酸（JA）信号通路分别主导活体营养型和死体营养型病原的防御响应，二者之间存在复杂的交叉调控。</li>
+            <li>系统性获得抗性（SAR）和诱导系统抗性（ISR）分别在植株局部感染后激发全身范围的防御准备状态。</li>
+          </ol>
+          <p>近年来的结构生物学进展进一步揭示了许多 NLR 蛋白形成抗病小体（resistosome）——在识别效应蛋白后寡聚化形成钙离子通道，直接触发细胞死亡和免疫信号。这一发现将植物免疫的执行层面推进到原子分辨率。</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>5. 基因组编辑与从头设计抗病性</h2>
+          <p>CRISPR/Cas 系统的成熟正在重塑抗病育种的技术路线：</p>
+
+          <div class="blog-grid">
+            <div>
+              <h3>隐性抗性的精准创制</h3>
+              <p>通过编辑 <em>SWEET</em> 基因启动子中的 EBE 元件，直接阻断 TAL 效应蛋白结合，快速获得广谱白叶枯病抗性材料，且无需引入外源基因。</p>
+            </div>
+            <div>
+              <h3>NLR 基因的定向进化</h3>
+              <p>对 <em>Pik</em>、<em>Pia</em> 等 NLR 基因的 HMA 结构域进行饱和突变，可以在实验室内快速拓展识别谱，获得识别新效应蛋白的人工 R 等位基因。</p>
+            </div>
+            <div>
+              <h3>多重编辑与代谢工程</h3>
+              <p>同时敲除多个感病基因（S 基因）和负调控因子，或过表达广谱防御基因，构建多基因协同的持久抗性体系。</p>
+            </div>
+          </div>
+
+          <p>更重要的是，基因组编辑使得"从头设计抗病性"成为可能。科学家不再局限于天然等位变异，而是可以根据病原效应蛋白的结构信息，理性改造宿主靶标，使植物获得自然界中不存在的新型抗性。</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>6. 多组学时代的抗病研究范式</h2>
+          <p>传统遗传学是从表型倒推基因型，而多组学整合正在实现正向预测：</p>
+          <ul>
+            <li><strong>泛基因组（Pan-genome）</strong>揭示了栽培稻和野生稻中丰富的 R 基因存在/缺失变异，为挖掘野生近缘种中的新抗病资源提供了路线图。</li>
+            <li><strong>转录组与代谢组联合分析</strong>可以解析 SA/JA 通路在特定病害中的动态平衡，寻找激活防御但不显著减产的最佳干预节点。</li>
+            <li><strong>微生物组学</strong>发现根际和叶际微生物群落结构与水稻基础免疫密切相关，为生物防治和微生物组工程提供了新思路。</li>
+            <li><strong>结构基因组学与计算预测</strong>使研究者可以对 NLR-效应蛋白互作界面进行大规模虚拟筛选，指导实验验证的优先级。</li>
+          </ul>
+          <p>这些技术的交汇意味着，未来的抗病育种将更像是"系统工程"而非"基因筛选"——育种家可以综合基因组、表型组、微生物组和气象数据，为特定稻区定制最优的抗病基因组合。</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>7. 挑战与展望</h2>
+          <p>尽管进展显著，水稻抗病研究仍面临几个核心挑战：</p>
+          <ol>
+            <li><strong>抗性持久性。</strong>单一 R 基因大面积推广 3-5 年后通常面临抗性丧失，如何设计"进化稳健"的抗性组合是关键问题。</li>
+            <li><strong>抗性与产量的权衡。</strong>许多 R 基因的组成型表达或过度激活会导致生长抑制和产量下降，必须在机制层面解耦防御代价。</li>
+            <li><strong>气候变化的影响。</strong>温度升高和降水模式改变显著影响病原生活史和植物免疫效率，高温下许多 R 基因的抗性会减弱。</li>
+            <li><strong>从实验室到大田。</strong>温室条件下的抗性表型不能完全预测田间表现，需要建立更贴近生产环境的评价体系。</li>
+            <li><strong>数据整合与育种决策。</strong>多组学产生的海量数据尚未充分转化为实际的育种方案，计算工具和预测模型的开发仍是短板。</li>
+          </ol>
+          <p>令人振奋的是，水稻具备其他作物难以匹敌的研究基础：高质量参考基因组、丰富的种质资源、成熟的转化体系以及庞大的功能基因组学数据集。随着 AlphaFold 等结构预测工具的应用和合成生物学的介入，未来 5-10 年很可能出现首个真正意义上通过计算设计获得的多基因广谱抗病水稻品种。</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>结语</h2>
+          <p>水稻抗病研究正处在一个范式转换的节点上。从 20 年前靠图位克隆逐个抓取 R 基因，到如今可以通过泛基因组挖掘、结构导向编辑和基因组选择进行系统设计，我们对抗病的理解和操控能力都达到了新的高度。</p>
+          <p>对于从事作物抗病研究的同行，建议关注三个方向：一是野生稻和农家品种中尚未被充分挖掘的抗病资源；二是 NLR 信号通路的结构基础和激活调控机制；三是将基因组预测与多环境表型数据结合，真正让生物信息学成为抗病育种的生产力工具。</p>
+        </section>
+
+        <footer class="blog-footer">
+          <a class="button button-secondary" href="../index.html">返回首页</a>
+          <a class="button button-primary" href="mailto:zhaojiwen@yzwlab.cn">交流抗病研究</a>
+        </footer>
+      </article>
+    </main>
+
+    <script src="../assets/js/resume.js"></script>
+  </body>
+</html>
