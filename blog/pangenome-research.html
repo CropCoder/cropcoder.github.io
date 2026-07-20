@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pan-genome Research Notes: From Resource Construction to Functional Interpretation</title>
+    <meta name="description" content="A practical note on pan-genome research for crop genomics and bioinformatics researchers, covering material selection, assembly and annotation, gene clustering, structural variation, presence–absence variation, haplotype analysis, and functional interpretation.">
+    <meta name="author" content="Jiwen Zhao">
+    <link rel="canonical" href="https://cropcoder.github.io/blog/pangenome-research.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Pan-genome Research Notes: From Resource Construction to Functional Interpretation">
+    <meta property="og:description" content="From material selection, assembly and annotation, gene clustering, and PAV/SV analysis to candidate gene interpretation — a roadmap for crop pan-genome research.">
+    <meta property="og:url" content="https://cropcoder.github.io/blog/pangenome-research.html">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="stylesheet" href="../assets/css/resume.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html" aria-label="Jiwen Zhao home">Jiwen Zhao</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" data-nav aria-label="Primary">
+        <a href="../index.html#home">Home</a>
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="gwas-analysis.html" class="is-active">Blog</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="blog-article">
+        <header class="blog-hero">
+          <p class="section-kicker">Bioinformatics Notes</p>
+          <h1>Pan-genome Research Notes: From Resource Construction to Functional Interpretation</h1>
+          <p class="blog-lead">The core value of pan-genome research lies not merely in comparing multiple genomes together, but in organizing intraspecific genetic diversity, structural variation, gene presence–absence variation, and phenotypic differences into an interpretable chain of evidence. For crop research, a pan-genome is especially well suited to answering questions that a single reference genome cannot: which genes are present only in a subset of accessions, which structural variants influence important traits, and which superior haplotypes can serve breeding programs.</p>
+          <div class="blog-meta">
+            <span>Author: Jiwen Zhao</span>
+            <span>Topic: Pan-genome / Crop Genomics / Bioinformatics</span>
+            <span>Updated: 2026-07-14</span>
+          </div>
+        </header>
+
+        <section class="blog-section">
+          <h2>1. When Do You Need a Pan-genome?</h2>
+          <p>If a research question only concerns the gene structure of a single accession, local variation, or conventional SNP association analysis, a single high-quality reference genome is often sufficient. But once the focus shifts to intraspecific diversity, domestication and improvement, resistance gene repertoires, large insertions and deletions, complex NLR clusters, non-reference sequences, or population-specific genes, a single reference genome quickly becomes a limiting factor.</p>
+          <p>A pan-genome is better suited to three kinds of questions: first, how many genes and sequence variants in a species or population are not represented by the reference genome; second, whether functional module differences exist among accessions of different ecotypes, breeding stages, or geographic origins; and third, whether these differences can explain phenotype, adaptation, or disease and stress resistance.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>2. Material Selection Sets the Ceiling</h2>
+          <div class="blog-grid">
+            <div>
+              <h3>Representativeness</h3>
+              <p>Accessions should cover the major genetic lineages of the target species, such as wild relatives, landraces, modern cultivars, founder parents, and special resistance resources. A pan-genome is not about the more samples the better — each new accession should genuinely contribute new genetic information.</p>
+            </div>
+            <div>
+              <h3>Research Objectives</h3>
+              <p>If the focus is disease resistance, the material set should include clear resistant–susceptible contrasts and known resistance sources; if domestication or improvement, wild, landrace, and modern materials should all be represented; if regional adaptation, ecological context and geographic origin should span a sufficiently wide range.</p>
+            </div>
+            <div>
+              <h3>Data Quality</h3>
+              <p>High-quality long-read assembly, Hi-C scaffolding, accurate annotation, and a uniform pipeline matter more than simply stacking more low-quality genomes. Uneven quality directly undermines downstream gene clustering, PAV detection, and structural variant interpretation.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>3. Assembly and Annotation: Lay a Solid Foundation First</h2>
+          <p>Pan-genome analysis usually begins with multiple assembly versions. Before comparison, assess the completeness, contiguity, and contamination level of each genome — for example, contig/scaffold N50, BUSCO completeness, LAI, Hi-C scaffolding ratio, repeat annotation quality, and predicted gene count. If a sample is markedly fragmented, its "specific" and "absent" genes may well be technical noise rather than biology.</p>
+          <p>Annotation pipelines should also be as uniform as possible. Using different parameters, evidence sets, or software versions across samples will entangle genuine biological differences with pipeline artifacts. For crop genomes, it is recommended to integrate transcriptome evidence, protein homology, ab initio prediction, and repeat masking, and to inspect gene length, exon count, transcript count, and the proportion of functional annotations before the final comparison.</p>
+          <pre><code># Example quality checks before pan-genome analysis
+busco -i genome.fa -l embryophyta_odb10 -m genome -o busco_genome
+busco -i proteins.fa -l embryophyta_odb10 -m proteins -o busco_protein
+
+# Keep assembly and annotation metrics in one table
+# sample, assembly_size, contig_N50, scaffold_N50, BUSCO_C, gene_count, repeat_ratio</code></pre>
+        </section>
+
+        <section class="blog-section">
+          <h2>4. Choose the Right Pan-genome Representation</h2>
+          <p>A pan-genome is not a single fixed format but a family of comparison frameworks. Different representations suit different questions: gene clustering is well suited to studying core and variable genes; graph pan-genomes are good at representing complex structural variation and non-linear references; reference-based PAV/SV matrices are convenient for rapid integration with population phenotypes, GWAS, and breeding materials.</p>
+          <table class="blog-table">
+            <thead>
+              <tr>
+                <th>Analysis framework</th>
+                <th>Suited questions</th>
+                <th>Caveats</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gene-based pan-genome</td>
+                <td>Core/variable/specific genes, gene family expansion and contraction</td>
+                <td>Highly dependent on annotation quality and homology clustering thresholds</td>
+              </tr>
+              <tr>
+                <td>Reference-guided PAV/SV</td>
+                <td>Population presence–absence variation, large insertions/deletions, trait association</td>
+                <td>Prone to missing sequences absent from the reference and complex rearrangements</td>
+              </tr>
+              <tr>
+                <td>Graph pan-genome</td>
+                <td>Non-reference sequences, complex haplotypes, repeat regions, and structural variation</td>
+                <td>Higher cost for construction, visualization, and downstream statistical interpretation</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="blog-section">
+          <h2>5. How to Interpret Core, Variable, and Specific Genes?</h2>
+          <p>Core genes are present in the vast majority of accessions and tend to be enriched in basic life processes, cellular metabolism, and development. Variable or cultivar-specific genes are more often associated with environmental adaptation, disease and stress resistance, secondary metabolism, and breeding selection. But do not equate "specific" with "important." Many specific genes may simply arise from fragmented annotation, repeat misclassification, contaminating sequences, or low-quality assembly.</p>
+          <p>A reliable interpretation should integrate multiple lines of evidence: whether the gene has a complete ORF, whether it carries a protein domain, whether there is expression evidence, whether it resides in a confidently assembled region, whether it recurs in similar materials, and whether it is consistent with phenotypic or population differentiation signals. For disease-resistance gene families such as NLRs, RLKs, and RLPs, pay particular attention to copy number variation, tandem duplication, pseudogenes, and paralog mismatches.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>6. From PAV/SV to Candidate Genes</h2>
+          <p>Presence–absence variation and structural variation are among the most explanatory parts of pan-genome research. Compared with SNPs, PAVs and SVs are more likely to directly affect gene dosage, promoter structure, coding-sequence integrity, and local chromosome architecture. For crop disease resistance, quality, plant architecture, and environmental adaptation traits, many key differences are not single-nucleotide mutations but large insertions, deletions, inversions, transposon insertions, or gene cluster rearrangements.</p>
+          <ol>
+            <li>First confirm that the variant is real, avoiding false positives caused by assembly breakpoints, repeat regions, or alignment errors.</li>
+            <li>Project the variant onto genes, promoters, repeats, and conserved domains to assess its potential functional impact.</li>
+            <li>Build a PAV/SV matrix and jointly analyze it with phenotype, population structure, geographic origin, and domestication grouping.</li>
+            <li>Within candidate regions, integrate expression, haplotype, selective sweep, known QTL, and homologous gene evidence.</li>
+            <li>Validate key variants using independent materials, PCR markers, long-read validation, or functional experiments.</li>
+          </ol>
+        </section>
+
+        <section class="blog-section">
+          <h2>7. Pan-genome, GWAS, Haplotypes, and Breeding Applications</h2>
+          <p>A pan-genome should not stop at the level of resource description. A more valuable approach is to convert pan-genome variation into a marker system that is analyzable, verifiable, and usable. Beyond SNP-GWAS, one can also carry out PAV-GWAS, SV-GWAS, gene copy number association analysis, gene presence frequency comparisons, superior haplotype mining, and regional combination pattern analysis.</p>
+          <p>In breeding applications, the point is not to list every variant but to filter for variants that are stable, detectable, of clear effect, and low in background dependency. For disease resistance traits, focus on genes that are present at high frequency in resistant materials and absent or functionally disrupted in susceptible materials; for complex quantitative traits, it is more appropriate to integrate haplotype effects, expression levels, and phenotypic stability across multiple environments for a combined ranking.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>8. A Recommended Analysis Workflow</h2>
+          <div class="workflow-list">
+            <span>Define the scientific question and the scope of materials</span>
+            <span>Collect high-quality assemblies and a uniform annotation</span>
+            <span>Assess assembly, annotation, repeats, and BUSCO completeness</span>
+            <span>Build homologous gene clusters and core/variable gene sets</span>
+            <span>Detect PAV, CNV, SV, and non-reference sequences</span>
+            <span>Integrate population structure, phenotype, and environmental origin</span>
+            <span>Carry out PAV/SV association, haplotype, and selection analyses</span>
+            <span>Shortlist candidate genes and design validation experiments</span>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>Closing Remarks</h2>
+          <p>Pan-genome research is most prone to two pitfalls: the first is chasing sample counts and map size while neglecting data quality; the second is stopping at statistics on the numbers of core and variable genes without interpretation oriented toward traits. A truly valuable pan-genome study should design its materials and technical route around a clear question from the very beginning, and leave interfaces for downstream functional validation and breeding use.</p>
+          <p>For crop researchers, the ultimate goal of a pan-genome is not a more complicated genome map, but a more accurate understanding of how genetic diversity shapes phenotypic differences. Only by connecting assembly, annotation, structural variation, population genetics, phenotypic data, and experimental validation can a pan-genome progress from resource construction to biological discovery.</p>
+        </section>
+
+        <footer class="blog-footer">
+          <a class="button button-secondary" href="gwas-analysis.html">GWAS Analysis Guide</a>
+          <a class="button button-secondary" href="rice-disease-resistance.html">Rice Disease Resistance Review</a>
+          <a class="button button-secondary" href="hpc-gpu-genomics.html">HPC &amp; GPU for Genomics</a>
+          <a class="button button-primary" href="mailto:zhaojiwen@yzwlab.cn">Discuss Pan-genomics</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__top">
+          <div class="site-footer__brand">
+            <div class="site-footer__logo">
+              <span class="site-footer__logo-text">Jiwen Zhao</span>
+            </div>
+            <p class="site-footer__tagline">Bioinformatics and crop disease resistance researcher at Yazhouwan National Laboratory — translating population genomics, resistance loci, and multi-omics evidence into practical resources for crop breeding.</p>
+            <span class="site-footer__locale">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+              Sanya, Hainan, China
+            </span>
+          </div>
+
+          <div class="site-footer__col">
+            <h3>Navigate</h3>
+            <ul class="site-footer__list">
+              <li><a href="../index.html#home">Home</a></li>
+              <li><a href="../index.html#research">Research</a></li>
+              <li><a href="../index.html#publications">Publications</a></li>
+              <li><a href="../index.html#resources">Blog</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer__col">
+            <h3>Blog</h3>
+            <ul class="site-footer__list">
+              <li><a href="gwas-analysis.html">GWAS Analysis Guide</a></li>
+              <li><a href="rice-disease-resistance.html">Rice Disease Resistance</a></li>
+              <li><a href="pangenome-research.html">Pan-genome Research</a></li>
+              <li><a href="hpc-gpu-genomics.html">HPC &amp; GPU for Genomics</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer__col">
+            <h3>Resources</h3>
+            <ul class="site-footer__list">
+              <li><a href="https://wheat.dftianyi.com">LWRR Platform</a></li>
+              <li><a href="https://github.com/CropCoder">GitHub</a></li>
+              <li><a href="https://scholar.google.com/citations?user=wOeWxxUAAAAJ">Google Scholar</a></li>
+              <li><a href="https://www.researchgate.net/profile/Jiwen-Zhao-3">ResearchGate</a></li>
+              <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=Zhao+J&cauthor_id=39429882">PubMed</a></li>
+              <li><a href="https://blog.csdn.net/ZaoJewin">CSDN Blog</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="site-footer__bottom">
+          <div class="site-footer__bottom-left">
+            <span>© 2026 Jiwen Zhao</span>
+          </div>
+          <a class="site-footer__top-link" href="../index.html#home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5 5.5 12H9v7h6v-7h3.5L12 5.5Z"/></svg>
+            Back to top
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/resume.js"></script>
+  </body>
+</html>

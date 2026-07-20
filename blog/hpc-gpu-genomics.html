@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HPC and GPU Servers for Large-Scale Genomics Analysis</title>
+    <meta name="description" content="A practical note on using HPC clusters and GPU servers for large-scale genomics — workload profiling, CPU vs GPU task mapping, cluster architecture, workflow managers, storage, parallelization strategies, and reproducibility.">
+    <meta name="author" content="Jiwen Zhao">
+    <link rel="canonical" href="https://cropcoder.github.io/blog/hpc-gpu-genomics.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="HPC and GPU Servers for Large-Scale Genomics Analysis">
+    <meta property="og:description" content="A practical guide to running large-scale genomics on HPC clusters and GPU servers — workload profiling, hardware matching, workflow managers, storage, and reproducibility.">
+    <meta property="og:url" content="https://cropcoder.github.io/blog/hpc-gpu-genomics.html">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="stylesheet" href="../assets/css/resume.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html" aria-label="Jiwen Zhao home">Jiwen Zhao</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" data-nav aria-label="Primary">
+        <a href="../index.html#home">Home</a>
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="hpc-gpu-genomics.html" class="is-active">Blog</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="blog-article">
+        <header class="blog-hero">
+          <p class="section-kicker">Bioinformatics Notes</p>
+          <h1>HPC and GPU Servers for Large-Scale Genomics Analysis</h1>
+          <p class="blog-lead">As genome and phenotype datasets grow into the terabyte range, a laptop is no longer a serious analysis platform. High-performance computing (HPC) clusters and GPU servers are now standard infrastructure for population-scale resequencing, pan-genome construction, association studies, and protein structure prediction. But more hardware does not automatically mean faster science — the real skill is matching each workload to the right resource, and building pipelines that scale without breaking reproducibility.</p>
+          <div class="blog-meta">
+            <span>Author: Jiwen Zhao</span>
+            <span>Topic: HPC / GPU / Genomics Infrastructure</span>
+            <span>Updated: 2026-07-20</span>
+          </div>
+        </header>
+
+        <section class="blog-section">
+          <h2>1. Why HPC and GPU Matter for Genomics</h2>
+          <p>Modern crop and biomedical genomics projects routinely involve thousands of accessions, whole-genome resequencing at 10–30× coverage, long-read assembly, and multi-omics integration. A single resequencing panel can generate terabytes of FASTQ, and a pan-genome study may require assembling dozens of genomes end-to-end. These workloads exceed the memory, storage, and wall-clock limits of any workstation.</p>
+          <p>HPC clusters solve this through parallelism and shared storage: hundreds of CPU cores work on independent samples simultaneously, while a parallel filesystem holds the data. GPU servers add a different capability — massive throughput for the matrix and deep-learning kernels that now permeate genomics, from basecalling to variant calling to structure prediction. The two are complementary, not interchangeable, and a well-designed pipeline uses each where it actually pays off.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>2. Where the Compute Actually Goes</h2>
+          <p>Before requesting resources, profile the dominant cost in your pipeline. Genomics tasks fall into a few recognizable patterns:</p>
+          <div class="blog-grid">
+            <div>
+              <h3>Alignment and Variant Calling</h3>
+              <p>BWA-MEM2, minimap2, and GATK-style callers are CPU-bound and embarrassingly parallel across samples and chromosomes. GPU pipelines (e.g., NVIDIA Clara Parabricks) can accelerate BWA-MEM2 and DeepVariant by an order of magnitude, but only pay off at sufficient scale.</p>
+            </div>
+            <div>
+              <h3>De Novo Assembly</h3>
+              <p>Long-read assemblers (Flye, hifiasm, wtdbg2) are CPU- and memory-bound, with some steps benefiting from many threads. Hi-C scaffolding and polishing add I/O load. GPUs are not yet standard here.</p>
+            </div>
+            <div>
+              <h3>Association and Population Genetics</h3>
+              <p>GWAS tools (GEMMA, SAIGE, BOLT-LMM, GCTA) are predominantly CPU-bound and often limited by linear-algebra kernels on the kinship matrix. Some implementations can offload to GPU, but most population-scale analyses remain CPU workloads.</p>
+            </div>
+            <div>
+              <h3>Structure and Deep Learning</h3>
+              <p>AlphaFold2/ColabFold, ESMFold, DeepVariant's CNN, and foundation models (Nucleotide Transformer, DNABERT) are genuinely GPU-bound. This is where GPU servers are irreplaceable.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>3. CPU vs GPU: Match the Task to the Hardware</h2>
+          <p>A common mistake is treating GPUs as a faster CPU. GPUs deliver throughput for highly parallel, regular computation; they struggle with branchy, I/O-heavy, or low-arithmetic-intensity code. Map each stage explicitly rather than assuming "GPU = better."</p>
+          <table class="blog-table">
+            <thead>
+              <tr>
+                <th>Workload</th>
+                <th>Preferred Hardware</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Short-read alignment (BWA-MEM2)</td>
+                <td>CPU (GPU at scale via Parabricks)</td>
+                <td>Multi-threaded; GPU wins above ~30× whole-genome samples</td>
+              </tr>
+              <tr>
+                <td>Long-read basecalling (Dorado/Guppy)</td>
+                <td>GPU</td>
+                <td>Direct GPU benefit; CPU basecalling is far slower</td>
+              </tr>
+              <tr>
+                <td>DeepVariant / CNN variant calling</td>
+                <td>GPU</td>
+                <td>Inference step is GPU-friendly; GPU avoids queueing bottlenecks</td>
+              </tr>
+              <tr>
+                <td>GWAS / mixed-model association</td>
+                <td>CPU (large-RAM nodes)</td>
+                <td>Kinship decomposition is the bottleneck; GPU offload is partial</td>
+              </tr>
+              <tr>
+                <td>Pan-genome graph (minigraph-cactus, PGGB)</td>
+                <td>CPU (high core count)</td>
+                <td>Memory-intensive; little GPU support today</td>
+              </tr>
+              <tr>
+                <td>Protein structure (AlphaFold2, ESMFold)</td>
+                <td>GPU</td>
+                <td>Essential; multi-GPU helps for MSA-heavy targets</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="blog-section">
+          <h2>4. Cluster Architecture Essentials</h2>
+          <p>Knowing the shape of the cluster helps you request resources that actually fit, instead of jobs that sit queued forever. A typical academic or institutional HPC system has a scheduler (SLURM, PBS/Torque, or LSF), a set of login and compute nodes, a shared parallel filesystem (Lustre, GPFS, or BeeGFS), and often a dedicated GPU partition.</p>
+          <p>Three resources are most commonly underestimated. First, memory: variant callers and assembly polishers can need hundreds of GB per node for large polyploid genomes. Second, scratch space: intermediate BAMs and VCFs multiply quickly. Third, wall-time: a job that underestimates runtime gets killed and must restart from scratch. Always request a comfortable margin on all three, and checkpoint long jobs so a failure does not discard hours of work.</p>
+          <pre><code># Example SLURM submission for a GPU variant-calling job
+#SBATCH --job-name=deepvariant
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=64G
+#SBATCH --time=06:00:00
+#SBATCH --output=logs/dv_%j.out
+
+module load singularity
+singularity exec --nv parabricks.sif \\
+  pbrun deepvariant --ref ref.fa --in-bam sample.bam \\
+  --out-vcf out/sample.vcf --num-gpus 1</code></pre>
+        </section>
+
+        <section class="blog-section">
+          <h2>5. Software Stack and Containers</h2>
+          <p>Genomics tools carry heavy, conflicting dependencies. Managing them per-tool with conda works for a while, but on shared clusters the robust answer is containers. Singularity/Apptainer is the de facto standard on HPC because it runs unprivileged and integrates cleanly with schedulers; Docker is common in cloud but rarely available on institutional clusters.</p>
+          <div class="blog-grid">
+            <div>
+              <h3>Environment Modules</h3>
+              <p>Use <code>module load</code> for compilers, MPI, and CUDA. Pin versions in your run scripts so an OS upgrade does not silently change your toolchain.</p>
+            </div>
+            <div>
+              <h3>Containers</h3>
+              <p>Build a Singularity image per pipeline (or pull from a trusted registry). <code>--nv</code> exposes GPUs to the container. This is the single biggest win for reproducibility.</p>
+            </div>
+            <div>
+              <h3>Workflow Managers</h3>
+              <p>Nextflow, Snakemake, and WDL/Cromwell orchestrate scattered tasks, retries, and resource requests. They turn a pile of scripts into a resumable, portable pipeline.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>6. Parallelization Strategies That Actually Scale</h2>
+          <p>Scaling on a cluster is rarely about one giant job; it is about decomposing the problem so many small jobs run at once. Three patterns cover most genomics workloads:</p>
+          <ol>
+            <li><strong>Embarrassingly parallel by sample.</strong> Align and call variants per accession independently. Launch one task per sample via a workflow manager or a SLURM array job; aggregate results at the end.</li>
+            <li><strong>Data-parallel by chromosome or region.</strong> Split the reference into chunks, process each in parallel, then merge with <code>bcftools concat</code> or Picard. This is how GATK and Parabricks scale within a single genome.</li>
+            <li><strong>Task-parallel pipelines.</strong> Let the workflow manager express dependencies (align → sort → call → filter) so each stage begins as soon as its inputs are ready, keeping the cluster continuously fed.</li>
+          </ol>
+          <p>Avoid over-subscribing cores: a tool that scales well to 16 threads may degrade at 64 because of lock contention or I/O saturation. Benchmark on a single node first, then extrapolate. For GPU jobs, mind that one GPU usually serves one process — oversubscribing it with several CPU-bound tasks wastes everyone's time.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>7. Storage, I/O, and Data Management</h2>
+          <p>On large genomics projects, I/O — not CPU — is often the true bottleneck. A parallel filesystem gives high aggregate bandwidth only when access patterns are friendly: large sequential reads, not millions of tiny random opens. Stage intermediate files to node-local scratch (<code>/tmp</code> or <code>$TMPDIR</code>) when possible, and clean up aggressively.</p>
+          <p>Separate your storage tiers. Use a fast parallel scratch for active computation, a project space for shared inputs (reference genomes, panels), and cold/archival storage for raw FASTQ you rarely touch. Compress with <code>bgzip</code> and index with <code>tabix</code> so downstream tools can seek efficiently. These habits matter more than buying more hardware.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>8. Reproducibility and Provenance</h2>
+          <p>An HPC result that cannot be reproduced is just a rumor. Treat every analysis as if a colleague — or your future self in two years — must rerun it from raw data. Concretely: pin software versions in a container, version-control your pipeline config and parameters, record the commit hash, and save the full execution log (Nextflow and Snakemake both emit trace reports).</p>
+          <pre><code># Nextflow: run, resume, and record provenance
+nextflow run main.nf \
+  -profile singularity,slurm \
+  -resume \
+  --input samplesheet.csv \
+  --genome wheat_ref \
+  -work-dir /scratch/project/pangenome_wf
+
+# Commit the config and samplesheet; archive the
+# trace report and Software versions alongside results.</code></pre>
+          <p>A useful test: delete the results directory and rerun with <code>-resume</code>. If the pipeline rebuilds everything cleanly and the outputs match, your provenance is real. If it fails, fix the gaps before publishing.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>9. Common Pitfalls</h2>
+          <p>Most HPC pain is not exotic. Underestimating memory kills large-genome jobs; underestimating wall-time wastes queued hours. Running everything from a network home directory thrashes the metadata server and slows the whole cluster. Assuming a GPU will speed up a CPU-bound GWAS burns budget for nothing. And skipping checkpoints means one node failure discards a multi-day assembly.</p>
+          <p>The countermeasures are unglamorous but effective: request resources from a real benchmark, use scratch and containers, checkpoint long runs, and let a workflow manager handle retries. Reliability, not peak speed, is what lets a project finish on time.</p>
+        </section>
+
+        <section class="blog-section">
+          <h2>10. A Recommended Workflow</h2>
+          <div class="workflow-list">
+            <span>Profile the pipeline and identify CPU- vs GPU-bound stages</span>
+            <span>Containerize tools with Singularity/Apptainer and pin versions</span>
+            <span>Express the pipeline in Nextflow or Snakemake</span>
+            <span>Benchmark one node, then choose array vs region splitting</span>
+            <span>Request memory, scratch, and wall-time with a margin</span>
+            <span>Stage intermediates to parallel scratch; compress and index</span>
+            <span>Use GPU partitions for basecalling, DeepVariant, and structure prediction</span>
+            <span>Checkpoint, log, and verify reproducibility with -resume</span>
+          </div>
+        </section>
+
+        <section class="blog-section">
+          <h2>Closing Remarks</h2>
+          <p>HPC and GPU servers are powerful, but their value is unlocked by discipline, not by raw hardware. The groups that finish large genomics projects on schedule are rarely the ones with the biggest cluster — they are the ones who profile their workloads, containerize their tools, parallelize sensibly, and treat reproducibility as a first-class concern.</p>
+          <p>For crop genomics researchers specifically, the practical takeaway is to think in terms of pipelines rather than commands. Once your alignment, variant calling, GWAS, and annotation steps live inside a workflow manager running on containerized software, scaling from a hundred accessions to several thousand becomes an engineering question, not a research emergency. That is the point at which HPC and GPU stop being intimidating and start being simply the place where the work gets done.</p>
+        </section>
+
+        <footer class="blog-footer">
+          <a class="button button-secondary" href="gwas-analysis.html">GWAS Analysis Guide</a>
+          <a class="button button-secondary" href="rice-disease-resistance.html">Rice Disease Resistance Review</a>
+          <a class="button button-secondary" href="pangenome-research.html">Pan-genome Research Notes</a>
+          <a class="button button-primary" href="mailto:zhaojiwen@yzwlab.cn">Discuss HPC &amp; GPU</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__top">
+          <div class="site-footer__brand">
+            <div class="site-footer__logo">
+              <span class="site-footer__logo-text">Jiwen Zhao</span>
+            </div>
+            <p class="site-footer__tagline">Bioinformatics and crop disease resistance researcher at Yazhouwan National Laboratory — translating population genomics, resistance loci, and multi-omics evidence into practical resources for crop breeding.</p>
+            <span class="site-footer__locale">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+              Sanya, Hainan, China
+            </span>
+          </div>
+
+          <div class="site-footer__col">
+            <h3>Navigate</h3>
+            <ul class="site-footer__list">
+              <li><a href="../index.html#home">Home</a></li>
+              <li><a href="../index.html#research">Research</a></li>
+              <li><a href="../index.html#publications">Publications</a></li>
+              <li><a href="../index.html#resources">Blog</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer__col">
+            <h3>Blog</h3>
+            <ul class="site-footer__list">
+              <li><a href="gwas-analysis.html">GWAS Analysis Guide</a></li>
+              <li><a href="rice-disease-resistance.html">Rice Disease Resistance</a></li>
+              <li><a href="pangenome-research.html">Pan-genome Research</a></li>
+              <li><a href="hpc-gpu-genomics.html">HPC &amp; GPU for Genomics</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer__col">
+            <h3>Resources</h3>
+            <ul class="site-footer__list">
+              <li><a href="https://wheat.dftianyi.com">LWRR Platform</a></li>
+              <li><a href="https://github.com/CropCoder">GitHub</a></li>
+              <li><a href="https://scholar.google.com/citations?user=wOeWxxUAAAAJ">Google Scholar</a></li>
+              <li><a href="https://www.researchgate.net/profile/Jiwen-Zhao-3">ResearchGate</a></li>
+              <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=Zhao+J&cauthor_id=39429882">PubMed</a></li>
+              <li><a href="https://blog.csdn.net/ZaoJewin">CSDN Blog</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="site-footer__bottom">
+          <div class="site-footer__bottom-left">
+            <span>© 2026 Jiwen Zhao</span>
+          </div>
+          <a class="site-footer__top-link" href="../index.html#home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5 5.5 12H9v7h6v-7h3.5L12 5.5Z"/></svg>
+            Back to top
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/resume.js"></script>
+  </body>
+</html>
