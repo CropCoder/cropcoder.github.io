@@ -133,7 +133,7 @@ svg {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
+  grid-template-columns: minmax(0, 1fr) 590px;
   gap: 40px;
   align-items: center;
   min-height: 480px;
@@ -420,6 +420,29 @@ svg {
 
 .text-link:hover {
   text-decoration: underline;
+}
+
+.pub-links {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pub-links .text-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.pub-links .text-link:hover {
+  border-color: var(--teal);
+  background: var(--soft);
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .featured-publication {
