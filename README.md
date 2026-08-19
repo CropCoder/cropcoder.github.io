@@ -4,7 +4,7 @@
 [![Email](https://img.shields.io/badge/email-zhaojiwen@yzwlab.cn-00525d?style=flat-square)](mailto:zhaojiwen@yzwlab.cn)
 [![Google Scholar](https://img.shields.io/badge/Google%20Scholar-Citations-4285F4?style=flat-square&logo=google-scholar)](https://scholar.google.com/citations?user=wOeWxxUAAAAJ)
 [![GitHub](https://img.shields.io/badge/GitHub-CropCoder-181717?style=flat-square&logo=github)](https://github.com/CropCoder)
-[![ORCID](https://img.shields.io/badge/ORCID-0000--0003--xxxx--xxxx-A6CE39?style=flat-square&logo=orcid)](https://orcid.org)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0005--2220--6426-A6CE39?style=flat-square&logo=orcid)](https://orcid.org/0009-0005-2220-6426)
 
 **Ph.D. candidate in Genetics, Chinese Academy of Sciences**
 
