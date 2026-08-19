@@ -9,10 +9,14 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 ## Architecture
 
 ```
-├── index.html                      # Home/resume page (single-page sections + hero)
+├── index.html                      # Language-gateway landing page (animated splash, 中/EN entry cards)
+├── en.html                         # English resume page (single-page sections + hero)
+├── cn.html                         # Chinese resume page (sans-serif, full translation)
 ├── blog/
-│   ├── gwas-analysis.html          # Blog: GWAS analysis tutorial (zh-CN)
-│   └── rice-disease-resistance.html# Blog: Rice disease resistance review (zh-CN)
+│   ├── gwas-analysis.html          # Blog: GWAS analysis tutorial
+│   ├── rice-disease-resistance.html# Blog: Rice disease resistance review
+│   ├── pangenome-research.html     # Blog: Pan-genome research notes
+│   └── hpc-gpu-genomics.html       # Blog: HPC/GPU for genomics
 ├── assets/
 │   ├── css/resume.css              # Single stylesheet (~1020 lines)
 │   └── js/resume.js                # Nav toggle + scroll-spy active link
@@ -24,9 +28,9 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 
 ### Key design decisions
 
-- **No build step.** Pure HTML + CSS + JS — `index.html` is both homepage and resume. All blog pages include the same `resume.css` and `resume.js`.
+- **No build step.** Pure HTML + CSS + JS — `index.html` is the language gateway, `en.html` is the English resume, `cn.html` the Chinese resume. All resume/blog pages include the same `resume.css` and `resume.js`.
 - **Named you must know:** CSS uses BEM-like naming (`site-header`, `hero-copy`, `edu-card`, `life-card`). JS uses data attributes (`[data-nav]`, `[data-header]`) for hooking elements.
-- **Blog pages** share the same header/nav structure as the homepage; nav links point to homepage anchors (`../index.html#research`) or sibling blog pages.
+- **Blog pages** share the same header/nav structure as the resume pages; nav links point to English resume anchors (`../en.html#research`) or sibling blog pages.
 - **Active nav link** is driven by a scroll-spy in `resume.js`; blog pages set `.is-active` statically in HTML.
 - **Responsive layout** in CSS uses `@media (max-width: 720px)` breakpoint.
 - **No dependencies.** No frameworks, no package manager, no bundler.
@@ -35,12 +39,12 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 
 1. Create `blog/<slug>.html` starting from an existing blog page as template.
 2. Copy the `<header>` block (with shared nav) and the `<script>` tag.
-3. Add an entry in `index.html` under `#resources` section — a card linking to `blog/<slug>.html`.
+3. Add an entry in both `en.html` and `cn.html` under `#resources` — a card linking to `blog/<slug>.html`.
 4. Add an entry in the `blog/` page nav if relevant.
 
 ## Common commands
 
-- `open index.html` — Preview site locally (no server needed).
+- `open index.html` — Preview the language-gateway landing page locally.
 - Validate HTML via browser DevTools or the W3C validator.
 
 ## Repository conventions
