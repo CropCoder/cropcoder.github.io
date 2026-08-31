@@ -4,17 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop disease resistance researcher. Hosted on GitHub Pages at `cropcoder.github.io`. Static HTML/CSS/JS site with blog articles in Chinese and English.
+Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop disease resistance researcher. Hosted on GitHub Pages at `cropcoder.github.io`. Static HTML/CSS/JS site with blog articles in English.
 
 ## Architecture
 
 ```
-├── index.html                      # Language-gateway landing page (animated splash, 中/EN entry cards)
-├── en.html                         # English resume page (single-page sections + hero)
-├── cn.html                         # Chinese resume page (sans-serif, full translation)
+├── index.html                      # English resume homepage (single-page sections + hero)
 ├── blog/
 │   ├── gwas-analysis.html          # Blog: GWAS analysis tutorial
-│   ├── rice-disease-resistance.html# Blog: Rice disease resistance review
+│   ├── rice-disease-resistance.html # Blog: Rice disease resistance review
 │   ├── pangenome-research.html     # Blog: Pan-genome research notes
 │   └── hpc-gpu-genomics.html       # Blog: HPC/GPU for genomics
 ├── assets/
@@ -28,9 +26,9 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 
 ### Key design decisions
 
-- **No build step.** Pure HTML + CSS + JS — `index.html` is the language gateway, `en.html` is the English resume, `cn.html` the Chinese resume. All resume/blog pages include the same `resume.css` and `resume.js`.
+- **No build step.** Pure HTML + CSS + JS — `index.html` is the English resume homepage. All resume/blog pages include the same `resume.css` and `resume.js`.
 - **Named you must know:** CSS uses BEM-like naming (`site-header`, `hero-copy`, `edu-card`, `life-card`). JS uses data attributes (`[data-nav]`, `[data-header]`) for hooking elements.
-- **Blog pages** share the same header/nav structure as the resume pages; nav links point to English resume anchors (`../en.html#research`) or sibling blog pages.
+- **Blog pages** share the same header/nav structure as the resume pages; nav links point to homepage anchors (`../index.html#research`) or sibling blog pages.
 - **Active nav link** is driven by a scroll-spy in `resume.js`; blog pages set `.is-active` statically in HTML.
 - **Responsive layout** in CSS uses `@media (max-width: 720px)` breakpoint.
 - **No dependencies.** No frameworks, no package manager, no bundler.
@@ -39,16 +37,16 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 
 1. Create `blog/<slug>.html` starting from an existing blog page as template.
 2. Copy the `<header>` block (with shared nav) and the `<script>` tag.
-3. Add an entry in both `en.html` and `cn.html` under `#resources` — a card linking to `blog/<slug>.html`.
+3. Add an entry in `index.html` under `#resources` — a card linking to `blog/<slug>.html`.
 4. Add an entry in the `blog/` page nav if relevant.
 
 ## Common commands
 
-- `open index.html` — Preview the language-gateway landing page locally.
+- `open index.html` — Preview the English resume homepage.
 - Validate HTML via browser DevTools or the W3C validator.
 
 ## Repository conventions
 
 - Commit messages should describe what changed and why.
-- Blog articles are written in Chinese (zh-CN), metadata and SEO in English.
+- Blog articles are written in English, metadata and SEO in English.
 - Images should be optimized (compressed) before committing.
