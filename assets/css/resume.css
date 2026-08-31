@@ -306,6 +306,83 @@ svg {
   color: var(--muted);
 }
 
+/* Software & tools */
+.software-block {
+  margin-top: 34px;
+}
+
+.software-heading {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.software-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--white) 0%, var(--soft) 100%);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.software-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal);
+  box-shadow: 0 16px 40px rgba(9, 33, 63, 0.10);
+}
+
+.software-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.software-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.software-card__tag {
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(0, 109, 114, 0.08);
+  color: var(--teal-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.software-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.software-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--teal-dark);
+}
+
 /* Education timeline */
 .edu-timeline {
   position: relative;
@@ -1139,6 +1216,10 @@ svg {
     grid-template-columns: 1fr 1fr;
   }
 
+  .software-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .blog-card-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1257,6 +1338,10 @@ svg {
   .life-grid,
   .blog-grid,
   .workflow-list {
+    grid-template-columns: 1fr;
+  }
+
+  .software-grid {
     grid-template-columns: 1fr;
   }
 
