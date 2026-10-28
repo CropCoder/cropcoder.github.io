@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>每日文献推荐 · 作物抗病基因组学文献简报</title>
+<meta name="description" content="作物抗病基因定位与克隆、GWAS、泛基因组、NLR 与植物免疫等方向的每日文献简报归档，含中英对照摘要与可借鉴点。">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#1d2129;--ink2:#4e5969;--ink3:#86909c;
+--line:#e5e6eb;--accent:#1f6feb;--accent-w:#eaf2ff;--ok:#0f7b4f;--warn:#a4571b;
+--radius:10px;--maxw:980px}
+@media (prefers-color-scheme:dark){:root{--bg:#17181c;--card:#1f2024;--ink:#e8eaed;
+--ink2:#b6bac2;--ink3:#82878f;--line:#2f3138;--accent:#6ea8fe;--accent-w:#1c2740;--ok:#5ccf9b;--warn:#e0a458}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:40px 20px 72px}
+header.top{margin-bottom:28px}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin:0 0 10px}
+h1{font-size:30px;line-height:1.25;margin:0 0 12px;letter-spacing:-.01em}
+.lede{color:var(--ink2);margin:0;max-width:70ch}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+padding:12px 16px;min-width:132px}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:12.5px;color:var(--ink3)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+input[type=search]{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);
+border-radius:8px;background:var(--card);color:var(--ink);font-size:15px}
+input[type=search]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.hint{font-size:13px;color:var(--ink3)}
+ul.list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+li.item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+transition:border-color .15s,transform .15s}
+li.item:hover{border-color:var(--accent);transform:translateY(-1px)}
+a.row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;
+padding:16px 18px;text-decoration:none;color:inherit}
+.date{font-variant-numeric:tabular-nums;font-weight:650;font-size:15px;white-space:nowrap}
+.date small{display:block;font-weight:400;font-size:12px;color:var(--ink3)}
+.main{min-width:0}
+.title{font-size:15px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;
+display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11.5px;padding:1px 7px;border-radius:20px;background:var(--accent-w);
+color:var(--accent);white-space:nowrap}
+.meta{text-align:right;font-size:12.5px;color:var(--ink3);white-space:nowrap}
+.meta .n{color:var(--ink2);font-weight:600}
+.empty{color:var(--ink3);padding:28px 0;text-align:center}
+details.legend{margin:-4px 0 16px;font-size:13px;color:var(--ink2)}
+details.legend summary{cursor:pointer;color:var(--accent);padding:4px 0;list-style:none}
+details.legend summary::-webkit-details-marker{display:none}
+details.legend summary::before{content:"▸ ";}
+details.legend[open] summary::before{content:"▾ ";}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:6px 14px;margin:8px 0 4px;padding:12px 14px;background:var(--card);
+border:1px solid var(--line);border-radius:var(--radius)}
+.legend-grid div{display:flex;gap:8px;align-items:baseline}
+.legend-grid b{font-variant-numeric:tabular-nums;color:var(--accent);min-width:2.2em}
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+font-size:13px;color:var(--ink3)}
+footer a{color:var(--accent)}
+@media(max-width:620px){
+ a.row{grid-template-columns:1fr;gap:8px}
+ .meta{text-align:left}
+ h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Daily Literature Briefing</p>
+  <h1>每日文献推荐</h1>
+  <p class="lede">面向作物抗病研究的每日文献简报归档：核心方向包括抗病（抗性）基因定位与克隆、
+  GWAS／关联分析、泛基因组、水稻与作物抗病基因、NLR 与植物免疫受体；专项涵盖抗病基因克隆与挖掘、
+  群体泛基因组、大规模 GWAS、AI／大模型在植物基因组学中的应用、蛋白结构预测与设计、
+  植物免疫机制与 NLR 演化、Decoy 诱饵蛋白研究。</p>
+</header>
+
+<div class="stats" id="stats"></div>
+
+<div class="toolbar">
+  <input type="search" id="q" placeholder="按日期或标题筛选，例如 2026-10 或 NLR …" aria-label="筛选">
+  <span class="hint" id="hint"></span>
+</div>
+<details class="legend" id="legend">
+  <summary>方向代码对照（12 个方向）</summary>
+  <div class="legend-grid" id="legend-grid"></div>
+</details>
+
+<ul class="list" id="list"></ul>
+<p class="empty" id="empty" hidden>没有匹配的日期。</p>
+
+<footer>
+  每份简报均为单文件自包含 HTML，可离线打开；英文摘要为 Europe PMC 原文逐字抄录。
+  GitHub／期刊 RSS 两层为非同行评议线索，不与主榜论文同等看待。
+  <br>返回 <a href="../">CropCoder 主页</a>
+</footer>
+</div>
+
+<script>
+const ISSUES = [
+ {
+  "date": "2026-10-28",
+  "file": "2026-10-28-日报.html",
+  "weekday": "周三",
+  "size_kb": 121.9,
+  "papers": 3,
+  "extended": 0,
+  "top_title": "油料作物的效应子触发免疫范围扩大，尽管受体 ZAR1 的特异性更窄",
+  "titles": [
+   "油料作物的效应子触发免疫范围扩大，尽管受体 ZAR1 的特异性更窄",
+   "植物韧性：利用生物活性化合物实现可持续病害防护",
+   "一个生物钟相关基因 GmRVE8b 调控大豆开花时间与成熟期"
+  ],
+  "dirs": [
+   "d4",
+   "d5",
+   "t6",
+   "t7",
+   "d2"
+  ],
+  "core_count": 3
+ },
+ {
+  "date": "2026-10-27",
+  "file": "2026-10-27-日报.html",
+  "weekday": "周二",
+  "size_kb": 122.8,
+  "papers": 3,
+  "extended": 0,
+  "top_title": "黄单胞菌效应子 XopY 破坏 OsMAPKKK24 的激活导致水稻抗病性受损",
+  "titles": [
+   "黄单胞菌效应子 XopY 破坏 OsMAPKKK24 的激活导致水稻抗病性受损",
+   "Pantoea ananatis 触发的系统性抗性需要经 LORE 受体激酶进行根部感知",
+   "合成微生物组抑制根腐病与根际细菌变化及氨基酸代谢相关"
+  ],
+  "dirs": [
+   "d4"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-26",
+  "file": "2026-10-26-日报.html",
+  "weekday": "周一",
+  "size_kb": 125.9,
+  "papers": 3,
+  "extended": 0,
+  "top_title": "一种飞虱分泌的 miRNA 通过破坏水稻生长–防御平衡促进病毒感染",
+  "titles": [
+   "一种飞虱分泌的 miRNA 通过破坏水稻生长–防御平衡促进病毒感染",
+   "葡萄科染色体水平系统发育基因组学与基因组演化",
+   "OsATG3 的等位变异增强氮响应性分蘖以维持水稻生产力"
+  ],
+  "dirs": [
+   "d4",
+   "d3",
+   "d5",
+   "d2"
+  ],
+  "core_count": 4
+ },
+ {
+  "date": "2026-10-25",
+  "file": "2026-10-25-日报.html",
+  "weekday": "周日",
+  "size_kb": 121.6,
+  "papers": 2,
+  "extended": 1,
+  "top_title": "一个新的疫霉特异性推定脂质结合蛋白触发植物免疫",
+  "titles": [
+   "一个新的疫霉特异性推定脂质结合蛋白触发植物免疫",
+   "SWEET 单向转运蛋白——2026 年更新",
+   "致病与共生：植物–微生物互作的双重视角"
+  ],
+  "dirs": [
+   "d4"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-24",
+  "file": "2026-10-24-日报.html",
+  "weekday": "周六",
+  "size_kb": 147.4,
+  "papers": 4,
+  "extended": 2,
+  "top_title": "NIK 类受体激酶通过驱动早期磷酸化事件传递植物细胞因子触发的免疫",
+  "titles": [
+   "NIK 类受体激酶通过驱动早期磷酸化事件传递植物细胞因子触发的免疫",
+   "水杨酸诱导的 MdTGA9–MdERF138–MdHCT 模块与同源四倍体苹果的木质素沉积及炭疽病抗性提升相关",
+   "胞质铁硫簇组装靶向复合体被稻瘟菌效应子 AvrPi9 劫持以抑制水稻抗性",
+   "葡萄锈菌 Neophysopella tropicalis 在致病连续阶段部署具有植物免疫抑制活性的蛋白效应子",
+   "DREM：整合抗性概率与结构域概率以优先排序植物免疫受体",
+   "Panagram 揭示植物与动物中性状变异背后的泛基因组架构"
+  ],
+  "dirs": [
+   "d5",
+   "d4",
+   "t4",
+   "d3",
+   "t2"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-23",
+  "file": "2026-10-23-日报.html",
+  "weekday": "周五",
+  "size_kb": 124.6,
+  "papers": 3,
+  "extended": 0,
+  "top_title": "通过 QTL-Seq 与防御相关基因表达分析定位番茄早疫病（Alternaria solani）耐受性",
+  "titles": [
+   "通过 QTL-Seq 与防御相关基因表达分析定位番茄早疫病（Alternaria solani）耐受性",
+   "拟南芥含 TIR/抗性结构域的 TX14 蛋白之结构域组成影响其定位与过敏性反应的诱导",
+   "植物效应子触发免疫需要 RNA 解旋酶 PMH2 介导的线粒体 II 型内含子剪接"
+  ],
+  "dirs": [
+   "d1",
+   "d4",
+   "d5",
+   "t1",
+   "t7"
+  ],
+  "core_count": 3
+ },
+ {
+  "date": "2026-10-22",
+  "file": "2026-10-22-日报.html",
+  "weekday": "周四",
+  "size_kb": 151.7,
+  "papers": 4,
+  "extended": 3,
+  "top_title": "小麦 TaHGH1/HSFA2D 整合温度与重力信号以控制淀粉体生成和生长素不对称分布，从而塑造株型可塑性",
+  "titles": [
+   "小麦 TaHGH1/HSFA2D 整合温度与重力信号以控制淀粉体生成和生长素不对称分布，从而塑造株型可塑性",
+   "植物基因组演化：从基因组变异到环境适应",
+   "WAK 之路：壁相关激酶在植物抗病中的作用",
+   "性状信息驱动的机器学习提升小麦精准基因组选择与杂交设计",
+   "ABA 与气孔生物学：从转录与生物合成到跨细胞类型的多细胞协调",
+   "移动的氨基酸：提升转运蛋白以在减氮条件下生产优质作物",
+   "根肿病菌的全球群体基因组学与泛基因组将克隆扩张和效应子多样化与油菜抗性丧失联系起来"
+  ],
+  "dirs": [
+   "d2",
+   "d3",
+   "d4",
+   "d5",
+   "t3",
+   "t4",
+   "t2",
+   "t5"
+  ],
+  "core_count": 4
+ },
+ {
+  "date": "2026-10-21",
+  "file": "2026-10-21-日报.html",
+  "weekday": "周三",
+  "size_kb": 130.8,
+  "papers": 3,
+  "extended": 1,
+  "top_title": "高粱 TIFY 基因家族的全基因组鉴定及 SbTIFY9 在耐盐性中的功能表征",
+  "titles": [
+   "高粱 TIFY 基因家族的全基因组鉴定及 SbTIFY9 在耐盐性中的功能表征",
+   "根瘤菌 III 型效应子作为豆科根瘤共生的调控因子",
+   "追溯茉莉酸信号的演化起源：绿色谱系中氧脂代谢与激素感知的协同演化",
+   "整合基因组分析揭示小麦对生物学上不同的土传病原数量抗性的层级组织"
+  ],
+  "dirs": [
+   "t5",
+   "d4",
+   "t6",
+   "d2"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-20",
+  "file": "2026-10-20-日报.html",
+  "weekday": "周二",
+  "size_kb": 128.8,
+  "papers": 3,
+  "extended": 1,
+  "top_title": "一对壳聚糖受体赋予广谱真菌抗性",
+  "titles": [
+   "一对壳聚糖受体赋予广谱真菌抗性",
+   "植物大小选择性感知几丁质的结构基础",
+   "BIK1–WRKY9 模块激活茉莉酸信号以赋予苹果对链格孢叶斑病的抗性",
+   "类受体激酶 RLK15 结合真菌 RNase 效应子以增强自磷酸化并激活寄主防御"
+  ],
+  "dirs": [
+   "d4",
+   "d5"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-19",
+  "file": "2026-10-19-日报.html",
+  "weekday": "周一",
+  "size_kb": 125.2,
+  "papers": 3,
+  "extended": 1,
+  "top_title": "一个稻瘟病菌效应子靶向类 Tubby 的 F-box 蛋白以抑制植物免疫",
+  "titles": [
+   "一个稻瘟病菌效应子靶向类 Tubby 的 F-box 蛋白以抑制植物免疫",
+   "在大麦 3HS 染色体上鉴定出一个不同于 Rph5 与 Rph7 的新大麦叶锈病抗性位点",
+   "葫芦科–白粉病菌互作的时间分辨多组学数据集",
+   "韩国大豆核心收集的 GWAS 揭示干旱下脱水响应与氧化胁迫的遗传解耦"
+  ],
+  "dirs": [
+   "d4",
+   "t5",
+   "t7",
+   "d2"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-18",
+  "file": "2026-10-18-日报.html",
+  "weekday": "周日",
+  "size_kb": 110.7,
+  "papers": 1,
+  "extended": 1,
+  "top_title": "藜麦核盘菌茎腐病抗性的遗传解析揭示抗性相关位点与候选防御基因",
+  "titles": [
+   "藜麦核盘菌茎腐病抗性的遗传解析揭示抗性相关位点与候选防御基因",
+   "番石榴 NBS-LRR 基因家族：遗传标记在种质表征与抗病中的潜在应用"
+  ],
+  "dirs": [
+   "d2",
+   "d4",
+   "d5",
+   "t7"
+  ],
+  "core_count": 3
+ },
+ {
+  "date": "2026-10-17",
+  "file": "2026-10-17-日报.html",
+  "weekday": "周六",
+  "size_kb": 128.6,
+  "papers": 3,
+  "extended": 2,
+  "top_title": "拟南芥外向 K⁺ 通道 GORK 介导 flg22 诱导的 K⁺ 外流与气孔关闭",
+  "titles": [
+   "拟南芥外向 K⁺ 通道 GORK 介导 flg22 诱导的 K⁺ 外流与气孔关闭",
+   "可可病原 Moniliophthora roreri 的质外体效应子 MrB3 调控植物防御并与可可中的一个 LRR 蛋白互作",
+   "玉米多样性面板的全基因组关联研究解析木质纤维素抗降解性的遗传基础",
+   "ZmPMI3 磷酸甘露糖异构酶的动力学与玉米水溶性碳水化合物含量的自然变异相关联",
+   "普通荞麦种质资源收集的农艺性状表征为基因组辅助鉴定解锁资源"
+  ],
+  "dirs": [
+   "d4",
+   "d5",
+   "t5",
+   "d2",
+   "t3"
+  ],
+  "core_count": 3
+ },
+ {
+  "date": "2026-10-16",
+  "file": "2026-10-16-日报.html",
+  "weekday": "周五",
+  "size_kb": 114.8,
+  "papers": 2,
+  "extended": 0,
+  "top_title": "一种基于 TurboID 的邻近标记方法用于检测植物细胞外（质外体）蛋白互作",
+  "titles": [
+   "一种基于 TurboID 的邻近标记方法用于检测植物细胞外（质外体）蛋白互作",
+   "铁是叶际（phyllosphere）防止菌群失调的主要介导因子"
+  ],
+  "dirs": [
+   "d4",
+   "d5"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-15",
+  "file": "2026-10-15-日报.html",
+  "weekday": "周四",
+  "size_kb": 110.7,
+  "papers": 1,
+  "extended": 1,
+  "top_title": "AATRhg1 是一个液泡膜蛋白，改变氨基酸、代谢与防御响应以及线虫抗性",
+  "titles": [
+   "AATRhg1 是一个液泡膜蛋白，改变氨基酸、代谢与防御响应以及线虫抗性",
+   "一个细菌效应子靶向染色质相关调控因子以抑制植物免疫"
+  ],
+  "dirs": [
+   "d4",
+   "t7"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-14",
+  "file": "2026-10-14-日报.html",
+  "weekday": "周三",
+  "size_kb": 103.3,
+  "papers": 1,
+  "extended": 0,
+  "top_title": "一个辅助 NLR 监视被病原效应子靶向的囊泡运输调控因子的催化扰动",
+  "titles": [
+   "一个辅助 NLR 监视被病原效应子靶向的囊泡运输调控因子的催化扰动"
+  ],
+  "dirs": [
+   "d4",
+   "d5"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-13",
+  "file": "2026-10-13-日报.html",
+  "weekday": "周二",
+  "size_kb": 102.5,
+  "papers": 1,
+  "extended": 0,
+  "top_title": "基因功能状态协变揭示拟南芥非必需基因组的模块化结构",
+  "titles": [
+   "基因功能状态协变揭示拟南芥非必需基因组的模块化结构"
+  ],
+  "dirs": [
+   "d3",
+   "d4",
+   "t2"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-12",
+  "file": "2026-10-12-日报.html",
+  "weekday": "周一",
+  "size_kb": 92.8,
+  "papers": 0,
+  "extended": 0,
+  "top_title": "",
+  "titles": [],
+  "dirs": [],
+  "core_count": 0
+ },
+ {
+  "date": "2026-10-11",
+  "file": "2026-10-11-日报.html",
+  "weekday": "周日",
+  "size_kb": 114.4,
+  "papers": 1,
+  "extended": 1,
+  "top_title": "PDF2.2 将组成型防御素表达与拟南芥的抗病性联系起来",
+  "titles": [
+   "PDF2.2 将组成型防御素表达与拟南芥的抗病性联系起来",
+   "整合候选基因克隆、序列多态性与防御信号甲基转移酶的葡萄 R 基因与抗病基因类似物标记开发"
+  ],
+  "dirs": [
+   "d4",
+   "d1",
+   "d3",
+   "d5",
+   "t1",
+   "t2"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-10",
+  "file": "2026-10-10-日报.html",
+  "weekday": "周六",
+  "size_kb": 143.4,
+  "papers": 3,
+  "extended": 4,
+  "top_title": "病原诱导的钙感受器 SlCBL1-2 的分子表征揭示番茄钙感知的结构基础",
+  "titles": [
+   "病原诱导的钙感受器 SlCBL1-2 的分子表征揭示番茄钙感知的结构基础",
+   "向日葵 FLS2 引导重建对黄单胞菌 flg22 逃逸变体的识别",
+   "植物寄生线虫的跨总科分子趋同与谱系特异分化：垫刃亚目内的比较基因组学",
+   "整合 GWAS 与转录组揭示热胁迫下苋菜（Amaranthus tricolor）甜菜色素相关着色的候选基因",
+   "北欧与外源春小麦穗发芽抗性主效位点的鉴定与验证",
+   "野生Saccharum spontaneum开花相关变异的整合分析",
+   "纵向多性状 GWAS 与单性状 GWAS 在红三叶草产量与牧草品质上的比较"
+  ],
+  "dirs": [
+   "d4",
+   "t5",
+   "d5",
+   "d2"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-09",
+  "file": "2026-10-09-日报.html",
+  "weekday": "周五",
+  "size_kb": 127.4,
+  "papers": 3,
+  "extended": 0,
+  "top_title": "全基因组结构变异揭示一株玉米病原真菌的菌株特异基因与演化基因组决定因素",
+  "titles": [
+   "全基因组结构变异揭示一株玉米病原真菌的菌株特异基因与演化基因组决定因素",
+   "稻瘟病菌非常规效应蛋白分泌分选依赖高尔基体前体区室蛋白 MoGrh1",
+   "一种广泛保守的植原体 α/β-水解酶效应蛋白 SGP-7 是具催化活性的酯酶，可水解独脚金内酯类似物并改变株型"
+  ],
+  "dirs": [
+   "d3",
+   "d4",
+   "t4"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-08",
+  "file": "2026-10-08-日报.html",
+  "weekday": "周四",
+  "size_kb": 136.6,
+  "papers": 3,
+  "extended": 3,
+  "top_title": "未折叠蛋白反应信号限制 PTI，并在内质网胁迫下限制水杨酸依赖性细胞死亡",
+  "titles": [
+   "未折叠蛋白反应信号限制 PTI，并在内质网胁迫下限制水杨酸依赖性细胞死亡",
+   "系统发育上不同的 NLR 免疫受体对烟草花叶病毒运动蛋白的趋同识别",
+   "多系起源与水平交换驱动新型突破抗性莴苣尖孢镰刀菌小种的涌现",
+   "整合 GWAS 与 RNA-seq 鉴定绿豆（Vigna radiata）中响应根瘤菌接种的基因",
+   "整合 GWAS 与转录组学鉴定与葡萄果实脱粒力相关的候选基因与生物学过程",
+   "gsGNA：一个挖掘植物抗逆调控因子的通用流程"
+  ],
+  "dirs": [
+   "d4",
+   "d5",
+   "t5",
+   "d2",
+   "t4"
+  ],
+  "core_count": 2
+ },
+ {
+  "date": "2026-10-07",
+  "file": "2026-10-07-日报.html",
+  "weekday": "周三",
+  "size_kb": 134.4,
+  "papers": 3,
+  "extended": 2,
+  "top_title": "遗传作图揭示野生葡萄中硼排斥的主效位点",
+  "titles": [
+   "遗传作图揭示野生葡萄中硼排斥的主效位点",
+   "大麦白粉病病理系统中的效应子–寄主网络揭示对泛素相关蛋白与转录调控因子的显著靶向",
+   "拟南芥半胱氨酸蛋白酶 RD19 限制 PTI 中 RBOHD 产生的 ROS",
+   "面向气候适应性育种的高粱早期世代多亲本群体构建与初步表征",
+   "86 份水稻（Oryza sativa L.）材料的 GBS 数据集：印尼地方品种、改良品种与育种品系"
+  ],
+  "dirs": [
+   "d1",
+   "d2",
+   "t1",
+   "t3",
+   "d4",
+   "d5",
+   "t7"
+  ],
+  "core_count": 4
+ },
+ {
+  "date": "2026-10-06",
+  "file": "2026-10-06-日报.html",
+  "weekday": "周二",
+  "size_kb": 106.0,
+  "papers": 1,
+  "extended": 0,
+  "top_title": "组合式顺式调控元件塑造玉米黑粉菌效应蛋白的时间特异性表达",
+  "titles": [
+   "组合式顺式调控元件塑造玉米黑粉菌效应蛋白的时间特异性表达"
+  ],
+  "dirs": [
+   "d4"
+  ],
+  "core_count": 1
+ },
+ {
+  "date": "2026-10-05",
+  "file": "2026-10-05-日报.html",
+  "weekday": "周一",
+  "size_kb": 150.4,
+  "papers": 3,
+  "extended": 3,
+  "top_title": "AHL13、AHL19 与 AHL20 差异调控拟南芥在伏马菌素 B1 胁迫下的细胞壁相关防御反应",
+  "titles": [
+   "AHL13、AHL19 与 AHL20 差异调控拟南芥在伏马菌素 B1 胁迫下的细胞壁相关防御反应",
+   "核定位控制水稻 BED-NLR 受体 Xa1 介导的免疫",
+   "多环境全基因组关联分析揭示小麦萌发期耐旱相关遗传位点",
+   "USDA 大豆种质资源库抗大豆猝死综合征的全基因组关联作图",
+   "泛基因组与转录组分析揭示燕麦 GDSL 酯酶/脂肪酶基因家族的广泛多样性与育种选择信号",
+   "六个 Pectobacterium 物种的比较功能基因组学揭示马铃薯块茎中的核心与特有适应决定因子"
+  ],
+  "dirs": [
+   "d4",
+   "d5",
+   "t7",
+   "d2",
+   "t3",
+   "t1",
+   "d3",
+   "t2"
+  ],
+  "core_count": 3
+ },
+ {
+  "date": "2026-10-04",
+  "file": "2026-10-04-日报.html",
+  "weekday": "周日",
+  "size_kb": 260.1,
+  "papers": 16,
+  "extended": 9,
+  "top_title": "SAPK10–RISBZ1–ABT 轴促进胚乳向胚的 ABA 转运以增强水稻穗发芽抗性",
+  "titles": [
+   "SAPK10–RISBZ1–ABT 轴促进胚乳向胚的 ABA 转运以增强水稻穗发芽抗性",
+   "十倍体长穗偃麦草 41.33 Gb 同源染色体分辨基因组：广泛的同源异源交换与可转移的赤霉病抗性资源",
+   "茶树 CsCAD14 的功能分化协同调控苯丙烷合成以抵御灰斑病",
+   "赖氨酸基序（LysM）效应蛋白通过调控植物免疫促进核盘菌在小麦中的内生定殖",
+   "Csi-miR3954b–CsCE70/CsPLA1 调控模块通过促进酚酸与类黄酮合成增强柑橘果实对指状青霉的抗性",
+   "LysM 类受体激酶 TaLYK5 正向调控小麦对叶锈病的抗性",
+   "烟草 SGR 家族全基因组筛选与功能验证：类转录因子 NtSGRL1 是番茄黄化曲叶病毒抗性的负调控因子",
+   "丁香假单胞菌致病变种 tabaci 8018 因 hopAZ1 自发突变而对烟草品种 N509 与 Burley21 具致病性",
+   "PmWRKY-10 通过转录激活 PmPMT2-1 促进松甲醚（PME）生物合成以增强马尾松抗松材线虫病",
+   "用于根癌农杆菌高效精准基因组编辑的 λ Red 重组酶辅助 CRISPR/Cas9 系统",
+   "二氧化硅纳米颗粒提升水分亏缺下孜然（Cuminum cyminum L.）生长与抗氧化防御系统",
+   "寄主遗传变异与烟草根系微生物组组装及尖孢镰刀菌抗性相关",
+   "两种主要害虫共同为害抑制苯丙烷防御并重编程挥发物，促成水稻上的稳定共存",
+   "TaWRKY24 通过调控防御信号与活性氧积累正向调控小麦对条锈菌的抗性",
+   "烟草 EXLB1 在叶片与气孔发育中的功能验证",
+   "整合基因组学解析水稻响应酸性土壤中铝、镉、锰胁迫的关联位点",
+   "一种新的 Euterpe precatoria（棕榈科）线粒体基因组",
+   "旗叶初生代谢物 GWAS 揭示与田间籼稻干旱下产量稳定性相关的代谢 QTL 枢纽",
+   "洪水制度改变带来的基因组后果：受威胁河漫滩植物的基因流与适应",
+   "气候差异显著的两个Aegilops mutica材料基因组组装揭示广泛的结构变异",
+   "Argonaute 15 通过转座子来源的小 RNA 调控马铃薯对丝状病原体的免疫",
+   "稻瘟病菌劫持水稻 RALF 肽以启动侵染",
+   "Trade-Off Evaluator：解析两个性状之间权衡关系的遗传结构",
+   "动态 RGB-深度表型与关联作图揭示大豆株高在对比光环境下的候选位点"
+  ],
+  "dirs": [
+   "d1",
+   "t1",
+   "d4",
+   "d5",
+   "d2",
+   "d3",
+   "t3"
+  ],
+  "core_count": 4
+ }
+];
+
+const DIR_NAMES = {
+  d1:"抗病（抗性）基因定位与克隆", d2:"GWAS / 关联分析", d3:"泛基因组",
+  d4:"水稻与作物抗病基因", d5:"NLR 与植物免疫受体",
+  t1:"作物抗病基因克隆与挖掘", t2:"群体水平泛基因组", t3:"大规模 GWAS 分析",
+  t4:"AI／大语言模型在植物基因组学", t5:"蛋白结构预测与设计改造",
+  t6:"植物免疫机制与 NLR-ID 演化", t7:"植物免疫 Decoy 诱饵蛋白"
+};
+const dirName = c => DIR_NAMES[c] || c;
+
+function renderLegend(){
+  const el = document.getElementById('legend-grid');
+  if(!el) return;
+  el.innerHTML = Object.keys(DIR_NAMES)
+    .map(c=>`<div><b>${c}</b><span>${DIR_NAMES[c]}</span></div>`).join('');
+}
+
+function fmtStats(items){
+  const n = items.length;
+  const papers = items.reduce((s,x)=>s+(x.papers||0),0);
+  const ext = items.reduce((s,x)=>s+(x.extended||0),0);
+  const span = n ? (items[n-1].date + ' ~ ' + items[0].date) : '—';
+  return [
+    ['出刊期数', n],
+    ['主榜论文', papers],
+    ['延伸阅读', ext],
+    ['覆盖区间', span],
+  ];
+}
+
+function renderStats(items){
+  document.getElementById('stats').innerHTML = fmtStats(items)
+    .map(([k,v])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join('');
+}
+
+function renderList(items){
+  const ul = document.getElementById('list');
+  const empty = document.getElementById('empty');
+  ul.innerHTML = items.map(x=>{
+    const tags = (x.dirs||[]).slice(0,6)
+      .map(d=>`<span class="tag" title="${dirName(d)}">${d}</span>`).join('');
+    const title = x.top_title || '（本期无论文卡片）';
+    const cnt = [];
+    if(x.papers) cnt.push(`<span class="n">${x.papers}</span> 篇主榜`);
+    if(x.extended) cnt.push(`<span class="n">${x.extended}</span> 条延伸`);
+    return `<li class="item"><a class="row" href="${x.file}">
+      <div class="date">${x.date}<small>${x.weekday}</small></div>
+      <div class="main"><div class="title">${title}</div><div class="tags">${tags}</div></div>
+      <div class="meta">${cnt.join(' · ')||'无论文'}<br>${x.size_kb} KB</div>
+    </a></li>`;
+  }).join('');
+  empty.hidden = items.length > 0;
+}
+
+function filter(q){
+  q = (q||'').trim().toLowerCase();
+  if(!q) return ISSUES;
+  return ISSUES.filter(x =>
+    x.date.includes(q) ||
+    (x.top_title||'').toLowerCase().includes(q) ||
+    (x.titles||[]).some(t=>(t||'').toLowerCase().includes(q)) ||
+    (x.dirs||[]).some(d=>d.toLowerCase().includes(q)) ||
+    (x.weekday||'').includes(q)
+  );
+}
+
+const qEl = document.getElementById('q');
+qEl.addEventListener('input', ()=>{
+  const r = filter(qEl.value);
+  renderList(r);
+  document.getElementById('hint').textContent =
+    qEl.value.trim() ? `匹配 ${r.length} / ${ISSUES.length} 期` : '';
+});
+
+renderStats(ISSUES);
+renderList(ISSUES);
+renderLegend();
+</script>
+</body>
+</html>

@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>每日文献简报 · 2026-10-04（植物抗病与基因组学 12 方向）</title>
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  /* Claude-style warm neutral palette */
+  --ink:#1f1e1d;
+  --ink-2:#4a4741;
+  --ink-3:#78746c;
+  --paper:#faf9f5;
+  --paper-2:#f0eee6;
+  --panel:#ffffff;
+  --line:#e5e2d9;
+  --line-2:#efede5;
+  --signal:#c15f3c;        /* clay — links & structure */
+  --signal-soft:#faece5;
+  --accent:#d97757;        /* Claude orange — small marks only */
+
+  /* direction hues, desaturated to sit in the warm register */
+  --d1:#7c63a6;   /* 定位与克隆 */
+  --d2:#3e6b9e;   /* GWAS */
+  --d3:#a67c2e;   /* 泛基因组 */
+  --d4:#4a7c59;   /* 作物抗病 */
+  --d5:#a8556e;   /* NLR 与免疫受体 */
+
+  --warn:#8a6420;
+  --warn-bg:#fbf3e4;
+
+  --radius:14px;
+  --radius-sm:9px;
+  --maxw:1140px;
+  --shadow:0 1px 2px rgba(31,30,29,.04), 0 6px 20px rgba(31,30,29,.035);
+
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Source Han Sans SC","Segoe UI","Microsoft YaHei",sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,"Songti SC","Source Han Serif SC","Noto Serif CJK SC",serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,"JetBrains Mono",Consolas,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16.5px;
+  line-height:1.75;
+  letter-spacing:.004em;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:var(--signal);text-decoration:none;border-bottom:1px solid rgba(193,95,60,.3)}
+a:hover{border-bottom-color:var(--signal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;
+  padding:10px 16px;z-index:99;border:0
+}
+.skip:focus{left:12px;top:12px}
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+.masthead{
+  background:var(--paper);
+  color:var(--ink);
+  border-bottom:1px solid var(--line);
+}
+.masthead .inner{max-width:var(--maxw);margin:0 auto;padding:66px 28px 38px}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin:0 0 20px;
+}
+
+.masthead h1{
+  font-family:var(--serif);
+  font-weight:400;
+  /* one line at every width: 13 CJK glyphs must fit the container */
+  font-size:clamp(20px,4.2vw,46px);
+  line-height:1.18;
+  letter-spacing:-.014em;
+  margin:0 0 12px;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.masthead h1 em{
+  font-style:normal;
+  color:var(--accent);
+}
+
+.masthead .lede{
+  margin:20px 0 0;
+  max-width:60ch;
+  color:var(--ink-2);
+  font-size:16px;
+  line-height:1.68;
+}
+
+.meta{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin:36px 0 0;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+}
+.meta>div{background:var(--panel);padding:15px 17px}
+.meta dt{
+  font-family:var(--mono);
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 6px;
+}
+.meta dd{margin:0;font-size:14px;color:var(--ink)}
+
+/* ============================================================
+   HERO — the supply strip (signature)
+   ============================================================ */
+.hero{
+  background:var(--paper-2);
+  border-bottom:1px solid var(--line);
+}
+.hero .inner{max-width:var(--maxw);margin:0 auto;padding:54px 28px 48px}
+
+.hero h2{
+  font-family:var(--serif);
+  font-size:clamp(23px,3.2vw,34px);
+  font-weight:400;
+  line-height:1.28;
+  margin:0 0 16px;
+  max-width:32ch;
+  letter-spacing:-.008em;
+}
+.hero h2 b{color:var(--accent);font-weight:500}
+
+.hero .hero-lede{
+  margin:0 0 30px;
+  max-width:66ch;
+  color:var(--ink-2);
+  font-size:15.5px;
+}
+.hero .hero-lede b{color:var(--ink);font-weight:600}
+
+/* supply strip */
+.strip{
+  display:flex;
+  height:88px;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--panel);
+}
+.seg{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 16px;
+  cursor:pointer;
+  border:0;
+  font:inherit;
+  color:#fff;
+  text-align:left;
+  transition:filter .18s ease;
+  min-width:0;
+}
+.seg:hover{filter:brightness(1.1)}
+.seg[aria-pressed="true"]{box-shadow:inset 0 0 0 2px rgba(255,255,255,.8)}
+.seg .sg-n{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1}
+.seg .sg-l{
+  font-size:11.5px;letter-spacing:.02em;margin-top:7px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.95;
+}
+.seg.zero{background:var(--paper-2)!important;color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--line)}
+.seg.zero .sg-n{color:var(--ink-3)}
+.seg[data-dir="d1"]{background:var(--d1)}
+.seg[data-dir="d2"]{background:var(--d2)}
+.seg[data-dir="d3"]{background:var(--d3)}
+.seg[data-dir="d4"]{background:var(--d4)}
+.seg[data-dir="d5"]{background:var(--d5)}
+
+.strip-note{
+  margin:14px 0 0;
+  font-size:13.5px;
+  color:var(--ink-3);
+}
+.strip-note code{
+  font-family:var(--mono);font-size:12.5px;
+  background:var(--paper);border:1px solid var(--line);
+  padding:1px 6px;border-radius:4px;color:var(--ink-2);
+}
+
+/* ============================================================
+   SHELL / TOC
+   ============================================================ */
+.shell{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:48px 28px 90px;
+  display:grid;
+  grid-template-columns:212px minmax(0,1fr);
+  gap:52px;
+  align-items:start;
+}
+
+.toc{position:sticky;top:26px;font-size:13.5px;max-height:calc(100vh - 52px);overflow-y:auto;padding-right:4px}
+.toc h2{
+  font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 14px;font-weight:500;
+}
+.toc ol{list-style:none;margin:0 0 26px;padding:0;counter-reset:t}
+.toc li{margin:0 0 2px}
+.toc a{
+  display:block;padding:6px 11px;border-radius:8px;
+  border:0;
+  color:var(--ink-2);line-height:1.42;
+  transition:background .15s ease,color .15s ease;
+}
+.toc a:hover{background:var(--paper-2);color:var(--ink)}
+.toc a.is-active{
+  background:var(--paper-2);color:var(--ink);font-weight:600;
+}
+.toc .toc-n{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+
+.filter h2{
+  font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 12px;font-weight:500;
+}
+.filter-btns{display:flex;flex-direction:column;gap:5px}
+.fbtn{
+  font-family:var(--sans);font-size:12.5px;text-align:left;width:100%;
+  padding:8px 12px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink-2);
+  transition:all .15s ease;
+}
+.fbtn:hover{border-color:#cfcabd;color:var(--ink)}
+.fbtn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+@media (max-width:940px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:34px;padding-top:34px}
+  .toc{position:static;max-height:none;overflow:visible}
+  .toc ol{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:20px}
+  .toc li{margin:0}
+  .toc a{padding:5px 10px;border:1px solid var(--line);background:var(--panel)}
+  .toc a.is-active{border-color:var(--signal)}
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{margin:0 0 62px;scroll-margin-top:24px}
+.section-head{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:14px;margin-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.section-head .sh-k{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  color:var(--ink-2);background:var(--paper-2);
+  border:1px solid var(--line);
+  padding:4px 11px;border-radius:20px;
+  align-self:center;flex:none;
+}
+.section-head .sh-k::before{
+  content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  margin-right:8px;background:var(--ink-3);
+}
+.section-head h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(21px,2.5vw,28px);line-height:1.25;margin:0;
+  letter-spacing:-.008em;
+}
+.section-head .sh-count{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  margin-left:auto;flex:none;
+}
+.section[data-dir="d1"] .sh-k::before{background:var(--d1)}
+.section[data-dir="d2"] .sh-k::before{background:var(--d2)}
+.section[data-dir="d3"] .sh-k::before{background:var(--d3)}
+.section[data-dir="d4"] .sh-k::before{background:var(--d4)}
+.section[data-dir="d5"] .sh-k::before{background:var(--d5)}
+
+.section-note{
+  font-size:14px;color:var(--ink-2);
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 18px;margin:0 0 26px;
+}
+
+h3.sub{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  margin:36px 0 14px;letter-spacing:-.005em;
+}
+h3.sub:first-child{margin-top:0}
+
+p{margin:0 0 13px}
+p:last-child{margin-bottom:0}
+
+/* ============================================================
+   OVERVIEW
+   ============================================================ */
+.takeaways{list-style:none;margin:0 0 34px;padding:0;counter-reset:tk}
+.takeaways li{
+  position:relative;
+  padding:0 0 0 40px;
+  margin:0 0 20px;
+  color:var(--ink-2);
+}
+.takeaways li::before{
+  counter-increment:tk;content:counter(tk,decimal-leading-zero);
+  position:absolute;left:0;top:4px;
+  font-family:var(--serif);font-size:15px;
+  color:var(--accent);
+}
+.takeaways li b{color:var(--ink);font-weight:600}
+
+/* scan table */
+.table-wrap{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--panel);
+  box-shadow:var(--shadow);
+}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:660px}
+caption{
+  text-align:left;padding:16px 18px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-2)}
+thead th{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+  border-bottom:1px solid var(--line);
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#f8f7f1}
+td.num{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+td.dircell{white-space:nowrap}
+.dirdot{
+  display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:7px;vertical-align:1px;
+  background:var(--ink-3);          /* default: 专项标签用中性点 */
+}
+.filter-btns+.fgroup{margin-top:14px}
+.fgroup{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 8px;
+}
+.coverage{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 24px;margin:0 0 30px;
+}
+.cov-title{font-family:var(--serif);font-size:18px;font-weight:400;margin:0 0 7px}
+.cov-note{font-size:13.3px;color:var(--ink-3);line-height:1.62;margin:0 0 16px}
+.cov-group{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:16px 0 2px;
+}
+.cov-group:first-of-type{margin-top:0}
+.cov-row{
+  display:grid;grid-template-columns:12px minmax(0,1fr) 34px auto;
+  align-items:baseline;gap:10px;padding:7px 0;
+  border-bottom:1px solid var(--line-2);
+}
+.cov-row:last-child{border-bottom:0}
+.cov-dir{font-size:13.7px;color:var(--ink-2);line-height:1.45}
+.cov-n{font-family:var(--mono);font-size:12.5px;color:var(--ink);text-align:right}
+.cov-refs{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.cov-row.zero .cov-dir,.cov-row.zero .cov-refs{color:var(--ink-3)}
+.cov-row.zero .cov-n{color:var(--warn)}
+.cov-row.zero .dirdot{background:var(--line)}
+[data-dir="d1"] .dirdot,[data-dir="d1"].dirdot{background:var(--d1)}
+[data-dir="d2"] .dirdot,[data-dir="d2"].dirdot{background:var(--d2)}
+[data-dir="d3"] .dirdot,[data-dir="d3"].dirdot{background:var(--d3)}
+[data-dir="d4"] .dirdot,[data-dir="d4"].dirdot{background:var(--d4)}
+[data-dir="d5"] .dirdot,[data-dir="d5"].dirdot{background:var(--d5)}
+
+/* ============================================================
+   PAPER CARD
+   ============================================================ */
+.paper{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  margin:0 0 24px;
+  overflow:hidden;
+  scroll-margin-top:22px;
+}
+.paper.is-hidden{display:none}
+
+.paper-head{padding:24px 26px 20px;border-bottom:1px solid var(--line-2)}
+.paper-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.paper-idx{
+  font-family:var(--serif);font-size:15px;
+  color:var(--ink-2);background:var(--paper-2);
+  border:1px solid var(--line);
+  width:34px;height:34px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+}
+
+.paper-kind{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--ink-3);text-transform:uppercase;
+}
+
+.paper-head h3{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(19px,2.4vw,23px);line-height:1.38;
+  margin:0 0 8px;letter-spacing:-.006em;
+}
+.paper .orig{
+  font-family:var(--serif);
+  font-size:15.5px;color:var(--ink-2);line-height:1.58;
+  margin:0 0 14px;font-style:italic;
+}
+.paper .orig .zh{
+  display:inline-block;font-style:normal;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);background:var(--paper-2);
+  border:1px solid var(--line);border-radius:6px;
+  padding:3px 9px;margin-right:10px;vertical-align:2px;
+}
+
+.src{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink-2);
+  margin:0 0 10px;
+}
+.src .journal{font-weight:600;color:var(--ink)}
+.src .sep{color:var(--line);}
+.src time{color:var(--ink-2)}
+
+.badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  padding:3px 10px;border-radius:20px;
+  border:1px solid var(--line);background:var(--paper-2);color:var(--ink-2);
+}
+.badge.ok{border-color:rgba(74,124,89,.32);background:#eef3ef;color:#3d6849}
+.badge.alt{border-color:rgba(166,124,46,.3);background:#faf4e8;color:#7d5c1f}
+.badge.na{border-color:rgba(138,100,32,.32);background:var(--warn-bg);color:var(--warn)}
+
+.authors{
+  font-size:13.5px;color:var(--ink-3);line-height:1.6;margin:12px 0 0;
+  padding-top:12px;border-top:1px dashed var(--line);
+}
+.authors b{color:var(--ink-2);font-weight:600}
+.authors .lbl{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+
+/* author profiles — first author + corresponding authors (unit + research focus) */
+.bios{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;
+  padding:20px 26px;border-bottom:1px solid var(--line-2);
+}
+.bio{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:15px 17px;
+}
+.bio-role{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 8px;
+}
+.bio-name{
+  font-family:var(--serif);font-size:16px;font-weight:400;
+  color:var(--ink);margin:0 0 6px;line-height:1.35;
+}
+.bio-unit{
+  font-size:12.6px;color:var(--ink-3);line-height:1.55;
+  margin:0 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line);
+}
+.bio-dir{font-size:13.9px;color:var(--ink-2);line-height:1.68;margin:0}
+.bio-dir span{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:4px;
+}
+
+/* abstract — sentence-by-sentence bilingual pairs (EN line above, ZH line below) */
+.abstract{
+  background:var(--paper-2);
+  padding:20px 26px 22px;
+}
+.abs-head{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 15px;
+}
+.pair{padding:13px 0;border-top:1px dashed var(--line)}
+.pair:first-of-type{border-top:0;padding-top:0}
+.pair:last-of-type{padding-bottom:0}
+.s-en{
+  font-family:var(--serif);
+  font-size:14.4px;line-height:1.7;
+  color:var(--ink-3);margin:0 0 6px;letter-spacing:.002em;
+}
+.s-zh{
+  font-size:15px;line-height:1.8;
+  color:var(--ink);margin:0;
+}
+.abs-none{
+  font-size:14px;line-height:1.7;color:var(--warn);margin:0;
+}
+
+/* prompts */
+.prompts{padding:6px 26px 22px}
+.prompt{
+  padding:18px 0 0;
+  margin:0;
+}
+.prompt+.prompt{border-top:1px solid var(--line-2);margin-top:6px}
+.prompt h4{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:13.5px;font-weight:500;color:var(--ink);
+  margin:0 0 9px;letter-spacing:.01em;
+}
+.pk{
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.07em;color:var(--signal);
+  border:1px solid rgba(193,95,60,.25);
+  background:var(--signal-soft);
+  padding:3px 8px;border-radius:6px;flex:none;
+  position:relative;top:-1px;
+}
+.prompt p{font-size:14.8px;color:var(--ink-2);margin:0 0 10px}
+.prompt p:last-child{margin-bottom:0}
+.prompt ul{margin:0 0 10px;padding-left:0;list-style:none}
+.prompt li{
+  position:relative;padding-left:18px;margin-bottom:8px;
+  font-size:14.8px;color:var(--ink-2);
+}
+.prompt li::before{
+  content:"";position:absolute;left:3px;top:.72em;
+  width:5px;height:5px;border-radius:50%;background:#cdc8ba;
+}
+.prompt li:last-child{margin-bottom:0}
+.prompt strong{color:var(--ink);font-weight:600}
+.prompt em{font-style:normal;background:var(--paper-2);padding:1px 5px;border-radius:4px}
+
+.prompt.na{opacity:.94}
+.prompt.na .pk{color:var(--warn);border-color:rgba(138,100,32,.35);background:var(--warn-bg)}
+.prompt.na p{color:var(--warn)}
+.prompt.na li::before{background:var(--warn)}
+
+.readnote{
+  background:var(--paper-2);
+  border-top:1px solid var(--line-2);
+  padding:16px 26px;
+  font-size:13.8px;color:var(--ink-2);
+}
+.readnote b{color:var(--ink)}
+
+.hairline{
+  margin:0;border:0;border-top:1px dashed var(--line);
+}
+
+/* ============================================================
+   TOP 3 / TEAMS / MORE / METHOD
+   ============================================================ */
+.rank{list-style:none;margin:0;padding:0;counter-reset:r}
+.rank li{
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:24px 26px;margin:0 0 16px;
+}
+.rank .rk{
+  font-family:var(--serif);font-size:30px;font-weight:400;
+  color:#d8d4c8;line-height:1;letter-spacing:-.02em;
+}
+.rank li:first-child .rk{color:var(--accent)}
+.rank h3{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  margin:0 0 8px;line-height:1.42;
+}
+.rank p{font-size:14.5px;color:var(--ink-2);margin:0}
+
+.teamgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.team{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 24px;
+}
+.team h3{
+  font-family:var(--serif);font-size:16.5px;font-weight:400;
+  margin:0 0 8px;line-height:1.4;
+}
+.team .aff{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  letter-spacing:.02em;margin:0 0 10px;
+}
+.team p{font-size:14px;color:var(--ink-2);margin:0}
+
+.moregrid{display:grid;gap:16px}
+.moregroup{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+}
+.moregroup>header{
+  padding:16px 22px;border-bottom:1px solid var(--line-2);
+  background:var(--paper-2);
+}
+.moregroup>header h3{
+  font-family:var(--serif);font-size:16.5px;font-weight:400;margin:0;
+}
+.moregroup>header p{
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  margin:5px 0 0;letter-spacing:.03em;
+}
+.morelist{list-style:none;margin:0;padding:0}
+.morelist li{padding:15px 20px;border-bottom:1px solid var(--line-2);font-size:14px;color:var(--ink-2)}
+.morelist li:last-child{border-bottom:0}
+.morelist .mt{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;line-height:1.45}
+.morelist .mm{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  display:block;margin-bottom:5px;
+}
+.morelist .md{margin:0;font-size:13.8px}
+/* section B items carry no per-item badge: the section header already
+   states the membership rule, and a "预印本" tag would be false for the
+   journal items listed there. */
+
+.methodblock{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:26px 28px;margin:0 0 18px;
+}
+.methodblock h3{
+  font-family:var(--serif);font-size:17px;font-weight:400;margin:0 0 12px;
+}
+.methodblock p{font-size:14.3px;color:var(--ink-2)}
+
+.ifbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.ifchip{
+  font-family:var(--mono);font-size:12px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:8px 12px;background:var(--paper-2);color:var(--ink-2);
+}
+.ifchip.yes{border-color:rgba(74,124,89,.32);background:#eef3ef;color:#3d6849}
+.ifchip.no{border-color:rgba(166,124,46,.3);background:#faf4e8;color:#7d5c1f}
+
+.alert{
+  border:1px solid var(--warn);
+  background:var(--warn-bg);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin:0 0 22px;
+}
+.alert h3{
+  font-family:var(--serif);font-size:17px;font-weight:400;
+  margin:0 0 10px;color:#6b4a14;
+}
+.alert p,.alert li{font-size:14.3px;color:#6b4a14}
+.alert ul{margin:0;padding-left:20px}
+.alert li{margin-bottom:7px}
+
+pre{
+  font-family:var(--mono);font-size:12.3px;line-height:1.66;
+  background:#26251f;color:#e8e4da;
+  padding:20px 22px;border-radius:var(--radius-sm);
+  overflow-x:auto;margin:14px 0 0;
+}
+pre .cm{color:#9c968a}
+
+.foot{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px 70px;
+  font-size:13px;color:var(--ink-3);
+}
+.foot .rule{border:0;border-top:1px solid var(--line);margin:0 0 18px}
+
+.empty{
+  display:none;
+  padding:40px 24px;text-align:center;
+  background:var(--panel);border:1px dashed var(--line);
+  border-radius:var(--radius);color:var(--ink-3);font-size:14.5px;
+}
+.empty.is-on{display:block}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print{
+  :root{--paper:#fff;--paper-2:#fff;--panel:#fff;--shadow:none}
+  body{font-size:11pt;background:#fff}
+  .masthead{background:#fff;color:#000;border-bottom:1px solid #ccc}
+  .masthead h1{color:#000}
+  .masthead h1 em{color:#8a3f22}
+  .masthead .lede,.meta dt{color:#333}
+  .meta{background:#ddd;border-color:#ddd}
+  .meta>div{background:#fff}
+  .meta dd{color:#000}
+  .toc,.filter,.skip,.strip-note{display:none}
+  .shell{display:block;padding:0 0 20px;max-width:none}
+  .hero,.hero .inner,.masthead .inner{padding-left:0;padding-right:0}
+  .paper,.rank li,.team,.moregroup,.methodblock,.table-wrap{break-inside:avoid;box-shadow:none}
+  .section{break-before:auto}
+  a{color:#000;border:0}
+  .seg{color:#fff}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+@media (max-width:620px){
+  .masthead .inner,.hero .inner,.shell{padding-left:18px;padding-right:18px}
+  .paper-head,.prompts,.readnote{padding-left:18px;padding-right:18px}
+  .strip{height:auto;flex-direction:column}
+  .seg{flex:0 0 auto!important;flex-direction:row;align-items:center;gap:10px;padding:11px 14px}
+  .seg .sg-l{margin-top:0}
+  .rank li{grid-template-columns:1fr;gap:8px}
+  .rank .rk{font-size:18px}
+}
+
+/* ============================================================
+   每日文献简报 · 增量组件
+   ------------------------------------------------------------
+   本文件只做「加法」：不覆盖 assets/report.css 中任何既有规则，
+   仅补齐日报所需的组件，全部复用同一套设计 token。
+   禁止事项（继承 配置.md 第 8 节）：卡片不得使用方向色、禁止左侧色条。
+   ============================================================ */
+
+/* ---------- 方向胶囊（卡片内） ---------- */
+.dirchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 11px 3px 9px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--paper-2);
+  color:var(--ink-2);
+  font-size:12px;
+  line-height:1.6;
+  letter-spacing:.01em;
+  white-space:nowrap;
+}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--ink-3);flex:0 0 auto}
+.chip[data-c="d1"] .chip-dot{background:var(--d1)}
+.chip[data-c="d2"] .chip-dot{background:var(--d2)}
+.chip[data-c="d3"] .chip-dot{background:var(--d3)}
+.chip[data-c="d4"] .chip-dot{background:var(--d4)}
+.chip[data-c="d5"] .chip-dot{background:var(--d5)}
+.chip[data-c="t1"] .chip-dot,
+.chip[data-c="t2"] .chip-dot,
+.chip[data-c="t3"] .chip-dot,
+.chip[data-c="t4"] .chip-dot,
+.chip[data-c="t5"] .chip-dot,
+.chip[data-c="t6"] .chip-dot,
+.chip[data-c="t7"] .chip-dot{background:var(--ink-3)}
+
+/* ---------- 来源层级标记 ---------- */
+.tier{
+  display:inline-block;
+  padding:1px 8px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.03em;
+  color:var(--ink-3);
+  background:var(--paper-2);
+}
+
+/* ---------- 速览表 ---------- */
+.glance{width:100%;border-collapse:collapse;font-size:15px}
+.glance caption{
+  caption-side:top;text-align:left;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);padding:0 0 12px;
+}
+.glance thead th{
+  text-align:left;font-weight:600;font-size:12.5px;color:var(--ink-3);
+  padding:0 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+.glance tbody td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line-2);vertical-align:top}
+.glance .g-n,.glance .g-d,.glance .g-dt{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.glance .g-t{min-width:15em}
+.glance .g-j{white-space:nowrap;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- 延伸阅读条目 ---------- */
+.paper.ext{background:var(--paper-2)}
+.paper.ext .paper-head h3{font-size:19px}
+
+/* ---------- 作者角色：未确认时用警示色区分 ---------- */
+.bio-role.warn{color:var(--warn);background:var(--warn-bg);border-color:rgba(138,100,32,.28)}
+
+/* ---------- 无法评估（Prompt 缺失） ---------- */
+.cannot{
+  margin:0;
+  padding:10px 14px;
+  border:1px solid rgba(138,100,32,.28);
+  border-radius:var(--radius-sm);
+  background:var(--warn-bg);
+  color:var(--warn);
+  font-size:14.5px;
+}
+
+/* ---------- 摘要不可得 ---------- */
+.abs-none{
+  padding:14px 18px;
+  border:1px solid rgba(138,100,32,.28);
+  border-radius:var(--radius-sm);
+  background:var(--warn-bg);
+  color:var(--warn);
+  font-size:14.5px;
+  line-height:1.7;
+  margin:0 26px 18px;
+}
+
+/* ---------- 打印与窄屏补丁 ---------- */
+@media print{
+  .chip,.tier{border-color:#000;color:#000;background:#fff}
+  .glance thead th,.glance tbody td{border-color:#000}
+  .cannot,.abs-none{border:1px solid #000;color:#000;background:#fff}
+}
+@media (max-width:620px){
+  .glance .g-j,.glance .g-d{display:none}
+  .abs-none{margin-left:18px;margin-right:18px}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="masthead"><div class="inner">
+<p class="eyebrow">每日文献简报 ｜ 2026-10-04 ｜ A/B/C 三层来源 ｜ 12 方向体系</p>
+<h1>植物抗病与基因组学<em>每日</em>文献简报</h1>
+<p class="lede">每天早上 8:00 自动出刊：从顶刊、专业期刊与预印本中，筛出真正落在你 12 个方向上的当日文献——有多少报多少，不凑数。</p>
+<dl class="meta">
+<div><dt>检索窗口</dt><dd>2026-10-03 → 2026-10-04（回看 5 天）</dd></div>
+<div><dt>来源层级</dt><dd>A 顶刊 / B 专业刊 / C 预印本<br>IF 为整数近似值</dd></div>
+<div><dt>主榜论文</dt><dd>16 篇<br>4 个核心方向有命中</dd></div>
+<div><dt>延伸阅读</dt><dd>9 条（预印本）</dd></div>
+</dl>
+</div></header>
+<section class="hero"><div class="inner">
+<h2>今日主榜 <b>16 篇</b>，延伸阅读 <b>9</b> 条</h2>
+<p class="hero-lede">本日窗口内 <b>无一篇论文的实际首发日等于出刊日</b>——这是 Europe PMC 索引延迟（1–4 天）的必然结果，详见下方警示。以下论文的<b>实际首发日均已逐条标注</b>。</p>
+<div class="strip" role="group" aria-label="本日核心方向供给分布，点击可筛选">
+<button class="seg" data-dir="d1" style="flex:1 1 11.1%" aria-pressed="false"><span class="sg-n">2</span><span class="sg-l">d1 · 定位与克隆</span></button>
+<button class="seg" data-dir="d2" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">1</span><span class="sg-l">d2 · GWAS</span></button>
+<button class="seg zero" data-dir="d3" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d3 · 泛基因组</span></button>
+<button class="seg" data-dir="d4" style="flex:1 1 72.2%" aria-pressed="false"><span class="sg-n">13</span><span class="sg-l">d4 · 作物抗病</span></button>
+<button class="seg" data-dir="d5" style="flex:1 1 11.1%" aria-pressed="false"><span class="sg-n">2</span><span class="sg-l">d5 · NLR 与免疫受体</span></button>
+</div>
+<p class="strip-note">条宽 = 该<b>核心方向</b>本日主榜篇数（虚线块表示 0 篇）。 当前筛选：<code id="filterState">全部方向</code></p>
+</div></section>
+<div class="shell">
+<nav class="toc" aria-label="目录"><h2>目录</h2><ol id="tocList">
+<li><a href="#overview"><span class="toc-n">00</span>本日速览</a></li>
+<li><a href="#d1"><span class="toc-n">d1</span>抗病（抗性）基因定位与克隆</a></li>
+<li><a href="#d2"><span class="toc-n">d2</span>GWAS / 关联分析</a></li>
+<li><a href="#d4"><span class="toc-n">d4</span>水稻与作物抗病基因</a></li>
+<li><a href="#d5"><span class="toc-n">d5</span>NLR 与植物免疫受体</a></li>
+<li><a href="#t1"><span class="toc-n">t1</span>作物抗病基因克隆与挖掘</a></li>
+<li><a href="#top3"><span class="toc-n">06</span>精读 Top 3</a></li>
+<li><a href="#teams"><span class="toc-n">07</span>跟踪团队</a></li>
+<li><a href="#more"><span class="toc-n">08</span>延伸阅读</a></li>
+<li><a href="#method"><span class="toc-n">09</span>检索与核实</a></li>
+</ol>
+<div class="filter"><h2>按方向筛选</h2>
+<div class="filter-btns"><button class="fbtn" data-filter="all" aria-pressed="true">全部方向</button></div>
+<p class="fgroup">核心方向</p><div class="filter-btns">
+<button class="fbtn" data-filter="d1" aria-pressed="false">抗病基因定位与克隆</button>
+<button class="fbtn" data-filter="d2" aria-pressed="false">GWAS / 关联分析</button>
+<button class="fbtn" data-filter="d3" aria-pressed="false">泛基因组</button>
+<button class="fbtn" data-filter="d4" aria-pressed="false">水稻与作物抗病基因</button>
+<button class="fbtn" data-filter="d5" aria-pressed="false">NLR 与植物免疫受体</button>
+</div><p class="fgroup">专项追踪</p><div class="filter-btns">
+<button class="fbtn" data-filter="t1" aria-pressed="false">作物抗病基因克隆与挖掘</button>
+<button class="fbtn" data-filter="t2" aria-pressed="false">群体水平泛基因组</button>
+<button class="fbtn" data-filter="t3" aria-pressed="false">大规模 GWAS 分析</button>
+<button class="fbtn" data-filter="t4" aria-pressed="false">AI / 大语言模型应用</button>
+<button class="fbtn" data-filter="t5" aria-pressed="false">AF3 结构预测与蛋白设计</button>
+<button class="fbtn" data-filter="t6" aria-pressed="false">免疫机制与 NLR-ID 演化</button>
+<button class="fbtn" data-filter="t7" aria-pressed="false">免疫 Decoy 诱饵蛋白</button>
+</div></div></nav>
+<main id="main">
+<div class="empty" id="emptyState">当前方向筛选下没有论文。</div>
+<section class="section" id="overview">
+<div class="section-head"><span class="sh-k">00</span><h2>本日速览</h2><span class="sh-count">16 篇 / 12 方向</span></div>
+<div class="alert"><h3>⚠️ 必读：为什么“当天发表”的篇数是 0</h3><p>你的需求是检索「<b>当天发表</b>」的文章。但实测结果是：在出刊日（2026-10-04）之前 24 小时内，<b>A/B/C 三层来源中没有任何一篇的实际首发日等于当天</b>。</p><p>原因是 <b>Europe PMC 对最近 1–4 天的文献收录不完整</b>——新论文从上线到进入索引通常需要数天。这不是检索失败，而是数据库的客观延迟。</p><p><b>本简报的处理方式</b>：① 出刊窗口向前回看 <b>5 天</b>，把最近可索引到的文献全部纳入；② <b>每篇论文都标注真实首发日</b>（见卡片与速览表），你可以自行判断新鲜度；③ 明确声明<b>本日篇数是下界而非全量</b>，后续出刊会回补复查。</p></div>
+<ol class="takeaways">
+<li><b>今日主榜 16 篇，全部为「回看窗口」内可索引到的最近文献，实际首发日集中在 2026-09-29 至 2026-10-01。</b>在这个窗口里，<b>A 层顶刊命中 3 篇、B 层专业刊 13 篇</b>——顶刊当日无一篇落在 12 个方向上，这不是筛选过严，而是顶刊本身极少发抗病基因定位/GWAS/泛基因组类论文（与你的周报实测一致）。</li>
+<li><b>本期最值得读的是 Molecular Plant 的水稻穗发芽研究</b>：它用<b>图位克隆</b>拿到 <i>PHS7/RISBZ1</i>，打通了「SAPK10 激酶 → RISBZ1 转录因子 → ABT 转运蛋白 → 胚内 ABA 升高」的完整链条，并用<b>籼粳单倍型差异</b>解释了亚种间抗性差异。对 d1（基因定位与克隆）而言，这是本日证据链最完整的范例。</li>
+<li><b>抗病基因不一定是 R 基因，本期再次被两份工作支持</b>：茶树 <i>CsCAD14</i> 证明<b>代谢酶的双酶活分化</b>决定灰斑病抗性（<i>Science Advances</i>）；烟草 NtSGRL1 证明<b>叶绿素降解相关蛋白</b>竟是病毒抗性的负调控因子，敲除后 TYLCV 积累下降 1995 倍（<i>MPP</i>）。</li>
+<li><b>效应蛋白仍是理解寄主范围与抗性的核心线索</b>：本期有两篇从效应子切入——<i>Sclerotinia sclerotiorum</i> 的 <b>LysM 效应蛋白</b>通过抑制几丁质触发的免疫（ROS、MAPK）促进小麦内生定殖；<i>Pseudomonas syringae</i> pv. tabaci 则因 <b><i>hopAZ1</i> 突变</b>逃避寄主识别、把寄主范围扩展到原抗病品种。后者用<b>功能互补</b>锁死了因果。</li>
+<li><b>本期收录 2 篇与你方向相关性较弱的论文，已明确标注</b>：P11（SiO₂ 纳米颗粒缓解孜然干旱，属非生物胁迫）与 P15（烟草 EXLB1 叶片/气孔发育，抗病仅为延伸表型）。收录理由是它们分别触及 <b>WRKY–MAPK 免疫信号骨架</b>与<b>气孔作为病原入侵门户</b>，但<b>不涉及抗病基因定位、克隆或病原互作</b>，请按需取舍、勿当作核心文献引用。</li>
+<li><b>7 个方向本日主榜为 0</b>：d3、t2、t3、t4、t5、t6、t7。原因见下方覆盖表——多为顶刊/专业刊当日供给空缺，或该细分方向（如 t4 AI/LLM 在植物基因组学）本就罕有论文，<b>未用无关文献凑数</b>。</li>
+</ol>
+<div class="coverage"><h3 class="cov-title">12 方向覆盖表</h3>
+<p class="cov-note">标签制：一篇论文可命中多个方向，故各方向篇数之和大于论文总数。「仅延伸阅读命中」表示主榜无该方向论文，但预印本中有。</p>
+<p class="cov-group">核心方向</p>
+<div class="cov-row" data-dir="d1"><span class="dirdot"></span><span class="cov-dir">抗病（抗性）基因定位与克隆</span><span class="cov-n">2</span><span class="cov-refs"><a href="#p1">#p1</a><a href="#p16">#p16</a></span></div>
+<div class="cov-row" data-dir="d2"><span class="dirdot"></span><span class="cov-dir">GWAS / 关联分析</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p12">#p12</a></span></div>
+<div class="cov-row zero" data-dir="d3"><span class="dirdot"></span><span class="cov-dir">泛基因组</span><span class="cov-n">0</span><span class="cov-refs">仅延伸阅读命中（E1、E4）</span></div>
+<div class="cov-row" data-dir="d4"><span class="dirdot"></span><span class="cov-dir">水稻与作物抗病基因</span><span class="cov-n">13</span><span class="cov-refs"><a href="#p2">#p2</a><a href="#p3">#p3</a><a href="#p4">#p4</a><a href="#p5">#p5</a><a href="#p6">#p6</a><a href="#p7">#p7</a><a href="#p8">#p8</a><a href="#p9">#p9</a><a href="#p11">#p11</a><a href="#p12">#p12</a><a href="#p13">#p13</a><a href="#p14">#p14</a><a href="#p15">#p15</a></span></div>
+<div class="cov-row" data-dir="d5"><span class="dirdot"></span><span class="cov-dir">NLR 与植物免疫受体</span><span class="cov-n">2</span><span class="cov-refs"><a href="#p6">#p6</a><a href="#p10">#p10</a></span></div>
+<p class="cov-group">专项追踪</p>
+<div class="cov-row" data-dir="t1"><span class="dirdot"></span><span class="cov-dir">作物抗病基因克隆与挖掘</span><span class="cov-n">2</span><span class="cov-refs"><a href="#p1">#p1</a><a href="#p16">#p16</a></span></div>
+<div class="cov-row zero" data-dir="t2"><span class="dirdot"></span><span class="cov-dir">群体水平泛基因组</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t3"><span class="dirdot"></span><span class="cov-dir">大规模 GWAS 分析</span><span class="cov-n">0</span><span class="cov-refs">仅延伸阅读命中（E8）</span></div>
+<div class="cov-row zero" data-dir="t4"><span class="dirdot"></span><span class="cov-dir">人工智能 / 大语言模型在植物基因组与遗传学中的应用</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t5"><span class="dirdot"></span><span class="cov-dir">植物蛋白结构预测（AlphaFold3 等）与蛋白结构设计改造</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t6"><span class="dirdot"></span><span class="cov-dir">植物免疫机制与 NLR-ID 演化进化</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t7"><span class="dirdot"></span><span class="cov-dir">植物免疫 Decoy 诱饵蛋白研究</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+</div>
+<div class="table-wrap"><table class="glance"><caption>速览表 · 一行一篇</caption>
+<thead><tr><th>#</th><th>方向</th><th>论文</th><th>期刊</th><th>日期</th></tr></thead><tbody>
+<tr><td class="g-n">01</td><td class="g-d">d1 t1</td><td class="g-t"><a href="#p1">SAPK10–RISBZ1–ABT 轴促进胚乳向胚的 ABA 转运以增强水稻穗发芽抗性</a></td><td class="g-j">Molecular Plant<br>IF=25</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">02</td><td class="g-d">d4</td><td class="g-t"><a href="#p2">十倍体长穗偃麦草 41.33 Gb 同源染色体分辨基因组：广泛的同源异源交换与可转移的赤霉病抗性资源</a></td><td class="g-j">Molecular Plant<br>IF=25</td><td class="g-dt">2026-09-30</td></tr>
+<tr><td class="g-n">03</td><td class="g-d">d4</td><td class="g-t"><a href="#p3">茶树 CsCAD14 的功能分化协同调控苯丙烷合成以抵御灰斑病</a></td><td class="g-j">Science Advances<br>IF=13</td><td class="g-dt">2026-09-30</td></tr>
+<tr><td class="g-n">04</td><td class="g-d">d4</td><td class="g-t"><a href="#p4">赖氨酸基序（LysM）效应蛋白通过调控植物免疫促进核盘菌在小麦中的内生定殖</a></td><td class="g-j">Molecular Plant Pathology<br>IF=4</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">05</td><td class="g-d">d4</td><td class="g-t"><a href="#p5">Csi-miR3954b–CsCE70/CsPLA1 调控模块通过促进酚酸与类黄酮合成增强柑橘果实对指状青霉的抗性</a></td><td class="g-j">Molecular Plant Pathology<br>IF=4</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">06</td><td class="g-d">d4 d5</td><td class="g-t"><a href="#p6">LysM 类受体激酶 TaLYK5 正向调控小麦对叶锈病的抗性</a></td><td class="g-j">Plant Science<br>IF=4</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">07</td><td class="g-d">d4</td><td class="g-t"><a href="#p7">烟草 SGR 家族全基因组筛选与功能验证：类转录因子 NtSGRL1 是番茄黄化曲叶病毒抗性的负调控因子</a></td><td class="g-j">Molecular Plant Pathology<br>IF=4</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">08</td><td class="g-d">d4</td><td class="g-t"><a href="#p8">丁香假单胞菌致病变种 tabaci 8018 因 hopAZ1 自发突变而对烟草品种 N509 与 Burley21 具致病性</a></td><td class="g-j">Molecular Plant Pathology<br>IF=4</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">09</td><td class="g-d">d4</td><td class="g-t"><a href="#p9">PmWRKY-10 通过转录激活 PmPMT2-1 促进松甲醚（PME）生物合成以增强马尾松抗松材线虫病</a></td><td class="g-j">Molecular Plant Pathology<br>IF=4</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-n">10</td><td class="g-d">d5</td><td class="g-t"><a href="#p10">用于根癌农杆菌高效精准基因组编辑的 λ Red 重组酶辅助 CRISPR/Cas9 系统</a></td><td class="g-j">Plant Biotechnology Journal<br>IF=10</td><td class="g-dt">2026-09-30</td></tr>
+<tr><td class="g-n">11</td><td class="g-d">d4</td><td class="g-t"><a href="#p11">二氧化硅纳米颗粒提升水分亏缺下孜然（Cuminum cyminum L.）生长与抗氧化防御系统</a></td><td class="g-j">Plant Science<br>IF=4</td><td class="g-dt">2026-09-30</td></tr>
+<tr><td class="g-n">12</td><td class="g-d">d2 d4</td><td class="g-t"><a href="#p12">寄主遗传变异与烟草根系微生物组组装及尖孢镰刀菌抗性相关</a></td><td class="g-j">Plant Physiology<br>IF=7</td><td class="g-dt">2026-09-30</td></tr>
+<tr><td class="g-n">13</td><td class="g-d">d4</td><td class="g-t"><a href="#p13">两种主要害虫共同为害抑制苯丙烷防御并重编程挥发物，促成水稻上的稳定共存</a></td><td class="g-j">Plant Communications<br>IF=10</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-n">14</td><td class="g-d">d4</td><td class="g-t"><a href="#p14">TaWRKY24 通过调控防御信号与活性氧积累正向调控小麦对条锈菌的抗性</a></td><td class="g-j">Plant Science<br>IF=4</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-n">15</td><td class="g-d">d4</td><td class="g-t"><a href="#p15">烟草 EXLB1 在叶片与气孔发育中的功能验证</a></td><td class="g-j">Plant Science<br>IF=4</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-n">16</td><td class="g-d">d1 t1</td><td class="g-t"><a href="#p16">整合基因组学解析水稻响应酸性土壤中铝、镉、锰胁迫的关联位点</a></td><td class="g-j">Plant Cell Reports<br>IF=3</td><td class="g-dt">2026-09-29</td></tr>
+</tbody></table></div>
+</section>
+<section class="section" id="d1" data-dir="d1">
+<div class="section-head"><span class="sh-k">d1</span><h2>抗病（抗性）基因定位与克隆</h2><span class="sh-count">2 篇</span></div>
+<article class="paper" data-dir="d1" data-tags="d1 t1" id="p1"><div class="paper-head"><div class="paper-top"><span class="paper-idx">01</span><span class="paper-kind">研究论文 · 图位克隆与籽粒休眠</span></div><h3>SAPK10–RISBZ1–ABT 轴促进胚乳向胚的 ABA 转运以增强水稻穗发芽抗性</h3><p class="orig"><span class="zh">英文原题</span>An SAPK10-RISBZ1-ABT axis promotes endosperm-to-embryo ABA transport to enhance pre-harvest sprouting tolerance in rice</p><p class="src"><span class="journal">Molecular Plant</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=25</span><span class="tier">A 层 · 顶刊白名单</span><a href="https://doi.org/10.1016/j.molp.2026.09.017">10.1016/j.molp.2026.09.017</a></p><div class="dirchips"><span class="chip" data-c="d1"><span class="chip-dot"></span>d1 · 抗病（抗性）基因定位与克隆</span><span class="chip" data-c="t1"><span class="chip-dot"></span>t1 · 作物抗病基因克隆与挖掘</span></div><p class="authors"><span class="lbl">作者</span>Guanghao Li（第一作者） 等 23 人；通讯作者：<b>Xianjun Song、Jian Zhang</b>。<br>主要单位：State Key Laboratory of Rice Biology and Breeding, China National Rice Research Institute, Hangzhou 311400, China.</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">李光豪 · Guanghao Li</p><p class="bio-unit">中国农业科学院 中国水稻研究所 水稻生物育种全国重点实验室（State Key Laboratory of Rice Biology and Breeding, China National Rice Research Institute, 杭州）</p><p class="bio-dir"><span>主要研究方向</span>中国水稻研究所张健课题组博士研究生，博士期间研究方向为水稻种子休眠关键基因的挖掘及育种应用；此前发表工作聚焦脱落酸（ABA）信号调控水稻开花与种子发育（SAPK8-ABF1-Ehd1/Ehd2 通路）。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">宋献军 · Xianjun Song</p><p class="bio-unit">中山大学农业与生物技术学院 分子生物育种创新中心，教授、博士生导师，深圳（2025年9月起；此前为中国科学院植物研究所课题组长、研究员）</p><p class="bio-dir"><span>主要研究方向</span>水稻重要农艺性状遗传与功能基因组学。长期从事水稻种子性状的遗传与功能基因组学研究，鉴定优化水稻籽粒大小和种子活力的关键基因，并解析其分子调控机制与遗传网络。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">张健 · Jian Zhang</p><p class="bio-unit">中国水稻研究所 水稻生物育种全国重点实验室 种子发育课题组组长，研究员、博士生导师，杭州</p><p class="bio-dir"><span>主要研究方向</span>水稻生殖发育相关基因的克隆与功能研究；水稻胚乳生物反应器与合成生物学。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Weak dormancy can lead to pre-harvest sprouting (PHS) of crops, which seriously affects grain yield and quality.</p><p class="s-zh">休眠性弱会导致作物穗发芽（PHS），严重影响籽粒产量与品质。</p></div><div class="pair"><p class="s-en" lang="en">During seed development, endosperm-derived ABA is transported into embryo to prevent PHS.</p><p class="s-zh">在种子发育过程中，源自胚乳的脱落酸（ABA）被转运进入胚，以防止穗发芽。</p></div><div class="pair"><p class="s-en" lang="en">However, the underlying molecular mechanism remains unclear.</p><p class="s-zh">然而，其背后的分子机制此前仍不清楚。</p></div><div class="pair"><p class="s-en" lang="en">Here, we report the map-based cloning of PHS7, encoding an ABA-inducible bZIP transcription factor RISBZ1, positively regulates PHS tolerance.</p><p class="s-zh">本文报道了通过图位克隆获得的 PHS7——它编码一个 ABA 诱导型 bZIP 转录因子 RISBZ1，正向调控穗发芽耐受性。</p></div><div class="pair"><p class="s-en" lang="en">Through an ″SAPK10- RISBZ1-ABT″ module, the SnRK2 family kinase SAPK10 senses the ABA signal to phosphorylate RISBZ1 at Ser190, thus enhance its transactivation activity on an ABC transporter gene ABT.</p><p class="s-zh">通过一个“SAPK10–RISBZ1–ABT”模块，SnRK2 家族激酶 SAPK10 感受 ABA 信号，在 Ser190 位点磷酸化 RISBZ1，从而增强其对 ABC 转运蛋白基因 ABT 的转录激活活性。</p></div><div class="pair"><p class="s-en" lang="en">Serves as an ABA efflux transporter located in the embryo-endosperm interface, ABT mediates the endosperm-to-embryo transport of ABA to elevate the ABA level in embryo, which promotes embryo dormancy and suppresses PHS.</p><p class="s-zh">ABT 作为定位于胚–胚乳界面的 ABA 外排转运蛋白，介导 ABA 由胚乳向胚的转运，提升胚内 ABA 水平，进而促进胚休眠并抑制穗发芽。</p></div><div class="pair"><p class="s-en" lang="en">The A339I variation in the CDS of RISBZ1 confers the indica type RISBZ1 Hap1 higher transactivation activity on ABT than the japonica type RISBZ1 Hap2 , thereby contributing to the difference in PHS resistance between indica and japonica subspecies.</p><p class="s-zh">RISBZ1 编码区（CDS）的 A339I 变异使籼型单倍型 RISBZ1 Hap1 对 ABT 的转录激活活性高于粳型 RISBZ1 Hap2，从而促成了籼粳亚种间穗发芽抗性的差异。</p></div><div class="pair"><p class="s-en" lang="en">Combined analysis of the RISBZ1-ABT genotypes revealed that the RISBZ1 Hap1 -ABT Hap1 module confers the lowest germination rate and optimal PHS resistance performance, suggesting that the RISBZ1-ABT module should be considered in improving PHS resistance.</p><p class="s-zh">对 RISBZ1–ABT 基因型的联合分析显示，RISBZ1 Hap1–ABT Hap1 模块带来最低的发芽率与最优的穗发芽抗性表现，提示在改良穗发芽抗性时应考虑 RISBZ1–ABT 模块。</p></div><div class="pair"><p class="s-en" lang="en">Using either a transgenic approach or marker-assisted selection, we demonstrated that RISBZ1 could effectively enhance PHS tolerance in cultivars and derived hybrids.</p><p class="s-zh">借助转基因途径或分子标记辅助选择，我们证明 RISBZ1 能有效提升品种及其衍生杂交种的穗发芽耐受性。</p></div><div class="pair"><p class="s-en" lang="en">This work shed new light on PHS regulation by the communication of ABA within a seed, and provided excellent genetic resources for PHS genetic improvement.</p><p class="s-zh">该工作为“种子内部 ABA 通讯调控穗发芽”提供了新认识，并为穗发芽的遗传改良提供了优质基因资源。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>水稻穗发芽（PHS）抗性的分子机制</strong>。核心研究问题是：胚乳合成的 ABA 如何被转运到胚中以维持休眠？<strong>这一转运过程的分子机器是什么</strong>？主要目的是通过图位克隆找到调控该过程的关键基因，并阐明“激酶–转录因子–转运蛋白”的功能模块。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>穗发芽直接损害籽粒产量与品质，是水稻等作物的重要生产问题。已知胚乳来源的 ABA 需转运进胚才能抑制穗发芽，但<strong>负责这一转运的分子机制长期不明</strong>。该研究把“ABA 信号感知（SAPK10）—转录调控（RISBZ1）—ABA 外排转运（ABT）”连成完整通路，回答了种子内部 ABA 如何在组织间通讯这一基础问题；同时通过籼粳单倍型差异把机制与<strong>亚种间抗性差异</strong>直接对应，为分子标记辅助选择提供了可直接使用的靶点。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>图位克隆获得 <strong>PHS7/RISBZ1</strong>，编码一个 ABA 诱导型 bZIP 转录因子，正向调控穗发芽耐受性；</li><li>建立 <strong>SAPK10–RISBZ1–ABT</strong> 模块：SAPK10 在 <strong>Ser190</strong> 磷酸化 RISBZ1，增强其对 <em>ABT</em> 的转录激活；</li><li>ABT 是位于<strong>胚–胚乳界面</strong>的 ABA 外排转运蛋白，介导 ABA 由胚乳向胚转运，提升胚内 ABA 水平；</li><li>发现 <strong>A339I</strong> 变异使籼型 Hap1 的转录激活活性高于粳型 Hap2，解释了籼粳穗发芽抗性差异；</li><li><strong>RISBZ1 Hap1–ABT Hap1</strong> 组合对应最低发芽率与最优抗性，并可通过转基因或分子标记辅助选择提升抗性。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>机制链条完整</strong>：信号感知 → 位点特异磷酸化 → 转录激活 → 转运蛋白 → 组织间 ABA 分配 → 表型，环节之间可独立验证。</li><li><strong>把基础机制直接落到育种</strong>：籼粳单倍型差异 + 两个基因的模块化组合 + 分子标记辅助选择验证，实用性强。</li><li><strong>位点分辨率高</strong>：明确 Ser190 磷酸化位点与 A339I 自然变异位点，便于后续功能验证与标记开发。</li><li><strong>转基因与 MAS 双路径验证</strong>，结论不依赖单一技术体系。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若你的目标性状存在“组织间信号/物质转运”环节，这篇的<b>激酶→转录因子→转运蛋白</b>三段式是可复制的解谜框架。更实用的是它的<b>单倍型模块化思路</b>：不只看单基因，而是把两个基因的单倍型<b>组合</b>起来评估表型，往往能解释单基因解释不了的抗性差异。</div></article>
+<article class="paper" data-dir="d1" data-tags="d1 t1" id="p16"><div class="paper-head"><div class="paper-top"><span class="paper-idx">16</span><span class="paper-kind">研究论文 · Meta-QTL 与多组学整合</span></div><h3>整合基因组学解析水稻响应酸性土壤中铝、镉、锰胁迫的关联位点</h3><p class="orig"><span class="zh">英文原题</span>Integrative genomics resolves rice loci associated with acidic soil-related aluminum, cadmium, and manganese stress responses</p><p class="src"><span class="journal">Plant Cell Reports</span><span class="sep">·</span><span>45(10):311</span><time datetime="2026-09-29">2026-09-29</time><span class="badge">IF=3</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1007/s00299-026-03989-1">10.1007/s00299-026-03989-1</a></p><div class="dirchips"><span class="chip" data-c="d1"><span class="chip-dot"></span>d1 · 抗病（抗性）基因定位与克隆</span><span class="chip" data-c="t1"><span class="chip-dot"></span>t1 · 作物抗病基因克隆与挖掘</span></div><p class="authors"><span class="lbl">作者</span>Sandeep Jaiswal（第一作者） 等 12 人；通讯作者：<b>Sandeep Jaiswal</b>。<br>主要单位：ICAR Research Complex for NEH Region（印度农业研究理事会东北丘陵区农业综合研究中心）作物科学部（Division of Crop Science），Umiam, Meghalaya 793013, India</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Sandeep Jaiswal</p><p class="bio-unit">印度农业研究理事会东北山区综合研究所（ICAR Research Complex for NEH Region, Umiam, Meghalaya）</p><p class="bio-dir"><span>主要研究方向</span>印度农业研究理事会东北山区综合研究所研究人员，主要从事水稻、玉米等作物酸性土壤金属（铝、镉、锰、铁）毒害与耐性的遗传解析，包括QTL/关联定位、候选基因挖掘以及耐铝根系构型的高通量表型鉴定。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">Sandeep Jaiswal</p><p class="bio-unit">印度农业研究理事会东北山区综合研究所（ICAR Research Complex for NEH Region, Umiam, Meghalaya）作物科学部</p><p class="bio-dir"><span>主要研究方向</span>印度农业研究理事会东北山区综合研究所研究人员，主要从事水稻、玉米等作物酸性土壤金属（铝、镉、锰、铁）毒害与耐性的遗传解析，包括QTL/关联定位、候选基因挖掘以及耐铝根系构型的高通量表型鉴定。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Key message Meta-QTL and transcriptomic integration prioritized transport, redox, and hormonal modules, while contrasting genotypes revealed coordinated differences in metal partitioning, cell-wall-associated spectral profiles and gene expression under combined stress.</p><p class="s-zh">要点：Meta-QTL 与转录组整合优先锁定了转运、氧化还原与激素模块；对比基因型揭示了在复合胁迫下金属分配、细胞壁相关光谱特征与基因表达的协同差异。</p></div><div class="pair"><p class="s-en" lang="en">Rice in acidic and metal-affected soils may encounter aluminum (Al), cadmium (Cd), and manganese (Mn), whose distinct toxicities have partially overlapping effects on ion and redox homeostasis.</p><p class="s-zh">生长于酸性及受金属影响土壤中的水稻可能同时遭遇铝（Al）、镉（Cd）与锰（Mn），它们各自的毒性与对离子及氧化还原稳态的影响存在部分重叠。</p></div><div class="pair"><p class="s-en" lang="en">We combined meta-quantitative trait locus (M-QTL) analysis with 14 public RNA-sequencing datasets and experimental evaluation of contrasting genotypes to identify recurrent regions without assuming a common tolerance mechanism.</p><p class="s-zh">我们将 meta-数量性状位点（M-QTL）分析与 14 套公开 RNA 测序数据集、以及对比基因型的实验评估相结合，在不预设共同耐受机制的前提下寻找反复出现的区段。</p></div><div class="pair"><p class="s-en" lang="en">From 681 QTLs and marker-trait associations across 53 studies, 493 were projected onto a consensus map; 79 M-QTLs were retained, reducing the mean confidence interval from 6.90 to 1.85 cM.</p><p class="s-zh">从 53 项研究的 681 个 QTL 与标记–性状关联中，493 个被投射到一致性图谱上，最终保留 79 个 M-QTL，使平均置信区间由 6.90 cM 缩小至 1.85 cM。</p></div><div class="pair"><p class="s-en" lang="en">Ten intervals contained loci from all three combined metal datasets, indicating positional recurrence across heterogeneous traits.</p><p class="s-zh">有 10 个区段包含了来自全部三套金属数据集的位点，表明在异质性性状之间存在位置上的反复出现。</p></div><div class="pair"><p class="s-en" lang="en">Integration of positional, transcriptomic, and functional evidence across 4702 interval genes prioritized 98 candidate genes spanning membrane transport, glutathione-dependent detoxification, redox regulation, and hormone signaling.</p><p class="s-zh">对区段内 4702 个基因整合位置、转录组与功能证据，优先锁定 98 个候选基因，涵盖膜转运、谷胱甘肽依赖的解毒、氧化还原调控与激素信号。</p></div><div class="pair"><p class="s-en" lang="en">M-QTL 10.9 contained a glutathione S-transferase-rich cluster, whereas M-QTL 9.5 included candidates associated with transport and transcriptional regulation.</p><p class="s-zh">M-QTL 10.9 包含一个富含谷胱甘肽 S-转移酶的基因簇，而 M-QTL 9.5 则包含与转运和转录调控相关的候选基因。</p></div><div class="pair"><p class="s-en" lang="en">Shahsarang maintained greater root-system integrity than IR64 under several Al-containing treatments, whereas metal accumulation and translocation remained genotype-, metal-, and treatment-dependent.</p><p class="s-zh">在若干含铝处理下，Shahsarang 比 IR64 保持了更好的根系完整性，而金属积累与转运仍取决于基因型、金属种类与处理方式。</p></div><div class="pair"><p class="s-en" lang="en">Qualitative FTIR profiles showed genotype- and treatment-associated spectral differences, while RT-qPCR revealed genotype-, tissue-, and treatment-dependent expression of selected candidates.</p><p class="s-zh">定性 FTIR 谱显示与基因型和处理相关的光谱差异，而 RT-qPCR 揭示所选候选基因的表达取决于基因型、组织与处理。</p></div><div class="pair"><p class="s-en" lang="en">Together, these findings identify recurrent intervals containing complementary, rather than identical, components of rice responses to Al, Cd, and Mn.</p><p class="s-zh">总之，这些发现鉴定出反复出现的区段，其中包含水稻响应铝、镉、锰的互补（而非同一）组分。</p></div><div class="pair"><p class="s-en" lang="en">The intervals and the candidate genes provide focused resources for functional validation and allele mining; breeding utility remains to be established experimentally.</p><p class="s-zh">这些区段与候选基因为功能验证和等位基因挖掘提供了聚焦的资源；其育种价值仍需通过实验确立。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>水稻对酸性土壤中铝、镉、锰复合胁迫的遗传基础</strong>。核心研究问题是：多种金属毒性对离子与氧化还原稳态的影响部分重叠，<strong>是否存在反复出现的共同遗传区段</strong>？主要目的是用 Meta-QTL 整合大量历史 QTL 数据，再结合公开转录组与实验评估，把区段收敛到候选基因。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>酸性土壤中铝毒与镉、锰污染常同时发生，但研究多按单一金属开展，<strong>跨研究、跨性状的位点整合此前缺乏</strong>。该研究的方法学价值突出：把 53 项研究的 681 个 QTL/关联整合为一致性图谱，将平均置信区间从 6.90 cM <strong>压缩到 1.85 cM</strong>，显著提升定位精度；并在<strong>不预设共同耐受机制</strong>的前提下寻找重复区段。对关注 d2（关联分析）与 d1（位点定位）的研究者，这是一套可直接迁移的“<strong>数据整合 + 多组学优先排序</strong>”范式。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>整合 <strong>53 项研究的 681 个 QTL/标记–性状关联</strong>，投射 493 个到一致性图谱，保留 <strong>79 个 M-QTL</strong>，平均置信区间 <strong>6.90 → 1.85 cM</strong>；</li><li>发现 <strong>10 个区段</strong>同时包含三套金属数据集的位点，提示跨性状的位置重复性；</li><li>整合位置 + 转录组 + 功能证据，从 <strong>4702 个区段基因</strong>中优先锁定 <strong>98 个候选基因</strong>（膜转运、谷胱甘肽解毒、氧化还原、激素信号）；</li><li>解析出 <strong>M-QTL 10.9（富含 GST 簇）</strong> 与 <strong>M-QTL 9.5（转运与转录调控）</strong> 的差异构成；</li><li>实验显示 <strong>Shahsarang 根系完整性优于 IR64</strong>，并指出金属积累/转运与基因表达均呈基因型–金属–处理依赖。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>方法学贡献突出</strong>：Meta-QTL 把分散研究整合并大幅压缩置信区间（6.90→1.85 cM），是低成本提升定位精度的实用手段。</li><li><strong>不预设共同机制</strong>：明确寻找“互补而非同一”的组分，避免了强行统一的过度解释。</li><li><strong>多源证据优先排序</strong>：位置 + 转录组 + 功能三层证据筛选候选，可显著减少后续验证工作量。</li><li><strong>结论表述审慎</strong>：明确声明“育种价值仍需实验确立”，不夸大应用前景。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇对你的 <b>d1/d2 方向有直接方法学价值</b>：若你手上有一批分散的 QTL 定位结果（自己或文献中的），<b>Meta-QTL 整合能把置信区间压缩 2–4 倍</b>，是提升定位精度的低成本手段。另外它的<b>“不预设共同机制、主动寻找互补组分”</b>的分析态度值得学习——尤其在复合胁迫（如抗病 + 抗逆）研究中，强行寻找单一主效位点往往失败。<b>注意：本篇研究的是非生物胁迫（铝/镉/锰），不是抗病</b>，收录原因是其方法学与 d1/d2 直接相关。</div></article>
+</section>
+<section class="section" id="d2" data-dir="d2">
+<div class="section-head"><span class="sh-k">d2</span><h2>GWAS / 关联分析</h2><span class="sh-count">1 篇</span></div>
+<article class="paper" data-dir="d2" data-tags="d2 d4" id="p12"><div class="paper-head"><div class="paper-top"><span class="paper-idx">12</span><span class="paper-kind">研究论文 · 微生物组 GWAS 与抗病</span></div><h3>寄主遗传变异与烟草根系微生物组组装及尖孢镰刀菌抗性相关</h3><p class="orig"><span class="zh">英文原题</span>Host Genetic Variation Is Associated with Root-Associated Microbiome Assembly and Resistance to Fusarium oxysporum in Tobacco</p><p class="src"><span class="journal">Plant Physiology</span><time datetime="2026-09-30">2026-09-30</time><span class="badge">IF=7</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1093/plphys/kiag727">10.1093/plphys/kiag727</a></p><div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Huan Su（第一作者） 等 15 人；通讯作者：<b>Jizhong Wu、Peijian Cao、Jingjing Jin</b>。<br>主要单位：中国烟草总公司郑州烟草研究院 国家烟草基因研究中心（2022 级硕士研究生、2025 届毕业）；论文署名单位另含北京生命科技研究院、安徽中烟工业有限责任公司技术中心</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">苏欢 · Huan Su</p><p class="bio-unit">中国烟草总公司郑州烟草研究院 国家烟草基因研究中心（2022 级硕士研究生、2025 届毕业）；论文署名单位另含北京生命科技研究院、安徽中烟工业有限责任公司技术中心</p><p class="bio-dir"><span>主要研究方向</span>郑州烟草研究院 2022 级硕士研究生、2025 届毕业生，师从曹培健研究员与金静静研究员，硕士学位论文为《烟草基因型驱动的微生物组结构和功能研究》，围绕宿主遗传变异与根际微生物组组装、可培养拮抗细菌的高通量分离筛选及抗病功能验证开展工作。读研期间以第一作者在 BMC Plant Biology 发表烟草 m6A 调控基因全基因组鉴定与 NtFIP37B 抗旱功能研究，并以共同第一作者在 BMC Genomics 发表烟草 WD40 蛋白家族与 NtTTG1 抗旱性研究。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">吴继忠 · Jizhong Wu</p><p class="bio-unit">浙江中烟工业有限责任公司 技术中心（副主任），杭州</p><p class="bio-dir"><span>主要研究方向</span>现任浙江中烟工业有限责任公司技术中心副主任，负责该企业技术中心的研发布局与科技创新工作。公开科技成果记录显示，其曾作为主要完成人参与「提高产品品质稳定性的模块化配方关键技术研究与应用」项目（主要完成单位：浙江中烟工业有限责任公司），研究方向属卷烟产品配方设计与品质稳定性等烟草工业技术领域。未查到其个人主页或更细化的研究方向说明。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">曹培健 · Peijian Cao</p><p class="bio-unit">中国烟草总公司郑州烟草研究院 研究员、硕士生导师；国家烟草基因研究中心 主任；北京生命科技研究院</p><p class="bio-dir"><span>主要研究方向</span>郑州烟草研究院研究员、硕士生导师，现任国家烟草基因研究中心主任；主要从事烟草基因组学和生物信息学研究，包括植物长链非编码RNA与细胞标记数据库构建、烟草根际微生物组（线虫/青枯病等）宏基因组分析等。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">金静静 · Jingjing Jin</p><p class="bio-unit">中国烟草总公司郑州烟草研究院 研究员、硕士生导师（中国烟草基因研究中心）；北京生命科学研究院</p><p class="bio-dir"><span>主要研究方向</span>郑州烟草研究院研究员、硕士生导师，主要从事计算生物学与生物信息学研究；聚焦烟草（Nicotiana tabacum）基因组与单细胞/单核转录组、植物根际微生物组与植物-微生物互作、植物长链非编码RNA与数据库构建。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Plant-microbe interactions are essential for plant health, yet the genetic basis of host control over root-associated microbiome assembly in Nicotiana tabacum remains unclear.</p><p class="s-zh">植物–微生物互作对植物健康至关重要，但普通烟草（<i>Nicotiana tabacum</i>）中寄主控制根系微生物组组装的遗传基础仍不清楚。</p></div><div class="pair"><p class="s-en" lang="en">We integrated whole-genome resequencing, amplicon sequencing, and metabolomics across 50 tobacco cultivars, together with microbial genome-wide association and mediation analyses, to investigate host-microbiome covariation.</p><p class="s-zh">我们整合了 50 个烟草品种的全基因组重测序、扩增子测序与代谢组学，并结合微生物组全基因组关联分析与中介分析，研究寄主–微生物组的共变关系。</p></div><div class="pair"><p class="s-en" lang="en">Host genotype significantly influenced the diversity and composition of root-associated microbial communities, particularly in the rhizosphere.</p><p class="s-zh">寄主基因型显著影响根系相关微生物群落的多样性与组成，在根际尤为明显。</p></div><div class="pair"><p class="s-en" lang="en">Several host loci were associated with heritable microbial taxa linked to nutrient acquisition and stress responses.</p><p class="s-zh">若干寄主位点与可遗传的微生物类群相关联，这些类群与养分获取和胁迫响应有关。</p></div><div class="pair"><p class="s-en" lang="en">Mediation analysis suggested that associations between host genetic variation and Pseudomonadaceae abundance were partly transmitted through secondary metabolites variation, particularly terpenoids, whereas this mediating effect was less pronounced for other taxa.</p><p class="s-zh">中介分析提示，寄主遗传变异与假单胞菌科（Pseudomonadaceae）丰度之间的关联部分是通过次生代谢物（尤其是萜类）的变异传递的，而这一中介效应在其他类群中不那么明显。</p></div><div class="pair"><p class="s-en" lang="en">Functional assays further showed that several genotype-associated bacterial isolates antagonized Fusarium oxysporum.</p><p class="s-zh">功能实验进一步显示，若干与基因型相关的细菌分离株可拮抗尖孢镰刀菌（<i>Fusarium oxysporum</i>）。</p></div><div class="pair"><p class="s-en" lang="en">Among them, Pseudomonas aeruginosa FZ1 suppressed pathogen growth, enhanced host defense responses, and reduced disease severity in greenhouse experiments.</p><p class="s-zh">其中，铜绿假单胞菌（<i>Pseudomonas aeruginosa</i>）FZ1 在温室实验中抑制病原生长、增强寄主防御反应并降低病害严重度。</p></div><div class="pair"><p class="s-en" lang="en">These findings suggest that host genetic variation is associated with shifts in the tobacco root microbiome and that secondary metabolites may contribute to the assembly of specific microbial taxa.</p><p class="s-zh">这些发现提示，寄主遗传变异与烟草根系微生物组的变化相关，且次生代谢物可能参与特定微生物类群的组装。</p></div><div class="pair"><p class="s-en" lang="en">The study provides a basis for future mechanistic and breeding-oriented investigations of microbiome-associated traits.</p><p class="s-zh">该研究为微生物组相关性状的机制研究与育种导向研究提供了基础。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>烟草寄主遗传变异如何塑造根系微生物组并影响镰刀菌抗性</strong>。核心研究问题是：<strong>寄主基因组的哪些位点控制根际微生物的组成</strong>？这种控制是否通过次生代谢物介导，又是否影响抗病？主要目的是用微生物组 GWAS + 中介分析把“寄主基因型–代谢物–微生物–抗病”串成一条可检验的链条。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>“寄主基因型决定微生物组、微生物组影响抗病”是近年热点，但多数研究停留在相关性层面，<strong>缺少从寄主位点到代谢物再到具体微生物类群的介导（mediation）证据</strong>。该研究通过 50 个品种的多组学整合，尝试回答“寄主通过什么分子介质招募有益菌”，并进一步用<strong>分离菌株的温室功能实验</strong>证明抗病效果。这为“<strong>微生物组辅助育种</strong>”提供了从关联到功能的证据链，也为理解根系微生态与土传病害的关系提供框架。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>整合 <strong>50 个烟草品种</strong>的重测序 + 扩增子 + 代谢组，结合<strong>微生物组 GWAS 与中介分析</strong>；</li><li>证明<strong>寄主基因型显著影响</strong>根系微生物多样性与组成，根际尤为明显；</li><li>多个寄主位点与<strong>可遗传微生物类群</strong>相关（涉及养分获取与胁迫响应）；</li><li><strong>中介分析</strong>：寄主变异与<strong>假单胞菌科丰度</strong>的关联部分经<strong>萜类等次生代谢物</strong>传递（其他类群中介效应较弱）；</li><li>功能验证：多个基因型相关菌株<strong>拮抗尖孢镰刀菌</strong>，其中 <strong>P. aeruginosa FZ1</strong> 抑制病原、增强防御、降低病害严重度。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>从关联推进到介导机制</strong>：不只说“位点与菌群相关”，而是用中介分析给出代谢物这一中间环节。</li><li><strong>关联 + 分离 + 功能回验</strong>形成闭环，避免微生物组研究常见的“只相关不因果”。</li><li><strong>样本量与方法匹配</strong>：50 个品种做微生物组 GWAS，规模适中且有重测序支撑。</li><li><strong>对育种有指向</strong>：若能选育“招募有益菌”的寄主等位基因，可实现间接抗病。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若你关注<b>土传病害</b>（镰刀菌、青枯、疫霉等），这篇的框架值得借鉴：<b>微生物组 GWAS（把微生物类群当“性状”做关联）+ 中介分析（找代谢物介质）+ 菌株分离回验</b>。要注意它的核心变量是“微生物组”而非寄主抗病基因本身——对你的 <b>d2（GWAS/关联分析）</b> 方向是方法学参考：<b>关联分析的表型不一定是植物性状，也可以是微生物组特征</b>。</div></article>
+</section>
+<section class="section" id="d4" data-dir="d4">
+<div class="section-head"><span class="sh-k">d4</span><h2>水稻与作物抗病基因</h2><span class="sh-count">12 篇</span></div>
+<article class="paper" data-dir="d4" data-tags="d4" id="p2"><div class="paper-head"><div class="paper-top"><span class="paper-idx">02</span><span class="paper-kind">研究论文 · 多倍体基因组与抗病资源</span></div><h3>十倍体长穗偃麦草 41.33 Gb 同源染色体分辨基因组：广泛的同源异源交换与可转移的赤霉病抗性资源</h3><p class="orig"><span class="zh">英文原题</span>The homoeolog-resolved assembly of the 40-Gb decaploid Thinopyrum ponticum genome reveals extensive homoeologous exchange and recombination, segmental allopolyploid organization, and allelic variations for wheat improvement</p><p class="src"><span class="journal">Molecular Plant</span><time datetime="2026-09-30">2026-09-30</time><span class="badge">IF=25</span><span class="tier">A 层 · 顶刊白名单</span><a href="https://doi.org/10.1016/j.molp.2026.09.014">10.1016/j.molp.2026.09.014</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Pingchuan Deng（第一作者） 等 22 人；通讯作者：<b>Xuanzhao Li、Fei He、Wanquan Ji</b>。<br>主要单位：State Key Laboratory for Crop Stress Resistance and High-Efficiency Production, College of Agronomy, Northwest A &amp;amp; F University, Yangling, Shaanxi 712100, China.</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">邓平川 · Pingchuan Deng</p><p class="bio-unit">西北农林科技大学 农学院 作物抗逆与高效生产全国重点实验室，副教授，陕西杨凌</p><p class="bio-dir"><span>主要研究方向</span>麦类基因组学及分子育种。主要研究兴趣：（1）麦类基因组及比较基因组学；（2）基于多组学数据的重要性状调控网络解析；（3）基于远缘杂交的小麦新种质创制、遗传基础解析及育种利用。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Xuanzhao Li</p><p class="bio-unit">中国科学院遗传与发育生物学研究所 育种前沿技术实验室（Laboratory of Advanced Breeding Technologies）；中国科学院大学</p><p class="bio-dir"><span>主要研究方向</span>中国科学院遗传与发育生物学研究所育种前沿技术实验室成员，从事基因组学与生物信息学分析（转座子注释、比较基因组学与群体基因组学），参与小麦及其野生近缘种基因组研究。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">贺飞 · Fei He</p><p class="bio-unit">中国科学院遗传与发育生物学研究所 研究员、博士生导师；植物细胞与染色体工程国家重点实验室 研究组组长；CEPAMS（中科院–约翰英纳斯中心植物与微生物科学卓越中心），北京</p><p class="bio-dir"><span>主要研究方向</span>小麦抗病育种的基因组学基础。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">吉万全 · Wanquan Ji</p><p class="bio-unit">西北农林科技大学 农学院 作物抗逆与高效生产全国重点实验室，教授，陕西杨凌</p><p class="bio-dir"><span>主要研究方向</span>领衔“小麦远缘杂交与分子染色体工程育种团队”，长期从事小麦远缘杂交与染色体工程育种研究；团队以小麦种质资源创制、抗病机制解析和新品种培育为主攻方向。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">The decaploid grass Thinopyrum ponticum (Th. ponticum, 2n = 10x = 70) is valuable for improving wheat resilience to biotic and abiotic stressors.</p><p class="s-zh">十倍体禾草长穗偃麦草（<i>Th. ponticum</i>，2n = 10x = 70）对提升小麦抵御生物与非生物胁迫的能力具有重要价值。</p></div><div class="pair"><p class="s-en" lang="en">However, the high level of ploidy and repetitive nature of its large genome present challenges for genome assembly.</p><p class="s-zh">然而，其高倍性与大基因组的高度重复性给基因组组装带来了挑战。</p></div><div class="pair"><p class="s-en" lang="en">We used long-read sequencing and an iterative reassembly strategy to overcome partial haplotype collapse and generate a homoeolog-resolved 41.33-Gb decaploid genome assembly for this grass.</p><p class="s-zh">我们采用长读长测序与迭代重组装策略克服了部分单倍型塌缩，为该禾草产出了 41.33 Gb 的同源染色体分辨十倍体基因组组装。</p></div><div class="pair"><p class="s-en" lang="en">Combined comparative genomic, phylogenetic, and k-mer analyses resolved its diploid ancestral origins.</p><p class="s-zh">结合比较基因组、系统发生与 k-mer 分析，厘清了其二倍体祖先来源。</p></div><div class="pair"><p class="s-en" lang="en">Genome-wide recombination-based evidence, corroborated by gametophytic genomic and multiple cytological analyses, further revealed extensive homoeologous exchange consistent with a segmental allopolyploid organization.</p><p class="s-zh">基于全基因组重组的证据（并得到配子体基因组与多项细胞学分析的佐证）进一步揭示出广泛的同源异源交换，与节段异源多倍体的组织模式相符。</p></div><div class="pair"><p class="s-en" lang="en">Annotation of this assembly recovered 577,421 high-confidence genes, the largest gene repertoire reported among Triticeae genomes, including a 22-copy Fhb7 tandem gene cluster distributed across five chromosomes.</p><p class="s-zh">对该组装的注释获得 577,421 个高置信基因，是麦类族基因组中已报道的最大基因集，其中包括分布于 5 条染色体的 22 拷贝 <i>Fhb7</i> 串联基因簇。</p></div><div class="pair"><p class="s-en" lang="en">A wheat-Th. ponticum introgression panel of 348 lines catalogued the beneficial allelic diversity captured in a long-term breeding program, revealing candidate regulators of blue aleurone and identifying an expanded Fhb7 gene cluster as a transferable Fusarium head blight resistance resource.</p><p class="s-zh">由 348 份材料构成的小麦–<i>Th. ponticum</i> 渐渗系面板，系统梳理了长期育种项目中获得的有益等位多样性，揭示了蓝色糊粉层的候选调控因子，并确认扩展的 <i>Fhb7</i> 基因簇是可转移的赤霉病抗性资源。</p></div><div class="pair"><p class="s-en" lang="en">These results provide insights into the structural basis of segmental allopolyploid genome stabilization and offer both a framework and extensive resources to study the basic mechanisms of hybrid introgression and recombination in polyploids.</p><p class="s-zh">这些结果为节段异源多倍体基因组稳定化的结构基础提供了新认识，并为研究多倍体中杂交渐渗与重组的基本机制提供了框架与丰富资源。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>十倍体长穗偃麦草的基因组组装与结构解析</strong>。核心研究问题是：面对庞大且高度重复的多倍体基因组，如何克服<strong>部分单倍型塌缩</strong>、解析其<strong>亚基因组组织方式</strong>，并提取可用的育种资源？主要目的是产出<strong>同源染色体分辨（homoeolog-resolved）</strong>的参考基因组与可直接转移的抗病资源。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p><i>Th. ponticum</i> 是改良小麦生物与非生物胁迫抗性的重要供体物种，但十倍体与超大高重复基因组使组装极为困难。<strong>没有高质量组装，就无法可靠定位与转移其携带的抗性基因</strong>——这是“知道抗源有用、却拿不到基因”这一长期瓶颈的直接技术根源。同时，该物种也是研究“<strong>节段异源多倍体如何稳定化</strong>”的天然模型，兼具育种与演化双重价值。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>采用<strong>长读长测序 + 迭代重组装策略</strong>克服部分单倍型塌缩，产出 <strong>41.33 Gb 同源染色体分辨</strong>的十倍体基因组组装；</li><li>结合比较基因组、系统发生与 k-mer 分析，厘清其二倍体祖先来源；</li><li>以全基因组重组证据（辅以配子体基因组与多种细胞学分析）揭示<strong>广泛的同源异源交换</strong>，支持<strong>节段异源多倍体</strong>组织模式；</li><li>注释出 <strong>577,421 个高置信基因</strong>（麦类族已知最大基因集），含跨 5 条染色体的 <strong>22 拷贝 <i>Fhb7</i> 串联基因簇</strong>；</li><li>构建 <strong>348 份小麦–<i>Th. ponticum</i> 渐渗系面板</strong>，定位蓝色糊粉层候选调控因子，并确认<strong>扩展的 <i>Fhb7</i> 簇是可转移的赤霉病（FHB）抗性资源</strong>。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>组装难题的实质突破</strong>：41.33 Gb、十倍体、同源染色体分辨，方法学与资源双重贡献。</li><li><strong>证据来源多元交叉</strong>：长读长 + 迭代重组装 + 比较基因组 + 系统发生 + k-mer + 配子体基因组 + 细胞学，结论不依赖单一证据。</li><li><strong>资源型价值极高</strong>：577,421 个基因 + 348 份渐渗系面板，可直接用于小麦抗病育种的基因挖掘。</li><li><strong>不做纯描述性基因组文章</strong>：把结构解析与“育种可用性”绑定（<i>Fhb7</i> 簇作为可转移抗源）。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若你要从小麦野生近缘种挖掘抗病基因，这篇的“<b>大规模基因组 + 渐渗系面板</b>”组合是可复制的范式。另外，<i>Fhb7</i> 簇的 <b>22 拷贝扩张</b>提示：在多倍体中，<b>抗病基因的拷贝数扩张</b>可能是抗性加性效应的重要来源，值得在你的目标物种中主动检查。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p3"><div class="paper-head"><div class="paper-top"><span class="paper-idx">03</span><span class="paper-kind">研究论文 · 代谢酶与抗病</span></div><h3>茶树 CsCAD14 的功能分化协同调控苯丙烷合成以抵御灰斑病</h3><p class="orig"><span class="zh">英文原题</span>Functional diversification of CsCAD14 orchestrates synergistic phenylpropanoid biosynthesis to defend gray blight disease in tea plants</p><p class="src"><span class="journal">Science Advances</span><span class="sep">·</span><span>12(40):eaei1647</span><time datetime="2026-09-30">2026-09-30</time><span class="badge">IF=13</span><span class="tier">A 层 · 顶刊白名单</span><a href="https://doi.org/10.1126/sciadv.aei1647">10.1126/sciadv.aei1647</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Linlin Xu（第一作者） 等 13 人；通讯作者：<b>Junyan Zhu</b>。<br>主要单位：State Key Laboratory for Tea Plant Germplasm Innovation and Resource Utilization/ Key Laboratory of Tea Biology and Tea Processing of Ministry of Agriculture and rural affairs, Anhui Agricultural University, West 130 Changjiang Road, Hefei 230036, Anhui, China.</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Linlin Xu</p><p class="bio-unit">安徽农业大学 茶树种质创新与资源利用全国重点实验室（茶树生物学与资源利用国家重点实验室），合肥</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息（未找到其机构个人主页或团队成员页）。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">朱俊彦 · Junyan Zhu</p><p class="bio-unit">安徽农业大学 茶树种质创新与资源利用全国重点实验室 茶树遗传育种与种质创新研究团队（团队PI：韦朝领）</p><p class="bio-dir"><span>主要研究方向</span>安徽农业大学茶树遗传育种与种质创新研究团队讲师；所在团队研究领域为茶树育种与基因组学、茶树栽培与逆境生理，其发表论文集中于茶树抗病相关基因功能与次生代谢（茶树叶部病害抗性、挥发物与类黄酮代谢）。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Phenylpropanoid metabolism is a crucial secondary metabolic pathway in plants.</p><p class="s-zh">苯丙烷代谢是植物中一条关键的次生代谢途径。</p></div><div class="pair"><p class="s-en" lang="en">Numerous neofunctionalized and specialized enzymes emerged during plant terrestrialization, yielding metabolites contributing to environmental adaptation.</p><p class="s-zh">在植物登陆过程中出现了大量新功能化与特化的酶，产生有助于环境适应的代谢产物。</p></div><div class="pair"><p class="s-en" lang="en">Here, a cinnamyl alcohol dehydrogenase from tea plant ( Camellia sinensis ), CsCAD14, exhibited dual activity catalyzing monolignol and hydroxycinnamic acid biosynthesis.</p><p class="s-zh">本文发现茶树（<i>Camellia sinensis</i>）的一个肉桂醇脱氢酶 CsCAD14 具双酶活，可催化木质醇与羟基肉桂酸的生物合成。</p></div><div class="pair"><p class="s-en" lang="en">Antifungal assays showed that monolignols and hydroxycinnamic acids synergistically inhibited Pestalotiopsis growth.</p><p class="s-zh">抗真菌实验表明，木质醇与羟基肉桂酸可协同抑制拟盘多毛孢（<i>Pestalotiopsis</i>）的生长。</p></div><div class="pair"><p class="s-en" lang="en">Integrated functional characterizations revealed that CsCAD14 enhanced gray blight disease resistance by increasing monolignol and hydroxycinnamic acid levels compared to CsCAD11 featured with single-enzymatic activity.</p><p class="s-zh">整合的功能表征显示，与仅具单酶活的 <i>CsCAD11</i> 相比，<i>CsCAD14</i> 通过提高木质醇与羟基肉桂酸水平增强了灰斑病抗性。</p></div><div class="pair"><p class="s-en" lang="en">Notably, genetic analysis of F 1 progeny from crossing susceptible and resistant tea cultivars identified a nonsynonymous mutation in the CsCAD14 coding region, which abolished dual-enzymatic activity and was associated with pathogen susceptibility.</p><p class="s-zh">值得注意的是，对感病与抗病茶树品种杂交 F<sub>1</sub> 后代的遗传分析，在 <i>CsCAD14</i> 编码区鉴定出一个非同义突变，该突变废除双酶活并与病原感病性相关。</p></div><div class="pair"><p class="s-en" lang="en">Furthermore, evolutionary analysis revealed a positively selected amino acid substitution (L192V) driving CAD functional diversification from single-enzymatic activity in algae to dual-enzymatic activity in land plants.</p><p class="s-zh">此外，演化分析揭示一个受正选择的氨基酸替换（L192V）驱动了 CAD 的功能分化：从藻类的单酶活到陆生植物的双酶活。</p></div><div class="pair"><p class="s-en" lang="en">These findings uncover neofunctionalization of dual-activity CADs evolved for phenylpropanoid defense to enhance fungal disease resistance during plant adaptation to terrestrial environments.</p><p class="s-zh">这些发现揭示了双酶活 CAD 的新功能化——它是植物在适应陆地环境过程中为增强真菌病害抗性而演化出的苯丙烷防御机制。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>茶树灰斑病抗性的次生代谢基础</strong>。核心研究问题是：苯丙烷代谢途径中的酶在植物登陆过程中发生了哪些新功能化？<strong>CsCAD14 的“双酶活”是否与抗病直接相关</strong>？主要目的是把“代谢酶的功能分化”与“抗/感品种间存在的自然遗传变异”连接起来，为抗病育种提供可选择的等位基因。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>苯丙烷代谢是植物关键的次生代谢途径，在植物登陆（terrestrialization）过程中演化出大量新功能化与特化酶，其产物服务于环境适应。然而，<strong>“代谢酶的新功能化如何具体贡献真菌病害抗性”缺少直接的遗传学证据</strong>。重要性体现在两端：一是为抗病育种提供<strong>可直接选择的代谢酶等位基因</strong>（抗/感品种间存在天然差异）；二是为理解植物登陆后的抗性演化提供线索。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>鉴定茶树肉桂醇脱氢酶 <strong>CsCAD14 具“双酶活”</strong>：可同时催化<strong>木质醇（monolignol）</strong>与<strong>羟基肉桂酸（hydroxycinnamic acid）</strong>合成；</li><li>抗真菌实验显示两类产物<strong>协同抑制</strong> <i>Pestalotiopsis</i> 生长；</li><li>与仅有单酶活的 <strong>CsCAD11</strong> 相比，CsCAD14 通过提高两类代谢物水平<strong>增强灰斑病抗性</strong>；</li><li>抗/感品种杂交 <strong>F<sub>1</sub> 群体</strong>的遗传分析定位到 <i>CsCAD14</i> 编码区一个<strong>非同义突变</strong>，该突变废除双酶活并与感病相关；</li><li>演化分析发现<strong>正选择氨基酸替换 L192V</strong> 驱动 CAD 从藻类的单酶活向陆生植物的双酶活功能分化。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>切入点新颖</strong>：从“代谢酶的功能分化”切入抗病，而非从免疫受体出发——再次印证“抗病基因不一定是 R 基因”。</li><li><strong>证据链完整</strong>：酶活 → 产物抑菌 → 抗性表型 → 自然变异（F<sub>1</sub> 非同义突变）→ 演化（正选择位点），五级递进。</li><li><strong>把自然变异落到具体碱基</strong>：抗/感品种差异被精确定位到编码区单个非同义突变，为分子标记辅助选择提供<strong>可直接使用的靶点</strong>。</li><li><strong>演化维度提升概念层次</strong>：从藻类到陆生植物的功能分化，把抗病机制放进宏观演化框架。</li><li><strong>研究对象稀缺</strong>：茶树是多年生木本作物、抗病研究基础相对薄弱，该工作拓展了抗病研究的作物版图。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若你的抗病定位未命中经典 R 基因，可考虑“<b>代谢酶功能分化 + 自然等位变异</b>”这条路。<b>F<sub>1</sub> 群体 + 非同义突变 + 酶活验证</b>是低成本、高说服力的证据组合。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p4"><div class="paper-head"><div class="paper-top"><span class="paper-idx">04</span><span class="paper-kind">研究论文 · 效应蛋白与免疫抑制</span></div><h3>赖氨酸基序（LysM）效应蛋白通过调控植物免疫促进核盘菌在小麦中的内生定殖</h3><p class="orig"><span class="zh">英文原题</span>Lysin Motif Effectors Facilitate the Endophytic Colonization of Wheat by Sclerotinia sclerotiorum via Modulating Plant Immunity</p><p class="src"><span class="journal">Molecular Plant Pathology</span><span class="sep">·</span><span>27(10):e70355</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/mpp.70355">10.1111/mpp.70355</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Yamin Du（第一作者） 等 12 人；通讯作者：<b>Xiao Yu</b>。<br>主要单位：National Key Laboratory of Agricultural Microbiology Huazhong Agricultural University  Wuhan Hubei China; Hubei Hongshan Laboratory  Wuhan Hubei China; The Provincial Key Lab of Plant Pathology of Hubei Province, College of Plant Science and Technology Huazhong Agricultural University  Wuhan Hubei China</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Yamin Du</p><p class="bio-unit">华中农业大学 农业微生物资源发掘与利用全国重点实验室 / 湖北洪山实验室 / 湖北省植物病理学重点实验室（植物科学技术学院），武汉</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">于晓 · Xiao Yu</p><p class="bio-unit">华中农业大学 植物科学技术学院 教授、博士生导师（植物病理学；农业微生物学国家重点实验室/洪山实验室）</p><p class="bio-dir"><span>主要研究方向</span>华中农业大学植物科学技术学院教授、博士生导师，研究方向为植物与微生物互作：系统开展植物先天免疫信号途径研究，主要包括植物自我免疫与细胞死亡信号通路、植物与内生菌（内生真菌）的识别与互作机制，以及内生真菌诱导植物系统免疫的抗病遗传改良应用。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Sclerotinia sclerotiorum is a necrotrophic fungus that causes severe plant diseases but can also colonize wheat as a symptomless endophyte.</p><p class="s-zh">核盘菌（<i>Sclerotinia sclerotiorum</i>）是一种死体营养型真菌，可造成严重的植物病害，但也能以无症状内生菌的形式定殖小麦。</p></div><div class="pair"><p class="s-en" lang="en">However, the mechanism by which its effector proteins regulate this dual lifestyle remains unclear.</p><p class="s-zh">然而，其效应蛋白调控这种双重生活方式的机制仍不清楚。</p></div><div class="pair"><p class="s-en" lang="en">This study aimed to identify key LysM effectors involved in S. sclerotiorum-plant interactions and elucidate their specific functions.</p><p class="s-zh">本研究旨在鉴定参与核盘菌–植物互作的关键 LysM 效应蛋白，并阐明其具体功能。</p></div><div class="pair"><p class="s-en" lang="en">Among seven SsLysM genes, SsLysM6 and SsLysM7 were transcriptionally upregulated during both the pathogenic infection of rapeseed and the endophytic colonization of wheat.</p><p class="s-zh">在 7 个 SsLysM 基因中，SsLysM6 与 SsLysM7 在致病性侵染油菜和内生定殖小麦两种过程中均上调表达。</p></div><div class="pair"><p class="s-en" lang="en">The ΔSsLysM6 and ΔSsLysM7 mutants exhibited significantly reduced colonization abilities on both their pathogenic host (rapeseed) and their endophytic host (wheat).</p><p class="s-zh">ΔSsLysM6 与 ΔSsLysM7 突变体在其致病寄主（油菜）与内生寄主（小麦）上的定殖能力均显著下降。</p></div><div class="pair"><p class="s-en" lang="en">Transient expression of SsLysM6 and SsLysM7 in Nicotiana benthamiana leaves demonstrated that both effectors suppress chitin-induced immune responses, including reactive oxygen species (ROS) bursts, MAPK activation, and immune gene expression.</p><p class="s-zh">在本氏烟草（<i>Nicotiana benthamiana</i>）叶片中瞬时表达 SsLysM6 与 SsLysM7 表明，这两个效应蛋白均能抑制几丁质诱导的免疫反应，包括活性氧（ROS）爆发、MAPK 激活以及免疫基因表达。</p></div><div class="pair"><p class="s-en" lang="en">Recombinant SsLysM6 and SsLysM7 proteins exhibited chitin-binding ability and efficiently suppressed chitin-triggered ROS bursts in wheat leaves.</p><p class="s-zh">重组 SsLysM6 与 SsLysM7 蛋白具有几丁质结合能力，并能有效抑制小麦叶片中几丁质触发的 ROS 爆发。</p></div><div class="pair"><p class="s-en" lang="en">These findings provide critical insights into the molecular mechanism by which S. sclerotiorum establishes compatible interactions across genetically diverse hosts, highlight the central role of LysM effectors in fungal adaptation to distinct lifestyles, and offer new perspectives on the evolutionary continuum between pathogenic and endophytic fungi.</p><p class="s-zh">这些发现为核盘菌如何在遗传背景迥异的寄主上建立亲和互作提供了关键的分子机制认识，凸显了 LysM 效应蛋白在真菌适应不同生活方式中的核心作用，并为理解病原真菌与内生真菌之间的演化连续谱提供了新视角。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>核盘菌如何以效应蛋白同时实现致病与无症状内生定殖</strong>。核心研究问题是：同一病原真菌在致病寄主（油菜）与内生寄主（小麦）上生活方式不同，<strong>哪些效应蛋白在两种生活方式中都起作用、其分子功能是什么</strong>？主要目的是鉴定关键 LysM 效应蛋白并阐明其抑制植物免疫的机制。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>核盘菌是典型的死体营养型病原，通常与“造成严重病害”关联；但同一菌株也能作为<strong>无症状内生菌</strong>定殖小麦。理解这种<strong>双重生活方式</strong>的分子开关，对认识真菌–植物互作的演化连续谱有基础意义，也直接关系到小麦菌核病的防控策略。LysM 效应蛋白是已知的真菌“几丁质屏蔽/捕获”工具，但<strong>它们在“致病 vs 内生”两种模式中的分工此前缺乏系统证据</strong>。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>从 7 个 <i>SsLysM</i> 基因中锁定 <strong>SsLysM6 与 SsLysM7</strong>：在致病侵染油菜与内生定殖小麦中<strong>均上调</strong>；</li><li>构建 <strong>ΔSsLysM6、ΔSsLysM7 突变体</strong>，在两种寄主上定殖能力均显著下降——证明其双场景必需性；</li><li>在本氏烟草中瞬时表达证明两个效应蛋白<strong>抑制几丁质诱导的免疫反应</strong>（ROS 爆发、MAPK 激活、免疫基因表达）；</li><li>重组蛋白具<strong>几丁质结合能力</strong>，可有效抑制小麦叶片中几丁质触发的 ROS 爆发（体外 + 活体双重证据）；</li><li>提出 LysM 效应蛋白是<strong>真菌适应不同生活方式</strong>的核心，并给出“病原–内生”演化连续谱的新视角。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>选题角度巧妙</strong>：不研究“杀不杀得死”，而研究“为什么有时不杀”——把内生定殖当作独立表型来剖析。</li><li><strong>基因家族筛选逻辑清晰</strong>：7 个候选 → 表达模式筛选 → 敲除验证 → 异源表达机制 → 蛋白体外活性，逐级收敛。</li><li><strong>跨寄主验证</strong>：油菜（致病寄主）与小麦（内生寄主）双体系，避免单寄主结论的片面性。</li><li><strong>把“几丁质捕获”从致病场景拓展到内生场景</strong>，概念上有增量。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若你的病原菌也存在“致病/无症状”两种状态，这篇的<b>双寄主对比 + 敲除定殖表型</b>是标准解法。实用提示：<b>LysM 效应蛋白家族通常有多个旁系同源基因</b>，先按表达模式（在两种场景都上调者优先）筛选，比逐个敲除更省力。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p5"><div class="paper-head"><div class="paper-top"><span class="paper-idx">05</span><span class="paper-kind">研究论文 · miRNA 与采后抗病</span></div><h3>Csi-miR3954b–CsCE70/CsPLA1 调控模块通过促进酚酸与类黄酮合成增强柑橘果实对指状青霉的抗性</h3><p class="orig"><span class="zh">英文原题</span>A Csi-miR3954b-CsCE70/CsPLA1 Regulatory Module Enhances Citrus Fruit Resistance to Penicillium digitatum by Promoting Phenolic Acid and Flavonoid Biosynthesis</p><p class="src"><span class="journal">Molecular Plant Pathology</span><span class="sep">·</span><span>27(10):e70351</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/mpp.70351">10.1111/mpp.70351</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Jixin Tian（第一作者） 等 8 人；通讯作者：<b>Kaifang Zeng</b>。<br>主要单位：College of Food Science Southwest University  Chongqing China</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Jixin Tian</p><p class="bio-unit">西南大学 食品科学学院，重庆</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">曾凯芳 · Kaifang Zeng</p><p class="bio-unit">西南大学 食品科学学院 二级教授、博士生导师；西南大学果蔬物流保鲜与营养品质调控研究中心主任</p><p class="bio-dir"><span>主要研究方向</span>西南大学食品科学学院二级教授、博士生导师，国家“万人计划”科技创新领军人才；长期从事柑橘等果蔬采后贮藏保鲜与病害绿色防控研究，包括柑橘采后病害（青霉病等）生防酵母控制机制、果实抗病性调控与营养品质保持。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Green mould is one of the major postharvest diseases affecting citrus.</p><p class="s-zh">绿霉病是影响柑橘的主要采后病害之一。</p></div><div class="pair"><p class="s-en" lang="en">Although evidence indicates that microRNAs (miRNAs) participate in plant defence responses, their roles and regulatory mechanisms in citrus resistance to green mould remain unclear.</p><p class="s-zh">尽管有证据表明 microRNA（miRNA）参与植物防御反应，但它们在柑橘抗绿霉病中的作用与调控机制仍不清楚。</p></div><div class="pair"><p class="s-en" lang="en">Small RNA sequencing identified several defence-associated miRNAs involved in citrus resistance to Penicillium digitatum.</p><p class="s-zh">小 RNA 测序鉴定出若干个参与柑橘抗指状青霉（<i>Penicillium digitatum</i>）的防御相关 miRNA。</p></div><div class="pair"><p class="s-en" lang="en">Among them, transient overexpression screening identified Csi-miR3954b as the most effective miRNA, reducing disease incidence by 24.4% compared with the control at 5 days post-inoculation (dpi).</p><p class="s-zh">其中，通过瞬时过表达筛选确定 Csi-miR3954b 是最有效的 miRNA，在接种后 5 天（5 dpi）相比对照使发病率降低 24.4%。</p></div><div class="pair"><p class="s-en" lang="en">Subsequent transient overexpression and short tandem target mimic (STTM)-mediated suppression assays demonstrated that Csi-miR3954b positively regulates citrus resistance to green mould, with transient overexpression reducing disease incidence by 22.7% and STTM-mediated suppression increasing it by 9.6% at 5 dpi.</p><p class="s-zh">随后的瞬时过表达与短串联靶标模拟（STTM）介导的抑制实验表明，Csi-miR3954b 正向调控柑橘对绿霉病的抗性：5 dpi 时瞬时过表达使发病率降低 22.7%，而 STTM 介导的抑制使其升高 9.6%。</p></div><div class="pair"><p class="s-en" lang="en">Degradome sequencing, transient assays in Nicotiana benthamiana leaves and expression analysis identified CsCE70 and CsPLA1 as the direct targets of Csi-miR3954b.</p><p class="s-zh">降解组测序、本氏烟草叶片瞬时实验与表达分析确定 CsCE70 与 CsPLA1 是 Csi-miR3954b 的直接靶标。</p></div><div class="pair"><p class="s-en" lang="en">Transcriptome analysis showed that CsCE70 and CsPLA1 mainly regulated phenolic acid and flavonoid biosynthesis, respectively.</p><p class="s-zh">转录组分析显示，CsCE70 与 CsPLA1 分别主要调控酚酸与类黄酮的生物合成。</p></div><div class="pair"><p class="s-en" lang="en">Transient overexpression of CsCE70 and CsPLA1 increased disease incidence by 17.4% and 10.4%, respectively, compared with the control at 5 dpi, suggesting that both genes negatively regulated citrus resistance to P. digitatum.</p><p class="s-zh">5 dpi 时，CsCE70 与 CsPLA1 的瞬时过表达分别使发病率升高 17.4% 与 10.4%，提示这两个基因负向调控柑橘对指状青霉的抗性。</p></div><div class="pair"><p class="s-en" lang="en">Silencing these genes enhanced its resistance, accompanied by the accumulation of phenolics and flavonoids in the peel.</p><p class="s-zh">沉默这两个基因则增强其抗性，同时伴随果皮中酚类与类黄酮的积累。</p></div><div class="pair"><p class="s-en" lang="en">In general, the results showed that the Csi-miR3954b-CsCE70/CsPLA1 regulatory modules enhanced citrus resistance to P. digitatum by promoting the biosynthesis of phenolic acids and flavonoids.</p><p class="s-zh">总体而言，结果表明 Csi-miR3954b–CsCE70/CsPLA1 调控模块通过促进酚酸与类黄酮的生物合成来增强柑橘对指状青霉的抗性。</p></div><div class="pair"><p class="s-en" lang="en">These results provide new insights into miRNA-mediated postharvest disease resistance and potential molecular strategies for improving citrus postharvest protection.</p><p class="s-zh">这些结果为 miRNA 介导的采后抗病性提供了新认识，并为改进柑橘采后保护提供了潜在的分子策略。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>柑橘采后绿霉病抗性的 miRNA 调控机制</strong>。核心研究问题是：哪些 miRNA 参与柑橘抗指状青霉？<strong>它们通过什么靶基因、什么代谢途径发挥作用</strong>？主要目的是解析一条完整的“miRNA–靶基因–代谢物–抗性”通路，为采后病害防控提供分子靶点。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>绿霉病是柑橘采后的主要病害，采后阶段无法依赖传统抗病育种手段，因此<strong>阐明可干预的分子节点</strong>具有直接的产业价值。miRNA 已知参与植物防御，但在<strong>柑橘采后抗病中的角色与调控网络此前不清楚</strong>。该研究把 miRNA 调控与酚酸/类黄酮代谢物积累联系起来，既补上了机制空白，也提示了可通过外源调控 miRNA 提升采后抗性的可能路径。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>小 RNA 测序 + 瞬时过表达筛选，锁定 <strong>Csi-miR3954b</strong> 为最有效 miRNA（5 dpi 发病率降 24.4%）；</li><li>过表达与 <strong>STTM 抑制</strong>双向验证：Csi-miR3954b <strong>正向调控</strong>绿霉病抗性；</li><li>降解组测序 + 瞬时实验确定直接靶标 <strong>CsCE70 与 CsPLA1</strong>；</li><li>转录组显示二者分别主要调控<strong>酚酸</strong>与<strong>类黄酮</strong>合成，且过表达使发病率升高（即<strong>负向调控</strong>抗性），沉默则增强抗性并积累酚类/类黄酮；</li><li>提出 Csi-miR3954b–CsCE70/CsPLA1 模块<strong>通过促进酚酸与类黄酮合成增强抗性</strong>。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>双向遗传学验证</strong>：过表达 + STTM 抑制两条相反方向的证据，因果推断强于单方向实验。</li><li><strong>靶标鉴定证据多元</strong>：降解组测序 + 异源瞬时表达 + 表达分析三重交叉。</li><li><strong>表型量化到具体百分比</strong>（24.4% / 22.7% / 9.6% / 17.4% / 10.4%），便于横向比较效应量。</li><li><strong>研究场景贴近产业</strong>：采后病害是柑橘产业的实际痛点，成果转化路径清晰。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>做 miRNA 功能研究时，这篇的<b>过表达 + STTM 抑制双向验证</b>是当前审稿人期待的标准配置。另外注意它的逻辑：<b>miRNA 正调控抗性，而其靶基因是负调控因子</b>——靶基因过表达使<b>发病率升高</b>这一“反向表型”是确认负调控关系的关键证据，不要只做 miRNA 本身。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4 d5" id="p6"><div class="paper-head"><div class="paper-top"><span class="paper-idx">06</span><span class="paper-kind">研究论文 · 模式识别受体与 PTI</span></div><h3>LysM 类受体激酶 TaLYK5 正向调控小麦对叶锈病的抗性</h3><p class="orig"><span class="zh">英文原题</span>A LysM receptor-like kinase TaLYK5 positively regulates wheat resistance to leaf rust</p><p class="src"><span class="journal">Plant Science</span><span class="sep">·</span><span>373:113478</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1016/j.plantsci.2026.113478">10.1016/j.plantsci.2026.113478</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span><span class="chip" data-c="d5"><span class="chip-dot"></span>d5 · NLR 与植物免疫受体</span></div><p class="authors"><span class="lbl">作者</span>Fuxin He（第一作者） 等 9 人；通讯作者：<b>Minjie Liu</b>。<br>主要单位：College of Plant Protection, Shanxi Agricultural University, Taiyuan, China.</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">何付新 · Fuxin He</p><p class="bio-unit">山西农业大学 植物保护学院 植物病理学系，讲师，山西省晋中市太谷区</p><p class="bio-dir"><span>主要研究方向</span>小麦抗病性、寄主与病原菌互作机理研究。主持国家自然科学基金青年科学基金项目、山西省基础研究计划青年项目等，主要从事小麦抗病性相关研究。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">刘敏捷 · Minjie Liu</p><p class="bio-unit">山西农业大学 植物保护学院 副研究员（山西省小麦产业体系岗位专家）</p><p class="bio-dir"><span>主要研究方向</span>山西农业大学植物保护学院副研究员，研究方向为作物品种抗病性与病原菌-寄主互作；具体开展小麦叶锈菌致病性及相关基因功能、小麦 LysM 类受体蛋白等抗病机制研究。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Wheat leaf rust, caused by the biotrophic fungus Puccinia triticina (Pt), is one of the most destructive diseases threatening global wheat production.</p><p class="s-zh">由活体营养型真菌小麦叶锈菌（<i>Puccinia triticina</i>，Pt）引起的小麦叶锈病，是威胁全球小麦生产的最具破坏性的病害之一。</p></div><div class="pair"><p class="s-en" lang="en">Lysin motif (LysM)-containing receptors play central roles in plant recognition of fungal chitin and activation of pattern-triggered immunity (PTI), but the function of the LysM receptor-like kinase TaLYK5 in wheat resistance to leaf rust remains largely unknown.</p><p class="s-zh">含赖氨酸基序（LysM）的受体在植物识别真菌几丁质并激活模式触发免疫（PTI）中起核心作用，但 LysM 类受体激酶 TaLYK5 在小麦叶锈病抗性中的功能此前基本未知。</p></div><div class="pair"><p class="s-en" lang="en">Here, we show that TaLYK5 lacks conserved kinase motifs essential for catalytic activity and is predicted to be a pseudokinase, suggesting that it may function through a co-receptor to transmit chitin signals.</p><p class="s-zh">本文表明，TaLYK5 缺乏催化活性所必需的保守激酶基序，被预测为一种假激酶（pseudokinase），提示它可能通过与共受体协作来传递几丁质信号。</p></div><div class="pair"><p class="s-en" lang="en">The transcript levels of TaLYK5 were rapidly and persistently upregulated upon Pt infection and chitin treatment in wheat.</p><p class="s-zh">在小麦中，Pt 侵染与几丁质处理均使 <i>TaLYK5</i> 的转录水平快速且持续上调。</p></div><div class="pair"><p class="s-en" lang="en">Transient expression of TaLYK5-6A in Nicotiana benthamiana significantly enhanced chitin-induced callose deposition.</p><p class="s-zh">在本氏烟草中瞬时表达 TaLYK5-6A 显著增强了几丁质诱导的胼胝质沉积。</p></div><div class="pair"><p class="s-en" lang="en">Transient silencing of TaLYK5 in wheat compromised resistance to Pt, with reduced H₂O₂ accumulation and increased fungal colonization.</p><p class="s-zh">在小麦中瞬时沉默 <i>TaLYK5</i> 削弱了对 Pt 的抗性，表现为 H₂O₂ 积累减少与真菌定殖增加。</p></div><div class="pair"><p class="s-en" lang="en">Importantly, stable transgenic overexpression of TaLYK5-6A in transgenic wheat lines conferred enhanced resistance to Pt, as shown by significantly fewer uredia and lower fungal biomass.</p><p class="s-zh">重要的是，在转基因小麦株系中稳定过表达 TaLYK5-6A 赋予了对 Pt 增强的抗性，表现为夏孢子堆显著减少与真菌生物量降低。</p></div><div class="pair"><p class="s-en" lang="en">Furthermore, overexpression of TaLYK5-6A enhanced chitin-induced callose deposition and expression of PTI marker genes.</p><p class="s-zh">此外，过表达 TaLYK5-6A 增强了几丁质诱导的胼胝质沉积与 PTI 标记基因的表达。</p></div><div class="pair"><p class="s-en" lang="en">Collectively, these results demonstrate that TaLYK5 positively regulates wheat resistance to leaf rust, and this regulation is associated with chitin-triggered PTI, highlighting its potential as a candidate gene for improving leaf rust resistance in wheat.</p><p class="s-zh">综上，这些结果证明 TaLYK5 正向调控小麦对叶锈病的抗性，且该调控与几丁质触发的 PTI 相关，凸显其作为改良小麦叶锈病抗性候选基因的潜力。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>小麦 LysM 类受体激酶 TaLYK5 在叶锈病抗性中的功能</strong>。核心研究问题是：作为几丁质识别通路的组分，<strong>TaLYK5 是否参与小麦对活体营养型锈菌的抗性？它如何发挥作用</strong>？主要目的是通过沉默与稳定过表达双向验证其功能，并确认其作用与几丁质触发的 PTI 相关联。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>小麦叶锈病是威胁全球小麦生产的重大病害。LysM 受体是植物识别真菌几丁质、启动 PTI 的核心组分，拟南芥 <i>LYK5</i> 的功能已较清楚，但<strong>小麦这类多倍体作物中的同源基因功能长期缺乏体内证据</strong>。该研究的价值在于：一是补上了小麦几丁质识别通路的关键一环；二是通过<strong>稳定转基因过表达提升抗性</strong>，直接给出可用于抗病育种的候选基因；三是提出 TaLYK5 可能是<strong>假激酶</strong>、需借助共受体传递信号，为后续互作研究指明方向。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>发现 TaLYK5 <strong>缺乏催化所需的保守激酶基序</strong>，预测为<strong>假激酶</strong>，提示其可能经共受体传递几丁质信号；</li><li>表达谱显示 <i>TaLYK5</i> 在 Pt 侵染与几丁质处理后<strong>快速且持续上调</strong>；</li><li>异源瞬时表达增强<strong>几丁质诱导的胼胝质沉积</strong>；小麦瞬时沉默则<strong>削弱抗性</strong>（H₂O₂ 减少、真菌定殖增加）；</li><li><strong>稳定转基因过表达</strong> TaLYK5-6A 赋予增强抗性：夏孢子堆显著减少、真菌生物量降低；</li><li>过表达同时增强<strong>胼胝质沉积与 PTI 标记基因表达</strong>，把表型与 PTI 机制连接。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>瞬时 + 稳定双体系验证</strong>：瞬时沉默看功能缺失、稳定过表达看功能获得，结论稳健。</li><li><strong>表型指标可量化</strong>：夏孢子堆数、真菌生物量、H₂O₂、胼胝质沉积，多指标相互印证。</li><li><strong>提出可检验的机制假设</strong>：“假激酶需共受体”是一个明确的后续研究方向，而非泛泛讨论。</li><li><strong>育种导向明确</strong>：稳定转基因株系直接证明过表达可提升抗性。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>该文最有价值的提示是 <b>TaLYK5 是假激酶（pseudokinase）</b>：在许多作物中，LysM 受体家族的成员常丢失激酶活性、需与 CERK1 等共受体形成复合体。若你在作物中克隆到 LysM 类受体，<b>先做激酶基序比对</b>——是否具催化活性会直接决定你后续的实验设计（是找共受体，还是做自磷酸化）。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p7"><div class="paper-head"><div class="paper-top"><span class="paper-idx">07</span><span class="paper-kind">研究论文 · 病毒抗性与叶绿素降解</span></div><h3>烟草 SGR 家族全基因组筛选与功能验证：类转录因子 NtSGRL1 是番茄黄化曲叶病毒抗性的负调控因子</h3><p class="orig"><span class="zh">英文原题</span>Genome-Wide Screening and Functional Verification of the Tobacco SGR Family Identify Transcription-Factor-Like NtSGRL as a Negative Regulator of Tomato Yellow Leaf Curl Virus Resistance</p><p class="src"><span class="journal">Molecular Plant Pathology</span><span class="sep">·</span><span>27(10):e70356</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/mpp.70356">10.1111/mpp.70356</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Ming Gu（第一作者） 等 11 人；通讯作者：<b>Yuanhua Wu</b>。<br>主要单位：Liaoning Key Laboratory of Plant Pathology, College of Plant Protection Shenyang Agricultural University  Shenyang China; Key Laboratory of Major Agricultural Invasion Biological Monitoring and Control of Shenyang  Shenyang Liaoning China</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Ming Gu</p><p class="bio-unit">沈阳农业大学 植物保护学院 辽宁省植物病理学重点实验室；沈阳市重大农业入侵生物监测与防控重点实验室</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">吴元华 · Yuanhua Wu</p><p class="bio-unit">沈阳农业大学 植物保护学院 教授、博士生导师，沈阳</p><p class="bio-dir"><span>主要研究方向</span>长期从事植物病毒学与生物技术方面的研究，对烟草病害、生物农药和转基因植物有较深入的研究；兼任中国植物病理学会副理事长、辽宁省植物保护学会副理事长。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Viral infection often induces chlorosis, a symptom closely associated with chlorophyll (Chl) degradation.</p><p class="s-zh">病毒感染常诱导褪绿，这一症状与叶绿素（Chl）降解密切相关。</p></div><div class="pair"><p class="s-en" lang="en">STAY-GREEN (SGR) proteins are key regulators of Chl breakdown, but their roles in plant virus resistance remain poorly understood.</p><p class="s-zh">STAY-GREEN（SGR）蛋白是叶绿素分解的关键调控因子，但其在植物病毒抗性中的作用此前了解甚少。</p></div><div class="pair"><p class="s-en" lang="en">In this study, we identified six NtSGR family genes in Nicotiana tabacum and functionally characterized NtSGRL1 during tomato yellow leaf curl virus (TYLCV) infection.</p><p class="s-zh">本研究在普通烟草（<i>Nicotiana tabacum</i>）中鉴定出 6 个 NtSGR 家族基因，并对 NtSGRL1 在番茄黄化曲叶病毒（TYLCV）侵染过程中的功能进行了表征。</p></div><div class="pair"><p class="s-en" lang="en">TYLCV drastically upregulates NtSGRL1 (149-fold at 4 days post-inoculation [dpi] vs. control), suggesting its involvement in the tobacco-TYLCV interaction.</p><p class="s-zh">TYLCV 使 NtSGRL1 大幅上调（接种后 4 天较对照上调 149 倍），提示其参与烟草–TYLCV 互作。</p></div><div class="pair"><p class="s-en" lang="en">Subcellular localization revealed that NtSGRL1 is targeted to both the nucleus and chloroplast, and yeast assays confirmed its transcriptional activation activity, indicating potential dual functions.</p><p class="s-zh">亚细胞定位显示 NtSGRL1 同时定位于细胞核与叶绿体，酵母实验证实其具转录激活活性，提示其可能具有双重功能。</p></div><div class="pair"><p class="s-en" lang="en">TYLCV accumulation was reduced by 1995-fold in Ntsgrl1 mutants relative to wild-type (WT) plants at 10 dpi.</p><p class="s-zh">在 10 dpi 时，Ntsgrl1 突变体中的 TYLCV 积累量相比野生型（WT）植株降低 1995 倍。</p></div><div class="pair"><p class="s-en" lang="en">Further assays with tomato spotted wilt virus (TSWV), potato virus Y (PVY) and tobacco mosaic virus (TMV) showed that viral accumulation in Ntsgrl1 mutants was reduced by 62%-99%, suggesting that NtSGRL1 may affect resistance to additional tested viruses.</p><p class="s-zh">进一步针对番茄斑萎病毒（TSWV）、马铃薯 Y 病毒（PVY）与烟草花叶病毒（TMV）的实验显示，Ntsgrl1 突变体中病毒积累量降低 62%–99%，提示 NtSGRL1 可能影响对所测试的多种病毒的抵抗力。</p></div><div class="pair"><p class="s-en" lang="en">Transcriptomics revealed 1470 differentially expressed genes in TYLCV-infected Ntsgrl1 plants enriched in MAPK signalling and phenylpropanoid biosynthesis pathways.</p><p class="s-zh">转录组分析在 TYLCV 侵染的 Ntsgrl1 植株中揭示 1470 个差异表达基因，富集于 MAPK 信号与苯丙烷生物合成途径。</p></div><div class="pair"><p class="s-en" lang="en">Virus-induced gene silencing (VIGS)-based validation further supported the involvement of these pathways in TYLCV resistance.</p><p class="s-zh">基于病毒诱导基因沉默（VIGS）的验证进一步支持这些途径参与 TYLCV 抗性。</p></div><div class="pair"><p class="s-en" lang="en">Overall, this study identifies NtSGRL1 as a critical regulator of antiviral resistance in tobacco and reveals its dual functional roles as both a Chl-related enzyme and a transcriptional regulator.</p><p class="s-zh">总体而言，本研究确认 NtSGRL1 是烟草抗病毒抗性的关键调控因子，并揭示其兼具叶绿素相关酶与转录调控因子的双重功能作用。</p></div><div class="pair"><p class="s-en" lang="en">These findings provide new insights into plant antiviral mechanisms and potential genetic resources for breeding virus-resistant crops.</p><p class="s-zh">这些发现为植物抗病毒机制提供了新认识，并为培育抗病毒作物提供了潜在基因资源。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>SGR 家族基因（叶绿素降解调控因子）在植物抗病毒中的新功能</strong>。核心研究问题是：STAY-GREEN 蛋白长期被视为叶绿素分解的调控者，<strong>它们是否也参与病毒抗性</strong>？主要目的是通过全基因组筛选锁定 NtSGRL1，并用突变体与多病毒测试验证其作为抗性负调控因子的功能。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>病毒感染引起褪绿是常见症状，而 SGR 蛋白是叶绿素降解的关键调控者，因此<strong>“褪绿症状”与“病毒抗性”可能在分子层面共享组分</strong>——这是一个此前未被系统挖掘的交叉点。该研究的意义在于：一是把 SGR 家族的功能从“叶片衰老/褪绿”拓展到“抗病毒免疫”；二是发现 NtSGRL1 兼具<strong>叶绿体酶与核内转录调控</strong>双重定位与功能；三是突变体对多种病毒均表现抗性提升，提示其可能是一个<strong>广谱抗病毒节点</strong>。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>在普通烟草中鉴定 <strong>6 个 NtSGR 家族基因</strong>，并对 NtSGRL1 做功能表征；</li><li>TYLCV 侵染使 <strong>NtSGRL1 上调 149 倍</strong>（4 dpi），提示参与互作；</li><li>亚细胞定位显示其<strong>同时位于细胞核与叶绿体</strong>，酵母实验证实<strong>转录激活活性</strong>，提示双重功能；</li><li><strong>Ntsgrl1 突变体</strong>在 10 dpi 时 TYLCV 积累降低 <strong>1995 倍</strong>；对 TSWV、PVY、TMV 的病毒积累降低 <strong>62%–99%</strong>；</li><li>转录组发现 1470 个差异基因，富集于 <strong>MAPK 信号与苯丙烷生物合成</strong>，并经 VIGS 验证其参与抗性。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>效应量惊人且可复核</strong>：1995 倍的病毒积累差异是极强的功能证据，且用突变体（功能缺失）而非仅过表达获得。</li><li><strong>多病毒验证提升结论外推力</strong>：不仅 TYLCV，还测了 TSWV/PVY/TMV 三种，支持“广谱”判断。</li><li><strong>把定位与功能对应起来</strong>：核+叶绿体双定位 + 转录激活活性，为“双重功能”提供了细胞学与生化双重依据。</li><li><strong>从表型到通路</strong>：转录组 + VIGS 把抗性差异落到 MAPK 与苯丙烷途径。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇最大的启发是<b>“症状相关基因可能就是抗性调控节点”</b>：SGR 本是研究褪绿/衰老的基因，却成为抗病毒负调控因子。若你的材料在病毒侵染下有明显症状差异（褪绿、坏死、矮化），<b>值得把症状通路的关键基因当作抗性候选来筛</b>。注意其负调控方向——<b>敲除/沉默才能提升抗性</b>，这对 CRISPR 育种尤其有利。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p8"><div class="paper-head"><div class="paper-top"><span class="paper-idx">08</span><span class="paper-kind">研究论文 · 效应蛋白与寄主范围</span></div><h3>丁香假单胞菌致病变种 tabaci 8018 因 hopAZ1 自发突变而对烟草品种 N509 与 Burley21 具致病性</h3><p class="orig"><span class="zh">英文原题</span>Pseudomonas syringae pv. tabaci 8018 is Virulent Against Tobacco Cultivars N509 and Burley21 Due to Spontaneous Mutation in hopAZ1</p><p class="src"><span class="journal">Molecular Plant Pathology</span><span class="sep">·</span><span>27(10):e70347</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/mpp.70347">10.1111/mpp.70347</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Yuto Hiraki（第一作者） 等 8 人；通讯作者：<b>Yuki Ichinose</b>。<br>主要单位：The Graduate School of Environmental, Life, Natural Science and Technology Okayama University  Okayama Japan</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Yuto Hiraki</p><p class="bio-unit">The Graduate School of Environmental, Life, Natural Science and Technology, Okayama University, Okayama, Japan（冈山大学 环境生命自然科学研究生院）</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Yuki Ichinose</p><p class="bio-unit">岡山大学 環境生命自然科学研究科（Graduate School of Environmental, Life, Natural Science and Technology, Okayama University），特命教授（2026年度；2015–2025年度为教授），日本冈山</p><p class="bio-dir"><span>主要研究方向</span>植物病原细菌的致病力与致病性岛水平转移机制（病原性扩大的分子机制）；植物信号对病原细菌侵染行为及致病基因表达（含 III 型效应子、Gac/Rsm 群体感应调控）的控制机制。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">The complete genome sequence of a relatively weak virulent tobacco pathogen, Pseudomonas syringae pv. tabaci 8018 (Pta8018) was determined to elucidate key genetic elements that cause disease.</p><p class="s-zh">为阐明导致病害的关键遗传元件，本研究完成了烟草相对弱致病菌株——丁香假单胞菌致病变种 tabaci 8018（Pta8018）的完整基因组序列测定。</p></div><div class="pair"><p class="s-en" lang="en">Genome comparison of Pta8018 to the previously available P. syringae pv. tabaci strains revealed that Pta8018 and Pta11528 had high genome synteny, with an approximately 5 Mb chromosome inversion in Pta6605.</p><p class="s-zh">将 Pta8018 与已有丁香假单胞菌 pv. tabaci 菌株做基因组比较，发现 Pta8018 与 Pta11528 基因组共线性高，而 Pta6605 存在约 5 Mb 的染色体倒位。</p></div><div class="pair"><p class="s-en" lang="en">Furthermore, Pta8018 had lost the pathogenicity island GI-1 including a tabtoxin biosynthesis gene cluster and showed weak virulence on Nicotiana tabacum &#x27;Xanthi NC&#x27; (Xanthi).</p><p class="s-zh">此外，Pta8018 丢失了包含烟草毒素（tabtoxin）生物合成基因簇的致病岛 GI-1，在普通烟草‘Xanthi NC’（Xanthi）上表现弱致病性。</p></div><div class="pair"><p class="s-en" lang="en">When inoculated into several tobacco cultivars, Pta8018 caused leaf angular spot not only in Xanthi but also in N. tabacum cultivars Burley21 and N509, while Pta6605 did not cause disease in Burley21 and N509 due to the presence of avirulence factor HopAZ1.</p><p class="s-zh">接种多个烟草品种时，Pta8018 不仅在 Xanthi 上、也在普通烟草品种 Burley21 与 N509 上引起角斑；而 Pta6605 由于携带无毒因子 HopAZ1，在 Burley21 与 N509 上不引起病害。</p></div><div class="pair"><p class="s-en" lang="en">We found that a mutation in hopAZ1 allows Pta8018 to avoid recognition in these cultivars.</p><p class="s-zh">我们发现 <i>hopAZ1</i> 的突变使 Pta8018 得以在这些品种中逃避识别。</p></div><div class="pair"><p class="s-en" lang="en">Introduction of intact hopAZ1 of Pta6605 into Pta8018 rendered it avirulent to N509 and Burley21, revealing that effector HopAZ1 is a key virulence determinant of P. syringae pv. tabaci.</p><p class="s-zh">将 Pta6605 的完整 <i>hopAZ1</i> 导入 Pta8018 后，其对 N509 与 Burley21 变为无毒，揭示效应蛋白 HopAZ1 是丁香假单胞菌 pv. tabaci 的关键致病决定因子。</p></div><div class="pair"><p class="s-en" lang="en">Our data show that although Pta8018 has reduced virulence strength by the loss of GI-1 in Xanthi, it expanded its host range to two other cultivars through mutation of hopAZ1.</p><p class="s-zh">我们的数据表明，虽然 Pta8018 因丢失 GI-1 而在 Xanthi 上致病性减弱，但它通过 <i>hopAZ1</i> 突变把寄主范围扩展到了另外两个品种。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>效应蛋白 HopAZ1 决定丁香假单胞菌寄主范围</strong>。核心研究问题是：一个被归类为“弱致病”的菌株 Pta8018，<strong>为什么反而能侵染原本抗病的烟草品种</strong>？主要目的是通过比较基因组学与功能互补实验，找出决定寄主范围扩张的遗传元件。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>“致病性强弱”与“寄主范围宽窄”并不总是同向变化——这是一个在植病流行与抗病育种中都很关键、却常被简化的问题。该研究通过全基因组比较发现 Pta8018 <strong>丢失了致病岛 GI-1</strong>（含烟草毒素基因簇），因此在本氏烟/ Xanthi 上致病性减弱；但同一菌株因 <strong><i>hopAZ1</i> 突变</strong>而逃避了 N509、Burley21 的识别，实现寄主范围扩张。这对理解<strong>效应蛋白与抗病基因的“军备竞赛”</strong>有直接意义，也提示抗病育种中需关注效应蛋白的变异而非仅看菌株整体毒力。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>完成 Pta8018 的<strong>完整基因组序列</strong>，与已有 pv. tabaci 菌株比较，发现 Pta6605 存在约 <strong>5 Mb 染色体倒位</strong>；</li><li>发现 Pta8018 <strong>丢失致病岛 GI-1</strong>（含 tabtoxin 生物合成基因簇），在 Xanthi 上表现弱致病性；</li><li>Pta8018 可侵染 Xanthi、<strong>Burley21 与 N509</strong>，而 Pta6605 因携带<strong>无毒因子 HopAZ1</strong> 不能侵染后两者；</li><li>证明 <strong><i>hopAZ1</i> 突变</strong>使 Pta8018 逃避寄主识别；</li><li><strong>功能互补实验</strong>：将完整 <i>hopAZ1</i> 导入 Pta8018，其对 N509/Burley21 恢复为无毒，确认 HopAZ1 为关键致病决定因子。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>用功能互补锁死因果</strong>：不是相关性描述，而是把候选基因“补回去”逆转表型，因果链完整。</li><li><strong>“毒力”与“寄主范围”解耦分析</strong>：指出丢失致病岛导致毒力下降、但效应蛋白突变导致寄主范围扩张，两个维度分开谈，避免笼统结论。</li><li><strong>基因组比较先导、功能实验收口</strong>：遗传背景清晰（倒位、致病岛缺失），后续实验针对性强。</li><li><strong>对育种有直接提示</strong>：抗性可能被单个效应蛋白的变异所突破，需按效应蛋白（而非菌株）层面监测。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇的实用价值在于提醒：<b>“菌株毒力”与“能否突破某个抗病基因”是两件事</b>。若你的抗病材料对某菌株抗、对另一菌株感，先比较两菌株的<b>效应蛋白库（effector repertoire）</b>，往往比比较整体毒力更有解释力。此外 <b>功能互补（把无毒菌株的完整效应基因补进致病菌株）</b> 是验证效应蛋白身份最干净的做法。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p9"><div class="paper-head"><div class="paper-top"><span class="paper-idx">09</span><span class="paper-kind">研究论文 · 林木抗病与次生代谢</span></div><h3>PmWRKY-10 通过转录激活 PmPMT2-1 促进松甲醚（PME）生物合成以增强马尾松抗松材线虫病</h3><p class="orig"><span class="zh">英文原题</span>PmWRKY-10 Enhances Pine Wilt Disease Resistance by Promoting Pinosylvin Monomethyl Ether Biosynthesis Through Transcriptional Activation of PmPMT2-1</p><p class="src"><span class="journal">Molecular Plant Pathology</span><span class="sep">·</span><span>27(10):e70348</span><time datetime="2026-10-01">2026-10-01</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/mpp.70348">10.1111/mpp.70348</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Ziyan Nie（第一作者） 等 7 人；通讯作者：<b>Kai Gao</b>。<br>主要单位：中国林业科学研究院亚热带林业研究所（杭州）；安徽省森林资源与培育重点实验室（安徽农业大学）；仲恺农业工程学院园艺园林学院；浙江省林木育种重点实验室</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">聂紫艳 · Ziyan Nie</p><p class="bio-unit">中国林业科学研究院亚热带林业研究所（杭州）；安徽省森林资源与培育重点实验室（安徽农业大学）；仲恺农业工程学院园艺园林学院；浙江省林木育种重点实验室</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">高凯 · Kai Gao</p><p class="bio-unit">中国林业科学研究院亚热带林业研究所（林木遗传育种与培育研究团队，杭州）；浙江省林木育种重点实验室；林木遗传育种国家重点实验室（中国林业科学研究院，北京）</p><p class="bio-dir"><span>主要研究方向</span>中国林业科学研究院亚热带林业研究所助理研究员，隶属该所林木遗传育种与培育研究团队，主要从事马尾松（Pinus massoniana）遗传育种与分子生物学研究，涉及体细胞胚胎发生调控、遗传转化与实时监测体系构建。公开专利记录（CN121538231A、CN202511250634）显示其作为发明人参与马尾松银松素/银松素单甲醚生物合成相关基因的克隆与应用研究，并主持国家自然科学基金青年科学基金项目（32501677）。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Pine wilt disease (PWD), caused by the pine wood nematode (PWN, Bursaphelenchus xylophilus), poses a severe threat to global pine forests.</p><p class="s-zh">由松材线虫（PWN，<i>Bursaphelenchus xylophilus</i>）引起的松材线虫病（PWD）对全球松林构成严重威胁。</p></div><div class="pair"><p class="s-en" lang="en">Plants can enhance their resistance to external stresses by eliciting secondary metabolites; however, the transcriptional regulatory mechanisms governing this defence response in pines remain largely unexplored.</p><p class="s-zh">植物可通过诱导次生代谢物来增强对外部胁迫的抗性；然而，松属植物中支配这一防御反应的转录调控机制此前基本未被探索。</p></div><div class="pair"><p class="s-en" lang="en">Here, we report a novel defence regulatory module in Pinus massoniana.</p><p class="s-zh">本文报道了马尾松（<i>Pinus massoniana</i>）中的一个新型防御调控模块。</p></div><div class="pair"><p class="s-en" lang="en">PmWRKY-10 may participate in PWN resistance by regulating the biosynthesis of the nematicidal metabolite pinosylvin monomethyl ether (PME).</p><p class="s-zh">PmWRKY-10 可能通过调控具杀线虫活性的代谢物松甲醚（pinosylvin monomethyl ether，PME）的生物合成来参与抗松材线虫。</p></div><div class="pair"><p class="s-en" lang="en">We first demonstrated that PME accumulation is closely linked to resistance in P. massoniana and provided evidence that PME exhibits direct and potent nematicidal activity against PWN in vitro.</p><p class="s-zh">我们首先证明 PME 的积累与马尾松的抗性密切相关，并提供证据表明 PME 在体外对松材线虫具直接且强烈的杀线虫活性。</p></div><div class="pair"><p class="s-en" lang="en">By integrating multi-omics profiling with weighted gene co-expression network analysis (WGCNA), we identified PmPMT2-1 as a key candidate associated with PME biosynthesis and accumulation, while recognizing that it is unlikely to function as the sole rate-limiting determinant.</p><p class="s-zh">通过整合多组学谱与加权基因共表达网络分析（WGCNA），我们确定 PmPMT2-1 是与 PME 生物合成与积累相关的关键候选基因，同时认识到它不太可能是唯一的限速决定因子。</p></div><div class="pair"><p class="s-en" lang="en">Functional analyses demonstrated that PmPMT2-1 overexpression promoted PME accumulation and enhanced resistance, whereas silencing the gene impaired both processes.</p><p class="s-zh">功能分析表明，过表达 PmPMT2-1 促进 PME 积累并增强抗性，而沉默该基因则损害这两个过程。</p></div><div class="pair"><p class="s-en" lang="en">Mechanistically, we identified PmWRKY-10 as an upstream transcriptional activator that directly binds to the W-box element in the PmPMT2-1 promoter, inducing its transcription.</p><p class="s-zh">在机制上，我们确定 PmWRKY-10 是上游转录激活因子，可直接结合 PmPMT2-1 启动子中的 W-box 元件并诱导其转录。</p></div><div class="pair"><p class="s-en" lang="en">Our work delineates a complete PmWRKY-10→PmPMT2-1→PME transcriptional-metabolic pathway that is essential for stilbene-based resistance in pine.</p><p class="s-zh">我们的工作勾勒出一条完整的 PmWRKY-10→PmPMT2-1→PME 转录–代谢通路，该通路对松属植物基于芪类的抗性至关重要。</p></div><div class="pair"><p class="s-en" lang="en">This discovery not only provides fundamental insights into the inducible defence mechanisms of conifers but also identifies key genetic targets for breeding resistant varieties and developing sustainable forest management strategies.</p><p class="s-zh">这一发现不仅为理解针叶树的诱导型防御机制提供了基础性认识，也为培育抗性品种与制定可持续森林管理策略确定了关键遗传靶点。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>马尾松抗松材线虫病的次生代谢防御机制</strong>。核心研究问题是：松树是否通过特定次生代谢物抵抗线虫？<strong>决定该代谢物积累的转录调控模块是什么</strong>？主要目的是打通“转录因子→合成酶→杀线虫代谢物→抗性”的完整通路。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>松材线虫病是毁灭性的森林病害，防治手段有限，<strong>抗性育种是根本出路</strong>，但松属（针叶树）基因组大、世代长，分子研究基础远落后于农作物。该研究把<strong>次生代谢物（芪类）介导的抗性</strong>与具体的转录调控模块连接起来，既填补了“针叶树诱导防御机制”的空白，也给出了可用于分子育种的<strong>明确靶点（PmWRKY-10 / PmPMT2-1）</strong>。值得注意的是作者明确承认 PmPMT2-1 可能不是唯一限速因子，态度审慎。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>证明 <strong>PME 积累与马尾松抗性密切相关</strong>，且 PME 在体外对松材线虫具<strong>直接杀线虫活性</strong>；</li><li>整合<strong>多组学 + WGCNA</strong>，锁定关键候选基因 <strong>PmPMT2-1</strong>（并注明其非唯一限速因子）；</li><li>功能验证：过表达促进 PME 积累并<strong>增强抗性</strong>，沉默则两者<strong>同时受损</strong>；</li><li>机制上确认 <strong>PmWRKY-10 直接结合 PmPMT2-1 启动子的 W-box</strong> 并诱导转录；</li><li>勾勒完整 <strong>PmWRKY-10→PmPMT2-1→PME</strong> 转录–代谢通路，指向芪类抗性。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>证据链从代谢物到转录因子完整闭环</strong>：代谢物抑菌/杀线虫活性 → 候选基因 → 功能验证 → 上游转录因子 → 启动子结合。</li><li><strong>体外活性直接验证</strong>：先证明 PME 本身对线虫有效，再谈调控，避免“调控因子很多但不知效应物是谁”。</li><li><strong>对候选基因定位诚实</strong>：明确 PmPMT2-1 “不太可能是唯一限速决定因子”，减少过度解读。</li><li><strong>研究对象稀缺</strong>：针叶树抗病分子研究极少，拓展了抗病研究的物种版图。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若研究对象是<b>林木或多年生作物</b>（世代长、难做遗传转化），这篇的路径值得复制：<b>先用代谢组锁定效应代谢物并验证其体外活性</b>，再用 WGCNA 找候选基因，最后用瞬时/异源体系做功能与上游调控验证——绕开长周期稳定转化。另外“<b>芪类（stilbene）</b>”在松属抗性中的角色值得关注，与常见的苯丙烷/木质素路线不同。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p11"><div class="paper-head"><div class="paper-top"><span class="paper-idx">11</span><span class="paper-kind">研究论文 · 非生物胁迫与纳米材料</span></div><h3>二氧化硅纳米颗粒提升水分亏缺下孜然（Cuminum cyminum L.）生长与抗氧化防御系统</h3><p class="orig"><span class="zh">英文原题</span>Applications of SiO&amp;lt;sub&amp;gt;2&amp;lt;/sub&amp;gt; Nanoparticles Enhance Growth and Antioxidant Defense System in Cumin (Cuminum cyminum L.) under Water-deficit Stress</p><p class="src"><span class="journal">Plant Science</span><span class="sep">·</span><span>373:113467</span><time datetime="2026-09-30">2026-09-30</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1016/j.plantsci.2026.113467">10.1016/j.plantsci.2026.113467</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Mohammad Esmaeil Ameri Bafqi（第一作者） 等 4 人；通讯作者：<b>Amir Mohammad Naji、Heshmat Omidi、Amir Bostani、Mohammad Esmaeil Ameri Bafqi</b>。<br>主要单位：伊朗德黑兰沙希德大学农业科学学院农学与植物育种系（Department of Agronomy and Plant Breeding, Faculty of Agricultural Sciences, Shahed University, Tehran, Iran）</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Mohammad Esmaeil Ameri Bafqi</p><p class="bio-unit">伊朗 沙希德大学（Shahed University）农学院 农学与植物育种系</p><p class="bio-dir"><span>主要研究方向</span>伊朗沙希德大学农学与植物育种系研究人员（Omidi 课题组），主要从事孜然（Cuminum cyminum）等作物在水分亏缺胁迫下的纳米二氧化硅（纳米硅）调控研究，涉及生理生化指标、产量与精油产量。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Amir Mohammad Naji</p><p class="bio-unit">伊朗德黑兰沙希德大学农业科学学院农学与植物育种系（现任该系系主任）</p><p class="bio-dir"><span>主要研究方向</span>现为沙希德大学农业科学学院农学与植物育种系助理教授（استادیار），兼任该系系主任。据其 ORCID 本人记录与其指导的学位论文记录，研究工作涉及小麦耐盐/耐逆相关基因表达与 QTL 定位、ISSR/SCOT 等分子标记在药用植物（黑种草等）遗传多样性评价中的应用，以及种子萌发与引发（priming）等种子生理方向。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">Heshmat Omidi</p><p class="bio-unit">伊朗 沙希德大学（Shahed University）农学院 农学与植物育种系 教授</p><p class="bio-dir"><span>主要研究方向</span>伊朗沙希德大学农学与植物育种系教授，ORCID 自述为作物生理学（plant physiology）教授；研究作物生理与种子萌发生理，涉及孜然、藜麦、菊苣等经济/药用作物在干旱等逆境下的养分管理与纳米材料（纳米硅、铁锌纳米颗粒）调控及产量品质形成。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Amir Bostani</p><p class="bio-unit">伊朗德黑兰沙希德大学农业科学学院农学与植物育种系（现任该系系主任）</p><p class="bio-dir"><span>主要研究方向</span>现为沙希德大学农业科学学院农学与植物育种系助理教授（استادیار），兼任该系系主任。据其 ORCID 本人记录与其指导的学位论文记录，研究工作涉及小麦耐盐/耐逆相关基因表达与 QTL 定位、ISSR/SCOT 等分子标记在药用植物（黑种草等）遗传多样性评价中的应用，以及种子萌发与引发（priming）等种子生理方向。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Mohammad Esmaeil Ameri Bafqi</p><p class="bio-unit">伊朗德黑兰沙希德大学农业科学学院农学与植物育种系</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Drought stress severely reduces cumin (Cuminum cyminum L.) yield.</p><p class="s-zh">干旱胁迫严重降低孜然（<i>Cuminum cyminum</i> L.）产量。</p></div><div class="pair"><p class="s-en" lang="en">This study investigated the physiological and molecular mechanisms by which foliar silicon dioxide nanoparticles (SiO₂ NPs; 0, 4, 6mM) mitigate drought (60, 40, and 20% field capacity) in two landraces (Isfahan, Semnan).</p><p class="s-zh">本研究探讨了叶面喷施二氧化硅纳米颗粒（SiO₂ NPs；0、4、6 mM）在两个地方品种（Isfahan、Semnan）中缓解干旱（60%、40%、20% 田间持水量）的生理与分子机制。</p></div><div class="pair"><p class="s-en" lang="en">The 4mM dose under 60% FC in Semnan maximized yield (757.6kgha -1 ), thousand-seed weight (3.31g), and umbels per plant (19.16).</p><p class="s-zh">在 Semnan 品种、60% 田间持水量条件下，4 mM 剂量使产量（757.6 kg·ha⁻¹）、千粒重（3.31 g）与单株伞形花序数（19.16）达到最高。</p></div><div class="pair"><p class="s-en" lang="en">Foliar aplication of 4mM SiO 2 under 40% field capacity (FC) boosted antioxidant activity (SOD: 16.1 U.mg -1 protein; POD: 21.3 U.mg -1 protein; GST: 50.0 U.mg -1 protein) and reduced oxidative damage (MDA: 2.2 nmol.ml -1 ).</p><p class="s-zh">在 40% 田间持水量下叶面施用 4 mM SiO₂ 提升了抗氧化活性（SOD：16.1 U·mg⁻¹ 蛋白；POD：21.3 U·mg⁻¹ 蛋白；GST：50.0 U·mg⁻¹ 蛋白）并降低了氧化损伤（MDA：2.2 nmol·ml⁻¹）。</p></div><div class="pair"><p class="s-en" lang="en">A strong negative correlation was observed between yield and MDA (r ≈ -0.7).</p><p class="s-zh">产量与 MDA 之间观察到强负相关（r ≈ -0.7）。</p></div><div class="pair"><p class="s-en" lang="en">At the molecular level, SiO₂ NPs upregulated a coordinated defense network: WRKY TF1 expression increased by 82% under severe drought with NPs, correlating with enhanced antioxidant genes (Cu-Zn SOD 2.2-fold, POD57 3.1-fold, and GST 3.5-fold) and yield.</p><p class="s-zh">在分子层面，SiO₂ NPs 上调了一个协同的防御网络：严重干旱加纳米颗粒处理下 WRKY TF1 表达提高 82%，与抗氧化基因增强（Cu-Zn SOD 2.2 倍、POD57 3.1 倍、GST 3.5 倍）及产量提升相关。</p></div><div class="pair"><p class="s-en" lang="en">The MAPK1 and MYB48 genes also showed synergistic upregulation of 2.5-fold and 2.1-fold, respectively, under synergistic NP-stress conditions.</p><p class="s-zh">在纳米颗粒与胁迫的协同条件下，MAPK1 与 MYB48 基因也分别表现出 2.5 倍与 2.1 倍的协同上调。</p></div><div class="pair"><p class="s-en" lang="en">Crucially, the Semnan landrace exhibited a 40-60% greater fold-change in this gene network than Isfahan, aligning with its superior physiological resilience.</p><p class="s-zh">关键的是，Semnan 地方品种在该基因网络中的倍数变化比 Isfahan 高 40%–60%，与其更优的生理恢复力相一致。</p></div><div class="pair"><p class="s-en" lang="en">The 4mM concentration was optimal for activating this WRKY-MAPK-antioxidant module, particularly in the more responsive Semnan landrace.</p><p class="s-zh">4 mM 浓度是激活该 WRKY–MAPK–抗氧化模块的最优剂量，在响应更强的 Semnan 品种中尤为明显。</p></div><div class="pair"><p class="s-en" lang="en">However, under severe drought (20% FC), 4mM NPs increased MDA by 117% (to 9.7 nmol ml -1 ), indicating a stress-dependent toxicity threshold.</p><p class="s-zh">然而，在严重干旱（20% 田间持水量）下，4 mM 纳米颗粒使 MDA 升高 117%（至 9.7 nmol·ml⁻¹），表明存在依赖胁迫强度的毒性阈值。</p></div><div class="pair"><p class="s-en" lang="en">We conclude that SiO₂ NPs mitigate drought by amplifying a genetically encoded transcriptional-antioxidant system, but optimal benefits require precise dose and genotype matching to stress severity.</p><p class="s-zh">我们得出结论：SiO₂ 纳米颗粒通过放大由遗传编码的转录–抗氧化系统来缓解干旱，但要获得最佳效果，需使剂量与基因型同胁迫强度精确匹配。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>SiO₂ 纳米颗粒缓解孜然干旱胁迫的生理与分子机制</strong>。核心研究问题是：叶面施硅纳米颗粒<strong>通过什么转录–抗氧化模块</strong>提升抗旱性？剂量与基因型如何影响效果？主要目的是量化不同剂量 × 胁迫强度 × 品种组合下的表型与基因表达响应。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>干旱是孜然等香料作物产量的主要限制因子，纳米材料（尤其是硅基）作为缓解非生物胁迫的手段近年来受到关注，但<strong>多数研究停留在生理指标层面，缺乏分子机制与剂量–响应关系的系统刻画</strong>。该研究的价值在于：一是把 WRKY–MAPK–抗氧化基因网络与生理表型对应起来；二是给出<strong>剂量与胁迫强度匹配</strong>的边界条件（4 mM 在 40%–60% FC 有益，但在 20% FC 反而加重氧化损伤）；三是揭示<strong>品种间响应差异</strong>（Semnan 优于 Isfahan），提示应用需考虑基因型。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>在 2 个地方品种 × 3 个 SiO₂ 剂量（0/4/6 mM）× 3 个水分水平（60/40/20% FC）下系统评估表型；</li><li>确定 <strong>4 mM 为最优剂量</strong>：在 60% FC 下 Semnan 产量、千粒重、单株伞形花序数最高；</li><li>40% FC + 4 mM 下<strong>抗氧化酶活性提升、MDA 降低</strong>，产量与 MDA 呈强负相关（r ≈ −0.7）；</li><li>分子层面揭示 <strong>WRKY TF1（+82%）→ 抗氧化基因（Cu-Zn SOD 2.2×、POD57 3.1×、GST 3.5×）</strong> 与 MAPK1/MYB48 协同上调；</li><li>发现 <strong>品种差异</strong>：Semnan 的基因网络倍数变化比 Isfahan 高 40%–60%；</li><li>指出<strong>毒性阈值</strong>：20% FC 下 4 mM 使 MDA 升高 117%，效果随胁迫强度反转。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>剂量 × 胁迫 × 基因型三维设计</strong>，比常见的单一处理设计信息量大得多。</li><li><strong>诚实报告负面结果</strong>：明确给出 20% FC 下纳米颗粒加重氧化损伤的阈值，而不是只报有利剂量。</li><li><strong>生理与分子证据对应</strong>：酶活、MDA、产量与基因表达变化方向一致。</li><li><strong>有可操作结论</strong>：剂量与基因型需与胁迫强度匹配，可直接指导田间应用。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>注意这篇与本日其他论文的<b>方向相关性偏弱</b>（它属于非生物胁迫 + 纳米材料，不是抗病基因或基因组学）。收录原因是：它命中了你的 <b>d4（作物抗病基因）中的“防御/抗氧化”边界，以及 WRKY–MAPK 免疫信号骨架</b>——WRKY 与 MAPK 既是抗病也是抗旱的共用模块。若你关注<b>抗病与抗旱的交叉调控</b>，其中 WRKY–MAPK–抗氧化网络可作为参考；但它<b>不涉及抗病基因定位、克隆或病原互作</b>，请按需取舍。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p13"><div class="paper-head"><div class="paper-top"><span class="paper-idx">13</span><span class="paper-kind">研究论文 · 虫害互作与植物防御</span></div><h3>两种主要害虫共同为害抑制苯丙烷防御并重编程挥发物，促成水稻上的稳定共存</h3><p class="orig"><span class="zh">英文原题</span>Co-infestation by two major pests suppresses phenylpropanoid defense and reprograms volatiles to facilitate stable cohabitation on rice</p><p class="src"><span class="journal">Plant Communications</span><time datetime="2026-09-29">2026-09-29</time><span class="badge">IF=10</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1016/j.xplc.2026.102125">10.1016/j.xplc.2026.102125</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Xiaoyun Hu（第一作者） 等 7 人；通讯作者：<b>Ted C. J. Turlings、Yunhe Li</b>。<br>主要单位：河南大学 生命科学学院；作物逆境适应与改良国家重点实验室 / 棉花生物育种与综合利用全国重点实验室（河南开封 475004）</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">胡晓云 · Xiaoyun Hu</p><p class="bio-unit">河南大学 生命科学学院（作物逆境适应与改良国家重点实验室／棉花生物育种与综合利用全国重点实验室）</p><p class="bio-dir"><span>主要研究方向</span>河南大学李云河课题组成员，从事水稻与害虫互作研究，包括二化螟、褐飞虱等害虫取食诱导的水稻挥发物（HIPVs）介导的直接与间接防御、以及多种害虫协同取食对水稻防御的调控。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Ted C. J. Turlings</p><p class="bio-unit">河南大学（外籍专家教授，与李云河共同负责植物昆虫互作与可持续农业研究团队 PIRSA）；瑞士纳沙泰尔大学 理学院生物研究所 化学生态学基础与应用研究实验室（FARCE）荣休教授；美国宾夕法尼亚州立大学 农业科学学院昆虫学系 附属教师</p><p class="bio-dir"><span>主要研究方向</span>化学生态学家，荷兰籍，长期从事植物—昆虫互作与化学生态学研究，重点关注虫害诱导的植物挥发物、植物间信号传递（priming）、地上与地下多营养级互作，以及寄生蜂、昆虫病原线虫等天敌对害虫的定位机制。其应用目标是以天然化学信号为基础发展可持续的农业害虫防控策略（如挥发物传感器监测、昆虫病原线虫制剂防治草地贪夜蛾）。现任纳沙泰尔大学荣休教授并继续主持 FARCE 团队，同时担任河南大学外籍专家教授（PIRSA 团队共同负责人）与宾州州立大学昆虫学系附属教师，并致力于推动国际科研合作与青年人才培养。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">李云河 · Yunhe Li</p><p class="bio-unit">河南大学 生命科学学院，作物逆境适应与改良国家重点实验室 / 棉花生物育种与综合利用全国重点实验室；教授、博士生导师</p><p class="bio-dir"><span>主要研究方向</span>河南大学教授、博士生导师，2023 年 2 月起任职于河南大学生命科学学院（此前长期在中国农业科学院植物保护研究所工作，历任助理研究员、副研究员、研究员）。主要从事植物与昆虫互作机制及转基因作物生态安全研究，聚焦水稻害虫（二化螟、褐飞虱）诱导挥发物介导的植物—植物通讯、害虫种间协同反防御机制与作物害虫绿色防控，同时开展转基因作物非靶标生物风险评价研究。学术兼职包括国家农业转基因生物安全委员会委员、中国植物保护学会常务理事、中国植物保护学会生物安全专业委员会主任及中国昆虫学会化学生态学分会副主任，入选国家「万人计划」科技创新领军人才、科技部创新推进计划中青年科技领军人才。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Classical ecological theory predicts that herbivorous species are in competition when they share the same host plant, yet in agricultural systems certain pest insects can stably coexist on the same plant, and even perform better when they feed together than if they feed alone.</p><p class="s-zh">经典生态学理论预测，共享同一寄主植物的植食性物种之间存在竞争；然而在农业系统中，某些害虫能够稳定共存于同一植株，甚至共同取食时表现优于单独取食。</p></div><div class="pair"><p class="s-en" lang="en">As yet, the molecular mechanisms underlying such collaborative cohabitation have remained unclear.</p><p class="s-zh">迄今为止，这种协作式共居背后的分子机制仍不清楚。</p></div><div class="pair"><p class="s-en" lang="en">Here we unravel how two major rice pests, the brown planthopper (BPH, Nilaparvata lugens) and the rice leaf folder (RLF, Cnaphalocrocis medinalis), achieve stable cohabitation by jointly suppressing plant chemical defenses.</p><p class="s-zh">本文揭示两种主要水稻害虫——褐飞虱（BPH，<i>Nilaparvata lugens</i>）与稻纵卷叶螟（RLF，<i>Cnaphalocrocis medinalis</i>）——如何通过共同抑制植物化学防御实现稳定共居。</p></div><div class="pair"><p class="s-en" lang="en">Prior BPH feeding induced strong rice resistance that reduced RLF performance, whereas prior RLF feeding did not affect BPH.</p><p class="s-zh">先期褐飞虱取食诱导了强烈的水稻抗性并降低稻纵卷叶螟的表现，而先期稻纵卷叶螟取食对褐飞虱没有影响。</p></div><div class="pair"><p class="s-en" lang="en">This asymmetric consequence of resistance induction was fully abolished when both pests initiated feeding simultaneously.</p><p class="s-zh">当两种害虫同时开始取食时，这种抗性诱导的不对称后果被完全消除。</p></div><div class="pair"><p class="s-en" lang="en">Metabolomics and network analyses identified phenylpropanoid-derived chlorogenic acids and coniferin as key BPH-induced defense compounds detrimental to RLF but not BPH.</p><p class="s-zh">代谢组学与网络分析确定苯丙烷来源的绿原酸类与松柏苷是褐飞虱诱导的关键防御化合物，它们对稻纵卷叶螟有害，但对褐飞虱本身无害。</p></div><div class="pair"><p class="s-en" lang="en">Dual infestation suppressed the accumulation of these toxins by inhibiting the phenylpropanoid pathway through downregulation of the hub gene OsHCT4.</p><p class="s-zh">双重为害通过下调枢纽基因 <i>OsHCT4</i> 抑制苯丙烷途径，从而压制这些毒素的积累。</p></div><div class="pair"><p class="s-en" lang="en">Feeding assays with mutant and overexpression lines confirmed the key role of the phenylpropanoid pathway in determining if the interaction results in competition or coexistence.</p><p class="s-zh">利用突变体与过表达株系的取食实验，确认苯丙烷途径在决定互作走向竞争还是共存中起关键作用。</p></div><div class="pair"><p class="s-en" lang="en">Moreover, plants with dual infestation were preferred by ovipositing females of both pests due to reduced emissions of decanal that repels RLF and BPH but enhanced release of DMNT and (E)-nerolidol that attract BPH females.</p><p class="s-zh">此外，双重为害的植株更受两种害虫雌虫产卵偏好，因为驱避稻纵卷叶螟与褐飞虱的癸醛释放减少，而吸引褐飞虱雌虫的 DMNT 与 (E)-橙花叔醇释放增强。</p></div><div class="pair"><p class="s-en" lang="en">These findings reveal how herbivores can jointly subvert host plant defenses to relax competition, providing a mechanistic extension of niche segregation and competition theory.</p><p class="s-zh">这些发现揭示了植食者如何协同颠覆寄主植物防御以缓和竞争，为生态位分化与竞争理论提供了机制层面的延伸。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>两种水稻害虫如何通过操纵植物防御实现共存</strong>。核心研究问题是：经典理论预测共享寄主的植食者应竞争，<strong>为何褐飞虱与稻纵卷叶螟能稳定共存甚至互利</strong>？主要目的是找出被共同抑制的植物防御通路与关键基因，并把代谢物与挥发物变化和害虫行为对应起来。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>这是一个把<strong>生态学理论问题落到分子机制</strong>的范例：竞争/共存通常以资源或天敌解释，而该研究指出<strong>植食者可以主动“关闭”寄主的化学防御</strong>，从而把竞争关系转为共存。对农业的意义直接——多种害虫同时发生时，植物防御可能被协同瓦解，<strong>单害虫研究的结论不能简单外推到复合虫害场景</strong>。此外它把“防御化合物”与“挥发物吸引/驱避”两条线都串了起来。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>发现<strong>不对称的抗性诱导</strong>：先期褐飞虱取食降低稻纵卷叶螟表现，反之无影响；<strong>同时取食则不对称性完全消失</strong>；</li><li>代谢组 + 网络分析锁定关键防御化合物：苯丙烷来源的<strong>绿原酸类与松柏苷</strong>，对稻纵卷叶螟有害而对褐飞虱无害；</li><li>证明双重为害通过<strong>下调枢纽基因 <i>OsHCT4</i></strong> 抑制苯丙烷途径，压制毒素积累；</li><li>用<strong>突变体与过表达株系</strong>取食实验确认苯丙烷途径决定竞争或共存；</li><li>挥发物层面：癸醛（驱避）减少、<strong>DMNT 与 (E)-橙花叔醇（吸引）</strong>增加，使双为害植株更受产卵偏好。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>问题意识强</strong>：从生态学理论预测与田间现象的冲突切入，而不是泛泛做防御基因。</li><li><strong>多层面证据闭环</strong>：害虫表现 → 代谢物鉴定 → 枢纽基因 → 遗传学验证（突变体/过表达）→ 挥发物与行为。</li><li><strong>方向不只一个</strong>：既解释了防御被抑制，也解释了为何雌虫偏好（挥发物重编程），把植物–害虫互作的两端都做了。</li><li><strong>对复合虫害防控有直接提示</strong>：害虫协同抑制防御，意味着防控策略需考虑组合效应。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>若你的抗虫/抗病材料是在<b>单一害虫或单一病原</b>下筛选的，这篇提醒：<b>复合胁迫下防御网络可能被协同压制，单胁迫结论未必成立</b>。方法上值得注意的是它把 <b>OsHCT4</b> 这个苯丙烷途径枢纽基因作为“防御开关”来验证——与你关注方向中 t7 的 <b>病害虫害协同颠覆植物防御</b> 逻辑相似。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p14"><div class="paper-head"><div class="paper-top"><span class="paper-idx">14</span><span class="paper-kind">研究论文 · 转录因子与抗锈病</span></div><h3>TaWRKY24 通过调控防御信号与活性氧积累正向调控小麦对条锈菌的抗性</h3><p class="orig"><span class="zh">英文原题</span>TaWRKY24 Positively Regulates Wheat Resistance to Puccinia striiformis f. sp. Tritici via Modulation of Defense Signaling and Reactive Oxygen Species Accumulation</p><p class="src"><span class="journal">Plant Science</span><span class="sep">·</span><span>373:113477</span><time datetime="2026-09-29">2026-09-29</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1016/j.plantsci.2026.113477">10.1016/j.plantsci.2026.113477</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Shuya Deng（第一作者） 等 10 人；通讯作者：<b>Chaowu Zeng、Yue Li、Guangkuo Li</b>。<br>主要单位：新疆农业大学 生命科学学院 极端环境生物生态适应与进化重点实验室（生物学专业硕士研究生，导师李月）；论文署名另含 新疆维吾尔自治区农业科学院 农业农村部西北荒漠绿洲作物有害生物综合治理重点实验室</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">邓淑雅 · Shuya Deng</p><p class="bio-unit">新疆农业大学 生命科学学院 极端环境生物生态适应与进化重点实验室（生物学专业硕士研究生，导师李月）；论文署名另含 新疆维吾尔自治区农业科学院 农业农村部西北荒漠绿洲作物有害生物综合治理重点实验室</p><p class="bio-dir"><span>主要研究方向</span>新疆农业大学生命科学学院生物学专业硕士研究生（导师为本文通讯作者李月），2025 年 5 月参加并通过硕士学位论文答辩，学位论文题目为《基于转录组和代谢组的粮春 1723 抗条锈病相关基因挖掘及功能验证》。其研究工作即围绕小麦品种（系）粮春 1723 的抗条锈病相关基因挖掘与功能验证展开，方法上结合转录组与代谢组分析。除在读研究生身份与学位论文方向外，未查到其职称、职务或其他公开个人简介。</p></div><div class="bio"><div class="bio-role">通讯作者（推断）</div><p class="bio-name">曾潮武 · Chaowu Zeng</p><p class="bio-unit">新疆农业科学院 作物研究所 副研究员</p><p class="bio-dir"><span>主要研究方向</span>新疆农业科学院作物研究所副研究员，长期从事春小麦新品种选育与示范推广（小麦遗传育种），以主要完成人选育新春34号、粮春1242、粮春1354等多个春小麦品种，并主持/参与国家与自治区级小麦育种项目。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">李月 · Yue Li</p><p class="bio-unit">新疆农业大学 生命科学学院（教授、硕士生导师）；论文署名另含 新疆维吾尔自治区农业科学院 农业农村部西北荒漠绿洲作物有害生物综合治理重点实验室</p><p class="bio-dir"><span>主要研究方向</span>新疆农业大学 生命科学学院教授、硕士生导师，作物抗逆分子生物学方向学术骨干，兼任新疆植物学会理事、新疆农业大学学报青年学术编委，为自治区级《分子生物学》《高级生物化学与分子生物学》一流本科课程与研究生精品课程负责人。长期从事作物抗逆分子生物学研究，聚焦棉花与小麦的抗性基因挖掘及抗逆种质资源创新，运用基因克隆、基因编辑与多组学技术解析逆境胁迫下的分子调控机制；先后主持国家自然科学基金地区项目 2 项、联合基金子课题 1 项、自治区自然科学基金杰出青年科学基金及农业农村部西北荒漠绿洲作物有害生物综合治理重点实验室开放基金（xjnkywdzc-2025002-02-04）等课题。以第一作者或通讯作者在国内外期刊发表论文 50 余篇（SCI 收录 13 篇），副主编《新疆小麦病虫草害识别及防治技术》专著 1 部。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">李广阔 · Guangkuo Li</p><p class="bio-unit">新疆维吾尔自治区农业科学院 植物保护研究所（所长）；农业农村部西北荒漠绿洲作物有害生物综合治理重点实验室（主任）</p><p class="bio-dir"><span>主要研究方向</span>新疆维吾尔自治区农业科学院植物保护研究所所长、农业农村部西北荒漠绿洲作物有害生物综合治理重点实验室主任，兼任中国植物保护学会第十三届理事会理事、新疆维吾尔自治区植物保护学会副理事长、自治区小麦现代产业技术体系岗位科学家。从事植物保护研究 20 余年，先后主持和参加国家和自治区科技支撑、自然基金等科研项目 20 余项，重点开展小麦、水稻、甜菜等作物病虫害防治技术研究与集成示范，制定相关地方标准 15 项。以第一作者或通讯作者发表学术论文 60 余篇（SCI 6 篇），主编/参编《新疆小麦病虫草害识别及防治技术》等著作 5 部，2024 年入选第三批「天山英才」科技创新领军人才。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Wheat stripe rust, caused by Puccinia striiformis f. sp. tritici (Pst), remains a major threat to global wheat production, which necessitates a better understanding of the molecular mechanisms underlying resistance.</p><p class="s-zh">由条形柄锈菌小麦专化型（<i>Puccinia striiformis</i> f. sp. <i>tritici</i>，Pst）引起的小麦条锈病仍是全球小麦生产的重大威胁，因此需要更深入理解抗性背后的分子机制。</p></div><div class="pair"><p class="s-en" lang="en">WRKY transcription factors are pivotal regulators of plant immunity; however, their specific functions in the wheat-Pst pathosystem remain poorly characterized.</p><p class="s-zh">WRKY 转录因子是植物免疫的关键调控因子；然而，它们在小麦–Pst 病理系统中的具体功能此前缺乏刻画。</p></div><div class="pair"><p class="s-en" lang="en">In this study, we identified and functionally characterized a WRKY transcription factor gene, TaWRKY24, in wheat.</p><p class="s-zh">本研究在小麦中鉴定并对一个 WRKY 转录因子基因 TaWRKY24 进行了功能表征。</p></div><div class="pair"><p class="s-en" lang="en">Expression profiling revealed that TaWRKY24 was continuously induced upon Pst inoculation.</p><p class="s-zh">表达谱分析显示，TaWRKY24 在 Pst 接种后持续被诱导。</p></div><div class="pair"><p class="s-en" lang="en">Subcellular localization assays demonstrated that the TaWRKY24 protein is predominantly localized to the nucleus.</p><p class="s-zh">亚细胞定位实验表明 TaWRKY24 蛋白主要定位于细胞核。</p></div><div class="pair"><p class="s-en" lang="en">Functional analyses indicated that transient overexpression of TaWRKY24 significantly enhanced wheat resistance to Pst, whereas virus-induced gene silencing (VIGS) compromised wheat resistance to Pst.</p><p class="s-zh">功能分析表明，瞬时过表达 TaWRKY24 显著增强小麦对 Pst 的抗性，而病毒诱导基因沉默（VIGS）则削弱小麦对 Pst 的抗性。</p></div><div class="pair"><p class="s-en" lang="en">Histological observations revealed that TaWRKY24 promotes reactive oxygen species (ROS) accumulation at early infection sites and restricts fungal hyphal expansion.</p><p class="s-zh">组织学观察显示，TaWRKY24 促进早期侵染位点的活性氧（ROS）积累并限制真菌菌丝扩展。</p></div><div class="pair"><p class="s-en" lang="en">To further explore the underlying mechanism, combined transcriptomic and qRT-PCR analyses showed that silencing TaWRKY24 resulted in significant downregulation of key genes involved in MAPK signaling (MKK4/5, WRKY33), glutathione metabolism (GSS), and phenylpropanoid biosynthesis (PAL).</p><p class="s-zh">为进一步探究其机制，转录组与 qRT-PCR 联合分析显示，沉默 TaWRKY24 导致参与 MAPK 信号（MKK4/5、WRKY33）、谷胱甘肽代谢（GSS）与苯丙烷生物合成（PAL）的关键基因显著下调。</p></div><div class="pair"><p class="s-en" lang="en">In addition, yeast one-hybrid and dual-luciferase reporter assays demonstrated that TaWRKY24 directly binds to and activates the promoters of PAL- and MAPK-related genes.</p><p class="s-zh">此外，酵母单杂交与双荧光素酶报告实验证明，TaWRKY24 可直接结合并激活 PAL 与 MAPK 相关基因的启动子。</p></div><div class="pair"><p class="s-en" lang="en">Collectively, our findings suggest that TaWRKY24 positively regulates wheat resistance to Pst, likely through the modulation of MAPK-mediated immune signaling, ROS homeostasis, and defense-related metabolic pathways.</p><p class="s-zh">综上，我们的发现提示 TaWRKY24 正向调控小麦对 Pst 的抗性，可能通过调节 MAPK 介导的免疫信号、ROS 稳态以及防御相关代谢途径实现。</p></div><div class="pair"><p class="s-en" lang="en">This study provides novel insights into the regulatory functions of WRKY transcription factors in wheat innate immunity.</p><p class="s-zh">该研究为 WRKY 转录因子在小麦先天免疫中的调控功能提供了新认识。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>小麦 WRKY 转录因子 TaWRKY24 在条锈病抗性中的功能与调控机制</strong>。核心研究问题是：TaWRKY24 <strong>是否正向调控抗条锈性</strong>？它通过哪些下游通路起作用？主要目的是用 VIGS 沉默与瞬时过表达双向验证功能，并找出其直接调控的靶基因与作用通路。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>条锈病是小麦生产的重大威胁，WRKY 是植物免疫的核心转录因子家族，但<strong>小麦中具体成员在条锈病病理系统里的功能缺少系统证据</strong>。该研究的价值在于把宏观表型（抗性、菌丝扩展）与分子机制（ROS 积累、MAPK、谷胱甘肽、苯丙烷）连接起来，并通过<strong>酵母单杂交 + 双荧光素酶</strong>确认直接调控关系，为小麦抗锈病分子育种提供候选基因与调控节点。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>鉴定并功能表征小麦 <strong>TaWRKY24</strong>：Pst 接种后<strong>持续诱导</strong>，蛋白<strong>主要定位于细胞核</strong>；</li><li><strong>双向遗传验证</strong>：瞬时过表达<strong>增强</strong>抗性，VIGS 沉默<strong>削弱</strong>抗性；</li><li>组织学证据：TaWRKY24 促进<strong>早期侵染位点 ROS 积累</strong>并<strong>限制菌丝扩展</strong>；</li><li>转录组 + qRT-PCR：沉默后 <strong>MAPK（MKK4/5、WRKY33）、谷胱甘肽（GSS）、苯丙烷（PAL）</strong> 关键基因显著下调；</li><li>酵母单杂交 + 双荧光素酶证明 TaWRKY24 <strong>直接结合并激活 PAL 与 MAPK 相关基因启动子</strong>。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>表型—细胞—分子三层证据</strong>：抗性表型、组织学（ROS 与菌丝）、转录组与靶基因验证逐层收敛。</li><li><strong>直接调控关系有实验支撑</strong>：酵母单杂交 + 双荧光素酶，而非仅靠表达相关性推断。</li><li><strong>通路指向明确</strong>：MAPK + 谷胱甘肽 + 苯丙烷，均为已知抗病骨架，结论可信度高。</li><li><strong>实用导向</strong>：TaWRKY24 可作为小麦抗条锈分子育种的过表达靶点。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这类“<b>转录因子 + 双向验证 + 靶基因启动子结合</b>”的论文是抗病机制研究的标准范式，可直接借鉴其证据组合。<b>特别注意它的下游通路选择：MAPK（信号）、谷胱甘肽（ROS 稳态）、苯丙烷（代谢防御）三者同时被调控</b>——说明一个 WRKY 可以同时接管信号与代谢两端。若你在做 WRKY 家族成员的功能研究，可优先检测这三条通路的标记基因。</div></article>
+<article class="paper" data-dir="d4" data-tags="d4" id="p15"><div class="paper-head"><div class="paper-top"><span class="paper-idx">15</span><span class="paper-kind">研究论文 · 细胞壁与发育（抗病为延伸表型）</span></div><h3>烟草 EXLB1 在叶片与气孔发育中的功能验证</h3><p class="orig"><span class="zh">英文原题</span>Functional validation of EXLB1 in leaf and stomatal development in tobacco</p><p class="src"><span class="journal">Plant Science</span><span class="sep">·</span><span>373:113479</span><time datetime="2026-09-29">2026-09-29</time><span class="badge">IF=4</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1016/j.plantsci.2026.113479">10.1016/j.plantsci.2026.113479</a></p><div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div><p class="authors"><span class="lbl">作者</span>Pingchang Fang（第一作者） 等 12 人；通讯作者：<b>Shuhua Zeng、Xingyou Yang、Chaowen Xiao</b>。<br>主要单位：四川大学 生命科学学院 生物资源与生态环境教育部重点实验室；成都市植物园-四川大学山地植物迁地保护与资源利用实验室（成都 610064）</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">房平昌 · Pingchang Fang</p><p class="bio-unit">四川大学 生命科学学院 生物资源与生态环境教育部重点实验室；成都市植物园-四川大学山地植物迁地保护与资源利用实验室（成都 610064）</p><p class="bio-dir"><span>主要研究方向</span>未查到可靠公开信息</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">曾淑华 · Shuhua Zeng</p><p class="bio-unit">四川农业大学 农学院（成都校区，611130）</p><p class="bio-dir"><span>主要研究方向</span>四川农业大学农学院副教授、硕士生导师，博士。主要从事烟草栽培与生理生化研究，内容涵盖不同烟草品种栽培特性与壮苗培育技术、漂浮育苗基质替代与少基质漂浮育苗、小苗膜下移栽；烟叶基地单元特色优质烟叶开发关键技术；白肋烟壮苗培育及膜下小苗移栽技术；以及宜宾生态焦甜香有机烟叶生产技术规程研发。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">杨兴有 · Xingyou Yang</p><p class="bio-unit">中国烟草总公司四川省公司（四川省烟草科学研究所），成都 610041</p><p class="bio-dir"><span>主要研究方向</span>高级农艺师，任职于四川省烟草科学研究所（中国烟草总公司四川省公司系统）。长期从事烟草农业工作，主要研究方向为烟草（白肋烟、雪茄烟）品种选育与栽培生态：作为项目承担单位代表负责「全国雪茄烟品种试验和抗根茎类病害新品种选育」等四川省烟草公司科技重点项目的方案与实施，并发表雪茄烟/白肋烟生态条件、烟叶质量评价与栽培技术研究论文。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">肖朝文 · Chaowen Xiao</p><p class="bio-unit">四川大学生命科学学院 生物资源与生态环境教育部重点实验室；成都市植物园-四川大学山地植物迁地保护与资源利用实验室（成都 610064；论文另署成都植物园 610083）</p><p class="bio-dir"><span>主要研究方向</span>四川大学生命科学学院研究员、博士生导师。课题组以拟南芥、油菜和烟草为研究对象，围绕细胞壁合成代谢，阐释细胞壁生物合成、修饰与降解的分子机制，探究细胞壁在植物生长发育和环境适应性中的作用机制。兼任中国植物学会植物生理及分子生物学专业委员会委员、中国细胞生物学学会植物细胞生物学分会委员，为四川省特聘专家、四川省学术与技术带头人后备人选。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Leaf morphological traits are the key determinants of tobacco yield and stress responses, and cell wall synthesis and metabolism play an important role in leaf development.</p><p class="s-zh">叶片形态性状是决定烟草产量与胁迫响应的关键因素，而细胞壁合成与代谢在叶片发育中起重要作用。</p></div><div class="pair"><p class="s-en" lang="en">However, the underlying regulatory mechanism of cell wall on leaf morphology remains largely unknown in tobacco.</p><p class="s-zh">然而，细胞壁调控叶片形态的内在机制在烟草中仍基本未知。</p></div><div class="pair"><p class="s-en" lang="en">Here, we compared two pairs of tobacco cultivars (DMC vs. DX3 and DMC vs. WM3) with distinct leaf traits, and identified a cell wall-related expansin gene, NtEXLB1, based on transcriptome data analysis.</p><p class="s-zh">本文比较了两对叶片性状差异明显的烟草品种（DMC 与 DX3、DMC 与 WM3），并基于转录组数据分析鉴定出一个细胞壁相关的扩展蛋白基因 NtEXLB1。</p></div><div class="pair"><p class="s-en" lang="en">The homolog NbEXLB1 from N. benthamiana is highly expressed in the mature leaf, and the NbEXLB1 protein is localized to the cell wall.</p><p class="s-zh">来自本氏烟草的同源基因 NbEXLB1 在成熟叶中高表达，且 NbEXLB1 蛋白定位于细胞壁。</p></div><div class="pair"><p class="s-en" lang="en">NbEXLB1 gene overexpression promoted leaf expansion with larger abaxial pavement cells, decreased stomatal density and aperture in N. benthamiana.</p><p class="s-zh">过表达 NbEXLB1 促进本氏烟草叶片扩展，下表皮铺皮细胞变大，气孔密度与开度降低。</p></div><div class="pair"><p class="s-en" lang="en">NbEXLB1 CRISPR mutant plants exhibited smaller pavement cells and more stomata, while the leaf area did not show any significant difference.</p><p class="s-zh">NbEXLB1 CRISPR 突变体植株表现为铺皮细胞变小、气孔增多，而叶面积无显著差异。</p></div><div class="pair"><p class="s-en" lang="en">Furthermore, overexpression of NbEXLB1 remarkably enhanced drought tolerance and resistance to Rhizoctonia solani infection.</p><p class="s-zh">此外，过表达 NbEXLB1 显著增强抗旱性与对茄丝核菌（<i>Rhizoctonia solani</i>）侵染的抗性。</p></div><div class="pair"><p class="s-en" lang="en">These findings provide mechanistic insights into how cell wall regulation coordinates leaf development, and highlight NbEXLB1 as a promising genetic resource for improving leaf productivity and stress resilience in tobacco breeding.</p><p class="s-zh">这些发现为细胞壁调控如何协调叶片发育提供了机制性认识，并凸显 NbEXLB1 作为改良烟草叶片生产力与抗逆性育种的有前景的基因资源。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>细胞壁扩展蛋白基因 EXLB1 对叶片与气孔发育的调控</strong>。核心研究问题是：细胞壁相关基因如何影响叶形态（铺皮细胞大小、气孔密度与开度）？<strong>这些发育改变是否同时影响抗逆与抗病</strong>？主要目的是通过过表达与 CRISPR 敲除双向验证 EXLB1 的功能及其对胁迫抗性的影响。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>叶片形态决定烟草产量，而气孔密度/开度直接关系到水分损失与病原入侵——这使“<strong>发育调控基因同时影响产量与抗性</strong>”成为一个有实际价值的问题。该研究通过品种比较 + 转录组锁定 EXLB1，并用过表达与 CRISPR 两条相反方向的遗传学证据验证其功能，进而发现<strong>过表达同时提升抗旱性与对丝核菌抗性</strong>，提示存在“形态—抗性”的协同改良空间。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>通过<strong>两对叶片性状差异品种</strong>（DMC vs. DX3、DMC vs. WM3）比较 + 转录组分析，鉴定细胞壁扩展蛋白基因 <strong>NtEXLB1</strong>；</li><li>同源基因 <strong>NbEXLB1</strong> 在成熟叶高表达，蛋白<strong>定位于细胞壁</strong>；</li><li><strong>过表达</strong>：叶片扩展、下表皮铺皮细胞变大、<strong>气孔密度与开度降低</strong>；</li><li><strong>CRISPR 突变体</strong>：铺皮细胞变小、气孔增多，但<strong>叶面积无显著差异</strong>；</li><li>过表达显著<strong>增强抗旱性与对茄丝核菌（<i>Rhizoctonia solani</i>）的抗性</strong>。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>过表达 + CRISPR 双向验证</strong>，功能证据强；且突变体叶面积无变化，说明该基因主要影响细胞/气孔层面而非整体叶大小，结论细致。</li><li><strong>把发育性状与抗逆/抗病关联</strong>：气孔密度与开度改变可同时解释抗旱与抗病，机制解释自洽。</li><li><strong>品种比较切入</strong>：从性状差异明显的材料出发，比盲目筛基因更有方向性。</li><li>提示<b>形态改良与抗性改良可能不冲突</b>，对育种有参考价值。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇与本日其他论文相比，<b>与你的 12 个方向相关性最弱</b>——核心是叶片/气孔发育，抗病（丝核菌抗性）只是延伸表型。收录原因是它触及 <b>d4 中“作物抗病”的边界：气孔作为病原入侵门户，其密度与开度改变可影响抗性</b>。若你关注<b>抗病与抗旱的协同改良</b>，或研究气孔在病原入侵中的作用，可参考其证据设计；<b>但它不涉及抗病基因定位、克隆或免疫信号</b>，请按需取舍。</div></article>
+</section>
+<section class="section" id="d5" data-dir="d5">
+<div class="section-head"><span class="sh-k">d5</span><h2>NLR 与植物免疫受体</h2><span class="sh-count">1 篇</span></div>
+<article class="paper" data-dir="d5" data-tags="d5" id="p10"><div class="paper-head"><div class="paper-top"><span class="paper-idx">10</span><span class="paper-kind">方法学论文 · 菌株工程与遗传转化</span></div><h3>用于根癌农杆菌高效精准基因组编辑的 λ Red 重组酶辅助 CRISPR/Cas9 系统</h3><p class="orig"><span class="zh">英文原题</span>A Lambda Red Recombinase-Assisted CRISPR/Cas9 System for Efficient and Precise Genome Editing in Agrobacterium tumefaciens</p><p class="src"><span class="journal">Plant Biotechnology Journal</span><time datetime="2026-09-30">2026-09-30</time><span class="badge">IF=10</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/pbi.70768">10.1111/pbi.70768</a></p><div class="dirchips"><span class="chip" data-c="d5"><span class="chip-dot"></span>d5 · NLR 与植物免疫受体</span></div><p class="authors"><span class="lbl">作者</span>Minmin Zheng（第一作者） 等 5 人；通讯作者：<b>Zuren Li、Kai Hua</b>。<br>主要单位：中国科学院分子植物科学卓越创新中心（CEMPS）／上海辰山植物园（上海辰山植物科学研究中心），上海市资源植物功能基因组学重点实验室</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">郑敏敏 · Minmin Zheng</p><p class="bio-unit">中国科学院分子植物科学卓越创新中心（CEMPS）／上海辰山植物园（上海辰山植物科学研究中心），上海市资源植物功能基因组学重点实验室</p><p class="bio-dir"><span>主要研究方向</span>据上海辰山植物园官方科研进展报道（2023 年），郑敏敏为辰山植物园药用植物与健康研究组（赵清研究组）硕士研究生，主要从事黄芩属药用植物黄酮类活性成分的检测与代谢研究，以第一作者发表六种药用黄芩属植物黄酮比较分析论文，并参与撰写中文综述《药用植物黄芩的生物学研究进展及展望》。2024 年之后是否转为博士研究生或科研助理，未查到公开来源。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">李祖任 · Zuren Li</p><p class="bio-unit">岳麓山实验室（长沙，论文署名单位）；湖南省农业科学院（湖南省植物保护研究所研究员、湖南省农业生物技术研究所副所长）</p><p class="bio-dir"><span>主要研究方向</span>研究员，现任湖南省农业科学院湖南省农业生物技术研究所副所长（2023 年 12 月起），入选农业农村部神农青年英才、湖南省杰青、湖南省荷尖人才等。主要从事杂草生理生态学及防控研究，重点为植物源除草剂与新型除草剂分子靶标（如丝氨酸羟甲基转移酶 SHMT）的发掘、设计合成与成药性评价，以及作物田恶性杂草的生态控草与治理技术研发推广。</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">华凯 · Kai Hua</p><p class="bio-unit">中国科学院分子植物科学卓越创新中心（CEMPS）／上海辰山植物园（上海辰山植物科学研究中心），上海市资源植物功能基因组学重点实验室，植物基因编辑与种质创新研究组</p><p class="bio-dir"><span>主要研究方向</span>博士，上海辰山植物园（中科院分子植物科学卓越创新中心）植物基因编辑与种质创新研究组课题组长；辰山官网 2024 年 12 月新闻中称「华凯副研究员」。主要研究方向为植物细胞核与质体基因组编辑工具的开发与优化，并将基因编辑工具应用于重要园艺植物与药用植物改良、优良种质资源创制，包括作物质体基因组改造与代谢工程。</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Agrobacterium tumefaciens is a powerful delivery tool for plant genetic transformation and a pivotal platform for agricultural biotechnology.</p><p class="s-zh">根癌农杆菌（<i>Agrobacterium tumefaciens</i>）是植物遗传转化的强大递送工具，也是农业生物技术的关键平台。</p></div><div class="pair"><p class="s-en" lang="en">However, laboratory strains of Agrobacterium have remained genetically unoptimized for decades, with genome engineering hindered by inefficient, endogenous homologous recombination systems.</p><p class="s-zh">然而，农杆菌实验室菌株数十年来在遗传上未获优化，其基因组工程受限于低效的内源同源重组系统。</p></div><div class="pair"><p class="s-en" lang="en">Here, we developed and optimized a lambda (λ) Red recombinase-assisted CRISPR/Cas9 system that enables efficient and precise introduction of point mutations, insertions, deletions and large fragment replacements into both the chromosome and Ti plasmids of different A. tumefaciens strains, with minimal off-target editing.</p><p class="s-zh">本文开发并优化了一套 λ Red 重组酶辅助的 CRISPR/Cas9 系统，可在不同农杆菌菌株的染色体与 Ti 质粒上高效精准地引入点突变、插入、缺失与大片段替换，且脱靶编辑极少。</p></div><div class="pair"><p class="s-en" lang="en">Editing efficiencies across eighteen target sites ranged from 26.7% to 100%, demonstrating the versatility of this method.</p><p class="s-zh">在 18 个靶点的编辑效率为 26.7% 至 100%，证明了该方法的通用性。</p></div><div class="pair"><p class="s-en" lang="en">Furthermore, we incorporated a SacB counter-selection marker into our system that facilitates the plasmids curing after editing.</p><p class="s-zh">此外，我们在系统中引入 SacB 反向筛选标记，便于编辑后质粒的消除。</p></div><div class="pair"><p class="s-en" lang="en">Using this platform, we sequentially deleted four antibiotic-resistance loci in strain EHA105, generating an antibiotic-sensitive derivative, EHA105-S, that maintains wild-type growth kinetics and transformation efficiency.</p><p class="s-zh">利用该平台，我们在 EHA105 菌株中依次删除 4 个抗生素抗性位点，获得抗生素敏感衍生菌株 EHA105-S，其保持野生型生长动力学与转化效率。</p></div><div class="pair"><p class="s-en" lang="en">Additionally, we engineered the microbe-associated molecular pattern (MAMPs) of two elongation factor Tu (EF-Tu) genes, allowing the A. tumefaciens to escape EF-Tu receptor (EFR) perception.</p><p class="s-zh">此外，我们对两个延伸因子 Tu（EF-Tu）基因的微生物相关分子模式（MAMPs）进行了改造，使农杆菌得以逃避 EF-Tu 受体（EFR）的识别。</p></div><div class="pair"><p class="s-en" lang="en">The resulting engineered strains displayed enhanced transient expression efficiency in Arabidopsis thaliana.</p><p class="s-zh">所得工程菌株在拟南芥（<i>Arabidopsis thaliana</i>）中显示出增强的瞬时表达效率。</p></div><div class="pair"><p class="s-en" lang="en">Our λ Red-assisted CRISPR/Cas9 system thus provides a robust, scalable and user-friendly tool for Agrobacterium genome engineering, paving the way for the design of next-generation strains to revolutionize plant transformation and advance synthetic biology applications in plants.</p><p class="s-zh">因此，我们这套 λ Red 辅助的 CRISPR/Cas9 系统为农杆菌基因组工程提供了稳健、可扩展且易用的工具，为设计下一代菌株以变革植物转化、推进植物合成生物学应用铺平了道路。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>农杆菌基因组工程工具的建立</strong>。核心研究问题是：农杆菌作为植物转化的核心递送工具，其<strong>实验室菌株数十年未被遗传优化</strong>，瓶颈在于内源同源重组效率低——如何实现高效精准的基因组编辑？主要目的是开发一套 λ Red 辅助的 CRISPR/Cas9 系统，并用它改造菌株以提升植物转化效率。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>几乎全部植物遗传转化都依赖农杆菌，但“工具本身”很少被优化：实验室菌株保留着大量抗生素抗性标记，且天然 MAMP（如 EF-Tu）会触发植物的 EFR 免疫识别，<strong>限制转化效率</strong>。该研究把 CRISPR 工具从“编辑植物”推进到“<strong>编辑递送工具</strong>”，思路有杠杆效应——改造一次菌株，所有使用该菌株的转化实验都受益。其 EHA105-S 衍生菌株与 MAMP 改造菌株对植物转化领域具有直接的实用价值。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>建立 <strong>λ Red 重组酶辅助的 CRISPR/Cas9 系统</strong>，可在<strong>染色体与 Ti 质粒</strong>上实现点突变、插入、缺失、大片段替换，脱靶极低；</li><li>18 个靶点编辑效率 <strong>26.7%–100%</strong>；</li><li>引入 <strong>SacB 反向筛选</strong>，便于编辑后消除质粒；</li><li>在 EHA105 中<strong>依次删除 4 个抗生素抗性位点</strong>，获得 <strong>EHA105-S</strong>，保持野生型生长与转化效率；</li><li>改造两个 <strong>EF-Tu 基因的 MAMPs</strong>，使农杆菌<strong>逃避 EFR 识别</strong>，工程菌株在拟南芥中<strong>瞬时表达效率提升</strong>。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>杠杆效应明显</strong>：优化递送工具而非单个植物材料，成果可被整个领域复用。</li><li><strong>工具性能有量化区间</strong>（26.7%–100%，18 个靶点），比只报“成功案例”更有说服力。</li><li><strong>配套设计完整</strong>：编辑 + 反向筛选（SacB）+ 表型验证（生长/转化效率）一体。</li><li><strong>机制清晰的应用出口</strong>：EFR 识别 EF-Tu 是已知的植物免疫机制，作者用 MAMP 改造规避之，把基础免疫知识直接转为工程手段。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这是本期最容易被忽略但<b>实用价值最高</b>的一篇。若你的转化效率长期偏低，除了改植物、改载体，还有第三条路：<b>改造农杆菌本身</b>——敲除多余抗性标记（便于筛选）、突变 EF-Tu 的 MAMP 以避开植物 EFR 识别。后一点尤其值得注意：<b>EFR 感知 EF-Tu 会削弱转化</b>，在拟南芥等具强 EFR 响应的物种中尤为明显。</div></article>
+</section>
+<section class="section" id="top3">
+<div class="section-head"><span class="sh-k">06</span><h2>值得精读 Top 3</h2><span class="sh-count">3 篇</span></div>
+<ol class="rank">
+<li><span class="rk">1</span><div class="rb"><p class="rt">P01 · 水稻 SAPK10–RISBZ1–ABT 轴与穗发芽抗性（Molecular Plant）</p><p class="rw">本日<b>证据链最完整</b>的一篇：图位克隆 → 位点特异磷酸化（Ser190）→ 转录激活 → 转运蛋白（ABT）→ 组织间 ABA 分配 → 表型；并用<b>籼粳单倍型差异（A339I）</b>解释亚种间抗性差异，最后以<b>转基因与分子标记辅助选择</b>双路径验证。若你做 d1（定位与克隆），这是可直接照搬的范式。</p></div></li>
+<li><span class="rk">2</span><div class="rb"><p class="rt">P03 · 茶树 CsCAD14 双酶活与灰斑病抗性（Science Advances）</p><p class="rw">本日<b>概念最锐利</b>的一篇：抗病来自<b>代谢酶的新功能化</b>而非免疫受体，并用抗/感品种 F<sub>1</sub> 群体把差异落到<b>编码区单个非同义突变</b>，再以正选择位点（L192V）把机制放进演化框架。<b>“抗病基因不一定是 R 基因”</b>这一判断对选题有直接启发。</p></div></li>
+<li><span class="rk">3</span><div class="rb"><p class="rt">P07 · 烟草 NtSGRL1 负调控病毒抗性（Molecular Plant Pathology）</p><p class="rw">本日<b>效应量最大</b>的一篇：Ntsgrl1 突变体中 TYLCV 积累下降 <b>1995 倍</b>，且对 TSWV/PYV/TMV 均下降 62%–99%，提示<b>广谱抗病毒节点</b>。更值得注意的是思路——<b>把“褪绿症状相关基因”当作抗性候选来筛</b>，且为<b>负调控因子，敲除即可提升抗性</b>，对 CRISPR 育种特别友好。</p></div></li>
+</ol></section>
+<section class="section" id="teams">
+<div class="section-head"><span class="sh-k">07</span><h2>建议跟踪的团队</h2><span class="sh-count">3 组</span></div>
+<div class="team"><h3>中国水稻研究所 · 水稻生物学与育种全国重点实验室（P01）</h3><p class="tu">张健（Jian Zhang）团队；共同通讯含中山大学宋献军（Xianjun Song）</p><p class="tw">本日唯一以<b>图位克隆 + 单倍型模块化</b>解决种子休眠/穗发芽问题的团队，并走通了「机制 → 分子标记辅助选择」的转化路径。若你关注<b>水稻种子发育与休眠</b>，其 SAPK10/SnRK2 系列工作值得系统跟踪。</p></div>
+<div class="team"><h3>中国科学院遗传与发育生物学研究所 · 育种前沿技术实验室（P02）</h3><p class="tu">贺飞（Fei He）研究组；合作西北农林科技大学吉万全（Wanquan Ji）团队</p><p class="tw">本日<b>多倍体基因组 + 渐渗系面板</b>工作的核心团队，长期做<b>小麦远缘杂交与跨物种抗性改良</b>、小麦–病原协同进化。若你要从小麦野生近缘种挖掘抗病基因，这是最直接对口的团队之一。</p></div>
+<div class="team"><h3>安徽农业大学 · 茶树种质创新与资源利用全国重点实验室（P03）</h3><p class="tu">韦朝领（Chaoling Wei）团队；共同通讯含美国北卡罗来纳州立大学 De-Yu Xie</p><p class="tw">本日<b>代谢酶功能分化与抗病</b>工作的团队，长期做茶树种质创新与次生代谢介导的抗病虫机制。若你的抗病定位落在<b>代谢通路</b>而非免疫受体上，其研究范式值得参考。</p></div>
+</section>
+<section class="section" id="more">
+<div class="section-head"><span class="sh-k">08</span><h2>延伸阅读</h2><span class="sh-count">9 条</span></div>
+<p class="cov-note">以下为 <b>C 层预印本</b>，<b>未经同行评审</b>，不得与主榜论文同等看待；列出仅供快速跟进前沿动态。标有「相关性提示（较弱）」者与 12 个方向仅间接相关，优先级低。</p>
+<article class="paper ext" data-dir="d3" data-tags="d3" id="E1">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E1</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>一种新的 Euterpe precatoria（棕榈科）线粒体基因组</h3>
+<p class="orig"><span class="zh">英文原题</span>A novel mitogenome for Euterpe precatoria (Arecaceae)</p>
+<p class="src"><span class="journal">预印本</span><time datetime="2026-10-02">2026-10-02</time><a href="https://doi.org/10.64898/2026.09.28.754896">10.64898/2026.09.28.754896</a></p>
+<div class="dirchips"><span class="chip" data-c="d3"><span class="chip-dot"></span>d3 · 泛基因组</span></div>
+<p class="authors"><span class="lbl">作者</span>Lucile Soler（第一作者） 等 6 人；通讯作者：<b>Christine D. Bacon</b>。<br>主要单位：SciLifeLab, National Bioinformatics Infrastructure Sweden, Department of Medical Biochemistry and Microbiology, Uppsala University, Uppsala, Sweden;</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Mitochondrial genomes of angiosperms are unusual due to their large size, low gene content, and high structural variation.</p><p class="s-zh">被子植物的线粒体基因组因其体积大、基因含量低与结构变异高而显得特殊。</p></div><div class="pair"><p class="s-en" lang="en">In the palm family (Arecaceae), mitochondrial architecture is highly dynamic, characterized by expansive sizes, fragmentation, and extensive recombination activity.</p><p class="s-zh">在棕榈科（Arecaceae）中，线粒体结构高度动态，表现为体积庞大、碎片化与广泛的重组活动。</p></div><div class="pair"><p class="s-en" lang="en">This biological complexity presents a significant bioinformatic challenge, especially since only three complete palm mitochondrial genomes are publicly available to date.</p><p class="s-zh">这种生物学复杂性带来了显著的生信分析挑战，尤其因为迄今仅有三套完整的棕榈线粒体基因组公开可用。</p></div><div class="pair"><p class="s-en" lang="en">Here, we present the complete mitochondrial genome sequence for the Amazonian palm Euterpe precatoria, assembled de novo using PacBio HiFi long-read sequencing data.</p><p class="s-zh">本文报道了亚马逊棕榈 <i>Euterpe precatoria</i> 的完整线粒体基因组序列，基于 PacBio HiFi 长读长数据从头组装。</p></div><div class="pair"><p class="s-en" lang="en">The assembly required extensive manual curation and graph tracing to resolve a complex recombination topology.</p><p class="s-zh">该组装需要大量人工校正与图追踪，以解析复杂的重组拓扑结构。</p></div><div class="pair"><p class="s-en" lang="en">The final resolved sequence spans 1,268,308 base pairs and is supported by a mean read coverage depth estimated at 746X.</p><p class="s-zh">最终解析出的序列长 1,268,308 bp，平均读长覆盖深度估计为 746×。</p></div><div class="pair"><p class="s-en" lang="en">Annotation revealed a high degree of structural complexity, including 177 total gene features corresponding to 76 unique genes.</p><p class="s-zh">注释揭示出高度的结构复杂性，共 177 个基因特征，对应 76 个唯一基因。</p></div><div class="pair"><p class="s-en" lang="en">This gene set includes 41 unique protein-coding genes (56 features), 32 unique tRNA genes (118 features), and three unique rRNA genes, reflecting the characteristic gene duplication and fragmentation documented in Arecaceae.</p><p class="s-zh">该基因集包括 41 个唯一蛋白编码基因（56 个特征）、32 个唯一 tRNA 基因（118 个特征）与 3 个唯一 rRNA 基因，反映了棕榈科已知的基因重复与碎片化特征。</p></div><div class="pair"><p class="s-en" lang="en">The complete mitochondrial genome sequence is publicly available and provides a high-quality resource for understanding the mechanisms of plant mitochondrial genome expansion and structural evolution.</p><p class="s-zh">该完整线粒体基因组序列已公开，为理解植物线粒体基因组扩张与结构演化的机制提供了高质量资源。</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b><b>相关性提示（较弱）</b>：本篇为棕榈科线粒体基因组组装，与你的 12 个方向（抗病基因、GWAS、泛基因组、NLR 等）<b>仅有间接关联</b>——它命中的是 d3 泛基因组方向中「植物基因组结构与组装」这一大类。列出仅供了解细胞器基因组组装方法（HiFi 长读长 + 图追踪解析重组拓扑），<b>优先级低</b>。</div>
+</article>
+<article class="paper ext" data-dir="d2" data-tags="d2" id="E2">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E2</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>旗叶初生代谢物 GWAS 揭示与田间籼稻干旱下产量稳定性相关的代谢 QTL 枢纽</h3>
+<p class="orig"><span class="zh">英文原题</span>GWAS of flag leaf primary metabolites uncovers metabolic QTL hubs linked to grain yield stability under drought in field-grown indica rice</p>
+<p class="src"><span class="journal">预印本</span><time datetime="2026-10-02">2026-10-02</time><a href="https://doi.org/10.64898/2026.09.28.754946">10.64898/2026.09.28.754946</a></p>
+<div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span></div>
+<p class="authors"><span class="lbl">作者</span>Chosen E Obih（第一作者） 等 3 人；通讯作者：<b>Giovanni Melandri</b>。<br>主要单位：University of Arizona</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Reproductive stage drought disrupts flag leaf metabolism in rice (Oryza sativa), limiting photoassimilate translocation to developing grains and reducing grain yield (GY).</p><p class="s-zh">生殖期干旱扰乱水稻（<i>Oryza sativa</i>）旗叶代谢，限制光合同化物向发育中籽粒的转运，从而降低籽粒产量（GY）。</p></div><div class="pair"><p class="s-en" lang="en">How natural variation in this response relates to GY remains poorly understood.</p><p class="s-zh">这一响应中的自然变异与籽粒产量之间的关系此前了解甚少。</p></div><div class="pair"><p class="s-en" lang="en">This study combines untargeted metabolomics of flag leaves from 271 indica rice accessions grown under well-watered (WW) and reproductive-stage water-limited (WL) field conditions with genome-wide association studies of 89 annotated polar metabolites.</p><p class="s-zh">本研究结合了 271 份籼稻材料在充分灌溉（WW）与生殖期限水（WL）大田条件下的旗叶非靶向代谢组学，以及对 89 个已注释极性代谢物的全基因组关联分析。</p></div><div class="pair"><p class="s-en" lang="en">A total of 180 metabolite quantitative trait loci (mQTLs) were identified: 93 detected only under WL, 68 only under WW, and 19 under both conditions, indicating a predominant stress-dependent genetic control; mapping of GY itself detected only four marginal QTLs, none overlapping the mQTLs.</p><p class="s-zh">共鉴定出 180 个代谢物数量性状位点（mQTL）：93 个仅在限水条件下检出，68 个仅在充分灌溉下检出，19 个在两种条件下均检出，表明遗传控制以胁迫依赖型为主；而直接对籽粒产量作图仅检出 4 个边缘 QTL，且均不与 mQTL 重叠。</p></div><div class="pair"><p class="s-en" lang="en">Four high-density regions (HDRs) of mQTLs were identified: HDR1-1, detected only under WW conditions and associated mainly with raffinose family oligosaccharides; HDR1-2, HDR4, and HDR11, detected only under WL conditions and associated mainly with tricarboxylic acid cycle intermediates and amino acids.</p><p class="s-zh">鉴定出 4 个 mQTL 高密度区（HDR）：HDR1-1 仅在充分灌溉条件下检出，主要与棉子糖家族寡糖相关；HDR1-2、HDR4 与 HDR11 仅在限水条件下检出，主要与三羧酸循环中间产物和氨基酸相关。</p></div><div class="pair"><p class="s-en" lang="en">After correcting for genetic relatedness, accessions carrying the favourable haplotype at both HDR1-2 and HDR4 yielded 21.5% more under WL conditions than accessions carrying the unfavourable haplotype at both loci and lost 11.4 percentage points less GY to stress.</p><p class="s-zh">校正遗传亲缘关系后，在 HDR1-2 与 HDR4 两个位点均携带有利单倍型的材料，在限水条件下比两位点均携带不利单倍型的材料增产 21.5%，且因胁迫导致的产量损失少 11.4 个百分点。</p></div><div class="pair"><p class="s-en" lang="en">Accessions carrying the favourable haplotype at only one locus showed a comparable reduction in yield loss.</p><p class="s-zh">仅在其中一个位点携带有利单倍型的材料，其产量损失的降低幅度相当。</p></div><div class="pair"><p class="s-en" lang="en">Haplotype-guided variant </p><p class="s-zh">基于单倍型的变异……（摘要原文在此处被 Europe PMC 截断）</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b>命中 <b>d2（GWAS/关联分析）</b> 与 <b>t3（大规模 GWAS）</b>：以 <b>代谢物作为表型</b> 做 GWAS（mQTL），发现抗旱稳定性的单倍型组合，与你的方向高度相关。注意其关键发现——<b>直接对产量作图只有 4 个边缘 QTL，而代谢物 mQTL 有 180 个且不重叠</b>，说明“中间表型（代谢物）”比“最终产量”更容易定位，是值得借鉴的策略。</div>
+</article>
+<article class="paper ext" data-dir="d2" data-tags="d2" id="E3">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E3</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>洪水制度改变带来的基因组后果：受威胁河漫滩植物的基因流与适应</h3>
+<p class="orig"><span class="zh">英文原题</span>Genomic Consequences of Altered Flood Regimes: Gene Flow and Adaptation in a Threatened Floodplain Plant</p>
+<p class="src"><span class="journal">预印本</span><time datetime="2026-10-02">2026-10-02</time><a href="https://doi.org/10.64898/2026.09.28.755008">10.64898/2026.09.28.755008</a></p>
+<div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span></div>
+<p class="authors"><span class="lbl">作者</span>Wen-Hsi Kuo（第一作者） 等 14 人；通讯作者：<b>Christine E. Edwards</b>。<br>主要单位：Missouri Botanical Garden;</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Floodplains are highly dynamic ecotones where species persistence depends on synchrony between natural flow regimes and life-history.</p><p class="s-zh">河漫滩是高度动态的生态过渡带，物种的存续依赖于自然水文情势与其生活史的同步性。</p></div><div class="pair"><p class="s-en" lang="en">Artificial river engineering has profoundly altered these systems by reducing the frequency and magnitude of spring floods while increasing the unpredictability of flood timing and intensity during summer.</p><p class="s-zh">人工河流工程通过降低春季洪水的频率与规模、同时增加夏季洪水时间与强度的不可预测性，深刻改变了这些系统。</p></div><div class="pair"><p class="s-en" lang="en">These hydrological changes have disrupted historical patterns of dispersal, growth, reproduction, and competitive success among floodplain specialists.</p><p class="s-zh">这些水文变化扰乱了河漫滩专性物种在扩散、生长、繁殖与竞争成功方面的历史格局。</p></div><div class="pair"><p class="s-en" lang="en">Effective conservation in these ecosystems therefore requires understanding how human-altered flow regimes have reshaped floodplain specialists&#x27; demography, genetic diversity, genetic connectivity, functional variation, and adaptive potential.</p><p class="s-zh">因此，这些生态系统的有效保护需要理解人类改变的水文情势如何重塑了河漫滩专性物种的种群动态、遗传多样性、遗传连通性、功能变异与适应潜力。</p></div><div class="pair"><p class="s-en" lang="en">Here, we address this challenge in Boltonia decurrens, a federally threatened floodplain plant endemic to the Illinois River Valley, by integrating a chromosome-scale reference genome, whole-genome resequencing, and common-garden adaptive trait measurements from 424 individuals across 17 populations.</p><p class="s-zh">本文以美国联邦受威胁植物、伊利诺伊河谷特有种 <i>Boltonia decurrens</i> 为对象，整合染色体水平参考基因组、全基因组重测序与来自 17 个种群 424 个个体的同质园适应性性状测定来应对这一挑战。</p></div><div class="pair"><p class="s-en" lang="en">Demographic analyses revealed a severe recent bottleneck and a subsequent rebound.</p><p class="s-zh">种群动态分析揭示近期经历了一次严重的瓶颈并随后出现回升。</p></div><div class="pair"><p class="s-en" lang="en">Population structure was clinal with downstream-dominant gene flow, indicating that regional population connectivity predominates over longer-distance gene flow.</p><p class="s-zh">种群结构呈渐变式，基因流以下游为主导，表明区域尺度的种群连通性胜过远距离基因流。</p></div><div class="pair"><p class="s-en" lang="en">A subset of populations showed elevated genetic isolation with increased inbreeding and homozygous deleterious burden, revealing a genomic cost of disrupted floodplain connectivity.</p><p class="s-zh">部分种群表现出更高的遗传隔离度，近交与同型有害突变负荷增加，揭示了河漫滩连通性被破坏的基因组代价。</p></div><div class="pair"><p class="s-en" lang="en">Common-garden observations and GWAS</p><p class="s-zh">同质园观测与 GWAS……（摘要原文在此处被 Europe PMC 截断）</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b><b>相关性提示（较弱）</b>：本篇为保护遗传学与群体基因组学（河漫滩植物），命中 d2/t3 仅因使用 GWAS 方法，<b>研究对象与你的作物抗病方向无关</b>。列出仅供了解「<b>同质园表型 + 全基因组重测序 + GWAS</b>」的整合设计与“遗传隔离的基因组代价”分析思路，<b>优先级低</b>。</div>
+</article>
+<article class="paper ext" data-dir="d3" data-tags="d3 d4" id="E4">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E4</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>气候差异显著的两个<i>Aegilops mutica</i>材料基因组组装揭示广泛的结构变异</h3>
+<p class="orig"><span class="zh">英文原题</span>Genome assemblies of climatically distinct  <i>Aegilops mutica</i>  reveal extensive structural variation</p>
+<p class="src"><span class="journal">预印本</span><time datetime="2026-10-02">2026-10-02</time><a href="https://doi.org/10.64898/2026.09.28.753720">10.64898/2026.09.28.753720</a></p>
+<div class="dirchips"><span class="chip" data-c="d3"><span class="chip-dot"></span>d3 · 泛基因组</span><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div>
+<p class="authors"><span class="lbl">作者</span>Ashley L Tuffin（第一作者） 等 7 人；通讯作者：<b>Rajiv Sharma</b>。<br>主要单位：University of Edinburgh;</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Bread wheat harbours low genetic diversity due to bottlenecks during speciation, domestication, and selection; wild relatives therefore provide critical reservoir for climate-resilient breeding.</p><p class="s-zh">普通小麦因物种形成、驯化与选择过程中的瓶颈而遗传多样性偏低；因此野生近缘种是气候韧性育种的关键资源库。</p></div><div class="pair"><p class="s-en" lang="en">Aegilops mutica , one of the few self-incompatible diploids in the Aegilops-Triticum species complex, is a putative parent in the homoploid hybridisation event that formed the D-genome clade and is a proven donor of disease resistance, winter hardiness and grain zinc accumulation.</p><p class="s-zh"><i>Aegilops mutica</i> 是山羊草–小麦复合种中少数自交不亲和的二倍体之一，被认为是形成 D 基因组支系的同倍体杂交事件的假定亲本，且已被证明是抗病性、耐寒性与籽粒锌积累的供体。</p></div><div class="pair"><p class="s-en" lang="en">Ae. mutica is globally endangered, with a reference-quality genome available for only a single Central Anatolian accession.</p><p class="s-zh"><i>Ae. mutica</i> 全球濒危，目前仅有单一中安纳托利亚材料具备参考级基因组。</p></div><div class="pair"><p class="s-en" lang="en">Using HiFi sequencing, we generated genome assemblies from two accessions from opposite extremes of the species&#x27; range: western Türkiye and Armenia.</p><p class="s-zh">我们利用 HiFi 测序，对来自该物种分布范围两端（土耳其西部与亚美尼亚）的两个材料进行了基因组组装。</p></div><div class="pair"><p class="s-en" lang="en">The four haploid assemblies recovered ~93% complete BUSCOs and comprised ~81% repetitive sequence, predominantly LTR retrotransposons (~55%), closely matching the reference.</p><p class="s-zh">四套单倍型组装均恢复约 93% 的完整 BUSCO，重复序列约占 81%（以 LTR 反转座子为主，约 55%），与参考基因组高度一致。</p></div><div class="pair"><p class="s-en" lang="en">Comparison against the reference identified 145,871–155,535 structural variants per haplotype, including an 8.4 Mb inversion on chromosome 6T.</p><p class="s-zh">与参考基因组比较，每个单倍型鉴定出 145,871–155,535 个结构变异，包括 6T 染色体上一个 8.4 Mb 的倒位。</p></div><div class="pair"><p class="s-en" lang="en">Between 96,860 and 105,472 structural variants segregated between haplotypes within individuals and classic domestication loci did not overlap with any large structural variants.</p><p class="s-zh">个体内单倍型间分离的结构变异有 96,860–105,472 个，且经典驯化位点与任何大结构变异均不重叠。</p></div><div class="pair"><p class="s-en" lang="en">These assemblies and structural variant catalogue extend genomic resources for Ae. mutica , providing a basis for targeted introgression into wheat and conservation of a species for which populations in the South Caucasus have severely declined.</p><p class="s-zh">这些组装与结构变异目录扩展了 <i>Ae. mutica</i> 的基因组资源，为向小麦进行定向渐渗以及保护这一南高加索种群已严重衰退的物种提供了基础。</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b>命中 <b>d3（泛基因组）</b> 与 <b>t2（群体水平泛基因组）</b>：小麦野生近缘种 <i>Aegilops mutica</i> 的双材料 HiFi 组装 + 大规模结构变异目录，且该种是<b>已证实的抗病供体</b>，与 d4/t1 相关。对做小麦抗病基因挖掘的人有直接参考价值：<b>野生近缘种的结构变异目录是渐渗育种的定位基础</b>。</div>
+</article>
+<article class="paper ext" data-dir="d4" data-tags="d4" id="E5">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E5</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>Argonaute 15 通过转座子来源的小 RNA 调控马铃薯对丝状病原体的免疫</h3>
+<p class="orig"><span class="zh">英文原题</span>Argonaute 15 regulates immunity of potato to filamentous pathogens through transposon-derived small RNAs</p>
+<p class="src"><span class="journal">预印本</span><time datetime="2026-10-01">2026-10-01</time><a href="https://doi.org/10.64898/2026.09.25.754549">10.64898/2026.09.25.754549</a></p>
+<div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div>
+<p class="authors"><span class="lbl">作者</span>Shailja Singh（第一作者） 等 5 人；通讯作者：<b>Christina Dixelius</b>。<br>主要单位：Swedish University Of Agricultural Sciences;</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Canonical ribonucleases such as Argonaute (AGO) participate in RNA-based gene regulatory processes.</p><p class="s-zh">Argonaute（AGO）等经典核糖核酸酶参与基于 RNA 的基因调控过程。</p></div><div class="pair"><p class="s-en" lang="en">They are important for small RNA (sRNA) association and the formation of RNA-induced RNA silencing complexes.</p><p class="s-zh">它们对小 RNA（sRNA）的结合以及 RNA 诱导的 RNA 沉默复合体的形成至关重要。</p></div><div class="pair"><p class="s-en" lang="en">Potato (Solanum tuberosum) has 14 AGO-encoding genes, including the Solanum-specific StAGO15, which is activated upon infection by filamentous pathogens.</p><p class="s-zh">马铃薯（<i>Solanum tuberosum</i>）有 14 个编码 AGO 的基因，其中包括茄属特异的 StAGO15，该基因在丝状病原体侵染时被激活。</p></div><div class="pair"><p class="s-en" lang="en">The resistant phenotype conferred by ectopic expression of StAGO15 was abolished in plants in which a 21-nt sequence in the PAZ-encoding region of StAGO15 was targeted using an artificial miRNA.</p><p class="s-zh">异位表达 StAGO15 所赋予的抗性表型，在利用人工 miRNA 靶向 StAGO15 中编码 PAZ 结构域的 21-nt 序列的植株中被消除。</p></div><div class="pair"><p class="s-en" lang="en">We then analyzed the sRNAs associated with StAGO15 in Phytophthora infestans leaf infection.</p><p class="s-zh">随后我们分析了马铃薯叶片感染致病疫霉（<i>Phytophthora infestans</i>）时与 StAGO15 结合的 sRNA。</p></div><div class="pair"><p class="s-en" lang="en">Small RNAs were coimmunoprecipitated, subjected to deep sequencing, and analyzed against the P. infestans and potato genomes, in which cleavage sites were predicted by applying the R package, smartPARE.</p><p class="s-zh">对 sRNA 进行共免疫沉淀、深度测序，并分别比对致病疫霉与马铃薯基因组，其中切割位点通过 R 包 smartPARE 预测。</p></div><div class="pair"><p class="s-en" lang="en">The most notable difference between pathogen- and water-inoculated StAGO15 samples was observed in the transposon (TE) category.</p><p class="s-zh">在病原接种与水接种的 StAGO15 样本之间，最显著的差异出现在转座子（TE）类别。</p></div><div class="pair"><p class="s-en" lang="en">Here, two categories of nonautonomous TE dominated: the miniature inverted-repeat transposable elements (MITEs) and short interspersed nuclear elements.</p><p class="s-zh">其中以两类非自主转座子为主：微型反向重复转座元件（MITEs）与短散在核元件。</p></div><div class="pair"><p class="s-en" lang="en">The StAGO15-associated sRNAs bind and target complementary endogenous potato RNAs.</p><p class="s-zh">与 StAGO15 结合的 sRNA 可结合并靶向互补的内源马铃薯 RNA。</p></div><div class="pair"><p class="s-en" lang="en">One example is siRNA122, which acts on a cleavage site in the resistance gene PGSC0003DMG400015681 (StRES1).</p><p class="s-zh">其中一个例子是 siRNA122，它作用于抗病基因 PGSC0003DMG400015681（StRES1）中的一个切割位点。</p></div><div class="pair"><p class="s-en" lang="en">siRNA122 is derived from a MITE; upon deletion of this source sequence, resistance is restored.</p><p class="s-zh">siRNA122 来源于一个 MITE；删除该来源序列后，抗性得以恢复。</p></div><div class="pair"><p class="s-en" lang="en">Our findings provide new insights into the plant immune surveillance networ</p><p class="s-zh">我们的发现为植物免疫监视网络提供了新认识……（摘要原文在此处被 Europe PMC 截断）</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b>命中 <b>d4（作物抗病基因）</b>、<b>d5（植物免疫受体）</b> 与 <b>t6（免疫机制与演化）</b>：马铃薯 StAGO15 通过<b>转座子（MITE）来源的小 RNA 靶向抗病基因 StRES1</b> 调控疫霉抗性，且<b>删除来源序列即可恢复抗性</b>。这是“<b>转座子 → sRNA → 抗病基因</b>”这一新兴调控层次的清晰案例，对 t6/NLR 演化方向有参考价值。注意为预印本，结论待评审。</div>
+</article>
+<article class="paper ext" data-dir="d4" data-tags="d4" id="E6">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E6</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>稻瘟病菌劫持水稻 RALF 肽以启动侵染</h3>
+<p class="orig"><span class="zh">英文原题</span>Rice blast fungus hijacks a rice RALF peptide to initiate infection</p>
+<p class="src"><span class="journal">预印本</span><time datetime="2026-10-01">2026-10-01</time><a href="https://doi.org/10.64898/2026.09.30.754903">10.64898/2026.09.30.754903</a></p>
+<div class="dirchips"><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span></div>
+<p class="authors"><span class="lbl">作者</span>Fumi Fukada（第一作者） 等 21 人；通讯作者：<b>Yoji Kawano</b>。<br>主要单位：Institute of Plant Science and Resources, Okayama University, Okayama 710-0046, Japan;</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Plant-derived peptides regulate immunity and host-microbe interactions, but whether fungal pathogens exploit endogenous plant peptides for infection-site selection remains largely unknown.</p><p class="s-zh">植物来源的肽调控免疫与寄主–微生物互作，但真菌病原是否利用内源植物肽来选择侵染位点此前基本未知。</p></div><div class="pair"><p class="s-en" lang="en">Rapid alkalinization factors (RALFs) are a family of plant peptide hormones that contribute to plant development, reproduction, stress responses, and cell-wall organization.</p><p class="s-zh">快速碱化因子（RALF）是一类植物肽激素家族，参与植物发育、繁殖、胁迫响应与细胞壁组织。</p></div><div class="pair"><p class="s-en" lang="en">Here, we show that OsRALF7, which is an immune-activating peptide in rice ( Oryza sativa ), is co-opted by the rice blast fungus Magnaporthe oryzae as a host-derived cue for appressorium formation, specialized infection structures required for host penetration.</p><p class="s-zh">本文表明，水稻（<i>Oryza sativa</i>）中的免疫激活肽 OsRALF7 被稻瘟病菌（<i>Magnaporthe oryzae</i>）劫持，作为寄主来源的信号来诱导附着胞形成——附着胞是穿透寄主所需的特化侵染结构。</p></div><div class="pair"><p class="s-en" lang="en">While synthetic OsRALF7 peptide induced defense responses in rice suspension cells, the same peptide induced appressorium formation in M. oryzae .</p><p class="s-zh">合成的 OsRALF7 肽在水稻悬浮细胞中诱导防御反应，而同一肽在稻瘟病菌中却诱导附着胞形成。</p></div><div class="pair"><p class="s-en" lang="en">OsRALF7-induced appressorium formation was associated with activation of the cAMP/PKA and Pmk1 MAPK pathways and required a hydrophobic surface.</p><p class="s-zh">OsRALF7 诱导的附着胞形成与 cAMP/PKA 及 Pmk1 MAPK 途径的激活相关，并且需要疏水表面。</p></div><div class="pair"><p class="s-en" lang="en">M. oryzae inoculated onto Osralf7 knockout plants formed fewer appressoria, and the positioning of these appressoria relative to the boundaries between two adjacent plant epidermal cells was altered.</p><p class="s-zh">接种到 <i>Osralf7</i> 敲除植株上的稻瘟病菌形成的附着胞更少，且这些附着胞相对于相邻两个植物表皮细胞边界的定位发生了改变。</p></div><div class="pair"><p class="s-en" lang="en">These findings suggest that OsRALF7 provides positional information for infection initiation for M. oryzae .</p><p class="s-zh">这些发现提示，OsRALF7 为稻瘟病菌提供了启动侵染的位置信息。</p></div><div class="pair"><p class="s-en" lang="en">OsRALF7 localized to the plasma membrane and cell wall in rice, and its appressorium-inducing activity required a conserved YISY motif and cysteine residues.</p><p class="s-zh">OsRALF7 定位于水稻的质膜与细胞壁，其诱导附着胞的活性需要保守的 YISY 基序与半胱氨酸残基。</p></div><div class="pair"><p class="s-en" lang="en">This activity was not conserved in Colletotrichum higginsianum , as RALF23 from Arabidopsis thaliana did not induce </p><p class="s-zh">该活性在希金斯炭疽菌（<i>Colletotrichum higginsianum</i>）中不保守，因为来自拟南芥的 RALF23 未能诱导……（摘要原文在此处被 Europe PMC 截断）</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b>命中 <b>d4（作物抗病基因）</b>、<b>d5（植物免疫受体）</b> 与 <b>t7（Decoy 诱饵蛋白 / 效应子识别）</b>：这是本期<b>与稻瘟病–水稻互作最直接相关</b>的一篇。核心概念很有意思——<b>植物自身的免疫激活肽被病原“反向利用”作为侵染定位信号</b>，属于“植物肽被劫持（co-opt）”这一新机制。对做稻瘟病抗性与效应子识别的人优先级高。</div>
+</article>
+<article class="paper ext" data-dir="d2" data-tags="d2" id="E7">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E7</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>Trade-Off Evaluator：解析两个性状之间权衡关系的遗传结构</h3>
+<p class="orig"><span class="zh">英文原题</span>Trade-Off Evaluator enables dissecting the genetic architecture of trade-offs between two traits</p>
+<p class="src"><span class="journal">Research Square</span><time datetime="2026-10-01">2026-10-01</time><a href="https://doi.org/10.21203/rs.3.rs-10999364/v1">10.21203/rs.3.rs-10999364/v1</a></p>
+<div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span></div>
+<p class="authors"><span class="lbl">作者</span>Shang Liu（第一作者） 等 5 人；通讯作者：<b>Roosa A. E. Laitinen、Zoran Nikoloski</b>。<br>主要单位：University of Potsdam</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Biological trade-offs between quantitative traits are pervasive in plants.</p><p class="s-zh">数量性状之间的生物学权衡在植物中普遍存在。</p></div><div class="pair"><p class="s-en" lang="en">Yet, there is no framework to dissect their genetic basis due to the lack of measures to quantify trade-offs in individuals.</p><p class="s-zh">然而，由于缺乏在个体水平量化权衡的度量方法，尚无框架可解析其遗传基础。</p></div><div class="pair"><p class="s-en" lang="en">Here, we developed the Trade-Off Evaluator, a framework based on Pareto Frontier that quantifies trade-off between two traits at the level of an individual.</p><p class="s-zh">本文开发了 Trade-Off Evaluator——一个基于帕累托前沿（Pareto Frontier）的框架，可在个体水平量化两个性状之间的权衡。</p></div><div class="pair"><p class="s-en" lang="en">To validate the Trade-Off Evaluator, we employed the established fresh weight–protein content trade-off in 326 Arabidopsis thaliana accessions.</p><p class="s-zh">为验证该工具，我们在 326 份拟南芥（<i>Arabidopsis thaliana</i>）材料中采用了已确立的鲜重–蛋白含量权衡关系。</p></div><div class="pair"><p class="s-en" lang="en">Using cross-validation GWAS with the fresh weight-protein content trade-off scores, resulting from the Trade-Off Evaluator, we identified a locus harboring a cluster of seven membrane bound O-acyl transferase ( MBOAT ) encoding genes.</p><p class="s-zh">利用基于 Trade-Off Evaluator 得到的鲜重–蛋白含量权衡评分做交叉验证 GWAS，我们鉴定出一个含 7 个膜结合 O-酰基转移酶（MBOAT）编码基因簇的位点。</p></div><div class="pair"><p class="s-en" lang="en">We demonstrated that only the disruption of MBOAT4 (AT5G55350) showed higher fresh weight compared to the wild type at no penalty to protein content, thus, breaking the fresh weight-protein content trade-off.</p><p class="s-zh">我们证明，仅 <i>MBOAT4</i>（AT5G55350）的破坏在蛋白含量不受影响的前提下使鲜重高于野生型，从而打破了鲜重–蛋白含量的权衡。</p></div><div class="pair"><p class="s-en" lang="en">Furthermore, genomic prediction with the trade-off score demonstrated that the ability to decouple traits in trade-offs can be predicted from genetic markers.</p><p class="s-zh">此外，用权衡评分进行基因组预测表明，解耦权衡中两个性状的能力可由遗传标记预测。</p></div><div class="pair"><p class="s-en" lang="en">Collectively, the Trade-off Evaluator provides a framework for trade-off quantification that enables genetic dissection, with implications to multi-trait crop improvement.</p><p class="s-zh">总体而言，Trade-Off Evaluator 提供了一个可用于遗传解析的权衡量化框架，对多性状作物改良具有启示意义。</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b><b>通讯作者更正</b>：Research Square 封面作者顺序与预印本正文不一致，最初按末位作者推断为 Mikael Brosché 有误——正文明确标注通讯作者为 <b>Roosa A. E. Laitinen</b>（赫尔辛基大学）与 <b>Zoran Nikoloski</b>（波茨坦大学）。命中 <b>d2（GWAS/关联分析）</b> 与 <b>t3（大规模 GWAS）</b>。虽然研究对象是拟南芥鲜重–蛋白含量，但方法学与你的方向高度相关：<b>它把「权衡」本身变成可做 GWAS 的定量表型</b>。鉴于抗病与产量/生长的权衡（d4 方向的经典难题）长期难以定位，这套 <b>Pareto 前沿评分 + GWAS</b> 的思路值得直接借鉴到“抗病–产量权衡”的遗传解析上。</div>
+</article>
+<article class="paper ext" data-dir="d2" data-tags="d2 t3" id="E8">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E8</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>动态 RGB-深度表型与关联作图揭示大豆株高在对比光环境下的候选位点</h3>
+<p class="orig"><span class="zh">英文原题</span>Dynamic RGB-depth phenotyping and association mapping reveal candidate loci for soybean plant height variation under contrasting light environments</p>
+<p class="src"><span class="journal">Research Square</span><time datetime="2026-10-01">2026-10-01</time><a href="https://doi.org/10.21203/rs.3.rs-10610097/v1">10.21203/rs.3.rs-10610097/v1</a></p>
+<div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span><span class="chip" data-c="t3"><span class="chip-dot"></span>t3 · 大规模 GWAS 分析</span></div>
+<p class="authors"><span class="lbl">作者</span>Yihan Zhang（第一作者） 等 14 人；通讯作者：<b>Feng Yang</b>。<br>主要单位：Sichuan Agricultural University</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Plant height is a key agronomic trait in soybean and is strongly influenced by light availability.</p><p class="s-zh">株高是大豆的关键农艺性状，受光照可获得性的强烈影响。</p></div><div class="pair"><p class="s-en" lang="en">Accurate and scalable phenotyping under contrasting light environments remains a major constraint for dissecting plant-height variation and supporting downstream genetic analysis.</p><p class="s-zh">在对比光环境下进行准确且可扩展的表型测定，仍是解析株高变异并支撑下游遗传分析的主要制约。</p></div><div class="pair"><p class="s-en" lang="en">Here, we evaluated 112 soybean accessions under normal-light (CK) and low-light (SL) conditions using a rail-based high-throughput phenotyping platform that integrated red-green-blue (RGB) imaging and depth sensing.</p><p class="s-zh">本文利用一套整合了 RGB 成像与深度传感的轨道式高通量表型平台，在正常光（CK）与弱光（SL）条件下评估了 112 份大豆材料。</p></div><div class="pair"><p class="s-en" lang="en">A grayscale calibration and correction-coefficient strategy was developed to estimate plant height across light environments.</p><p class="s-zh">我们开发了一套灰度校准与校正系数策略，用于跨光环境估算株高。</p></div><div class="pair"><p class="s-en" lang="en">Dynamic validation from 5 to 25 days after sowing (DAS) showed that RGB-depth-derived plant height agreed most strongly with manual measurements during DAS15-DAS20, with the highest accuracy at DAS20.</p><p class="s-zh">播种后 5 至 25 天（DAS）的动态验证显示，RGB-深度估算的株高在 DAS15–DAS20 期间与人工测量最为一致，DAS20 时精度最高。</p></div><div class="pair"><p class="s-en" lang="en">DAS20 plant height was therefore used for genome-wide association study (GWAS) with 77,968 high-quality single-nucleotide polymorphism markers.</p><p class="s-zh">因此采用 DAS20 的株高，结合 77,968 个高质量单核苷酸多态性标记进行全基因组关联分析（GWAS）。</p></div><div class="pair"><p class="s-en" lang="en">Association mapping prioritized environment-associated loci on chromosomes 13 and 11 under CK and SL conditions, respectively, and a stable locus on chromosome 19 that was repeatedly detected across phenotyping approaches and light environments.</p><p class="s-zh">关联作图分别在 CK 与 SL 条件下优先锁定 13 号与 11 号染色体上与环境相关的位点，以及在多种表型方法与光环境下反复检出的 19 号染色体稳定位点。</p></div><div class="pair"><p class="s-en" lang="en">Three plausible candidate genes, GmPM1, GmHDG2 and GmTGA4, showed expression patterns consistent with the corresponding association signals and plant-height variation.</p><p class="s-zh">三个可能的候选基因 GmPM1、GmHDG2 与 GmTGA4 的表达模式与相应关联信号及株高变异一致。</p></div><div class="pair"><p class="s-en" lang="en">Conclusions Dynamic RGB-depth phenotyping improved the reliability of soybean plant-height a</p><p class="s-zh">结论：动态 RGB-深度表型提升了大豆株高……的可靠性（摘要原文在此处被 Europe PMC 截断）</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b><b>相关性提示（较弱）</b>：本篇是大豆株高（非抗病性状）的 GWAS，命中 d2/t3 仅因方法学。列出可供借鉴的是<b>「轨道式高通量表型平台 + 光环境校正」如何为 GWAS 提供可靠表型</b>——若你要做抗病性状的高通量表型（如病斑面积自动量化），这套 RGB+深度 + 校正系数的思路有参考价值。<b>与抗病基因本身无关，优先级低</b>。</div>
+</article>
+<article class="paper ext" data-dir="d2" data-tags="d2" id="E9">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E9</span><span class="paper-kind">C 层 · 预印本（未同行评审）</span></div>
+<h3>全基因组关联作图鉴定大麦初级基因库农艺性状的候选位点与基因</h3>
+<p class="orig"><span class="zh">英文原题</span>Genome-Wide Association Mapping Identifies Candidate Loci and Genes for Agronomic Traits in the Barley Primary Gene Pool</p>
+<p class="src"><span class="journal">Research Square</span><time datetime="2026-09-30">2026-09-30</time><a href="https://doi.org/10.21203/rs.3.rs-10932480/v1">10.21203/rs.3.rs-10932480/v1</a></p>
+<div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span></div>
+<p class="authors"><span class="lbl">作者</span>Pilmo Sung（第一作者） 等 9 人；通讯作者：<b>Nayoung Ro</b>。<br>主要单位：National Institute of Agricultural Sciences, Rural Development Administration</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">The barley primary gene pool, comprising cultivated barley ( Hordeum vulgare subsp. vulgare ) and its wild progenitor ( H. vulgare subsp. spontaneum ), represents an important source of genetic diversity for improving agronomic performance.</p><p class="s-zh">大麦初级基因库由栽培大麦（<i>Hordeum vulgare</i> subsp. <i>vulgare</i>）及其野生祖先（<i>H. vulgare</i> subsp. <i>spontaneum</i>）组成，是改良农艺表现的重要遗传多样性来源。</p></div><div class="pair"><p class="s-en" lang="en">However, the genetic architecture of complex agronomic traits across this diverse gene pool remains incompletely understood.</p><p class="s-zh">然而，这一多样化基因库中复杂农艺性状的遗传结构仍不完全清楚。</p></div><div class="pair"><p class="s-en" lang="en">In this study, we investigated 137 cultivated and wild barley accessions genotyped with 19,162 high-quality single nucleotide polymorphisms (SNPs) generated by genotyping-by-sequencing (GBS).</p><p class="s-zh">本研究考察了 137 份栽培与野生大麦材料，采用测序分型（GBS）产生的 19,162 个高质量单核苷酸多态性（SNP）进行基因分型。</p></div><div class="pair"><p class="s-en" lang="en">Genome-wide association study (GWAS) analyses were performed using six complementary GWAS models, and significant associations were subsequently evaluated through linkage disequilibrium (LD) block characterization, haplotype analyses, and candidate gene annotation to prioritize robust genomic regions.</p><p class="s-zh">使用六种互补的 GWAS 模型进行分析，随后通过连锁不平衡（LD）区块刻画、单倍型分析与候选基因注释评估显著关联，以优先锁定稳健的基因组区段。</p></div><div class="pair"><p class="s-en" lang="en">A total of 11 significant SNPs associated with four agronomically important traits—days to heading, days to maturity, spike length, and number of triple spikelets—were consistently supported across complementary analytical approaches.</p><p class="s-zh">共有 11 个与四个重要农艺性状（抽穗期、成熟期、穗长与三联小穗数）相关的显著 SNP 在多种互补分析方法中获得一致支持。</p></div><div class="pair"><p class="s-en" lang="en">Haplotype analyses confirmed significant phenotypic differences among LD-supported genomic regions, strengthening confidence in the prioritized loci.</p><p class="s-zh">单倍型分析确认了 LD 支持区段之间存在显著表型差异，增强了对优先位点的信心。</p></div><div class="pair"><p class="s-en" lang="en">Candidate gene analysis identified biologically plausible genes involved in developmental regulation and spike architecture, including members of the SCF ubiquitin ligase complex and an AP2/ERF domain-containing transcription factor.</p><p class="s-zh">候选基因分析鉴定出在发育调控与穗结构方面具有生物学合理性的基因，包括 SCF 泛素连接酶复合体成员与一个含 AP2/ERF 结构域的转录因子。</p></div><div class="pair"><p class="s-en" lang="en">By integrat</p><p class="s-zh">通过整合……（摘要原文在此处被 Europe PMC 截断）</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b><b>相关性提示（较弱）</b>：本篇是大麦农艺性状（抽穗期、穗长等，非抗病）GWAS，用 137 份初级基因库材料 + GBS 标记。列出可供借鉴的是其<b>「六种互补 GWAS 模型 + LD 区块 + 单倍型验证」的稳健性筛选流程</b>——把“多模型一致性”作为可信度标准，是降低 GWAS 假阳性的实用做法。<b>与抗病基因无关，优先级低</b>。</div>
+</article>
+</section>
+<section class="section" id="method">
+<div class="section-head"><span class="sh-k">09</span><h2>检索与核实说明</h2><span class="sh-count">口径 · 方法 · 局限</span></div>
+<div class="methodblock"><h3>1 · 时间窗口与「当天发表」的实际含义</h3><p>出刊日为 <b>2026-10-04</b>（Asia/Shanghai）。你的需求是检索「当天发表」的论文，但实测：<b>出刊日前 24 小时内，A/B/C 三层来源中没有任何一篇的实际首发日等于出刊日</b>。</p><p><b>原因</b>：Europe PMC 对最近 1–4 天的文献收录不完整，新论文从上线到入库通常滞后数天。这与工作区《论文周报/配置.md》第 5 节记录的实测经验一致。</p><p><b>本简报口径</b>：回看窗口设为 <b>5 天</b>（2026-10-03 → 2026-10-04），取该窗口内全部可索引到的、落在 12 个方向上的文献；<b>每篇均标注真实首发日</b>（卡片与速览表内），供你自行判断新鲜度。因此本日篇数是<b>下界而非全量</b>，且必然与次日/次轮出刊存在窗口重叠。</p></div>
+<div class="methodblock"><h3>2 · 来源分层（A / B / C）</h3><p><b>A 层（顶刊白名单，3 篇）</b>：Nature、Science、Cell、Nature Genetics、Nature Plants、Nature Communications、Science Advances、Molecular Plant、Nature Methods、Cell Host &amp;amp; Microbe。</p><p><b>B 层（专业期刊，13 篇）</b>：The Plant Cell、Plant Journal、Journal of Experimental Botany、New Phytologist、Plant Biotechnology Journal、Theoretical and Applied Genetics、Genome Biology、Horticulture Research、Plant Physiology、Plant Communications、Molecular Plant Pathology、Plant Cell Reports、Plant Science 等。</p><p><b>C 层（预印本，9 条）</b>：bioRxiv、Research Square、Preprints.org。<b>未经同行评审</b>，单独放入「延伸阅读」，不与主榜同等看待。</p><p>分层依据为期刊名映射——Europe PMC 返回的是缩写刊名（如 <code>Mol Plant</code>），必须先归一化再判定层级，映射表见 <code>fetch_daily.py</code> 的 <code>JOURNAL_MAP</code>。</p></div>
+<div class="methodblock"><h3>3 · 检索通道与可复现流程</h3><p><b>主通道</b>：Europe PMC REST API（<code>resultType=core</code> 取摘要原文）。按「期刊白名单 × 植物词 × 日期」与「方向检索式 × 期刊 × 日期」两轮交叉检索，再对预印本单独检索（<code>SRC:&amp;quot;PPR&amp;quot;</code>）。</p><p><b>作者与通讯作者</b>：Europe PMC 的 <code>authorList</code> <b>不提供通讯作者字段</b>，且对本批论文的 affiliation 为空；Crossref 的 <code>sequence</code> 也只区分 first/additional，<b>不是</b>通讯标记。因此通讯作者改用 <b>NCBI PubMed XML</b> 中 <code>Electronic address: &amp;lt;email&amp;gt;</code> 这一<b>出版商官方标记</b>判定；无该标记者回退「末位作者」惯例并明确标注为<b>推断</b>。姓名与单位另由 Crossref 补齐。</p><p><b>可复现流程</b>：<code>fetch_daily.py</code>（检索）→ <code>classify.py</code>（方向分类，含 13 例回归测试）→ <code>fetch_authors.py</code> + <code>fetch_corresponding.py</code>（作者）→ <code>merge_authors.py</code> → <code>assemble.py</code> → <code>build_report.py</code>（生成 HTML）→ <code>selfcheck.py</code>（自检）。</p></div>
+<div class="methodblock"><h3>4 · 已知局限与未核实项</h3><ul><li><b>索引延迟</b>：最近 1–4 天收录不完整，本日篇数为<b>下界</b>。</li><li><b>方向分类为关键词规则</b>（<code>classify.py</code>），已用 13 个真实样本做回归测试，并设置多层语境门（d1 须有基因层语境、d4 须有病害专有词或分子免疫证据、d5 须有免疫语境）以压制误标；但仍可能有漏标或误标，卡片内附「证据词」字段，便于复核判断依据。</li><li><b>通讯作者</b>：标 <b>通讯作者</b> 者依据 PubMed 官方 <code>Electronic address</code> 标记或期刊全文 <code>corresp</code> 字段；标<b>（推断）</b>者仅据末位作者惯例，<b>未经官方确认</b>。Wiley 系期刊部分文章网页被 Cloudflare 拦截，无法二次核对是否另有共同通讯。</li><li><b>作者「主要研究方向」</b>：仅在有明确公开来源时填写，并标注 confidence（confirmed / inferred / unconfirmed）；标 <b>unconfirmed</b> 者写明「未查到可靠公开信息」。<b>未展示任何年龄信息</b>（无可靠公开来源，且按你的要求省略）。</li><li><b>IF 值</b>为<b>整数近似值</b>，仅用于快速分层，不构成精确引用依据。</li><li><b>摘要</b>：英文为 Europe PMC <code>abstractText</code> <b>逐字原文</b>；若原文在数据库中截断（本次有数篇预印本出现），卡片内已明确标注截断位置，<b>不补写、不推测</b>缺失内容。</li></ul></div>
+</section>
+</main></div>
+<script>
+
+(function(){
+  "use strict";
+  var papers   = Array.prototype.slice.call(document.querySelectorAll('.paper'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section[id]'));
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('#tocList a'));
+  var segs     = Array.prototype.slice.call(document.querySelectorAll('.seg'));
+  var fbtns    = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var state    = document.querySelector('#filterState');
+  var empty    = document.querySelector('#emptyState');
+
+  var LABEL = {
+    all:'全部方向',
+    d1:'核心 · 抗病基因定位与克隆', d2:'核心 · GWAS 与关联分析', d3:'核心 · 泛基因组',
+    d4:'核心 · 水稻与作物抗病基因', d5:'核心 · NLR 与免疫受体',
+    t1:'专项 · 作物抗病基因克隆与挖掘', t2:'专项 · 群体水平泛基因组', t3:'专项 · 大规模 GWAS 分析',
+    t4:'专项 · AI / 大语言模型应用', t5:'专项 · AF3 结构预测与蛋白设计',
+    t6:'专项 · 免疫机制与 NLR-ID 演化', t7:'专项 · 免疫 Decoy 诱饵蛋白'
+  };
+
+  function matches(p, dir){
+    if (dir === 'all') return true;
+    if (p.dataset.dir === dir) return true;
+    return (p.dataset.tags || '').split(/\s+/).indexOf(dir) !== -1;
+  }
+
+  function applyFilter(dir){
+    papers.forEach(function(p){
+      p.classList.toggle('is-hidden', !matches(p, dir));
+    });
+    fbtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.filter === dir)); });
+    segs.forEach(function(s){ s.setAttribute('aria-pressed', String(s.dataset.dir === dir)); });
+    if (state) state.textContent = LABEL[dir] || LABEL.all;
+
+    var shown = papers.filter(function(p){ return !p.classList.contains('is-hidden'); }).length;
+    if (empty) empty.classList.toggle('is-on', shown === 0);
+
+    sections.forEach(function(sec){
+      var body = sec.querySelectorAll('.paper');
+      if (!body.length) return;
+      var visible = Array.prototype.filter.call(body, function(p){
+        return !p.classList.contains('is-hidden');
+      }).length;
+      sec.style.display = (dir !== 'all' && visible === 0) ? 'none' : '';
+    });
+  }
+
+  fbtns.forEach(function(b){
+    b.addEventListener('click', function(){ applyFilter(b.dataset.filter); });
+  });
+  segs.forEach(function(s){
+    s.addEventListener('click', function(){
+      var next = s.getAttribute('aria-pressed') === 'true' ? 'all' : s.dataset.dir;
+      applyFilter(next);
+    });
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setActive(id){
+    tocLinks.forEach(function(a){
+      a.classList.toggle('is-active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if ('IntersectionObserver' in window){
+    var seen = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ seen[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var best = null, bestRatio = 0;
+      Object.keys(seen).forEach(function(k){
+        if (seen[k] > bestRatio){ bestRatio = seen[k]; best = k; }
+      });
+      if (best) setActive(best);
+    }, { rootMargin:'-15% 0px -60% 0px', threshold:[0, .12, .3, .6] });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  tocLinks.forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var el = document.querySelector(a.getAttribute('href'));
+      if (!el) return;
+      ev.preventDefault();
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+      setActive(a.getAttribute('href').slice(1));
+    });
+  });
+})();
+
+</script>
+</body></html>
