@@ -863,6 +863,31 @@ pre .cm{color:#9c968a}
   .morebox>div{display:block!important}
 }
 
+/* ---------- 主题聚合模式：主题综述章节 ---------- */
+.theme-intro{
+  margin:14px 0 20px;padding:16px 20px;
+  background:var(--paper-2);border-left:3px solid var(--accent);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;line-height:1.9;
+}
+.theme-intro p{margin:0 0 10px}
+.theme-intro p:last-child{margin:0}
+.theme-h3{
+  margin:28px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line);
+  font-size:16px;font-weight:700;color:var(--ink);letter-spacing:.01em;
+}
+#theme p{margin:10px 0;line-height:1.9}
+#theme ul,#theme ol{margin:10px 0 16px;padding-left:24px;line-height:1.9}
+#theme li{margin:7px 0}
+#theme blockquote{
+  margin:14px 0;padding:10px 16px;border-left:3px solid var(--line-2);
+  background:var(--paper-2);color:var(--ink-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+#theme table{margin:14px 0}
+@media print{
+  #theme{break-inside:auto}
+  .theme-h3{break-after:avoid}
+}
+
 </style>
 </head>
 <body>
