@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主题文献综述 · 2026-11-05（NLR 结构与抗病小体）</title>
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  /* Claude-style warm neutral palette */
+  --ink:#1f1e1d;
+  --ink-2:#4a4741;
+  --ink-3:#78746c;
+  --paper:#faf9f5;
+  --paper-2:#f0eee6;
+  --panel:#ffffff;
+  --line:#e5e2d9;
+  --line-2:#efede5;
+  --signal:#c15f3c;        /* clay — links & structure */
+  --signal-soft:#faece5;
+  --accent:#d97757;        /* Claude orange — small marks only */
+
+  /* direction hues, desaturated to sit in the warm register */
+  --d1:#7c63a6;   /* 定位与克隆 */
+  --d2:#3e6b9e;   /* GWAS */
+  --d3:#a67c2e;   /* 泛基因组 */
+  --d4:#4a7c59;   /* 作物抗病 */
+  --d5:#a8556e;   /* NLR 与免疫受体 */
+
+  --warn:#8a6420;
+  --warn-bg:#fbf3e4;
+
+  --radius:14px;
+  --radius-sm:9px;
+  --maxw:1140px;
+  --shadow:0 1px 2px rgba(31,30,29,.04), 0 6px 20px rgba(31,30,29,.035);
+
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Source Han Sans SC","Segoe UI","Microsoft YaHei",sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,"Songti SC","Source Han Serif SC","Noto Serif CJK SC",serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,"JetBrains Mono",Consolas,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16.5px;
+  line-height:1.75;
+  letter-spacing:.004em;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:var(--signal);text-decoration:none;border-bottom:1px solid rgba(193,95,60,.3)}
+a:hover{border-bottom-color:var(--signal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;
+  padding:10px 16px;z-index:99;border:0
+}
+.skip:focus{left:12px;top:12px}
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+.masthead{
+  background:var(--paper);
+  color:var(--ink);
+  border-bottom:1px solid var(--line);
+}
+.masthead .inner{max-width:var(--maxw);margin:0 auto;padding:66px 28px 38px}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin:0 0 20px;
+}
+
+.masthead h1{
+  font-family:var(--serif);
+  font-weight:400;
+  /* one line at every width: 13 CJK glyphs must fit the container */
+  font-size:clamp(20px,4.2vw,46px);
+  line-height:1.18;
+  letter-spacing:-.014em;
+  margin:0 0 12px;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.masthead h1 em{
+  font-style:normal;
+  color:var(--accent);
+}
+
+.masthead .lede{
+  margin:20px 0 0;
+  max-width:60ch;
+  color:var(--ink-2);
+  font-size:16px;
+  line-height:1.68;
+}
+
+.meta{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin:36px 0 0;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+}
+.meta>div{background:var(--panel);padding:15px 17px}
+.meta dt{
+  font-family:var(--mono);
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 6px;
+}
+.meta dd{margin:0;font-size:14px;color:var(--ink)}
+
+/* ============================================================
+   HERO — the supply strip (signature)
+   ============================================================ */
+.hero{
+  background:var(--paper-2);
+  border-bottom:1px solid var(--line);
+}
+.hero .inner{max-width:var(--maxw);margin:0 auto;padding:54px 28px 48px}
+
+.hero h2{
+  font-family:var(--serif);
+  font-size:clamp(23px,3.2vw,34px);
+  font-weight:400;
+  line-height:1.28;
+  margin:0 0 16px;
+  max-width:32ch;
+  letter-spacing:-.008em;
+}
+.hero h2 b{color:var(--accent);font-weight:500}
+
+.hero .hero-lede{
+  margin:0 0 30px;
+  max-width:66ch;
+  color:var(--ink-2);
+  font-size:15.5px;
+}
+.hero .hero-lede b{color:var(--ink);font-weight:600}
+
+/* supply strip */
+.strip{
+  display:flex;
+  height:88px;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--panel);
+}
+.seg{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 16px;
+  cursor:pointer;
+  border:0;
+  font:inherit;
+  color:#fff;
+  text-align:left;
+  transition:filter .18s ease;
+  min-width:0;
+}
+.seg:hover{filter:brightness(1.1)}
+.seg[aria-pressed="true"]{box-shadow:inset 0 0 0 2px rgba(255,255,255,.8)}
+.seg .sg-n{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1}
+.seg .sg-l{
+  font-size:11.5px;letter-spacing:.02em;margin-top:7px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.95;
+}
+.seg.zero{background:var(--paper-2)!important;color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--line)}
+.seg.zero .sg-n{color:var(--ink-3)}
+.seg[data-dir="d1"]{background:var(--d1)}
+.seg[data-dir="d2"]{background:var(--d2)}
+.seg[data-dir="d3"]{background:var(--d3)}
+.seg[data-dir="d4"]{background:var(--d4)}
+.seg[data-dir="d5"]{background:var(--d5)}
+
+.strip-note{
+  margin:14px 0 0;
+  font-size:13.5px;
+  color:var(--ink-3);
+}
+.strip-note code{
+  font-family:var(--mono);font-size:12.5px;
+  background:var(--paper);border:1px solid var(--line);
+  padding:1px 6px;border-radius:4px;color:var(--ink-2);
+}
+
+/* ============================================================
+   SHELL / TOC
+   ============================================================ */
+.shell{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:48px 28px 90px;
+  display:grid;
+  grid-template-columns:212px minmax(0,1fr);
+  gap:52px;
+  align-items:start;
+}
+
+.toc{position:sticky;top:26px;font-size:13.5px;max-height:calc(100vh - 52px);overflow-y:auto;padding-right:4px}
+.toc h2{
+  font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 14px;font-weight:500;
+}
+.toc ol{list-style:none;margin:0 0 26px;padding:0;counter-reset:t}
+.toc li{margin:0 0 2px}
+.toc a{
+  display:block;padding:6px 11px;border-radius:8px;
+  border:0;
+  color:var(--ink-2);line-height:1.42;
+  transition:background .15s ease,color .15s ease;
+}
+.toc a:hover{background:var(--paper-2);color:var(--ink)}
+.toc a.is-active{
+  background:var(--paper-2);color:var(--ink);font-weight:600;
+}
+.toc .toc-n{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+
+.filter h2{
+  font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 12px;font-weight:500;
+}
+.filter-btns{display:flex;flex-direction:column;gap:5px}
+.fbtn{
+  font-family:var(--sans);font-size:12.5px;text-align:left;width:100%;
+  padding:8px 12px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink-2);
+  transition:all .15s ease;
+}
+.fbtn:hover{border-color:#cfcabd;color:var(--ink)}
+.fbtn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+@media (max-width:940px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:34px;padding-top:34px}
+  .toc{position:static;max-height:none;overflow:visible}
+  .toc ol{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:20px}
+  .toc li{margin:0}
+  .toc a{padding:5px 10px;border:1px solid var(--line);background:var(--panel)}
+  .toc a.is-active{border-color:var(--signal)}
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{margin:0 0 62px;scroll-margin-top:24px}
+.section-head{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:14px;margin-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.section-head .sh-k{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  color:var(--ink-2);background:var(--paper-2);
+  border:1px solid var(--line);
+  padding:4px 11px;border-radius:20px;
+  align-self:center;flex:none;
+}
+.section-head .sh-k::before{
+  content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  margin-right:8px;background:var(--ink-3);
+}
+.section-head h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(21px,2.5vw,28px);line-height:1.25;margin:0;
+  letter-spacing:-.008em;
+}
+.section-head .sh-count{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  margin-left:auto;flex:none;
+}
+.section[data-dir="d1"] .sh-k::before{background:var(--d1)}
+.section[data-dir="d2"] .sh-k::before{background:var(--d2)}
+.section[data-dir="d3"] .sh-k::before{background:var(--d3)}
+.section[data-dir="d4"] .sh-k::before{background:var(--d4)}
+.section[data-dir="d5"] .sh-k::before{background:var(--d5)}
+
+.section-note{
+  font-size:14px;color:var(--ink-2);
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 18px;margin:0 0 26px;
+}
+
+h3.sub{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  margin:36px 0 14px;letter-spacing:-.005em;
+}
+h3.sub:first-child{margin-top:0}
+
+p{margin:0 0 13px}
+p:last-child{margin-bottom:0}
+
+/* ============================================================
+   OVERVIEW
+   ============================================================ */
+.takeaways{list-style:none;margin:0 0 34px;padding:0;counter-reset:tk}
+.takeaways li{
+  position:relative;
+  padding:0 0 0 40px;
+  margin:0 0 20px;
+  color:var(--ink-2);
+}
+.takeaways li::before{
+  counter-increment:tk;content:counter(tk,decimal-leading-zero);
+  position:absolute;left:0;top:4px;
+  font-family:var(--serif);font-size:15px;
+  color:var(--accent);
+}
+.takeaways li b{color:var(--ink);font-weight:600}
+
+/* scan table */
+.table-wrap{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--panel);
+  box-shadow:var(--shadow);
+}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:660px}
+caption{
+  text-align:left;padding:16px 18px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-2)}
+thead th{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+  border-bottom:1px solid var(--line);
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#f8f7f1}
+td.num{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+td.dircell{white-space:nowrap}
+.dirdot{
+  display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:7px;vertical-align:1px;
+  background:var(--ink-3);          /* default: 专项标签用中性点 */
+}
+.filter-btns+.fgroup{margin-top:14px}
+.fgroup{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 8px;
+}
+.coverage{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 24px;margin:0 0 30px;
+}
+.cov-title{font-family:var(--serif);font-size:18px;font-weight:400;margin:0 0 7px}
+.cov-note{font-size:13.3px;color:var(--ink-3);line-height:1.62;margin:0 0 16px}
+.cov-group{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:16px 0 2px;
+}
+.cov-group:first-of-type{margin-top:0}
+.cov-row{
+  display:grid;grid-template-columns:12px minmax(0,1fr) 34px auto;
+  align-items:baseline;gap:10px;padding:7px 0;
+  border-bottom:1px solid var(--line-2);
+}
+.cov-row:last-child{border-bottom:0}
+.cov-dir{font-size:13.7px;color:var(--ink-2);line-height:1.45}
+.cov-n{font-family:var(--mono);font-size:12.5px;color:var(--ink);text-align:right}
+.cov-refs{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.cov-row.zero .cov-dir,.cov-row.zero .cov-refs{color:var(--ink-3)}
+.cov-row.zero .cov-n{color:var(--warn)}
+.cov-row.zero .dirdot{background:var(--line)}
+[data-dir="d1"] .dirdot,[data-dir="d1"].dirdot{background:var(--d1)}
+[data-dir="d2"] .dirdot,[data-dir="d2"].dirdot{background:var(--d2)}
+[data-dir="d3"] .dirdot,[data-dir="d3"].dirdot{background:var(--d3)}
+[data-dir="d4"] .dirdot,[data-dir="d4"].dirdot{background:var(--d4)}
+[data-dir="d5"] .dirdot,[data-dir="d5"].dirdot{background:var(--d5)}
+
+/* ============================================================
+   PAPER CARD
+   ============================================================ */
+.paper{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  margin:0 0 24px;
+  overflow:hidden;
+  scroll-margin-top:22px;
+}
+.paper.is-hidden{display:none}
+
+.paper-head{padding:24px 26px 20px;border-bottom:1px solid var(--line-2)}
+.paper-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.paper-idx{
+  font-family:var(--serif);font-size:15px;
+  color:var(--ink-2);background:var(--paper-2);
+  border:1px solid var(--line);
+  width:34px;height:34px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+}
+
+.paper-kind{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--ink-3);text-transform:uppercase;
+}
+
+.paper-head h3{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(19px,2.4vw,23px);line-height:1.38;
+  margin:0 0 8px;letter-spacing:-.006em;
+}
+.paper .orig{
+  font-family:var(--serif);
+  font-size:15.5px;color:var(--ink-2);line-height:1.58;
+  margin:0 0 14px;font-style:italic;
+}
+.paper .orig .zh{
+  display:inline-block;font-style:normal;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);background:var(--paper-2);
+  border:1px solid var(--line);border-radius:6px;
+  padding:3px 9px;margin-right:10px;vertical-align:2px;
+}
+
+.src{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink-2);
+  margin:0 0 10px;
+}
+.src .journal{font-weight:600;color:var(--ink)}
+.src .sep{color:var(--line);}
+.src time{color:var(--ink-2)}
+
+.badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  padding:3px 10px;border-radius:20px;
+  border:1px solid var(--line);background:var(--paper-2);color:var(--ink-2);
+}
+.badge.ok{border-color:rgba(74,124,89,.32);background:#eef3ef;color:#3d6849}
+.badge.alt{border-color:rgba(166,124,46,.3);background:#faf4e8;color:#7d5c1f}
+.badge.na{border-color:rgba(138,100,32,.32);background:var(--warn-bg);color:var(--warn)}
+
+.authors{
+  font-size:13.5px;color:var(--ink-3);line-height:1.6;margin:12px 0 0;
+  padding-top:12px;border-top:1px dashed var(--line);
+}
+.authors b{color:var(--ink-2);font-weight:600}
+.authors .lbl{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+
+/* author profiles — first author + corresponding authors (unit + research focus) */
+.bios{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;
+  padding:20px 26px;border-bottom:1px solid var(--line-2);
+}
+.bio{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:15px 17px;
+}
+.bio-role{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 8px;
+}
+.bio-name{
+  font-family:var(--serif);font-size:16px;font-weight:400;
+  color:var(--ink);margin:0 0 6px;line-height:1.35;
+}
+.bio-unit{
+  font-size:12.6px;color:var(--ink-3);line-height:1.55;
+  margin:0 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line);
+}
+.bio-dir{font-size:13.9px;color:var(--ink-2);line-height:1.68;margin:0}
+.bio-dir span{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:4px;
+}
+
+/* abstract — sentence-by-sentence bilingual pairs (EN line above, ZH line below) */
+.abstract{
+  background:var(--paper-2);
+  padding:20px 26px 22px;
+}
+.abs-head{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 15px;
+}
+.pair{padding:13px 0;border-top:1px dashed var(--line)}
+.pair:first-of-type{border-top:0;padding-top:0}
+.pair:last-of-type{padding-bottom:0}
+.s-en{
+  font-family:var(--serif);
+  font-size:14.4px;line-height:1.7;
+  color:var(--ink-3);margin:0 0 6px;letter-spacing:.002em;
+}
+.s-zh{
+  font-size:15px;line-height:1.8;
+  color:var(--ink);margin:0;
+}
+.abs-none{
+  font-size:14px;line-height:1.7;color:var(--warn);margin:0;
+}
+
+/* prompts */
+.prompts{padding:6px 26px 22px}
+.prompt{
+  padding:18px 0 0;
+  margin:0;
+}
+.prompt+.prompt{border-top:1px solid var(--line-2);margin-top:6px}
+.prompt h4{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:13.5px;font-weight:500;color:var(--ink);
+  margin:0 0 9px;letter-spacing:.01em;
+}
+.pk{
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.07em;color:var(--signal);
+  border:1px solid rgba(193,95,60,.25);
+  background:var(--signal-soft);
+  padding:3px 8px;border-radius:6px;flex:none;
+  position:relative;top:-1px;
+}
+.prompt p{font-size:14.8px;color:var(--ink-2);margin:0 0 10px}
+.prompt p:last-child{margin-bottom:0}
+.prompt ul{margin:0 0 10px;padding-left:0;list-style:none}
+.prompt li{
+  position:relative;padding-left:18px;margin-bottom:8px;
+  font-size:14.8px;color:var(--ink-2);
+}
+.prompt li::before{
+  content:"";position:absolute;left:3px;top:.72em;
+  width:5px;height:5px;border-radius:50%;background:#cdc8ba;
+}
+.prompt li:last-child{margin-bottom:0}
+.prompt strong{color:var(--ink);font-weight:600}
+.prompt em{font-style:normal;background:var(--paper-2);padding:1px 5px;border-radius:4px}
+
+.prompt.na{opacity:.94}
+.prompt.na .pk{color:var(--warn);border-color:rgba(138,100,32,.35);background:var(--warn-bg)}
+.prompt.na p{color:var(--warn)}
+.prompt.na li::before{background:var(--warn)}
+
+.readnote{
+  background:var(--paper-2);
+  border-top:1px solid var(--line-2);
+  padding:16px 26px;
+  font-size:13.8px;color:var(--ink-2);
+}
+.readnote b{color:var(--ink)}
+
+.hairline{
+  margin:0;border:0;border-top:1px dashed var(--line);
+}
+
+/* ============================================================
+   TOP 3 / TEAMS / MORE / METHOD
+   ============================================================ */
+.rank{list-style:none;margin:0;padding:0;counter-reset:r}
+.rank li{
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:24px 26px;margin:0 0 16px;
+}
+.rank .rk{
+  font-family:var(--serif);font-size:30px;font-weight:400;
+  color:#d8d4c8;line-height:1;letter-spacing:-.02em;
+}
+.rank li:first-child .rk{color:var(--accent)}
+.rank h3{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  margin:0 0 8px;line-height:1.42;
+}
+.rank p{font-size:14.5px;color:var(--ink-2);margin:0}
+
+.teamgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.team{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 24px;
+}
+.team h3{
+  font-family:var(--serif);font-size:16.5px;font-weight:400;
+  margin:0 0 8px;line-height:1.4;
+}
+.team .aff{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  letter-spacing:.02em;margin:0 0 10px;
+}
+.team p{font-size:14px;color:var(--ink-2);margin:0}
+
+.moregrid{display:grid;gap:16px}
+.moregroup{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+}
+.moregroup>header{
+  padding:16px 22px;border-bottom:1px solid var(--line-2);
+  background:var(--paper-2);
+}
+.moregroup>header h3{
+  font-family:var(--serif);font-size:16.5px;font-weight:400;margin:0;
+}
+.moregroup>header p{
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  margin:5px 0 0;letter-spacing:.03em;
+}
+.morelist{list-style:none;margin:0;padding:0}
+.morelist li{padding:15px 20px;border-bottom:1px solid var(--line-2);font-size:14px;color:var(--ink-2)}
+.morelist li:last-child{border-bottom:0}
+.morelist .mt{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;line-height:1.45}
+.morelist .mm{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  display:block;margin-bottom:5px;
+}
+.morelist .md{margin:0;font-size:13.8px}
+/* section B items carry no per-item badge: the section header already
+   states the membership rule, and a "预印本" tag would be false for the
+   journal items listed there. */
+
+.methodblock{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:26px 28px;margin:0 0 18px;
+}
+.methodblock h3{
+  font-family:var(--serif);font-size:17px;font-weight:400;margin:0 0 12px;
+}
+.methodblock p{font-size:14.3px;color:var(--ink-2)}
+
+.ifbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.ifchip{
+  font-family:var(--mono);font-size:12px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:8px 12px;background:var(--paper-2);color:var(--ink-2);
+}
+.ifchip.yes{border-color:rgba(74,124,89,.32);background:#eef3ef;color:#3d6849}
+.ifchip.no{border-color:rgba(166,124,46,.3);background:#faf4e8;color:#7d5c1f}
+
+.alert{
+  border:1px solid var(--warn);
+  background:var(--warn-bg);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin:0 0 22px;
+}
+.alert h3{
+  font-family:var(--serif);font-size:17px;font-weight:400;
+  margin:0 0 10px;color:#6b4a14;
+}
+.alert p,.alert li{font-size:14.3px;color:#6b4a14}
+.alert ul{margin:0;padding-left:20px}
+.alert li{margin-bottom:7px}
+
+pre{
+  font-family:var(--mono);font-size:12.3px;line-height:1.66;
+  background:#26251f;color:#e8e4da;
+  padding:20px 22px;border-radius:var(--radius-sm);
+  overflow-x:auto;margin:14px 0 0;
+}
+pre .cm{color:#9c968a}
+
+.foot{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px 70px;
+  font-size:13px;color:var(--ink-3);
+}
+.foot .rule{border:0;border-top:1px solid var(--line);margin:0 0 18px}
+
+.empty{
+  display:none;
+  padding:40px 24px;text-align:center;
+  background:var(--panel);border:1px dashed var(--line);
+  border-radius:var(--radius);color:var(--ink-3);font-size:14.5px;
+}
+.empty.is-on{display:block}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print{
+  :root{--paper:#fff;--paper-2:#fff;--panel:#fff;--shadow:none}
+  body{font-size:11pt;background:#fff}
+  .masthead{background:#fff;color:#000;border-bottom:1px solid #ccc}
+  .masthead h1{color:#000}
+  .masthead h1 em{color:#8a3f22}
+  .masthead .lede,.meta dt{color:#333}
+  .meta{background:#ddd;border-color:#ddd}
+  .meta>div{background:#fff}
+  .meta dd{color:#000}
+  .toc,.filter,.skip,.strip-note{display:none}
+  .shell{display:block;padding:0 0 20px;max-width:none}
+  .hero,.hero .inner,.masthead .inner{padding-left:0;padding-right:0}
+  .paper,.rank li,.team,.moregroup,.methodblock,.table-wrap{break-inside:avoid;box-shadow:none}
+  .section{break-before:auto}
+  a{color:#000;border:0}
+  .seg{color:#fff}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+@media (max-width:620px){
+  .masthead .inner,.hero .inner,.shell{padding-left:18px;padding-right:18px}
+  .paper-head,.prompts,.readnote{padding-left:18px;padding-right:18px}
+  .strip{height:auto;flex-direction:column}
+  .seg{flex:0 0 auto!important;flex-direction:row;align-items:center;gap:10px;padding:11px 14px}
+  .seg .sg-l{margin-top:0}
+  .rank li{grid-template-columns:1fr;gap:8px}
+  .rank .rk{font-size:18px}
+}
+
+/* ============================================================
+   每日文献简报 · 增量组件
+   ------------------------------------------------------------
+   本文件只做「加法」：不覆盖 assets/report.css 中任何既有规则，
+   仅补齐日报所需的组件，全部复用同一套设计 token。
+   禁止事项（继承 配置.md 第 8 节）：卡片不得使用方向色、禁止左侧色条。
+   ============================================================ */
+
+/* ---------- 方向胶囊（卡片内） ---------- */
+.dirchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 11px 3px 9px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--paper-2);
+  color:var(--ink-2);
+  font-size:12px;
+  line-height:1.6;
+  letter-spacing:.01em;
+  white-space:nowrap;
+}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--ink-3);flex:0 0 auto}
+.chip[data-c="d1"] .chip-dot{background:var(--d1)}
+.chip[data-c="d2"] .chip-dot{background:var(--d2)}
+.chip[data-c="d3"] .chip-dot{background:var(--d3)}
+.chip[data-c="d4"] .chip-dot{background:var(--d4)}
+.chip[data-c="d5"] .chip-dot{background:var(--d5)}
+.chip[data-c="t1"] .chip-dot,
+.chip[data-c="t2"] .chip-dot,
+.chip[data-c="t3"] .chip-dot,
+.chip[data-c="t4"] .chip-dot,
+.chip[data-c="t5"] .chip-dot,
+.chip[data-c="t6"] .chip-dot,
+.chip[data-c="t7"] .chip-dot{background:var(--ink-3)}
+
+/* ---------- 来源层级标记 ---------- */
+.tier{
+  display:inline-block;
+  padding:1px 8px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.03em;
+  color:var(--ink-3);
+  background:var(--paper-2);
+}
+
+/* ---------- 速览表 ---------- */
+.glance{width:100%;border-collapse:collapse;font-size:15px}
+.glance caption{
+  caption-side:top;text-align:left;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);padding:0 0 12px;
+}
+.glance thead th{
+  text-align:left;font-weight:600;font-size:12.5px;color:var(--ink-3);
+  padding:0 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+.glance tbody td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line-2);vertical-align:top}
+.glance .g-n,.glance .g-d,.glance .g-dt{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.glance .g-t{min-width:15em}
+.glance .g-j{white-space:nowrap;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- 延伸阅读条目 ---------- */
+.paper.ext{background:var(--paper-2)}
+.paper.ext .paper-head h3{font-size:19px}
+
+/* ---------- 作者角色：未确认时用警示色区分 ---------- */
+.bio-role.warn{color:var(--warn);background:var(--warn-bg);border-color:rgba(138,100,32,.28)}
+
+/* ---------- 无法评估（Prompt 缺失） ---------- */
+.cannot{
+  margin:0;
+  padding:10px 14px;
+  border:1px solid rgba(138,100,32,.28);
+  border-radius:var(--radius-sm);
+  background:var(--warn-bg);
+  color:var(--warn);
+  font-size:14.5px;
+}
+
+/* ---------- 摘要不可得 ---------- */
+.abs-none{
+  padding:14px 18px;
+  border:1px solid rgba(138,100,32,.28);
+  border-radius:var(--radius-sm);
+  background:var(--warn-bg);
+  color:var(--warn);
+  font-size:14.5px;
+  line-height:1.7;
+  margin:0 26px 18px;
+}
+
+/* ---------- 打印与窄屏补丁 ---------- */
+@media print{
+  .chip,.tier{border-color:#000;color:#000;background:#fff}
+  .glance thead th,.glance tbody td{border-color:#000}
+  .cannot,.abs-none{border:1px solid #000;color:#000;background:#fff}
+}
+@media (max-width:620px){
+  .glance .g-j,.glance .g-d{display:none}
+  .abs-none{margin-left:18px;margin-right:18px}
+}
+
+/* ---------- 折叠附录（GitHub / 新闻长清单） ---------- */
+.morebox{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  background:var(--panel);
+  padding:0;
+}
+.morebox>summary{
+  cursor:pointer;
+  padding:12px 16px;
+  font-size:14px;
+  color:var(--ink-2);
+  list-style:none;
+}
+.morebox>summary::-webkit-details-marker{display:none}
+.morebox>summary::before{content:"▸ ";color:var(--signal)}
+.morebox[open]>summary::before{content:"▾ "}
+.morebox>summary:hover{background:var(--paper-2)}
+.morebox>summary:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.morebox .table-wrap{padding:0 16px 14px}
+@media print{
+  .morebox{border-color:#000}
+  .morebox>summary{display:none}
+  .morebox>div{display:block!important}
+}
+
+/* ---------- 主题聚合模式：主题综述章节 ---------- */
+.theme-intro{
+  margin:14px 0 20px;padding:16px 20px;
+  background:var(--paper-2);border-left:3px solid var(--accent);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;line-height:1.9;
+}
+.theme-intro p{margin:0 0 10px}
+.theme-intro p:last-child{margin:0}
+.theme-h3{
+  margin:28px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line);
+  font-size:16px;font-weight:700;color:var(--ink);letter-spacing:.01em;
+}
+#theme p{margin:10px 0;line-height:1.9}
+#theme ul,#theme ol{margin:10px 0 16px;padding-left:24px;line-height:1.9}
+#theme li{margin:7px 0}
+#theme blockquote{
+  margin:14px 0;padding:10px 16px;border-left:3px solid var(--line-2);
+  background:var(--paper-2);color:var(--ink-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+#theme table{margin:14px 0}
+@media print{
+  #theme{break-inside:auto}
+  .theme-h3{break-after:avoid}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="masthead"><div class="inner">
+<p class="eyebrow">主题文献综述 ｜ 2026-11-05 ｜ 隔日出刊 ｜ 主题聚合模式</p>
+<h1>植物抗病与基因组学<em>主题</em>文献综述</h1>
+<p class="lede">每隔一天 08:00 出刊：围绕一个主题，把<b>已收录的全部相关论文</b>重新组织成有脉络的综述，并补入该主题的新文献与开源项目动态——不再逐日追薄产出。</p>
+<dl class="meta">
+<div><dt>检索窗口</dt><dd>2026-11-04 → 2026-11-05（回看 7 天）</dd></div>
+<div><dt>来源层级</dt><dd>A 顶刊 / B 专业刊 / C 预印本<br>IF 为整数近似值</dd></div>
+<div><dt>主榜论文</dt><dd>1 篇<br>2 个核心方向有命中</dd></div>
+<div><dt>延伸阅读</dt><dd>0 条（预印本）</dd></div>
+<div><dt>AI4Science 项目</dt><dd>62 个 GitHub 项目<br>非同行评议</dd></div>
+<div><dt>领域动态</dt><dd>10 条命中方向<br>共 128 条植物学相关</dd></div>
+</dl>
+</div></header>
+<section class="hero"><div class="inner">
+<h2>本期主题：<b>NLR 结构与抗病小体</b>（T01）</h2>
+<p class="hero-lede">回看窗口内共命中 <b>10</b> 篇，其中 <b>9</b> 篇在往期简报中已报过，本期只呈现<b>新增</b>的 1 篇——避免连续几天重复同一批论文。所有论文的<b>实际首发日均已逐条标注</b>。</p>
+<div class="strip" role="group" aria-label="本日核心方向供给分布，点击可筛选">
+<button class="seg" data-dir="d1" style="flex:1 1 50.0%" aria-pressed="false"><span class="sg-n">1</span><span class="sg-l">d1 · 定位与克隆</span></button>
+<button class="seg zero" data-dir="d2" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d2 · GWAS</span></button>
+<button class="seg zero" data-dir="d3" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d3 · 泛基因组</span></button>
+<button class="seg" data-dir="d4" style="flex:1 1 50.0%" aria-pressed="false"><span class="sg-n">1</span><span class="sg-l">d4 · 作物抗病</span></button>
+<button class="seg zero" data-dir="d5" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d5 · NLR 与免疫受体</span></button>
+</div>
+<p class="strip-note">条宽 = 该<b>核心方向</b>本期新增篇数（虚线块表示 0 篇）。 当前筛选：<code id="filterState">全部方向</code></p>
+</div></section>
+<div class="shell">
+<nav class="toc" aria-label="目录"><h2>目录</h2><ol id="tocList">
+<li><a href="#overview"><span class="toc-n">00</span>本日速览</a></li>
+<li><a href="#d1"><span class="toc-n">d1</span>抗病（抗性）基因定位与克隆</a></li>
+<li><a href="#d4"><span class="toc-n">d4</span>水稻与作物抗病基因</a></li>
+<li><a href="#t1"><span class="toc-n">t1</span>作物抗病基因克隆与挖掘</a></li>
+<li><a href="#top3"><span class="toc-n">06</span>精读 Top 3</a></li>
+<li><a href="#teams"><span class="toc-n">07</span>跟踪团队</a></li>
+<li><a href="#more"><span class="toc-n">08</span>延伸阅读</a></li>
+<li><a href="#github"><span class="toc-n">08a</span>AI4Science 项目</a></li>
+<li><a href="#news"><span class="toc-n">08c</span>国内外研究进展</a></li>
+<li><a href="#prior"><span class="toc-n">08b</span>往期已报</a></li>
+<li><a href="#method"><span class="toc-n">09</span>检索与核实</a></li>
+</ol>
+<div class="filter"><h2>按方向筛选</h2>
+<div class="filter-btns"><button class="fbtn" data-filter="all" aria-pressed="true">全部方向</button></div>
+<p class="fgroup">核心方向</p><div class="filter-btns">
+<button class="fbtn" data-filter="d1" aria-pressed="false">抗病基因定位与克隆</button>
+<button class="fbtn" data-filter="d2" aria-pressed="false">GWAS / 关联分析</button>
+<button class="fbtn" data-filter="d3" aria-pressed="false">泛基因组</button>
+<button class="fbtn" data-filter="d4" aria-pressed="false">水稻与作物抗病基因</button>
+<button class="fbtn" data-filter="d5" aria-pressed="false">NLR 与植物免疫受体</button>
+</div><p class="fgroup">专项追踪</p><div class="filter-btns">
+<button class="fbtn" data-filter="t1" aria-pressed="false">作物抗病基因克隆与挖掘</button>
+<button class="fbtn" data-filter="t2" aria-pressed="false">群体水平泛基因组</button>
+<button class="fbtn" data-filter="t3" aria-pressed="false">大规模 GWAS 分析</button>
+<button class="fbtn" data-filter="t4" aria-pressed="false">AI / 大语言模型应用</button>
+<button class="fbtn" data-filter="t5" aria-pressed="false">AF3 结构预测与蛋白设计</button>
+<button class="fbtn" data-filter="t6" aria-pressed="false">免疫机制与 NLR-ID 演化</button>
+<button class="fbtn" data-filter="t7" aria-pressed="false">免疫 Decoy 诱饵蛋白</button>
+</div></div></nav>
+<main id="main">
+<div class="empty" id="emptyState">当前方向筛选下没有论文。</div>
+<section class="section" id="overview">
+<div class="section-head"><span class="sh-k">00</span><h2>本日速览</h2><span class="sh-count">1 篇 / 12 方向</span></div>
+<div class="alert"><h3>⚠️ 必读：本期是「主题综述」而不是「当日新增清单」</h3><p>从本期起改为<b>隔日出刊的主题聚合模式</b>：每期聚焦一个主题，把<b>已收录的历史论文</b>重新组织成有脉络的综述。所以「本日新增」这个数字<b>不再是本期的重点</b>，新增为 0 或很少都<b>不影响出刊</b>。</p><p>本期主题：<b>NLR 结构与抗病小体（T01）</b>。综述正文见下方 05 主题综述章节。</p></div>
+<div class="alert"><h3>本期新增与分层</h3><p>常规检索新增 <b>10 篇</b>论文，其中生成完整卡片 <b>1 篇</b>；另有 <b>G 层 62 个 GitHub 项目</b>与 <b>N 层 128 条期刊动态</b>（其中 10 条命中方向）。</p><p>G/N 两层<b>不是同行评议文献</b>，已与主榜论文严格分层标注，不得作为结论引用。</p></div>
+<ol class="takeaways">
+</ol>
+<div class="coverage"><h3 class="cov-title">12 方向覆盖表</h3>
+<p class="cov-note">本期为<b>主题聚合模式</b>（T01 NLR 结构与抗病小体），主体是 05 主题综述，从台账 34 篇 T01 候选中语义筛选出 <b>6 篇</b>真正围绕 NLR 结构与信号的研究重新组织。常规 7 天窗口<b>新增 24 篇</b>，其中与该主题直接相关的 NLR 结构类论文为 <b>0 篇</b>（含 Pik 位点新等位基因等 2 篇无摘要，按红线不出卡片）。故本期只出 <b>1 张新论文卡片</b>（ZmPHO2，d1/d4/t1 全命中），其余 23 篇列入 08d 延期。</p>
+<p class="cov-group">核心方向</p>
+<div class="cov-row" data-dir="d1"><span class="dirdot"></span><span class="cov-dir">抗病（抗性）基因定位与克隆</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p1">#p1</a></span></div>
+<div class="cov-row zero" data-dir="d2"><span class="dirdot"></span><span class="cov-dir">GWAS / 关联分析</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="d3"><span class="dirdot"></span><span class="cov-dir">泛基因组</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row" data-dir="d4"><span class="dirdot"></span><span class="cov-dir">水稻与作物抗病基因</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p1">#p1</a></span></div>
+<div class="cov-row zero" data-dir="d5"><span class="dirdot"></span><span class="cov-dir">NLR 与植物免疫受体</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<p class="cov-group">专项追踪</p>
+<div class="cov-row" data-dir="t1"><span class="dirdot"></span><span class="cov-dir">作物抗病基因克隆与挖掘</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p1">#p1</a></span></div>
+<div class="cov-row zero" data-dir="t2"><span class="dirdot"></span><span class="cov-dir">群体水平泛基因组</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t3"><span class="dirdot"></span><span class="cov-dir">大规模 GWAS 分析</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t4"><span class="dirdot"></span><span class="cov-dir">人工智能 / 大语言模型在植物基因组与遗传学中的应用</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t5"><span class="dirdot"></span><span class="cov-dir">植物蛋白结构预测（AlphaFold3 等）与蛋白结构设计改造</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t6"><span class="dirdot"></span><span class="cov-dir">植物免疫机制与 NLR-ID 演化进化</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t7"><span class="dirdot"></span><span class="cov-dir">植物免疫 Decoy 诱饵蛋白研究</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+</div>
+<div class="table-wrap"><table class="glance"><caption>速览表 · 一行一篇</caption>
+<thead><tr><th>#</th><th>方向</th><th>论文</th><th>期刊</th><th>日期</th></tr></thead><tbody>
+<tr><td class="g-n">01</td><td class="g-d">d1 d4 t1</td><td class="g-t"><a href="#p1">ZmPHO2 介导的磷稳态调控玉米的 PAMP 触发免疫与抗病性</a></td><td class="g-j">Plant Biotechnology Journal<br>IF=10</td><td class="g-dt">2026-11-04</td></tr>
+</tbody></table></div>
+</section>
+<section class="section" id="theme">
+<div class="section-head"><span class="sh-k">05</span><h2>主题综述 · NLR 结构与抗病小体</h2><span class="sh-count">T01</span></div>
+<div class="theme-intro"><p>NLR（nucleotide-binding leucine-rich repeat）是植物胞内免疫的核心受体，它要解决三个层次的问题：<b>怎么识别</b>（直接结合还是监视寄主蛋白被攻击）、<b>识别之后怎么被激活</b>（构象变化与寡聚化）、<b>激活之后怎么杀敌</b>（信号输出与细胞死亡）。</p><p>本期从台账 T01 候选池的 <b>34 篇</b>中，按「是否真正围绕 NLR 的结构、组装或信号机制」做语义筛选，最终取 <b>6 篇</b>（2026-09-30 ~ 2026-10-26）。<b>筛选标准</b>：排除仅沾方向代码的论文——例如葡萄科系统发育基因组学、高粱 TIFY 耐盐、番茄 QTL-Seq 定位、LysM 类受体激酶 TaLYK5 等，它们分别是 d5/t5 的宽泛命中或偏 PRR 方向（属 T03），并未讨论 NLR 的结构或组装。保留下来的 6 篇中 <b>3 篇为预印本</b>（HREZ、TOPGAP、DREM），已在文中逐条标注，<b>不得与同行评议结论同等看待</b>。</p></div>
+<h3 class="theme-h3">一、抗病小体：从「是否寡聚」走到「几聚体」——而结构预测只给假设</h3>
+<p>NLR 激活后组装成高阶寡聚复合物（resistosome）已是共识，但<b>化学计量</b>一直是难点。本期最直接相关的是番茄 <b>CC-NLR HREZ</b> 识别番茄褐色皱果病毒（ToBRFV）运动蛋白（MP）的工作（预印本，2026-10-06）：HREZ 被 MP 激活后诱导 HR，并<b>组装成更高阶的寡聚复合物</b>；作者用 <b>AlphaFold 3</b> 建模来<b>支持一个五聚体抗病小体模型</b>。</p><p>这里有个必须说明的边界：<b>AlphaFold 3 给出的是「与实验数据相容的假设」，不是结构证据</b>。该工作的可信度来自两条正交证据——生化上证实了寡聚化、且<b>8 个 Virgaviridae 科 MPs 中有 4 个</b>既能激活 HREZ 又促进其寡聚；<b>五聚体这一具体计量目前仍属模型推断</b>。</p><p><b>可迁移的判断</b>：当你的 NLR 只能拿到 AF3 模型时，把它当作「提出假设」而非「证明结构」；真正需要补的是交联质谱、原生电泳或冷冻电镜中的至少一项。另外一个值得注意的空白：<b>作物 NLR 的抗病小体结构解析仍然极少</b>，现有范式基本由拟南芥 ZAR1 建立。</p>
+<h3 class="theme-h3">二、辅助 NLR：从「信号放大器」变成「酶活监视器」</h3>
+<p>辅助 NLR（helper NLR）传统上被看作下游信号通道，本身不识别效应子。本期 <b>TOPGAP–NRC4</b> 的工作（预印本，2026-10-07）给出了一种更精细的定位：<b>NRC4 监视的是寄主酶的「催化状态」</b>，而不是效应子本身。</p><p>机制链条清楚：<b>TOPGAP</b> 是一个 Rab GTPase 激活蛋白（GAP），同时是<b>感病因子</b>；来自两种疫霉的效应子 <b>PiE355 与 TIKI</b> 结合它的 <b>N 端调控域</b>；由此引发的细胞死亡<b>需要 TOPGAP 及其 C 端 GAP 活性</b>。关键的三条遗传证据：<b>①</b> 单独表达 TOPGAP 催化域就足以激活 NRC4 介导的细胞死亡；<b>②</b> 催化失活突变<b>废除</b>该能力；<b>③</b> 效应子所结合的 N 端调控域<b>抑制</b>该能力。三者合起来指向一个结论：<b>引发免疫的是「TOPGAP 活性失控」，而非「TOPGAP 被结合」</b>。</p><p>这在概念上是 guard/decoy 模型的延伸——从「监视蛋白是否被修饰/降解」推进到<b>「监视酶的催化是否被扰动」</b>。实际问题也随之而来：<b>扰动到什么程度算越界？</b>本文的答案是催化域开关式（活性去掉就全没了），但多数寄主酶并非如此二元，这个边界在更普遍的情形下仍未界定。</p>
+<h3 class="theme-h3">三、识别广度：NLR 库越大不等于越强，广度与强度是两件事</h3>
+<p>本期 <b>Current Biology</b> 的油料作物 ETI 全景筛选（同行评议，2026-10-26）提供了一组难得的<b>跨物种定量比较</b>。作者用 <b>529 个</b>丁香假单胞菌三型效应子，在甘蓝型油菜（<i>Brassica napus</i>）与亚麻荠（<i>Camelina sativa</i>）中系统筛查 ETI：</p><ul><li>65 个效应子家族中，分别有 <b>44.6%</b> 与 <b>55.4%</b> 含能触发 ETI 的等位基因；</li><li><b>79% 与 88%</b> 的菌株携带<b>三个或以上</b>预测 ETI 激发子——说明油料作物面对丁香假单胞菌承受着相当高的 ETI 负荷；</li><li>与拟南芥相比，油料作物的 ETI 谱<b>更宽</b>，且 ETI 响应数量与<b>NLR 库大小和倍性</b>正相关；</li><li>但反过来——<b>拟南芥的 ETI 响应普遍更强</b>；</li><li>而且<b>拟南芥 ZAR1 的效应子识别谱比油菜或亚麻荠的 ZAR1 更广</b>，作者据此认为<b>趋同演化</b>在扩展免疫多样性中起作用。</li></ul><p><b>这组结果最值得记住的是「可分离性」</b>：<b>识别广度（能认出多少个效应子）</b>与<b>响应强度（认出来之后反应多剧烈）</b>不是同一件事，多倍体/大 NLR 库带来的是前者。对育种的含义很实际——<b>不能只数 NLR 基因个数来评估抗性潜力</b>；而单个受体（如 ZAR1）的特异性在作物中反而可能比模式植物更窄，这解释了为何「把拟南芥的机制直接搬到作物」常常失效。</p>
+<h3 class="theme-h3">四、本期最强的跨论文共识：「结合」不等于「激活」，定位与结构域组成才是闸门</h3>
+<p>把两篇看似无关的论文并排看，会浮出一条共同的机制原则。这是本期<b>最有价值的发现</b>，且它无法从任何单篇论文里读出来。</p><p><b>案例 A：水稻 BED-NLR Xa1</b>（<i>The Plant Cell</i>，同行评议，2026-10-03）。Xa1 通过识别 TALE 类效应子赋予细菌性条斑病抗性。作者用瞬时表达、内源表位标记与<b>对天然 Xa1 位点的先导编辑</b>证明：<b>核定位是 Xa1 免疫功能的必要前提</b>，并在 N 端区鉴定出 <b>3 个功能性 NLS</b>。先导编辑破坏这些基序后抗性受损，其中<b>第一个 NLS 突变导致的感病表型最强</b>。最关键的一条证据是：<b>破坏 Xa1 或 TALE 的 NLS 都不影响两者的物理互作</b>——说明结合与核输入是解耦的；而<b>只有定位到核内的 Xa1 才能触发胞质 Ca<sup>2+</sup> 内流</b>这一免疫激活标志。</p><p><b>案例 B：拟南芥 TX14 的 TIR 异构体</b>（<i>Journal of Experimental Botany</i>，同行评议，2026-10-01）。<i>TX14</i> 通过可变剪接产生<b>4 个</b>结构域组成不同的异构体，其中<b>仅由完整 TIR 结构域构成的 TX14 2IR</b> 被证明是诱导 HR 的<b>必要且充分</b>条件。定位上出现分化：<b>2IR 同时位于细胞质与细胞核</b>，而另外两个有功能的异构体（TX14 Full 与 Fusion）<b>只位于细胞质</b>。此外，同时突变 2IR 中<b>四个成簇碱性氨基酸</b>会<b>废除其脱氧核糖核酸酶活性并延迟 HR</b>；不同异构体对 <b>EDS1</b> 的依赖程度也不同。</p><p><b>合并结论</b>：两个体系、两种受体类型（BED-NLR 与 TIR-only），都指向同一件事——<b>「能结合配体」并不构成激活证据，真正的闸门是定位（甚至构象/酶活）</b>。这对实验设计的直接含义是：<b>仅用酵母双杂交或 Co-IP 证明 NLR 与效应子互作，不足以支持「该 NLR 被激活」的结论</b>，必须补定位与下游读出。同时它也提示<b>剪接异构体是 NLR 功能调控中一个长期被低估的层次</b>——同一个基因的不同产物可以落在不同区室、依赖不同下游节点。</p>
+<h3 class="theme-h3">五、AI 正在改变 NLR 的「发现」环节（而不是「解释」环节）</h3>
+<p>本期 <b>DREM</b>（预印本，2026-10-22）代表了 AI 在 NLR 研究中目前最落地的用法：<b>从序列直接预测抗病基因</b>，而非依赖 HMM 的序列同源搜索。它把两个带注意力的双向 LSTM 组合起来——一个做<b>抗病性二分类</b>，一个做<b>抗病结构域多标签分类</b>。</p><p>性能与几个值得注意的细节：</p><ul><li>在 RefPlantNLR 实验表征蛋白上<b>召回 99.8%</b>；</li><li>在 15,000 个留出蛋白上<b>优于</b>深度学习预测器 PRGminer（MCC <b>0.938 vs 0.820</b>，分类错误约少三分之二）；</li><li>跨 5 个植物蛋白组共鉴定 <b>4,046</b> 个高置信或候选蛋白；其中 <b>75.5%</b> 确认有经典结构域架构，但有 <b>992 个带强 DREM 信号却检测不到 Pfam 结构域</b>；</li><li><b>54/55</b> 个已表征 NLR 位点落在各自蛋白组的前 <b>1.7%</b>；</li><li>与结构域门控的流程（如 R-Predictor）不同，它还能召回<b>实验验证过的非典型 NLR、RPW8 类蛋白与非受体型抗病基因</b>；</li><li>一个解释性线索：<b>注意力并没有集中在经典 ATP 结合基序上</b>，说明模型用的信息超出了保守结构域特征。</li></ul><p><b>与 AlphaFold 3 的分工要说清楚</b>：AF3 解决的是「激活后长什么样」（结构假设），DREM 解决的是「基因组里哪些序列值得做功能验证」（候选排序）。两者都<b>不替代实验</b>——DREM 那 992 个无结构域信号的蛋白，正是最需要但最难验证的一批。<b>空白</b>：这类工具在作物上的验证集仍然很小（主要靠拟南芥 RefPlantNLR），直接用在水稻/小麦上时，召回率是否保持尚缺公开证据。</p>
+<h3 class="theme-h3">六、共识、分歧与空白（汇总）</h3>
+<p><b>共识（本期多篇支持）</b></p><ul><li>NLR 激活伴随<b>高阶寡聚化</b>（HREZ 与 ZAR1 体系一致）；</li><li><b>互作 ≠ 激活</b>：Xa1（NLS 突变不破坏互作）与 TX14（结构域组成决定定位与 EDS1 依赖）共同支持；</li><li>NLR 的<b>识别广度与响应强度可分离</b>，且与 NLR 库规模/倍性相关（油料作物 vs 拟南芥）。</li></ul><p><b>分歧与未定</b></p><ul><li><b>抗病小体的化学计量</b>：HREZ 为五聚体<b>模型</b>，与其他 NLR 已报道的组装形式是否统一，尚无定论；</li><li><b>广度–强度的权衡</b>：油料作物 ETI 谱更宽但响应更弱，这是权衡、是阈值差异，还是实验体系差异，本文未定论；</li><li><b>guard 模型的边界</b>：TOPGAP 案例里「催化失控」是二元开关，一般情形下如何界定扰动程度仍不清楚；</li><li><b>作物 vs 模式植物</b>：ZAR1 在拟南芥中识别谱更广，直接跨物种移植识别机制的可行性存疑。</li></ul><p><b>空白（本期确认该主题下没人做的）</b></p><ul><li><b>作物 NLR 的抗病小体结构生物学</b>几乎空白，范式仍由拟南芥 ZAR1 主导；</li><li><b>非典型 NLR（BED-NLR、TIR-only、RPW8 类）的激活机制</b>研究明显少于经典 CC/TIR-NLR；</li><li><b>AF3 预测的验证率</b>无人系统统计——大部分工作只把 AF3 当辅助证据；</li><li><b>NLR 剪接异构体的功能分化</b>仅在 TX14 这类个别案例中被揭示，全基因组尺度未见系统研究。</li></ul>
+<h3 class="theme-h3">七、对你（作物抗病基因研究）的可操作含义</h3>
+<ul><li><b>做 NLR 功能验证时，不要用互作实验代替激活证据。</b>Xa1 那篇明确显示 NLS 突变不破坏与 TALE 的结合、但抗性完全丧失——你的体系里若只做到 Y2H/Co-IP，建议至少补<b>亚细胞定位</b>与<b>一个下游读出</b>（ROS 爆发、Ca<sup>2+</sup> 内流、HR、标记基因）。</li><li><b>手上有病斑模拟或组成型防御材料时，优先查剪接异构体。</b>TX14 说明同一基因的不同剪接产物在定位、EDS1 依赖性与 HR 能力上可以完全不同；只克隆「最长转录本」可能漏掉真正有功能的那个。</li><li><b>找 NLR 候选基因时，用「AI 排序 + 结构域注释」互补，而不是二选一。</b>DREM 的价值恰恰在它能召回<b>无经典结构域</b>的候选（992 个），但这也意味着<b>结构域筛选会系统性漏掉非典型抗病基因</b>。</li><li><b>评估作物抗性潜力时，别只数 NLR 基因数量。</b>油料作物的 NLR 库更大、ETI 谱更宽，但单个受体（ZAR1）识别谱反而更窄、响应也更弱——「数量多」与「抗得住」不是一回事。</li><li><b>用 AF3 时把结论措辞降一级。</b>写「AF3 模型提示五聚体组装」，不要写「AF3 证明五聚体」；并把实验验证计划写清楚，否则审稿人会抓这一点。</li></ul>
+</section>
+<section class="section" id="d1" data-dir="d1">
+<div class="section-head"><span class="sh-k">d1</span><h2>抗病（抗性）基因定位与克隆</h2><span class="sh-count">1 篇</span></div>
+<article class="paper" data-dir="d1" data-tags="d1 d4 t1" id="p1"><div class="paper-head"><div class="paper-top"><span class="paper-idx">01</span><span class="paper-kind">研究论文 · Plant Biotechnology Journal · 磷营养与免疫</span></div><h3>ZmPHO2 介导的磷稳态调控玉米的 PAMP 触发免疫与抗病性</h3><p class="orig"><span class="zh">英文原题</span>ZmPHO2-Mediated Phosphorus Homeostasis Modulates PAMP-Triggered Immunity and Disease Resistance in Maize</p><p class="src"><span class="journal">Plant Biotechnology Journal</span><time datetime="2026-11-04">2026-11-04</time><span class="badge">IF=10</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1111/pbi.70778">10.1111/pbi.70778</a></p><div class="dirchips"><span class="chip" data-c="d1"><span class="chip-dot"></span>d1 · 抗病（抗性）基因定位与克隆</span><span class="chip" data-c="d4"><span class="chip-dot"></span>d4 · 水稻与作物抗病基因</span><span class="chip" data-c="t1"><span class="chip-dot"></span>t1 · 作物抗病基因克隆与挖掘</span></div><p class="authors"><span class="lbl">作者</span>Mengyao Chen（第一作者） 等 28 人；通讯作者：<b>Mingyue Gou</b>。<br>主要单位：State Key Laboratory of High‐Efficiency Production of Wheat‐Maize Double Cropping, Collaborative Innovation Center of Henan Grain Crops, College of Agronomy Henan Agricultural University  Zhengzhou China</p></div><div class="bios"><div class="bio"><div class="bio-role warn">第一作者</div><p class="bio-name">Mengyao Chen</p><p class="bio-unit">State Key Laboratory of High‐Efficiency Production of Wheat‐Maize Double Cropping, Collaborative Innovation Center of Henan Grain Crops, College of Agronomy Henan Agricultural University  Zhengzhou China</p></div><div class="bio"><div class="bio-role warn">通讯作者（推断）</div><p class="bio-name">Mingyue Gou</p><p class="bio-unit">State Key Laboratory of High-Efficiency Production of Wheat-Maize Double Cropping, Collaborative Innovation Center of Henan Grain Crops, College of Agronomy, Henan Agricultural University, Zhengzhou, China.; The Shennong Laboratory, Zhengzhou, China.</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Maize production is influenced by both macronutrient-driven growth and resistance to various abiotic and biotic stresses.</p><p class="s-zh">玉米生产同时受<b>大量营养驱动的生长</b>与<b>对多种生物及非生物胁迫的抗性</b>影响。</p></div><div class="pair"><p class="s-en" lang="en">While phosphorus (P) is essential for maize growth and productivity, its role in maize immunity remains elusive.</p><p class="s-zh">尽管<b>磷（P）</b>对玉米生长与生产力至关重要，但其在玉米<b>免疫</b>中的作用此前不清楚。</p></div><div class="pair"><p class="s-en" lang="en">Here, we characterized a maize lesion mimic mutant, les33, which exhibits enhanced resistance to southern corn rust (SCR) and Curvularia leaf spot (CLS).</p><p class="s-zh">本文表征了一个玉米<b>病斑模拟突变体 <i>les33</i></b>，它对<b>南方玉米锈病（SCR）</b>与<b>弯孢菌叶斑病（CLS）</b>表现出<b>增强的抗性</b>。</p></div><div class="pair"><p class="s-en" lang="en">Positional cloning indicated that ZmPHO2, encoding an E2 ubiquitin-conjugating enzyme involved in P homeostasis, was the causal gene.</p><p class="s-zh"><b>图位克隆</b>表明，编码参与磷稳态的 <b>E2 泛素结合酶</b>的 <b><i>ZmPHO2</i></b> 即为因果基因。</p></div><div class="pair"><p class="s-en" lang="en">In les33, increased P level was accompanied by upregulated defence-related gene expression and elevated accumulation of phenylalanine-derived salicylic acid, lignin, and flavonoids, establishing a genetic link between P status and immune activation.</p><p class="s-zh">在 <i>les33</i> 中，<b>磷水平升高</b>伴随<b>防御相关基因表达上调</b>以及<b>苯丙氨酸来源的水杨酸、木质素与类黄酮</b>积累增加，从而建立起了<b>磷状态与免疫激活之间的遗传联系</b>。</p></div><div class="pair"><p class="s-en" lang="en">Consistently, exogenous phosphate (Pi) application activates defence-related gene expression and enhances resistance to SCR and CLS in a hydroponics system.</p><p class="s-zh">与此一致，在水培体系中<b>外源施用磷酸盐（Pi）</b>可激活防御相关基因表达并<b>增强对 SCR 与 CLS 的抗性</b>。</p></div><div class="pair"><p class="s-en" lang="en">In particular, flg22-triggered defence marker gene expression, phosphorylation of mitogen-activated protein kinase (MAPK), and burst of reactive oxygen species (ROS) were enhanced by Pi application, indicating a positive role of P in potentiating PAMP-triggered immunity (PTI).</p><p class="s-zh">特别地，施磷增强了 <b>flg22 触发的防御标记基因表达、促分裂原活化蛋白激酶（MAPK）磷酸化与活性氧（ROS）爆发</b>，表明磷对<b>增强 PAMP 触发免疫（PTI）</b>有正向作用。</p></div><div class="pair"><p class="s-en" lang="en">Moreover, field trials showed that application of Pi fertilizer improved SCR resistance in a Pi-dose-dependent manner, further supporting a critical role of P in maize immunity.</p><p class="s-zh">此外，田间试验显示施用磷肥以<b>依赖磷剂量的方式</b>提高 SCR 抗性，进一步支持磷在玉米免疫中的关键作用。</p></div><div class="pair"><p class="s-en" lang="en">Taken together, this study provides both genetic and agronomic evidence that P primes defence responses, and highlights optimized Pi fertilization as a practical strategy to coordinate growth and immunity in maize production.</p><p class="s-zh">综上，本研究提供了<b>遗传学与农艺学双重证据</b>表明磷能<b> priming 防御响应</b>，并指出<b>优化磷肥施用</b>是协调玉米生产中生长与免疫的实用策略。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>磷营养如何影响玉米免疫</strong>。核心研究问题是：磷是生长必需元素，但它<b>在玉米抗病中的作用此前不清楚</b>。主要目的是通过一个病斑模拟突变体定位因果基因，并验证磷与免疫激活的因果关系。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>这篇的价值在于<b>把「营养」和「免疫」用遗传学钉在了一起</b>（d1/d4/t1 全命中）。路径很标准：<b>病斑模拟突变体 <i>les33</i>（抗锈病与叶斑病增强）→ 图位克隆 → <i>ZmPHO2</i>（E2 泛素结合酶，磷稳态）→ 磷升高 → SA/木质素/类黄酮积累 + 防御基因上调 → 外源 Pi 处理复现 → flg22 触发的 MAPK 磷酸化与 ROS 增强 → 田间施磷提高抗性</b>。最实用的是最后一步：<b>田间剂量依赖验证</b>，把机制落到了可操作的农艺措施上。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>材料：玉米<b>病斑模拟突变体 <i>les33</i></b>，对南方玉米锈病（SCR）与弯孢菌叶斑病（CLS）抗性增强；</li><li>因果基因：<b><i>ZmPHO2</i></b>，编码参与磷稳态的 <b>E2 泛素结合酶</b>（图位克隆定位）；</li><li>代谢变化：<b>水杨酸、木质素、类黄酮</b>积累升高，防御基因上调；</li><li>外源 <b>Pi</b> 处理可复现抗性，并增强 <b>flg22 触发的 MAPK 磷酸化与 ROS 爆发</b>（PTI 增强）；</li><li><b>田间试验</b>：施磷以<b>剂量依赖</b>方式提高 SCR 抗性。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>遗传学 + 农艺学双重证据</strong>：不止定位基因，还给出可落地的施肥策略。</li><li><strong>把营养状态纳入免疫调控网络</strong>：提示做抗病表型时须控制施肥一致性，否则磷水平差异会混入结果。</li><li><strong>「病斑模拟突变体」是找免疫节点的经典入口</strong>（本文由此定位到磷转运调控）。</li><li><strong>机制解释到 PTI 层面</strong>：MAPK 磷酸化与 ROS 爆发同时增强，说明磷作用于 PTI 的早期信号。</li><li>局限：<b>ZmPHO2 如何具体影响 SA 合成尚未阐明</b>，E2 酶到代谢物之间的环节待补。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇对你的价值在<b>「别让营养状态污染抗病表型」</b>。三个可带走点：① <b>磷水平会实质影响 PTI 强度</b>（MAPK 磷酸化、ROS 爆发都随施磷增强）——若你的抗病实验里各处理施肥不一致，表型差异可能来自营养而非基因型，<b>务必统一施肥并记录</b>；② <b>「病斑模拟突变体」是定位免疫调控节点的有效入口</b>，本文由此找到磷稳态基因，你若手上有病斑模拟材料可优先图位克隆；③ 实用延伸：<b>优化磷肥施用本身可以作为协调生长与抗病的农艺手段</b>，且作者给了田间剂量依赖证据，这在育种/栽培结合的工作里是可发的点。同行评议文献（Plant Biotechnology Journal）。</div></article>
+</section>
+<section class="section" id="top3">
+<div class="section-head"><span class="sh-k">06</span><h2>值得精读 Top 3</h2><span class="sh-count">3 篇</span></div>
+<ol class="rank">
+<li><span class="rk">1</span><div class="rb"><p class="rt">「结合」不等于「激活」——两个体系独立指向同一条原则</p><p class="rw">本期<b>最有价值的发现，且无法从任何单篇里读出来</b>。把两篇并排看：<b>水稻 BED-NLR Xa1</b>（The Plant Cell）用先导编辑证明<b>破坏 Xa1 或 TALE 的 NLS 都不影响两者互作</b>，但抗性完全丧失，<b>只有核内 Xa1 才触发胞质 Ca²⁺ 内流</b>；<b>拟南芥 TX14</b>（J Exp Bot）显示 4 个剪接异构体里只有<b>纯 TIR 的 2IR</b> 能诱导 HR，且它<b>同时位于细胞质与核</b>，另两个异构体只在细胞质。<b>含义：仅用 Y2H/Co-IP 证明 NLR 与效应子互作，不足以支持「该 NLR 被激活」。</b></p></div></li>
+<li><span class="rk">2</span><div class="rb"><p class="rt">辅助 NLR 监视的不是效应子，而是「寄主酶的催化是否失控」</p><p class="rw"><b>TOPGAP–NRC4</b>（预印本）把 guard 模型推进了一步。链条是：效应子 PiE355/TIKI 结合 Rab GAP <b>TOPGAP 的 N 端调控域</b> → 解除对催化域的抑制 → <b>TOPGAP 催化域单独就足以激活 NRC4</b>。三条遗传证据互为印证：催化域可激活、<b>催化失活即废除</b>、<b>N 端调控域可抑制</b>。结论是 <b>引发免疫的是「活性失控」而非「被结合」</b>——这是从「监视蛋白是否被修饰」推进到「<b>监视酶的催化是否被扰动</b>」。</p></div></li>
+<li><span class="rk">3</span><div class="rb"><p class="rt">NLR 库越大 ≠ 抗性越强：识别广度与响应强度是可分离的</p><p class="rw"><b>Current Biology</b> 用 <b>529 个</b>效应子在油菜与亚麻荠中做 ETI 全景筛选（同行评议）：65 个效应子家族中 <b>44.6% / 55.4%</b> 含能触发 ETI 的等位基因；油料作物 ETI 谱<b>宽于拟南芥</b>、且与 NLR 库大小和倍性正相关；但<b>拟南芥的 ETI 响应普遍更强</b>，且<b>拟南芥 ZAR1 识别谱比油菜/亚麻荠 ZAR1 更广</b>。<b>育种含义：不能只数 NLR 基因个数评估抗性潜力；把模式植物机制直接搬到作物常失效。</b></p></div></li>
+</ol></section>
+<section class="section" id="teams">
+<div class="section-head"><span class="sh-k">07</span><h2>建议跟踪的团队</h2><span class="sh-count">3 组</span></div>
+<div class="team"><h3>NLR 结构与激活机制方向（本期主题）</h3><p class="tu">见各文原文（本简报未核实作者单位）</p><p class="tw">本期 6 篇核心文献分别来自：<b>番茄 HREZ 抗 ToBRFV</b>（AF3 五聚体模型）、<b>疫霉–NRC4/TOPGAP</b>（helper NLR 监视）、<b>水稻 Xa1 BED-NLR</b>（核定位）、<b>拟南芥 TX14 TIR 异构体</b>、<b>油菜/亚麻荠 ETI 全景</b>、<b>DREM</b>（AI 预测）。三篇为预印本，已在卡片与综述中标注。</p></div>
+<div class="team"><h3>本期新增：磷营养与免疫交叉方向</h3><p class="tu">见 Plant Biotechnology Journal 原文（本简报未核实作者单位）</p><p class="tw">该团队用<b>病斑模拟突变体 <i>les33</i> → 图位克隆 <i>ZmPHO2</i></b> 打通「磷稳态 → SA/木质素/类黄酮积累 → PTI 增强」，并给出<b>田间施磷剂量依赖</b>证据。若你做<b>抗病表型鉴定（d1/d4/t1）</b>，这篇提醒必须控制施肥一致性。注：同行评议文献。</p></div>
+<div class="team"><h3>本期 G/N 两层说明</h3><p class="tu">—</p><p class="tw">G 层（GitHub 59 个项目）与 N 层（期刊 RSS）均完整抓取，已核对 <code>queries[].error</code> / <code>feeds[].error</code> 为 0。两层与论文<b>严格分层标注</b>，不作为同行评议结论引用。</p></div>
+</section>
+<section class="section" id="more">
+<div class="section-head"><span class="sh-k">08</span><h2>延伸阅读</h2><span class="sh-count">0 条</span></div>
+<p class="cov-note">以下为 <b>C 层预印本</b>，<b>未经同行评审</b>，不得与主榜论文同等看待；列出仅供快速跟进前沿动态。标有「相关性提示（较弱）」者与 12 个方向仅间接相关，优先级低。</p>
+</section>
+<section class="section" id="github">
+<div class="section-head"><span class="sh-k">08a</span><h2>AI4Science 开源项目动态（GitHub）</h2><span class="sh-count">62 个项目</span></div>
+<div class="alert"><h3>⚠️ 来源分层说明</h3><p>本层为 GitHub 开源项目动态，<b>不是同行评议文献</b>，与主榜论文严格分层，不得同等引用。星数/活跃度仅供筛选参考，不代表质量。</p><p>筛选口径：topic 检索 + 领域词/方法词三层闸门；活跃窗口 <b>45 天</b>，星数门槛 <b>≥30</b>。星数仅用于筛选，<b>不代表质量或适用性</b>。数据经 GitHub API 获取（日期为 UTC）。</p></div>
+<div class="table-wrap"><table class="glance"><caption>重点观察名单优先（本领域主流工具），其余按星数排序（共 18 个；完整清单见下方附录）</caption>
+<thead><tr><th>项目</th><th>分组</th><th>★</th><th>最近推送</th><th>说明</th></tr></thead><tbody>
+<tr><td class="g-t"><a href="https://github.com/google-deepmind/alphafold3">google-deepmind/alphafold3</a><br><span class="tier">Python</span></td><td class="g-d">蛋白质设计与结构预测 · 观察名单</td><td class="g-dt">8726</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">AlphaFold 3 inference pipeline.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/RosettaCommons/RFdiffusion">RosettaCommons/RFdiffusion</a><br><span class="tier">Python</span></td><td class="g-d">蛋白质设计与结构预测 · 观察名单</td><td class="g-dt">3121</td><td class="g-dt">2026-10-28 <span class="tier">活跃</span></td><td class="g-j">Code for running RFdiffusion</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ComparativeGenomicsToolkit/cactus">ComparativeGenomicsToolkit/cactus</a><br><span class="tier">Python</span></td><td class="g-d">泛基因组 · 观察名单</td><td class="g-dt">716</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">Official home of genome aligner based upon notion of Cactus graphs</td></tr>
+<tr><td class="g-t"><a href="https://github.com/pangenome/pggb">pangenome/pggb</a><br><span class="tier">Shell</span></td><td class="g-d">泛基因组 · 观察名单</td><td class="g-dt">520</td><td class="g-dt">2026-07-24 <span class="tier">一年内</span></td><td class="g-j">the pangenome graph builder</td></tr>
+<tr><td class="g-t"><a href="https://github.com/schneebergerlab/plotsr">schneebergerlab/plotsr</a><br><span class="tier">Python</span></td><td class="g-d">植物基因组学 · 观察名单</td><td class="g-dt">359</td><td class="g-dt">2026-07-27 <span class="tier">一年内</span></td><td class="g-j">Tool to plot synteny and structural rearrangements between genomes</td></tr>
+<tr><td class="g-t"><a href="https://github.com/tangerzhang/ALLHiC">tangerzhang/ALLHiC</a><br><span class="tier">Perl</span></td><td class="g-d">植物基因组学 · 观察名单</td><td class="g-dt">181</td><td class="g-dt">2024-10-20 <span class="tier">⚠ 停更 2 年</span></td><td class="g-j">ALLHiC: phasing and scaffolding polyploid genomes based on Hi-C data</td></tr>
+<tr><td class="g-t"><a href="https://github.com/codialab/panacus">codialab/panacus</a><br><span class="tier">Rust</span></td><td class="g-d">泛基因组 · 观察名单</td><td class="g-dt">141</td><td class="g-dt">2026-09-08 <span class="tier">活跃</span></td><td class="g-j">Panacus is a tool for computing statistics for GFA-formatted pangenome graphs</td></tr>
+<tr><td class="g-t"><a href="https://github.com/limix/limix">limix/limix</a><br><span class="tier">Python</span></td><td class="g-d">GWAS / 关联分析 · 观察名单</td><td class="g-dt">119</td><td class="g-dt">2026-10-16 <span class="tier">活跃</span></td><td class="g-j">Linear mixed model for genomic analyses.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/AI-sandbox/snputils">AI-sandbox/snputils</a><br><span class="tier">Python</span></td><td class="g-d">GWAS / 关联分析 · 观察名单</td><td class="g-dt">54</td><td class="g-dt">2026-09-10 <span class="tier">活跃</span></td><td class="g-j">Python toolkit for fast genotype I/O, ancestry analysis, population-genetics statistics, genotype QC, GWAS, and visualization</td></tr>
+<tr><td class="g-t"><a href="https://github.com/dougspeed/LDAK">dougspeed/LDAK</a><br><span class="tier">C</span></td><td class="g-d">GWAS / 关联分析 · 观察名单</td><td class="g-dt">53</td><td class="g-dt">2026-10-22 <span class="tier">活跃</span></td><td class="g-j"></td></tr>
+<tr><td class="g-t"><a href="https://github.com/synthetic-sciences/openscience">synthetic-sciences/openscience</a><br><span class="tier">TypeScript</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">4338</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">The open-source AI workbench for scientific research</td></tr>
+<tr><td class="g-t"><a href="https://github.com/sokrypton/ColabFold">sokrypton/ColabFold</a><br><span class="tier">Jupyter Notebook</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">2980</td><td class="g-dt">2026-10-25 <span class="tier">活跃</span></td><td class="g-j">Making Protein folding accessible to all!</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ai4s-research/open-science">ai4s-research/open-science</a><br><span class="tier">TypeScript</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">2075</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">Open Science Desktop — local-first, model-agnostic AI research workbench for macOS, Windows &amp; Linux. Open-source Claude Science desktop alternative built on Tauri + MCP + agent skills.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/zi-yue-1129/DATAGEN">zi-yue-1129/DATAGEN</a><br><span class="tier">Python</span></td><td class="g-d">大语言模型</td><td class="g-dt">1814</td><td class="g-dt">2026-11-02 <span class="tier">活跃</span></td><td class="g-j">DATAGEN: AI-driven multi-agent research assistant automating hypothesis generation, data analysis, and report writing.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/scverse/scvi-tools">scverse/scvi-tools</a><br><span class="tier">Python</span></td><td class="g-d">单细胞基础模型</td><td class="g-dt">1720</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">Deep probabilistic analysis of single-cell and spatial omics data</td></tr>
+<tr><td class="g-t"><a href="https://github.com/BradyAJohnston/MolecularNodes">BradyAJohnston/MolecularNodes</a><br><span class="tier">Python</span></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">1405</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">Toolbox for molecular animations in Blender, powered by Geometry Nodes.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/opensim-org/opensim-core">opensim-org/opensim-core</a><br><span class="tier">C++</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">1145</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">SimTK OpenSim C++ libraries and command-line applications, and Java/Python wrapping.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/xuzhougeng/wisp-science">xuzhougeng/wisp-science</a><br><span class="tier">Rust</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">1065</td><td class="g-dt">2026-11-04 <span class="tier">活跃</span></td><td class="g-j">Open-source, local-first desktop AI research workbench for scientific computing with Python/R, MCP bioinformatics tools, SSH/WSL/GPU runtimes, and OpenAI/Anthropic models.</td></tr>
+</tbody></table></div>
+<details class="morebox"><summary>其余 44 个项目（点击展开）</summary><div class="table-wrap"><table class="glance"><tbody>
+<tr><td class="g-t"><a href="https://github.com/3dmol/3Dmol.js">3dmol/3Dmol.js</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★1036</td><td class="g-dt">2026-10-21</td></tr>
+<tr><td class="g-t"><a href="https://github.com/instadeepai/nucleotide-transformer">instadeepai/nucleotide-transformer</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★937</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/tanghaibao/jcvi">tanghaibao/jcvi</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★936</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/saeyslab/nichenetr">saeyslab/nichenetr</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★685</td><td class="g-dt">2026-10-23</td></tr>
+<tr><td class="g-t"><a href="https://github.com/cafferychen777/mLLMCelltype">cafferychen777/mLLMCelltype</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★661</td><td class="g-dt">2026-09-28</td></tr>
+<tr><td class="g-t"><a href="https://github.com/opencobra/cobrapy">opencobra/cobrapy</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★596</td><td class="g-dt">2026-11-04</td></tr>
+<tr><td class="g-t"><a href="https://github.com/pinellolab/DNA-Diffusion">pinellolab/DNA-Diffusion</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★490</td><td class="g-dt">2026-10-28</td></tr>
+<tr><td class="g-t"><a href="https://github.com/gao-lab/GLUE">gao-lab/GLUE</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★485</td><td class="g-dt">2026-11-03</td></tr>
+<tr><td class="g-t"><a href="https://github.com/RosettaCommons/rosetta">RosettaCommons/rosetta</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★484</td><td class="g-dt">2026-10-21</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ACEnglish/truvari">ACEnglish/truvari</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★428</td><td class="g-dt">2026-10-03</td></tr>
+<tr><td class="g-t"><a href="https://github.com/HKU-BAL/Clair3">HKU-BAL/Clair3</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★397</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/OmicsML/dance">OmicsML/dance</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★389</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/songlab-cal/gpn">songlab-cal/gpn</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★387</td><td class="g-dt">2026-10-30</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Boom5426/Awesome-Virtual-Cell">Boom5426/Awesome-Virtual-Cell</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★334</td><td class="g-dt">2026-10-28</td></tr>
+<tr><td class="g-t"><a href="https://github.com/heise3/ExtremaRank">heise3/ExtremaRank</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★288</td><td class="g-dt">2026-10-07</td></tr>
+<tr><td class="g-t"><a href="https://github.com/datamllab/OpenEBFM">datamllab/OpenEBFM</a></td><td class="g-d">大语言模型</td><td class="g-dt">★260</td><td class="g-dt">2026-11-03</td></tr>
+<tr><td class="g-t"><a href="https://github.com/DISCO-design/DISCO">DISCO-design/DISCO</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★225</td><td class="g-dt">2026-11-03</td></tr>
+<tr><td class="g-t"><a href="https://github.com/lbcb-sci/RiNALMo">lbcb-sci/RiNALMo</a></td><td class="g-d">基础模型</td><td class="g-dt">★181</td><td class="g-dt">2026-10-08</td></tr>
+<tr><td class="g-t"><a href="https://github.com/IAAR-Shanghai/ICSFSurvey">IAAR-Shanghai/ICSFSurvey</a></td><td class="g-d">大语言模型</td><td class="g-dt">★171</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/zjunlp/SciAtlas">zjunlp/SciAtlas</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★167</td><td class="g-dt">2026-10-22</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ai4protein/ProSST">ai4protein/ProSST</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★166</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-t"><a href="https://github.com/TianGzlab/OmicsClaw">TianGzlab/OmicsClaw</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★161</td><td class="g-dt">2026-10-07</td></tr>
+<tr><td class="g-t"><a href="https://github.com/PapenfussLab/proteindj">PapenfussLab/proteindj</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★151</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ai4protein/VenusREM">ai4protein/VenusREM</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★148</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-t"><a href="https://github.com/MSDLLCpapers/ovo">MSDLLCpapers/ovo</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★144</td><td class="g-dt">2026-10-30</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Rockman6/CellSim">Rockman6/CellSim</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★128</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/moritztng/tt-bio">moritztng/tt-bio</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★126</td><td class="g-dt">2026-11-04</td></tr>
+<tr><td class="g-t"><a href="https://github.com/001TMF/blatant-why">001TMF/blatant-why</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★119</td><td class="g-dt">2026-10-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/nf-core/proteinfold">nf-core/proteinfold</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★116</td><td class="g-dt">2026-10-27</td></tr>
+<tr><td class="g-t"><a href="https://github.com/PlantSimulationLab/Helios">PlantSimulationLab/Helios</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★112</td><td class="g-dt">2026-11-04</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ai4protein/ProtSSN">ai4protein/ProtSSN</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★98</td><td class="g-dt">2026-09-29</td></tr>
+<tr><td class="g-t"><a href="https://github.com/salilab/imp">salilab/imp</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★81</td><td class="g-dt">2026-11-04</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ssinder/bioinformatics-agent-skills">ssinder/bioinformatics-agent-skills</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★75</td><td class="g-dt">2026-10-27</td></tr>
+<tr><td class="g-t"><a href="https://github.com/cryoEM-CNIO/BinderFlow">cryoEM-CNIO/BinderFlow</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★66</td><td class="g-dt">2026-09-23</td></tr>
+<tr><td class="g-t"><a href="https://github.com/mjendrusch/salad">mjendrusch/salad</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★66</td><td class="g-dt">2026-09-30</td></tr>
+<tr><td class="g-t"><a href="https://github.com/labstructbioinf/pLM-BLAST">labstructbioinf/pLM-BLAST</a></td><td class="g-d">蛋白质语言模型</td><td class="g-dt">★66</td><td class="g-dt">2026-10-22</td></tr>
+<tr><td class="g-t"><a href="https://github.com/wallnerlab/AFsample2">wallnerlab/AFsample2</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★62</td><td class="g-dt">2026-10-01</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Tomasz-Lab/Metagenomic-DeepFRI">Tomasz-Lab/Metagenomic-DeepFRI</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★55</td><td class="g-dt">2026-10-21</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Degiacomi-Lab/molearn">Degiacomi-Lab/molearn</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★52</td><td class="g-dt">2026-10-27</td></tr>
+<tr><td class="g-t"><a href="https://github.com/K-Dense-AI/drug-discovery-agent-skills">K-Dense-AI/drug-discovery-agent-skills</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★52</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/IBM/AutoPeptideML">IBM/AutoPeptideML</a></td><td class="g-d">蛋白质语言模型</td><td class="g-dt">★42</td><td class="g-dt">2026-10-25</td></tr>
+<tr><td class="g-t"><a href="https://github.com/maize-genetics/tassel-r">maize-genetics/tassel-r</a></td><td class="g-d">GWAS / 关联分析</td><td class="g-dt">★35</td><td class="g-dt">2026-10-21</td></tr>
+<tr><td class="g-t"><a href="https://github.com/UTokyo-FieldPhenomics-Lab/SPROUT">UTokyo-FieldPhenomics-Lab/SPROUT</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★10</td><td class="g-dt">2026-10-29</td></tr>
+<tr><td class="g-t"><a href="https://github.com/djaliloh/FrontVegV2">djaliloh/FrontVegV2</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★8</td><td class="g-dt">2026-10-30</td></tr>
+</tbody></table></div></details>
+</section>
+<section class="section" id="news">
+<div class="section-head"><span class="sh-k">08c</span><h2>国内外研究进展（期刊动态 · 新闻）</h2><span class="sh-count">10 条命中方向（其中新增 5）</span></div>
+<div class="alert"><h3>⚠️ 来源分层说明</h3><p>本层为期刊新闻/研究动态 RSS 与预印本趋势，<b>属于动态线索而非同行评议结论的转述</b>；凡由 web_search 补充的条目须另标「未逐条核实」。</p><p>本层来自期刊官方 RSS（Cell / Science / Nature 系 / Wiley 等），窗口 <b>30 天</b>。「命中方向」= 标题/摘要出现 12 方向的关键词；「仅植物学相关」= 属本领域但不落在 12 个方向上，见下方附录。<b>RSS 条目标题由期刊提供，本简报未逐条核实其结论。</b></p></div>
+<div class="table-wrap"><table class="glance"><caption>命中 12 方向的最新动态</caption>
+<thead><tr><th>日期</th><th>来源</th><th>标题</th><th>方向</th><th>链接</th></tr></thead><tbody>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><span class="tier">新</span> ZmPHO2‐Mediated Phosphorus Homeostasis Modulates PAMP‐Triggered Immunity and Disease Resistance in Maize</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70778?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><span class="tier">新</span> Harnessing Host‐Pathogen Evolutionary Dynamics to Engineer Bacterial Blight and Leaf Streak Resistance in Basmati Rice</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70786?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">New Phytologist</td><td class="g-t"><span class="tier">新</span> PELOTA at the crossroads of tomato fertility and viral resistance</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71715?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><span class="tier">新</span> Multiplexed Engineering of Disease Resistance and Lodging Tolerance in Wheat Via a Single Xylan Modifying Glycosyltransferase</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70747?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Journal</td><td class="g-t"><span class="tier">新</span> Multi‐locus genetic basis of stomatal density and size in maize revealed by integrated QTL and GWAS</td><td class="g-d">d2 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71187?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">Converging GWAS and Genome Editing Decrypts MsCBF8‐MsGolS2 Regulatory Module for Drought Tolerance Without Yield Penalty in Medicago sativa</td><td class="g-d">d2 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70756?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-10-30</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t">Assessing Zymoseptoria tritici Candidate Effectors in the Non‐Host Nicotiana benthamiana Reveals Immune Recognition and Potential Host‐Independent Activities</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70344?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-10-26</td><td class="g-j">New Phytologist</td><td class="g-t">A single‐nucleus multiome profiling reveals the regulatory programs driving plant nematode–induced syncytium</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71707?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-10-22</td><td class="g-j">New Phytologist</td><td class="g-t">Elevated CO2 drives nonlinear trait responses and reshapes growth‐virulence trade‐offs in a plant pathogen</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71669?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-10-21</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">The Cytosolic Iron–Sulfur Cluster Assembly Targeting Complex Is Hijacked by Magnaporthe Effector AvrPi9 to Suppress Rice Resistance</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70773?af=R">原文</a></td></tr>
+</tbody></table></div>
+<details class="morebox"><summary>仅植物学相关、未落在 12 方向的 118 条（点击展开，可作为领域背景）</summary><div class="table-wrap"><table class="glance"><tbody>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature Communications</td><td class="g-t"><a href="https://www.nature.com/articles/s41467-026-78409-9">Decoding microprotein interactome via a minimal genetically encoded photocatalytic proximity labeling system</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03167-z">Clearing the way for a transformative stem-cell treatment for Parkinson’s disease</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03168-y">Fine-tuning brain stimulation to fight Parkinson’s disease</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03580-4">Mysterious anthrax outbreak kills hippos in Africa — raising concerns for human spread</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03166-0">Replacing the neurons that Parkinson’s destroys</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/s41586-026-11243-7">Synergy in viral–bacterial co-infection expedites algal bloom demise</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/s41586-026-11187-y">A conserved flowering-time module underlies double-season cropping</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71653?af=R">Soil engineering by an invasive ant reprograms plant growth–defense trade‐offs to entrench a tripartite mutualism</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">Nature Biotechnology</td><td class="g-t"><a href="https://www.nature.com/articles/s41587-026-03377-w">Editor’s Pick: Wild Bioscience</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71718?af=R">Identification of auxin response factor ARF27 as a regulator of maize root morphogenesis</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71727?af=R">Root age structure governs long‐term architecture and hydraulic function in perennial plants: a modelling framework</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71675?af=R">Four universal modules and their combinations for decoding amplitude and frequency of Ca2+ signals in plants</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71209?af=R">Bringing seed barriers into focus: Optimized clearing and histological staining</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71717?af=R">Allometric scaling of adaxial–abaxial stomatal allocation in amphistomatous plants worldwide</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71671?af=R">Emerging roles of inositol pyrophosphates in plants: from environmental stress acclimation to hormonal responses and terrestrialization</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71711?af=R">Cortical lacunae, not xylem embolism, drive interspecific differences in freeze–thaw hydraulic dysfunction of conifer fine roots</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71641?af=R">Why be deciduous in a tropical savanna climate? Insights from leaf deployment, stem growth and sap flow dynamics</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70772?af=R">Issue Information</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70652?af=R">Production of the High Value Pharmaceutical Target, Human Granulocyte‐Colony Stimulating Factor, in Nicotiana benthamiana Is Improved by Co‐Expression of the Transcriptional Regulator of the Unfolded Protein Response, bZIP60</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70741?af=R">Satellite DNA Editing Enables Multiplexed Chromosome Restructuring in Populus</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70751?af=R">Natural Variation in SlSPS1 Promoter Reduces Soluble Solids Content During Tomato Domestication</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70746?af=R">Targeted Knockout of CYP79A1 Reduces Cyanogenic Potential in Grain Sorghum</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70560?af=R">Harnessing Bulk‐Segregant Mapping to Identify Trait‐Associated Genes in the Allopolyploid Model Plant Nicotiana benthamiana</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70705?af=R">Plant‐Based Production of Human Major Histocompatibility Complex Class II Molecules</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70717?af=R">Design and Immunogenicity of a Nanoparticle Combination Vaccine for Salmonella in Poultry</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70731?af=R">Natural and CRISPR/Cas9 Editing Variations of Dual‐uORFs Synergistically Increase the Nutritional Value of Silage Maize Feed</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70736?af=R">miR172‐AP2 Controls Age‐Dependent Regeneration Competence in Populus</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70737?af=R">Single‐Nucleus Transcriptome Analysis Provides New Insights Into B Chromosome Elimination in Sorghum</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70738?af=R">The OsWRKY15‐OsSUT3 Regulatory Module Enhances Rice Pollen Fertility by Mediating Sucrose Allocation to Anthers</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70742?af=R">Unexpected Suppression of Tomato Fruit Cuticle Formation by Overexpression of a Key Cutin Biosynthetic Enzyme</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70743?af=R">Metabolic Rewiring of the Shikimate Pathway Enables Rose‐Scented Rice</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70744?af=R">In Planta Expression of Thermophilic GtGBE Mimics BEIIb and Modifies Rice Starch Structure Without Yield Penalties</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70745?af=R">A MYB‐Related Transcriptional Module Cooperatively Represses Xylem Development in Poplar</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70748?af=R">Genetic Dissection of Wheat Heterosis Identifies Candidate Genes in Biparental and Diverse Hybrid Populations</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70750?af=R">Single‐Cell Transcriptomics Reveals the FA9–VAP Module Regulating Fatty Acid Accumulation in Soybean Seeds</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70753?af=R">CRISPR/Cas9‐Mediated Knockout of LbSP1 and LbSP5G1 Reveals Efficient Customization of Shoot Architecture in Black Goji Berry</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70754?af=R">HvPHO1 Controls a Glucose 1‐Phosphate–SnRK1 Signalling Module That Coordinates Starch Accumulation in Barley Endosperm</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70575?af=R">Knocking Out Two Polyphenol Oxidase Genes Significantly Improves Recombinant Protein Purification in Nicotiana benthamiana</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70685?af=R">Gene Editing of Nicotiana benthamiana Architecture for Space‐Efficient Production of Recombinant Proteins in Closed Environments</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70718?af=R">Development of In Vitro and In Planta Strategies for Efficient Production of High‐Value Steviol Glycosides</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70735?af=R">Bacteriophage P22 Virus‐Like Particles as Nanoscale Protein Scaffolds for Plant Synthetic Biology</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70739?af=R">Simultaneous Overexpression of FERULOYL‐CoA 6′‐HYDROXYLASE 1 and COUMARIN SYNTHASE Leads to Coumarin‐Enriched Lignin and Improved Saccharification in Greenhouse‐ and Field‐Grown Poplar</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71714?af=R">Thermal acclimation as an emergent property of economically optimal photosynthesis</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71701?af=R">Rice bZIP11 acts as a transcriptional repressor that negatively regulates photosynthesis in response to nitrogen deficiency</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71716?af=R">Aligning auxin supply to developmental demand in adventitious rooting</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70365?af=R">The Sweetpotato Black Rot Pathogen Ceratocystis fimbriata</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70760?af=R">AhMADS6‐Mediated Repression of AhHD‐Zip Contributes to Growth Habit Regulation in Cultivated Peanut (Arachis hypogaea L.)</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70762?af=R">PlantPopMethylDB: An Integrated Database of Intraspecific DNA Methylation Variation in Plants</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70764?af=R">CRISPR/Cas9‐Mediated OsHMA3 Promoter Editing Reduces Rice Grain Cd Accumulation Without Yield Penalty</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70752?af=R">Generation of Herbicide‐Resistant Alfalfa Germplasm via Prime Editing</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70755?af=R">Comparative Genome‐Wide Association Studies of Metabolites and Grain‐Related Traits in Common Wheat</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70757?af=R">Unravelling Mechanisms of Acquired Drought Tolerance by Priming in Tomato Using Integrative Multi‐Omics Phenotypic Analysis</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70758?af=R">Multiplex FAD2/FATB Editing Generates Ultra‐High‐Oleic, Low‐Saturate Soybean With Increased Seed Fatty Acid Content</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70761?af=R">An Intronic Structural Variant in GhEBS1 Drives Cotton Fruit Size Divergence by Modulating Chromatin Accessibility and Gene Expression</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70763?af=R">A Gain‐of‐Function Mutation in DELLA Selectively Alters Protein Interactions to Regulate Wheat Tiller Angle and Plant Height</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70765?af=R">Tonoplast‐Localized ABCC Transporters Enhance Heterologous Production of the Antidiabetic Montbretin A and Its Analogues in Nicotiana benthamiana</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70768?af=R">A Lambda Red Recombinase‐Assisted CRISPR/Cas9 System for Efficient and Precise Genome Editing in Agrobacterium tumefaciens</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70784?af=R">mRNA Decay Mediates Evolution and Biological Functions in Plant Gene Expression</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71210?af=R">The SlHYL1‐SlRBP1 module integrates gibberellin metabolism to promote plant height in tomato (Solanum lycopersicum)</a></td></tr>
+<tr><td class="g-dt">2026-11-01</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71720?af=R">Aridity reshapes leaf and root trait dispersion through distinct microbial pathways</a></td></tr>
+</tbody></table></div></details>
+</section>
+<section class="section" id="prior">
+<div class="section-head"><span class="sh-k">08b</span><h2>往期已报（不重复）</h2><span class="sh-count">9 条</span></div>
+<p class="cov-note">以下条目在本轮检索窗口内命中，但<b>已在往期简报中报道过</b>，故不重复列出卡片，仅保留清单备查（避免连续几期重复同一批论文）。</p>
+<div class="table-wrap"><table class="glance"><caption>本轮窗口内已在往期简报报道过的条目</caption>
+<thead><tr><th>日期</th><th>期刊</th><th>论文</th><th>DOI</th></tr></thead><tbody>
+<tr><td class="g-dt">2026-10-29</td><td class="g-j">Nature Plants</td><td class="g-t">The SCHENGEN pathway regulates lignin barrier formation via the receptor-like cytoplasmic kinase BIK1 in plant immunity</td><td class="g-dt">10.1038/s41477-026-02446-x</td></tr>
+<tr><td class="g-dt">2026-11-01</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t">Assessing Zymoseptoria tritici Candidate Effectors in the Non-Host Nicotiana benthamiana Reveals Immune Recognition and Potential Host-Independent Activities</td><td class="g-dt">10.1111/mpp.70344</td></tr>
+<tr><td class="g-dt">2026-10-31</td><td class="g-j">预印本</td><td class="g-t">Dynamic evolution of diaphorin biosynthetic genes against a background of genome conservation in Profftella</td><td class="g-dt">10.64898/2026.10.30.762998</td></tr>
+<tr><td class="g-dt">2026-10-31</td><td class="g-j">预印本</td><td class="g-t">Genomic forecasting links climate-associated variation to spring phenology in the European wild apple, a crop wild relative of the cultivated apple</td><td class="g-dt">10.64898/2026.10.29.761786</td></tr>
+<tr><td class="g-dt">2026-10-30</td><td class="g-j">预印本</td><td class="g-t">Pattern-triggered immunity induced by dsRNA against plant viruses involves two distinct branches, one of which depends on Coronatine insensitive1 ( COI1 )</td><td class="g-dt">10.64898/2026.10.29.762747</td></tr>
+<tr><td class="g-dt">2026-10-30</td><td class="g-j">Research Square</td><td class="g-t">Transient overexpression and silencing of tomato SlGLP11-1 gene reveal its crucial role in mediating ROS homeostasis driven disease resistance</td><td class="g-dt">10.21203/rs.3.rs-11217426/v1</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-j">预印本</td><td class="g-t">Metabolic and transcriptional responses reveal co-option of symbiotic processes during early soybean-soybean cyst nematode interaction</td><td class="g-dt">10.64898/2026.10.23.761348</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-j">预印本</td><td class="g-t">Yeast surface display reveals structure-dependent β-glucan association with the plant immune receptor At IGP1</td><td class="g-dt">10.64898/2026.10.28.762498</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-j">Research Square</td><td class="g-t">StCCR6-Mediated Lignin Biosynthesis Enhances Potato Resistance Against Ralstonia solanacearum</td><td class="g-dt">10.21203/rs.3.rs-11215989/v1</td></tr>
+</tbody></table></div>
+</section>
+<section class="section" id="coverage">
+<div class="section-head"><span class="sh-k">08e</span><h2>本期覆盖说明</h2><span class="sh-count">人工声明</span></div>
+<div class="alert alert-warn"><h3>论文层覆盖情况</h3><p>本期为<b>主题聚合模式</b>（T01 NLR 结构与抗病小体），主体是 05 主题综述，从台账 34 篇 T01 候选中语义筛选出 <b>6 篇</b>真正围绕 NLR 结构与信号的研究重新组织。常规 7 天窗口<b>新增 24 篇</b>，其中与该主题直接相关的 NLR 结构类论文为 <b>0 篇</b>（含 Pik 位点新等位基因等 2 篇无摘要，按红线不出卡片）。故本期只出 <b>1 张新论文卡片</b>（ZmPHO2，d1/d4/t1 全命中），其余 23 篇列入 08d 延期。</p></div>
+</section>
+<section class="section" id="priority">
+<div class="section-head"><span class="sh-k">08d</span><h2>优先方向补网记录</h2><span class="sh-count">23 条被排除</span></div>
+<div class="alert"><h3>说明</h3><p>当常规检索连续多日空窗时，会用<b>优先方向专项检索</b>（d5/t5/t6/t7 的窄术语 + 预印本平台）补网。补网按术语召回，会带进与 12 方向<b>仅术语层面相关</b>的条目——下表如实列出<b>被排除</b>的条目与原因，避免「悄悄丢掉」。</p></div>
+<div class="table-wrap"><table class="glance"><caption>补网召回但未纳入主榜/延伸的条目</caption>
+<thead><tr><th>日期</th><th>DOI</th><th>标题</th><th>排除原因</th></tr></thead><tbody>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1016/j.molp.2026.10.018</td><td class="g-t">A haplotype-resolved lychee pangenome uncovers structural and haplotype variations associated with flowering time divergence and fruit sugar composition</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1038/s41467-026-78787-0</td><td class="g-t">GATA transcription factors coordinate developmental progression in the arabidopsis root</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-dt">10.1111/pbi.70775</td><td class="g-t">Pikz, a Novel Allele at the Rice Pik Locus Conferring Resistance Against Magnaporthe oryzae</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1111/pbi.70786</td><td class="g-t">Harnessing Host-Pathogen Evolutionary Dynamics to Engineer Bacterial Blight and Leaf Streak Resistance in Basmati Rice</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1007/s00299-026-04030-1</td><td class="g-t">A hidden T-DNA-linked inversion-duplication is associated with a light-dependent Arabidopsis mutant phenotype</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1111/jipb.70434</td><td class="g-t">Chemical cues and cognitive models: Integrating metabolomics and AI for plant stress resilience</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1093/plphys/kiag818</td><td class="g-t">Catabolism of jasmonoyl-isoleucine modulates maize development and defense responses</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1093/jxb/erag563</td><td class="g-t">Overexpression of REMORIN1.2 affects salt signaling and tolerance in Arabidopsis</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.1093/jxb/erag555</td><td class="g-t">Integrative transcriptome meta-analysis distinguishes compatibility and incompatibility in rice-Xanthomonas interaction</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-dt">10.1038/s43016-026-01452-8</td><td class="g-t">Wheat yield sensitivity to compound hot-dry-windy events is increasing in China</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-31</td><td class="g-dt">10.1093/plphys/kiag809</td><td class="g-t">The art of multi-tasking: plant responses to their environment</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-dt">10.1016/j.plantsci.2026.113554</td><td class="g-t">Seed Morphogenesis: Genetic Architecture, Regulatory Mechanisms, and Breeding Opportunities</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.64898/2026.11.01.763533</td><td class="g-t">Dissecting the genetic basis of DUS characters in Pakistani wheat varieties</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.64898/2026.10.30.762947</td><td class="g-t">GxE and changes to the genetic architecture of flowering time in an overwintering environment</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-dt">10.21203/rs.3.rs-11278791/v1</td><td class="g-t">High-density genetic mapping based on whole-genome resequencing reveals a novel major locus for leaf-related traits in barley</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-dt">10.64898/2026.10.27.762148</td><td class="g-t">Mapping, stacking and characterization of a novel resistance haplotype against GpaV vrn -virulent Globodera pallida derived from wild potato relative Solanum brevicaule</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-dt">10.21203/rs.3.rs-11280428/v1</td><td class="g-t">Genome-wide and haplotype mapping reveals genetic drivers of biomass productivity per unit water and nitrogen in sorghum</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-11-01</td><td class="g-dt">10.64898/2026.10.27.762259</td><td class="g-t">Unravelling genomic and environmental contributions to nitrogen-use efficiency in tropical maize through Bayesian causal forests</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-30</td><td class="g-dt">10.21203/rs.3.rs-11533831/v1</td><td class="g-t">Phenotyping part of the target family improves within-family genomic prediction in rice nested association mapping families</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-30</td><td class="g-dt">10.21203/rs.3.rs-11350363/v1</td><td class="g-t">Identification of QTNs, QTN-by-Environment Interactions, and Their Candidate Genes for Rice Grain-Related Traits across Years using 3VmrMLM</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-dt">10.20944/preprints202610.2984.v1</td><td class="g-t">Genomic Basis and Immunosuppressive Mechanism of Xenorhabdus nematophila HNS01 Against the Rice Pest Chilo suppressalis</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-dt">10.21203/rs.3.rs-11319537/v1</td><td class="g-t">Genome-wide association study in Arabidopsis reveals IAN genes regulate pollen heatwave tolerance</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+<tr><td class="g-dt">2026-10-29</td><td class="g-dt">10.21203/rs.3.rs-10997427/v1</td><td class="g-t">Evaluation of Cimmyt’s Biofortified Elite Wheat (Triticum Aestivum L.) Genotypes for Heat Stress at Different Reproductive Stages</td><td class="g-j">本期未生成卡片（主题综述模式，人工复核时间用于撰写 T01 主题综述）。</td></tr>
+</tbody></table></div></section>
+<section class="section" id="method">
+<div class="section-head"><span class="sh-k">09</span><h2>检索与核实说明</h2><span class="sh-count">口径 · 方法 · 局限</span></div>
+<div class="methodblock"><h3>1 · 时间窗口与「当天发表」的实际含义</h3><p>出刊日为 <b>2026-11-05</b>（Asia/Shanghai）。你的需求是检索「当天发表」的论文，但实测：<b>出刊日前 24 小时内，A/B/C 三层来源中没有任何一篇的实际首发日等于出刊日</b>。</p><p><b>原因</b>：Europe PMC 对最近 1–4 天的文献收录不完整，新论文从上线到入库通常滞后数天。这与工作区《论文周报/配置.md》第 5 节记录的实测经验一致。</p><p><b>本简报口径</b>：回看窗口设为 <b>7 天</b>（2026-11-04 → 2026-11-05），取该窗口内全部可索引到的、落在 12 个方向上的文献；<b>每篇均标注真实首发日</b>（卡片与速览表内），供你自行判断新鲜度。因此本日篇数是<b>下界而非全量</b>，且必然与次日/次轮出刊存在窗口重叠。</p></div>
+<div class="methodblock"><h3>2 · 来源分层（A / B / C）</h3><p><b>A 层（顶刊白名单，0 篇）</b>：Nature、Science、Cell、Nature Genetics、Nature Plants、Nature Communications、Science Advances、Molecular Plant、Nature Methods、Cell Host &amp;amp; Microbe。</p><p><b>B 层（专业期刊，1 篇）</b>：The Plant Cell、Plant Journal、Journal of Experimental Botany、New Phytologist、Plant Biotechnology Journal、Theoretical and Applied Genetics、Genome Biology、Horticulture Research、Plant Physiology、Plant Communications、Molecular Plant Pathology、Plant Cell Reports、Plant Science 等。</p><p><b>C 层（预印本，0 条）</b>：bioRxiv、Research Square、Preprints.org。<b>未经同行评审</b>，单独放入「延伸阅读」，不与主榜同等看待。</p><p>分层依据为期刊名映射——Europe PMC 返回的是缩写刊名（如 <code>Mol Plant</code>），必须先归一化再判定层级，映射表见 <code>fetch_daily.py</code> 的 <code>JOURNAL_MAP</code>。</p></div>
+<div class="methodblock"><h3>3 · 检索通道与可复现流程</h3><p><b>主通道</b>：Europe PMC REST API（<code>resultType=core</code> 取摘要原文）。按「期刊白名单 × 植物词 × 日期」与「方向检索式 × 期刊 × 日期」两轮交叉检索，再对预印本单独检索（<code>SRC:&amp;quot;PPR&amp;quot;</code>）。</p><p><b>作者与通讯作者</b>：Europe PMC 的 <code>authorList</code> <b>不提供通讯作者字段</b>，且对本批论文的 affiliation 为空；Crossref 的 <code>sequence</code> 也只区分 first/additional，<b>不是</b>通讯标记。因此通讯作者改用 <b>NCBI PubMed XML</b> 中 <code>Electronic address: &amp;lt;email&amp;gt;</code> 这一<b>出版商官方标记</b>判定；无该标记者回退「末位作者」惯例并明确标注为<b>推断</b>。姓名与单位另由 Crossref 补齐。</p><p><b>可复现流程</b>：<code>fetch_daily.py</code>（检索）→ <code>classify.py</code>（方向分类，含 13 例回归测试）→ <code>fetch_authors.py</code> + <code>fetch_corresponding.py</code>（作者）→ <code>merge_authors.py</code> → <code>assemble.py</code> → <code>build_report.py</code>（生成 HTML）→ <code>selfcheck.py</code>（自检）。</p></div>
+<div class="methodblock"><h3>4 · 已知局限与未核实项</h3><ul><li><b>索引延迟</b>：最近 1–4 天收录不完整，本日篇数为<b>下界</b>。</li><li><b>方向分类为关键词规则</b>（<code>classify.py</code>），已用 13 个真实样本做回归测试，并设置多层语境门（d1 须有基因层语境、d4 须有病害专有词或分子免疫证据、d5 须有免疫语境）以压制误标；但仍可能有漏标或误标，卡片内附「证据词」字段，便于复核判断依据。</li><li><b>通讯作者</b>：标 <b>通讯作者</b> 者依据 PubMed 官方 <code>Electronic address</code> 标记或期刊全文 <code>corresp</code> 字段；标<b>（推断）</b>者仅据末位作者惯例，<b>未经官方确认</b>。Wiley 系期刊部分文章网页被 Cloudflare 拦截，无法二次核对是否另有共同通讯。</li><li><b>作者「主要研究方向」</b>：仅在有明确公开来源时填写，并标注 confidence（confirmed / inferred / unconfirmed）；标 <b>unconfirmed</b> 者写明「未查到可靠公开信息」。<b>未展示任何年龄信息</b>（无可靠公开来源，且按你的要求省略）。</li><li><b>IF 值</b>为<b>整数近似值</b>，仅用于快速分层，不构成精确引用依据。</li><li><b>摘要</b>：英文为 Europe PMC <code>abstractText</code> <b>逐字原文</b>；若原文在数据库中截断（本次有数篇预印本出现），卡片内已明确标注截断位置，<b>不补写、不推测</b>缺失内容。</li></ul></div>
+</section>
+</main></div>
+<script>
+
+(function(){
+  "use strict";
+  var papers   = Array.prototype.slice.call(document.querySelectorAll('.paper'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section[id]'));
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('#tocList a'));
+  var segs     = Array.prototype.slice.call(document.querySelectorAll('.seg'));
+  var fbtns    = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var state    = document.querySelector('#filterState');
+  var empty    = document.querySelector('#emptyState');
+
+  var LABEL = {
+    all:'全部方向',
+    d1:'核心 · 抗病基因定位与克隆', d2:'核心 · GWAS 与关联分析', d3:'核心 · 泛基因组',
+    d4:'核心 · 水稻与作物抗病基因', d5:'核心 · NLR 与免疫受体',
+    t1:'专项 · 作物抗病基因克隆与挖掘', t2:'专项 · 群体水平泛基因组', t3:'专项 · 大规模 GWAS 分析',
+    t4:'专项 · AI / 大语言模型应用', t5:'专项 · AF3 结构预测与蛋白设计',
+    t6:'专项 · 免疫机制与 NLR-ID 演化', t7:'专项 · 免疫 Decoy 诱饵蛋白'
+  };
+
+  function matches(p, dir){
+    if (dir === 'all') return true;
+    if (p.dataset.dir === dir) return true;
+    return (p.dataset.tags || '').split(/\s+/).indexOf(dir) !== -1;
+  }
+
+  function applyFilter(dir){
+    papers.forEach(function(p){
+      p.classList.toggle('is-hidden', !matches(p, dir));
+    });
+    fbtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.filter === dir)); });
+    segs.forEach(function(s){ s.setAttribute('aria-pressed', String(s.dataset.dir === dir)); });
+    if (state) state.textContent = LABEL[dir] || LABEL.all;
+
+    var shown = papers.filter(function(p){ return !p.classList.contains('is-hidden'); }).length;
+    if (empty) empty.classList.toggle('is-on', shown === 0);
+
+    sections.forEach(function(sec){
+      var body = sec.querySelectorAll('.paper');
+      if (!body.length) return;
+      var visible = Array.prototype.filter.call(body, function(p){
+        return !p.classList.contains('is-hidden');
+      }).length;
+      sec.style.display = (dir !== 'all' && visible === 0) ? 'none' : '';
+    });
+  }
+
+  fbtns.forEach(function(b){
+    b.addEventListener('click', function(){ applyFilter(b.dataset.filter); });
+  });
+  segs.forEach(function(s){
+    s.addEventListener('click', function(){
+      var next = s.getAttribute('aria-pressed') === 'true' ? 'all' : s.dataset.dir;
+      applyFilter(next);
+    });
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setActive(id){
+    tocLinks.forEach(function(a){
+      a.classList.toggle('is-active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if ('IntersectionObserver' in window){
+    var seen = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ seen[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var best = null, bestRatio = 0;
+      Object.keys(seen).forEach(function(k){
+        if (seen[k] > bestRatio){ bestRatio = seen[k]; best = k; }
+      });
+      if (best) setActive(best);
+    }, { rootMargin:'-15% 0px -60% 0px', threshold:[0, .12, .3, .6] });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  tocLinks.forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var el = document.querySelector(a.getAttribute('href'));
+      if (!el) return;
+      ev.preventDefault();
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+      setActive(a.getAttribute('href').slice(1));
+    });
+  });
+})();
+
+</script>
+</body></html>
