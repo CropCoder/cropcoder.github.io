@@ -10,15 +10,22 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 
 ```
 ├── index.html                      # English resume homepage (single-page sections + hero)
+├── 404.html                        # Branded 404 page (standalone, inline styles)
+├── robots.txt / sitemap.xml        # Search engine crawl + index
 ├── blog/
+│   ├── index.html                  # Blog listing page (all posts)
 │   ├── gwas-analysis.html          # Blog: GWAS analysis tutorial
 │   ├── rice-disease-resistance.html # Blog: Rice disease resistance review
 │   ├── pangenome-research.html     # Blog: Pan-genome research notes
 │   └── hpc-gpu-genomics.html       # Blog: HPC/GPU for genomics
+├── newpaper/
+│   ├── index.html                  # Daily literature briefing archive (zh-CN)
+│   └── YYYY-MM-DD-日报.html        # Daily briefing issues (zh-CN)
 ├── assets/
-│   ├── css/resume.css              # Single stylesheet (~1020 lines)
-│   └── js/resume.js                # Nav toggle + scroll-spy active link
-├── images/                         # Favicons, profile photo, publication figures
+│   ├── css/resume.css              # Single stylesheet (~1450 lines)
+│   └── js/resume.js                # Nav toggle + scroll-spy active link + footer year
+├── images/                         # Favicons, profile photo, publication figures, og-image.jpg
+├── pdf/                            # Publication PDFs (linked from homepage)
 ├── .github/FUNDING.yml
 ├── .nojekyll                       # Disables Jekyll processing for GitHub Pages
 └── .gitignore

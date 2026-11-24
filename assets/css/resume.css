@@ -151,6 +151,7 @@ svg {
 }
 
 .hero h1,
+.section-heading h1,
 .section-heading h2,
 .contact-section h2 {
   margin: 0;
@@ -264,6 +265,7 @@ svg {
   margin-bottom: 28px;
 }
 
+.section-heading h1,
 .section-heading h2,
 .contact-section h2 {
   font-size: clamp(2rem, 4vw, 2.75rem);
@@ -1414,5 +1416,30 @@ svg {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+  }
+}
+
+/* Accessibility: visible keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* Section lead paragraph */
+.section-lede {
+  color: var(--muted);
+  max-width: 70ch;
+  margin: 10px 0 0;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
