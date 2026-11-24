@@ -133,7 +133,7 @@ svg {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 590px;
+  grid-template-columns: 1fr;
   gap: 40px;
   align-items: center;
   min-height: 480px;
@@ -200,15 +200,6 @@ svg {
   flex: 0 0 auto;
 }
 
-.hero-summary {
-  width: 100%;
-  margin: 16px 0 0;
-  color: #24364e;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  text-align: justify;
-}
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -240,21 +231,6 @@ svg {
   color: var(--ink);
   border: 1px solid #8ba1b9;
   background: var(--white);
-}
-
-.profile-card {
-  padding: 0 0 20px;
-}
-
-.profile-card img {
-  width: min(100%, 150px);
-  aspect-ratio: 1;
-  margin: 0 auto;
-  object-fit: cover;
-  border: 3px solid #08213f;
-  border-radius: 50%;
-  background: var(--soft);
-  box-shadow: var(--shadow);
 }
 
 .section-heading {
@@ -1207,10 +1183,6 @@ svg {
     min-height: auto;
   }
 
-  .profile-card {
-    max-width: 100%;
-  }
-
   .focus-grid,
   .resource-grid,
   .life-grid,
@@ -1307,11 +1279,6 @@ svg {
 
   .hero-role {
     font-size: 1.12rem;
-  }
-
-  .profile-card {
-    max-width: 100%;
-    margin: 0 auto;
   }
 
   .section-heading,
