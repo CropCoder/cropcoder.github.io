@@ -37,6 +37,11 @@ Full list → [Google Scholar](https://scholar.google.com/citations?user=wOeWxxU
 - [GWAS Analysis: From Population Design to Candidate Gene Interpretation](https://cropcoder.github.io/blog/gwas-analysis.html) — A practical guide to association mapping in crops
 - [Rice Disease Resistance: From R Gene Cloning to Molecular Design Breeding](https://cropcoder.github.io/blog/rice-disease-resistance.html) — Review of progress in rice R gene research
 - [Pan-genome Research Notes: From Resource Construction to Functional Interpretation](https://cropcoder.github.io/blog/pangenome-research.html) — Practical notes on pan-genome analysis for crop genomics
+- [HPC and GPU Servers for Large-Scale Genomics Analysis](https://cropcoder.github.io/blog/hpc-gpu-genomics.html) — Matching genomics workloads to hardware
+
+## 📰 Daily Literature Briefing（每日文献推荐）
+
+- [每日文献推荐归档索引](https://cropcoder.github.io/newpaper/) — 作物抗病基因组学每日文献简报：12 个方向（抗病基因定位与克隆、GWAS、泛基因组、NLR 与植物免疫、AI4Science 等），含中英对照摘要与可借鉴点，每期自包含可离线阅读。
 
 ## 🛠️ Skills
 

@@ -863,7 +863,24 @@ pre .cm{color:#9c968a}
   .morebox>div{display:block!important}
 }
 
+
+/* ===== site back-nav ===== */
+.site-backnav{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;max-width:var(--maxw);margin:34px auto 0;padding:18px 28px;border-top:1px solid var(--line);font-size:14.5px}
+.site-backnav a{border-bottom:none}
+.site-backnav a:hover{border-bottom:1px solid var(--signal)}
 </style>
+    <link rel="canonical" href="https://cropcoder.github.io/newpaper/2026-10-26-日报.html">
+    <meta name="keywords" content="赵记稳, Jiwen Zhao, zhao jiwen, zhaojiwen, CropCoder, 每日文献推荐, 植物抗病, 作物抗病基因, GWAS, 泛基因组, NLR, 文献简报">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="每日文献简报 · 2026-10-26（植物抗病与基因组学 12 方向）">
+    <meta property="og:url" content="https://cropcoder.github.io/newpaper/2026-10-26-日报.html">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="CropCoder（赵记稳 Jiwen Zhao）">
+    <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "headline": "每日文献简报 · 2026-10-26（植物抗病与基因组学 12 方向）", "datePublished": "2026-10-26", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Jiwen Zhao（赵记稳）", "alternateName": ["赵记稳", "zhao jiwen", "zhaojiwen", "CropCoder"], "url": "https://cropcoder.github.io/"}, "publisher": {"@type": "Person", "name": "Jiwen Zhao（赵记稳）", "url": "https://cropcoder.github.io/"}, "mainEntityOfPage": "https://cropcoder.github.io/newpaper/2026-10-26-日报.html"}
+    </script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
@@ -893,20 +910,17 @@ pre .cm{color:#9c968a}
 <p class="strip-note">条宽 = 该<b>核心方向</b>本期新增篇数（虚线块表示 0 篇）。 当前筛选：<code id="filterState">全部方向</code></p>
 </div></section>
 <div class="shell">
-<nav class="toc" aria-label="目录"><h2>目录</h2><ol id="tocList">
-<li><a href="#overview"><span class="toc-n">00</span>本日速览</a></li>
+<nav class="toc" aria-label="目录"><h2>目录</h2><ol id="tocList"><li><a href="#overview"><span class="toc-n">01</span>本日速览</a></li>
 <li><a href="#d2"><span class="toc-n">d2</span>GWAS / 关联分析</a></li>
 <li><a href="#d3"><span class="toc-n">d3</span>泛基因组</a></li>
 <li><a href="#d4"><span class="toc-n">d4</span>水稻与作物抗病基因</a></li>
-<li><a href="#d5"><span class="toc-n">d5</span>NLR 与植物免疫受体</a></li>
-<li><a href="#top3"><span class="toc-n">06</span>精读 Top 3</a></li>
-<li><a href="#teams"><span class="toc-n">07</span>跟踪团队</a></li>
-<li><a href="#more"><span class="toc-n">08</span>延伸阅读</a></li>
-<li><a href="#github"><span class="toc-n">08a</span>AI4Science 项目</a></li>
-<li><a href="#news"><span class="toc-n">08c</span>国内外研究进展</a></li>
-<li><a href="#prior"><span class="toc-n">08b</span>往期已报</a></li>
-<li><a href="#method"><span class="toc-n">09</span>检索与核实</a></li>
-</ol>
+<li><a href="#top3"><span class="toc-n">02</span>精读 Top 3</a></li>
+<li><a href="#teams"><span class="toc-n">03</span>跟踪团队</a></li>
+<li><a href="#more"><span class="toc-n">04</span>延伸阅读</a></li>
+<li><a href="#github"><span class="toc-n">05</span>AI4Science 项目</a></li>
+<li><a href="#news"><span class="toc-n">06</span>国内外研究进展</a></li>
+<li><a href="#prior"><span class="toc-n">07</span>往期已报</a></li>
+<li><a href="#method"><span class="toc-n">08</span>检索与核实</a></li></ol>
 <div class="filter"><h2>按方向筛选</h2>
 <div class="filter-btns"><button class="fbtn" data-filter="all" aria-pressed="true">全部方向</button></div>
 <p class="fgroup">核心方向</p><div class="filter-btns">
@@ -1172,6 +1186,13 @@ pre .cm{color:#9c968a}
 <div class="methodblock"><h3>4 · 已知局限与未核实项</h3><ul><li><b>索引延迟</b>：最近 1–4 天收录不完整，本日篇数为<b>下界</b>。</li><li><b>方向分类为关键词规则</b>（<code>classify.py</code>），已用 13 个真实样本做回归测试，并设置多层语境门（d1 须有基因层语境、d4 须有病害专有词或分子免疫证据、d5 须有免疫语境）以压制误标；但仍可能有漏标或误标，卡片内附「证据词」字段，便于复核判断依据。</li><li><b>通讯作者</b>：标 <b>通讯作者</b> 者依据 PubMed 官方 <code>Electronic address</code> 标记或期刊全文 <code>corresp</code> 字段；标<b>（推断）</b>者仅据末位作者惯例，<b>未经官方确认</b>。Wiley 系期刊部分文章网页被 Cloudflare 拦截，无法二次核对是否另有共同通讯。</li><li><b>作者「主要研究方向」</b>：仅在有明确公开来源时填写，并标注 confidence（confirmed / inferred / unconfirmed）；标 <b>unconfirmed</b> 者写明「未查到可靠公开信息」。<b>未展示任何年龄信息</b>（无可靠公开来源，且按你的要求省略）。</li><li><b>IF 值</b>为<b>整数近似值</b>，仅用于快速分层，不构成精确引用依据。</li><li><b>摘要</b>：英文为 Europe PMC <code>abstractText</code> <b>逐字原文</b>；若原文在数据库中截断（本次有数篇预印本出现），卡片内已明确标注截断位置，<b>不补写、不推测</b>缺失内容。</li></ul></div>
 </section>
 </main></div>
+
+<nav class="site-backnav" aria-label="站内导航">
+  <a href="index.html">« 返回归档索引（每日文献推荐）</a>
+  <a href="../">CropCoder 主页</a>
+  <a href="../#publications">论文与资源</a>
+</nav>
+
 <script>
 
 (function(){
