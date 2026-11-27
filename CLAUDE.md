@@ -59,7 +59,8 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 - Every page carries `canonical`, `robots`, `keywords` (include name variants: 赵记稳 / Jiwen Zhao / zhao jiwen / zhaojiwen / CropCoder), and OpenGraph/Twitter meta.
 - `index.html` has JSON-LD `Person`; blog pages and daily issues have JSON-LD `Article`; `newpaper/index.html` has JSON-LD `Blog`.
 - Footer copyright uses `<span data-year>` — `resume.js` fills in the current year; don't hard-code years.
-- After structural changes, regenerate `sitemap.xml` (43 URLs as of 2026-11, daily issues use their publish date as `lastmod`).
+- After structural changes, regenerate `sitemap.xml` (50 URLs as of 2026-11, daily issues use their publish date as `lastmod`).
+- IndexNow: the key file `40b17750855086a4e63b2d7f7b457f5d.txt` at the site root verifies ownership; after publishing updates, POST the changed URLs to `https://api.indexnow.org/indexnow` with body `{"host": "cropcoder.github.io", "key": "40b17750855086a4e63b2d7f7b457f5d", "keyLocation": "https://cropcoder.github.io/40b17750855086a4e63b2d7f7b457f5d.txt", "urlList": [...]}` — this pings Bing/Yandex/Naver/Seznam at once.
 
 ## Common commands
 
