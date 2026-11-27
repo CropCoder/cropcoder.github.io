@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主题文献综述 · 2026-11-17（AI／大模型在植物基因组学）</title>
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  /* Claude-style warm neutral palette */
+  --ink:#1f1e1d;
+  --ink-2:#4a4741;
+  --ink-3:#78746c;
+  --paper:#faf9f5;
+  --paper-2:#f0eee6;
+  --panel:#ffffff;
+  --line:#e5e2d9;
+  --line-2:#efede5;
+  --signal:#c15f3c;        /* clay — links & structure */
+  --signal-soft:#faece5;
+  --accent:#d97757;        /* Claude orange — small marks only */
+
+  /* direction hues, desaturated to sit in the warm register */
+  --d1:#7c63a6;   /* 定位与克隆 */
+  --d2:#3e6b9e;   /* GWAS */
+  --d3:#a67c2e;   /* 泛基因组 */
+  --d4:#4a7c59;   /* 作物抗病 */
+  --d5:#a8556e;   /* NLR 与免疫受体 */
+
+  --warn:#8a6420;
+  --warn-bg:#fbf3e4;
+
+  --radius:14px;
+  --radius-sm:9px;
+  --maxw:1140px;
+  --shadow:0 1px 2px rgba(31,30,29,.04), 0 6px 20px rgba(31,30,29,.035);
+
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Source Han Sans SC","Segoe UI","Microsoft YaHei",sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,"Songti SC","Source Han Serif SC","Noto Serif CJK SC",serif;
+  --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,"JetBrains Mono",Consolas,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16.5px;
+  line-height:1.75;
+  letter-spacing:.004em;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:var(--signal);text-decoration:none;border-bottom:1px solid rgba(193,95,60,.3)}
+a:hover{border-bottom-color:var(--signal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;
+  padding:10px 16px;z-index:99;border:0
+}
+.skip:focus{left:12px;top:12px}
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+.masthead{
+  background:var(--paper);
+  color:var(--ink);
+  border-bottom:1px solid var(--line);
+}
+.masthead .inner{max-width:var(--maxw);margin:0 auto;padding:66px 28px 38px}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin:0 0 20px;
+}
+
+.masthead h1{
+  font-family:var(--serif);
+  font-weight:400;
+  /* one line at every width: 13 CJK glyphs must fit the container */
+  font-size:clamp(20px,4.2vw,46px);
+  line-height:1.18;
+  letter-spacing:-.014em;
+  margin:0 0 12px;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.masthead h1 em{
+  font-style:normal;
+  color:var(--accent);
+}
+
+.masthead .lede{
+  margin:20px 0 0;
+  max-width:60ch;
+  color:var(--ink-2);
+  font-size:16px;
+  line-height:1.68;
+}
+
+.meta{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin:36px 0 0;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+}
+.meta>div{background:var(--panel);padding:15px 17px}
+.meta dt{
+  font-family:var(--mono);
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 6px;
+}
+.meta dd{margin:0;font-size:14px;color:var(--ink)}
+
+/* ============================================================
+   HERO — the supply strip (signature)
+   ============================================================ */
+.hero{
+  background:var(--paper-2);
+  border-bottom:1px solid var(--line);
+}
+.hero .inner{max-width:var(--maxw);margin:0 auto;padding:54px 28px 48px}
+
+.hero h2{
+  font-family:var(--serif);
+  font-size:clamp(23px,3.2vw,34px);
+  font-weight:400;
+  line-height:1.28;
+  margin:0 0 16px;
+  max-width:32ch;
+  letter-spacing:-.008em;
+}
+.hero h2 b{color:var(--accent);font-weight:500}
+
+.hero .hero-lede{
+  margin:0 0 30px;
+  max-width:66ch;
+  color:var(--ink-2);
+  font-size:15.5px;
+}
+.hero .hero-lede b{color:var(--ink);font-weight:600}
+
+/* supply strip */
+.strip{
+  display:flex;
+  height:88px;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--panel);
+}
+.seg{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 16px;
+  cursor:pointer;
+  border:0;
+  font:inherit;
+  color:#fff;
+  text-align:left;
+  transition:filter .18s ease;
+  min-width:0;
+}
+.seg:hover{filter:brightness(1.1)}
+.seg[aria-pressed="true"]{box-shadow:inset 0 0 0 2px rgba(255,255,255,.8)}
+.seg .sg-n{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1}
+.seg .sg-l{
+  font-size:11.5px;letter-spacing:.02em;margin-top:7px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.95;
+}
+.seg.zero{background:var(--paper-2)!important;color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--line)}
+.seg.zero .sg-n{color:var(--ink-3)}
+.seg[data-dir="d1"]{background:var(--d1)}
+.seg[data-dir="d2"]{background:var(--d2)}
+.seg[data-dir="d3"]{background:var(--d3)}
+.seg[data-dir="d4"]{background:var(--d4)}
+.seg[data-dir="d5"]{background:var(--d5)}
+
+.strip-note{
+  margin:14px 0 0;
+  font-size:13.5px;
+  color:var(--ink-3);
+}
+.strip-note code{
+  font-family:var(--mono);font-size:12.5px;
+  background:var(--paper);border:1px solid var(--line);
+  padding:1px 6px;border-radius:4px;color:var(--ink-2);
+}
+
+/* ============================================================
+   SHELL / TOC
+   ============================================================ */
+.shell{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:48px 28px 90px;
+  display:grid;
+  grid-template-columns:212px minmax(0,1fr);
+  gap:52px;
+  align-items:start;
+}
+
+.toc{position:sticky;top:26px;font-size:13.5px;max-height:calc(100vh - 52px);overflow-y:auto;padding-right:4px}
+.toc h2{
+  font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 14px;font-weight:500;
+}
+.toc ol{list-style:none;margin:0 0 26px;padding:0;counter-reset:t}
+.toc li{margin:0 0 2px}
+.toc a{
+  display:block;padding:6px 11px;border-radius:8px;
+  border:0;
+  color:var(--ink-2);line-height:1.42;
+  transition:background .15s ease,color .15s ease;
+}
+.toc a:hover{background:var(--paper-2);color:var(--ink)}
+.toc a.is-active{
+  background:var(--paper-2);color:var(--ink);font-weight:600;
+}
+.toc .toc-n{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+
+.filter h2{
+  font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 12px;font-weight:500;
+}
+.filter-btns{display:flex;flex-direction:column;gap:5px}
+.fbtn{
+  font-family:var(--sans);font-size:12.5px;text-align:left;width:100%;
+  padding:8px 12px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink-2);
+  transition:all .15s ease;
+}
+.fbtn:hover{border-color:#cfcabd;color:var(--ink)}
+.fbtn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+@media (max-width:940px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:34px;padding-top:34px}
+  .toc{position:static;max-height:none;overflow:visible}
+  .toc ol{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:20px}
+  .toc li{margin:0}
+  .toc a{padding:5px 10px;border:1px solid var(--line);background:var(--panel)}
+  .toc a.is-active{border-color:var(--signal)}
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{margin:0 0 62px;scroll-margin-top:24px}
+.section-head{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:14px;margin-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.section-head .sh-k{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  color:var(--ink-2);background:var(--paper-2);
+  border:1px solid var(--line);
+  padding:4px 11px;border-radius:20px;
+  align-self:center;flex:none;
+}
+.section-head .sh-k::before{
+  content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  margin-right:8px;background:var(--ink-3);
+}
+.section-head h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(21px,2.5vw,28px);line-height:1.25;margin:0;
+  letter-spacing:-.008em;
+}
+.section-head .sh-count{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  margin-left:auto;flex:none;
+}
+.section[data-dir="d1"] .sh-k::before{background:var(--d1)}
+.section[data-dir="d2"] .sh-k::before{background:var(--d2)}
+.section[data-dir="d3"] .sh-k::before{background:var(--d3)}
+.section[data-dir="d4"] .sh-k::before{background:var(--d4)}
+.section[data-dir="d5"] .sh-k::before{background:var(--d5)}
+
+.section-note{
+  font-size:14px;color:var(--ink-2);
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 18px;margin:0 0 26px;
+}
+
+h3.sub{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  margin:36px 0 14px;letter-spacing:-.005em;
+}
+h3.sub:first-child{margin-top:0}
+
+p{margin:0 0 13px}
+p:last-child{margin-bottom:0}
+
+/* ============================================================
+   OVERVIEW
+   ============================================================ */
+.takeaways{list-style:none;margin:0 0 34px;padding:0;counter-reset:tk}
+.takeaways li{
+  position:relative;
+  padding:0 0 0 40px;
+  margin:0 0 20px;
+  color:var(--ink-2);
+}
+.takeaways li::before{
+  counter-increment:tk;content:counter(tk,decimal-leading-zero);
+  position:absolute;left:0;top:4px;
+  font-family:var(--serif);font-size:15px;
+  color:var(--accent);
+}
+.takeaways li b{color:var(--ink);font-weight:600}
+
+/* scan table */
+.table-wrap{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--panel);
+  box-shadow:var(--shadow);
+}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:660px}
+caption{
+  text-align:left;padding:16px 18px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-2)}
+thead th{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+  border-bottom:1px solid var(--line);
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#f8f7f1}
+td.num{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+td.dircell{white-space:nowrap}
+.dirdot{
+  display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:7px;vertical-align:1px;
+  background:var(--ink-3);          /* default: 专项标签用中性点 */
+}
+.filter-btns+.fgroup{margin-top:14px}
+.fgroup{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 8px;
+}
+.coverage{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 24px;margin:0 0 30px;
+}
+.cov-title{font-family:var(--serif);font-size:18px;font-weight:400;margin:0 0 7px}
+.cov-note{font-size:13.3px;color:var(--ink-3);line-height:1.62;margin:0 0 16px}
+.cov-group{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin:16px 0 2px;
+}
+.cov-group:first-of-type{margin-top:0}
+.cov-row{
+  display:grid;grid-template-columns:12px minmax(0,1fr) 34px auto;
+  align-items:baseline;gap:10px;padding:7px 0;
+  border-bottom:1px solid var(--line-2);
+}
+.cov-row:last-child{border-bottom:0}
+.cov-dir{font-size:13.7px;color:var(--ink-2);line-height:1.45}
+.cov-n{font-family:var(--mono);font-size:12.5px;color:var(--ink);text-align:right}
+.cov-refs{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.cov-row.zero .cov-dir,.cov-row.zero .cov-refs{color:var(--ink-3)}
+.cov-row.zero .cov-n{color:var(--warn)}
+.cov-row.zero .dirdot{background:var(--line)}
+[data-dir="d1"] .dirdot,[data-dir="d1"].dirdot{background:var(--d1)}
+[data-dir="d2"] .dirdot,[data-dir="d2"].dirdot{background:var(--d2)}
+[data-dir="d3"] .dirdot,[data-dir="d3"].dirdot{background:var(--d3)}
+[data-dir="d4"] .dirdot,[data-dir="d4"].dirdot{background:var(--d4)}
+[data-dir="d5"] .dirdot,[data-dir="d5"].dirdot{background:var(--d5)}
+
+/* ============================================================
+   PAPER CARD
+   ============================================================ */
+.paper{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  margin:0 0 24px;
+  overflow:hidden;
+  scroll-margin-top:22px;
+}
+.paper.is-hidden{display:none}
+
+.paper-head{padding:24px 26px 20px;border-bottom:1px solid var(--line-2)}
+.paper-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.paper-idx{
+  font-family:var(--serif);font-size:15px;
+  color:var(--ink-2);background:var(--paper-2);
+  border:1px solid var(--line);
+  width:34px;height:34px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+}
+
+.paper-kind{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--ink-3);text-transform:uppercase;
+}
+
+.paper-head h3{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(19px,2.4vw,23px);line-height:1.38;
+  margin:0 0 8px;letter-spacing:-.006em;
+}
+.paper .orig{
+  font-family:var(--serif);
+  font-size:15.5px;color:var(--ink-2);line-height:1.58;
+  margin:0 0 14px;font-style:italic;
+}
+.paper .orig .zh{
+  display:inline-block;font-style:normal;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);background:var(--paper-2);
+  border:1px solid var(--line);border-radius:6px;
+  padding:3px 9px;margin-right:10px;vertical-align:2px;
+}
+
+.src{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink-2);
+  margin:0 0 10px;
+}
+.src .journal{font-weight:600;color:var(--ink)}
+.src .sep{color:var(--line);}
+.src time{color:var(--ink-2)}
+
+.badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  padding:3px 10px;border-radius:20px;
+  border:1px solid var(--line);background:var(--paper-2);color:var(--ink-2);
+}
+.badge.ok{border-color:rgba(74,124,89,.32);background:#eef3ef;color:#3d6849}
+.badge.alt{border-color:rgba(166,124,46,.3);background:#faf4e8;color:#7d5c1f}
+.badge.na{border-color:rgba(138,100,32,.32);background:var(--warn-bg);color:var(--warn)}
+
+.authors{
+  font-size:13.5px;color:var(--ink-3);line-height:1.6;margin:12px 0 0;
+  padding-top:12px;border-top:1px dashed var(--line);
+}
+.authors b{color:var(--ink-2);font-weight:600}
+.authors .lbl{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+
+/* author profiles — first author + corresponding authors (unit + research focus) */
+.bios{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;
+  padding:20px 26px;border-bottom:1px solid var(--line-2);
+}
+.bio{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:15px 17px;
+}
+.bio-role{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 8px;
+}
+.bio-name{
+  font-family:var(--serif);font-size:16px;font-weight:400;
+  color:var(--ink);margin:0 0 6px;line-height:1.35;
+}
+.bio-unit{
+  font-size:12.6px;color:var(--ink-3);line-height:1.55;
+  margin:0 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line);
+}
+.bio-dir{font-size:13.9px;color:var(--ink-2);line-height:1.68;margin:0}
+.bio-dir span{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:4px;
+}
+
+/* abstract — sentence-by-sentence bilingual pairs (EN line above, ZH line below) */
+.abstract{
+  background:var(--paper-2);
+  padding:20px 26px 22px;
+}
+.abs-head{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 15px;
+}
+.pair{padding:13px 0;border-top:1px dashed var(--line)}
+.pair:first-of-type{border-top:0;padding-top:0}
+.pair:last-of-type{padding-bottom:0}
+.s-en{
+  font-family:var(--serif);
+  font-size:14.4px;line-height:1.7;
+  color:var(--ink-3);margin:0 0 6px;letter-spacing:.002em;
+}
+.s-zh{
+  font-size:15px;line-height:1.8;
+  color:var(--ink);margin:0;
+}
+.abs-none{
+  font-size:14px;line-height:1.7;color:var(--warn);margin:0;
+}
+
+/* prompts */
+.prompts{padding:6px 26px 22px}
+.prompt{
+  padding:18px 0 0;
+  margin:0;
+}
+.prompt+.prompt{border-top:1px solid var(--line-2);margin-top:6px}
+.prompt h4{
+  display:flex;align-items:baseline;gap:10px;
+  font-size:13.5px;font-weight:500;color:var(--ink);
+  margin:0 0 9px;letter-spacing:.01em;
+}
+.pk{
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.07em;color:var(--signal);
+  border:1px solid rgba(193,95,60,.25);
+  background:var(--signal-soft);
+  padding:3px 8px;border-radius:6px;flex:none;
+  position:relative;top:-1px;
+}
+.prompt p{font-size:14.8px;color:var(--ink-2);margin:0 0 10px}
+.prompt p:last-child{margin-bottom:0}
+.prompt ul{margin:0 0 10px;padding-left:0;list-style:none}
+.prompt li{
+  position:relative;padding-left:18px;margin-bottom:8px;
+  font-size:14.8px;color:var(--ink-2);
+}
+.prompt li::before{
+  content:"";position:absolute;left:3px;top:.72em;
+  width:5px;height:5px;border-radius:50%;background:#cdc8ba;
+}
+.prompt li:last-child{margin-bottom:0}
+.prompt strong{color:var(--ink);font-weight:600}
+.prompt em{font-style:normal;background:var(--paper-2);padding:1px 5px;border-radius:4px}
+
+.prompt.na{opacity:.94}
+.prompt.na .pk{color:var(--warn);border-color:rgba(138,100,32,.35);background:var(--warn-bg)}
+.prompt.na p{color:var(--warn)}
+.prompt.na li::before{background:var(--warn)}
+
+.readnote{
+  background:var(--paper-2);
+  border-top:1px solid var(--line-2);
+  padding:16px 26px;
+  font-size:13.8px;color:var(--ink-2);
+}
+.readnote b{color:var(--ink)}
+
+.hairline{
+  margin:0;border:0;border-top:1px dashed var(--line);
+}
+
+/* ============================================================
+   TOP 3 / TEAMS / MORE / METHOD
+   ============================================================ */
+.rank{list-style:none;margin:0;padding:0;counter-reset:r}
+.rank li{
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:24px 26px;margin:0 0 16px;
+}
+.rank .rk{
+  font-family:var(--serif);font-size:30px;font-weight:400;
+  color:#d8d4c8;line-height:1;letter-spacing:-.02em;
+}
+.rank li:first-child .rk{color:var(--accent)}
+.rank h3{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  margin:0 0 8px;line-height:1.42;
+}
+.rank p{font-size:14.5px;color:var(--ink-2);margin:0}
+
+.teamgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.team{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 24px;
+}
+.team h3{
+  font-family:var(--serif);font-size:16.5px;font-weight:400;
+  margin:0 0 8px;line-height:1.4;
+}
+.team .aff{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  letter-spacing:.02em;margin:0 0 10px;
+}
+.team p{font-size:14px;color:var(--ink-2);margin:0}
+
+.moregrid{display:grid;gap:16px}
+.moregroup{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+}
+.moregroup>header{
+  padding:16px 22px;border-bottom:1px solid var(--line-2);
+  background:var(--paper-2);
+}
+.moregroup>header h3{
+  font-family:var(--serif);font-size:16.5px;font-weight:400;margin:0;
+}
+.moregroup>header p{
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  margin:5px 0 0;letter-spacing:.03em;
+}
+.morelist{list-style:none;margin:0;padding:0}
+.morelist li{padding:15px 20px;border-bottom:1px solid var(--line-2);font-size:14px;color:var(--ink-2)}
+.morelist li:last-child{border-bottom:0}
+.morelist .mt{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;line-height:1.45}
+.morelist .mm{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  display:block;margin-bottom:5px;
+}
+.morelist .md{margin:0;font-size:13.8px}
+/* section B items carry no per-item badge: the section header already
+   states the membership rule, and a "预印本" tag would be false for the
+   journal items listed there. */
+
+.methodblock{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:26px 28px;margin:0 0 18px;
+}
+.methodblock h3{
+  font-family:var(--serif);font-size:17px;font-weight:400;margin:0 0 12px;
+}
+.methodblock p{font-size:14.3px;color:var(--ink-2)}
+
+.ifbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.ifchip{
+  font-family:var(--mono);font-size:12px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:8px 12px;background:var(--paper-2);color:var(--ink-2);
+}
+.ifchip.yes{border-color:rgba(74,124,89,.32);background:#eef3ef;color:#3d6849}
+.ifchip.no{border-color:rgba(166,124,46,.3);background:#faf4e8;color:#7d5c1f}
+
+.alert{
+  border:1px solid var(--warn);
+  background:var(--warn-bg);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin:0 0 22px;
+}
+.alert h3{
+  font-family:var(--serif);font-size:17px;font-weight:400;
+  margin:0 0 10px;color:#6b4a14;
+}
+.alert p,.alert li{font-size:14.3px;color:#6b4a14}
+.alert ul{margin:0;padding-left:20px}
+.alert li{margin-bottom:7px}
+
+pre{
+  font-family:var(--mono);font-size:12.3px;line-height:1.66;
+  background:#26251f;color:#e8e4da;
+  padding:20px 22px;border-radius:var(--radius-sm);
+  overflow-x:auto;margin:14px 0 0;
+}
+pre .cm{color:#9c968a}
+
+.foot{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px 70px;
+  font-size:13px;color:var(--ink-3);
+}
+.foot .rule{border:0;border-top:1px solid var(--line);margin:0 0 18px}
+
+.empty{
+  display:none;
+  padding:40px 24px;text-align:center;
+  background:var(--panel);border:1px dashed var(--line);
+  border-radius:var(--radius);color:var(--ink-3);font-size:14.5px;
+}
+.empty.is-on{display:block}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print{
+  :root{--paper:#fff;--paper-2:#fff;--panel:#fff;--shadow:none}
+  body{font-size:11pt;background:#fff}
+  .masthead{background:#fff;color:#000;border-bottom:1px solid #ccc}
+  .masthead h1{color:#000}
+  .masthead h1 em{color:#8a3f22}
+  .masthead .lede,.meta dt{color:#333}
+  .meta{background:#ddd;border-color:#ddd}
+  .meta>div{background:#fff}
+  .meta dd{color:#000}
+  .toc,.filter,.skip,.strip-note{display:none}
+  .shell{display:block;padding:0 0 20px;max-width:none}
+  .hero,.hero .inner,.masthead .inner{padding-left:0;padding-right:0}
+  .paper,.rank li,.team,.moregroup,.methodblock,.table-wrap{break-inside:avoid;box-shadow:none}
+  .section{break-before:auto}
+  a{color:#000;border:0}
+  .seg{color:#fff}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+@media (max-width:620px){
+  .masthead .inner,.hero .inner,.shell{padding-left:18px;padding-right:18px}
+  .paper-head,.prompts,.readnote{padding-left:18px;padding-right:18px}
+  .strip{height:auto;flex-direction:column}
+  .seg{flex:0 0 auto!important;flex-direction:row;align-items:center;gap:10px;padding:11px 14px}
+  .seg .sg-l{margin-top:0}
+  .rank li{grid-template-columns:1fr;gap:8px}
+  .rank .rk{font-size:18px}
+}
+
+/* ============================================================
+   每日文献简报 · 增量组件
+   ------------------------------------------------------------
+   本文件只做「加法」：不覆盖 assets/report.css 中任何既有规则，
+   仅补齐日报所需的组件，全部复用同一套设计 token。
+   禁止事项（继承 配置.md 第 8 节）：卡片不得使用方向色、禁止左侧色条。
+   ============================================================ */
+
+/* ---------- 方向胶囊（卡片内） ---------- */
+.dirchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 11px 3px 9px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--paper-2);
+  color:var(--ink-2);
+  font-size:12px;
+  line-height:1.6;
+  letter-spacing:.01em;
+  white-space:nowrap;
+}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--ink-3);flex:0 0 auto}
+.chip[data-c="d1"] .chip-dot{background:var(--d1)}
+.chip[data-c="d2"] .chip-dot{background:var(--d2)}
+.chip[data-c="d3"] .chip-dot{background:var(--d3)}
+.chip[data-c="d4"] .chip-dot{background:var(--d4)}
+.chip[data-c="d5"] .chip-dot{background:var(--d5)}
+.chip[data-c="t1"] .chip-dot,
+.chip[data-c="t2"] .chip-dot,
+.chip[data-c="t3"] .chip-dot,
+.chip[data-c="t4"] .chip-dot,
+.chip[data-c="t5"] .chip-dot,
+.chip[data-c="t6"] .chip-dot,
+.chip[data-c="t7"] .chip-dot{background:var(--ink-3)}
+
+/* ---------- 来源层级标记 ---------- */
+.tier{
+  display:inline-block;
+  padding:1px 8px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.03em;
+  color:var(--ink-3);
+  background:var(--paper-2);
+}
+
+/* ---------- 速览表 ---------- */
+.glance{width:100%;border-collapse:collapse;font-size:15px}
+.glance caption{
+  caption-side:top;text-align:left;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);padding:0 0 12px;
+}
+.glance thead th{
+  text-align:left;font-weight:600;font-size:12.5px;color:var(--ink-3);
+  padding:0 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+.glance tbody td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line-2);vertical-align:top}
+.glance .g-n,.glance .g-d,.glance .g-dt{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.glance .g-t{min-width:15em}
+.glance .g-j{white-space:nowrap;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- 延伸阅读条目 ---------- */
+.paper.ext{background:var(--paper-2)}
+.paper.ext .paper-head h3{font-size:19px}
+
+/* ---------- 作者角色：未确认时用警示色区分 ---------- */
+.bio-role.warn{color:var(--warn);background:var(--warn-bg);border-color:rgba(138,100,32,.28)}
+
+/* ---------- 无法评估（Prompt 缺失） ---------- */
+.cannot{
+  margin:0;
+  padding:10px 14px;
+  border:1px solid rgba(138,100,32,.28);
+  border-radius:var(--radius-sm);
+  background:var(--warn-bg);
+  color:var(--warn);
+  font-size:14.5px;
+}
+
+/* ---------- 摘要不可得 ---------- */
+.abs-none{
+  padding:14px 18px;
+  border:1px solid rgba(138,100,32,.28);
+  border-radius:var(--radius-sm);
+  background:var(--warn-bg);
+  color:var(--warn);
+  font-size:14.5px;
+  line-height:1.7;
+  margin:0 26px 18px;
+}
+
+/* ---------- 打印与窄屏补丁 ---------- */
+@media print{
+  .chip,.tier{border-color:#000;color:#000;background:#fff}
+  .glance thead th,.glance tbody td{border-color:#000}
+  .cannot,.abs-none{border:1px solid #000;color:#000;background:#fff}
+}
+@media (max-width:620px){
+  .glance .g-j,.glance .g-d{display:none}
+  .abs-none{margin-left:18px;margin-right:18px}
+}
+
+/* ---------- 折叠附录（GitHub / 新闻长清单） ---------- */
+.morebox{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  background:var(--panel);
+  padding:0;
+}
+.morebox>summary{
+  cursor:pointer;
+  padding:12px 16px;
+  font-size:14px;
+  color:var(--ink-2);
+  list-style:none;
+}
+.morebox>summary::-webkit-details-marker{display:none}
+.morebox>summary::before{content:"▸ ";color:var(--signal)}
+.morebox[open]>summary::before{content:"▾ "}
+.morebox>summary:hover{background:var(--paper-2)}
+.morebox>summary:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.morebox .table-wrap{padding:0 16px 14px}
+@media print{
+  .morebox{border-color:#000}
+  .morebox>summary{display:none}
+  .morebox>div{display:block!important}
+}
+
+/* ---------- 主题聚合模式：主题综述章节 ---------- */
+.theme-intro{
+  margin:14px 0 20px;padding:16px 20px;
+  background:var(--paper-2);border-left:3px solid var(--accent);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;line-height:1.9;
+}
+.theme-intro p{margin:0 0 10px}
+.theme-intro p:last-child{margin:0}
+.theme-h3{
+  margin:28px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line);
+  font-size:16px;font-weight:700;color:var(--ink);letter-spacing:.01em;
+}
+#theme p{margin:10px 0;line-height:1.9}
+#theme ul,#theme ol{margin:10px 0 16px;padding-left:24px;line-height:1.9}
+#theme li{margin:7px 0}
+#theme blockquote{
+  margin:14px 0;padding:10px 16px;border-left:3px solid var(--line-2);
+  background:var(--paper-2);color:var(--ink-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+#theme table{margin:14px 0}
+@media print{
+  #theme{break-inside:auto}
+  .theme-h3{break-after:avoid}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="masthead"><div class="inner">
+<p class="eyebrow">主题文献综述 ｜ 2026-11-17 ｜ 隔日出刊 ｜ 主题聚合模式</p>
+<h1>植物抗病与基因组学<em>主题</em>文献综述</h1>
+<p class="lede">每隔一天 08:00 出刊：围绕一个主题，把<b>已收录的全部相关论文</b>重新组织成有脉络的综述，并补入该主题的新文献与开源项目动态——不再逐日追薄产出。</p>
+<dl class="meta">
+<div><dt>检索窗口</dt><dd>2026-11-16 → 2026-11-17（回看 7 天）</dd></div>
+<div><dt>来源层级</dt><dd>A 顶刊 / B 专业刊 / C 预印本<br>IF 为整数近似值</dd></div>
+<div><dt>主榜论文</dt><dd>2 篇<br>1 个核心方向有命中</dd></div>
+<div><dt>延伸阅读</dt><dd>2 条（预印本）</dd></div>
+<div><dt>AI4Science 项目</dt><dd>58 个 GitHub 项目<br>非同行评议</dd></div>
+<div><dt>领域动态</dt><dd>19 条命中方向<br>共 165 条植物学相关</dd></div>
+</dl>
+</div></header>
+<section class="hero"><div class="inner">
+<h2>本期主题：<b>AI／大模型在植物基因组学</b>（T07）</h2>
+<p class="hero-lede">回看窗口内共命中 <b>9</b> 篇，其中 <b>5</b> 篇在往期简报中已报过，本期只呈现<b>新增</b>的 2 篇——避免连续几天重复同一批论文。所有论文的<b>实际首发日均已逐条标注</b>。</p>
+<div class="strip" role="group" aria-label="本日核心方向供给分布，点击可筛选">
+<button class="seg zero" data-dir="d1" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d1 · 定位与克隆</span></button>
+<button class="seg" data-dir="d2" style="flex:1 1 100.0%" aria-pressed="false"><span class="sg-n">1</span><span class="sg-l">d2 · GWAS</span></button>
+<button class="seg zero" data-dir="d3" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d3 · 泛基因组</span></button>
+<button class="seg zero" data-dir="d4" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d4 · 作物抗病</span></button>
+<button class="seg zero" data-dir="d5" style="flex:1 1 9.0%" aria-pressed="false"><span class="sg-n">0</span><span class="sg-l">d5 · NLR 与免疫受体</span></button>
+</div>
+<p class="strip-note">条宽 = 该<b>核心方向</b>本期新增篇数（虚线块表示 0 篇）。 当前筛选：<code id="filterState">全部方向</code></p>
+</div></section>
+<div class="shell">
+<nav class="toc" aria-label="目录"><h2>目录</h2><ol id="tocList">
+<li><a href="#overview"><span class="toc-n">00</span>本日速览</a></li>
+<li><a href="#d2"><span class="toc-n">d2</span>GWAS / 关联分析</a></li>
+<li><a href="#t3"><span class="toc-n">t3</span>大规模 GWAS 分析</a></li>
+<li><a href="#t4"><span class="toc-n">t4</span>人工智能 / 大语言模型在…</a></li>
+<li><a href="#top3"><span class="toc-n">06</span>精读 Top 3</a></li>
+<li><a href="#teams"><span class="toc-n">07</span>跟踪团队</a></li>
+<li><a href="#more"><span class="toc-n">08</span>延伸阅读</a></li>
+<li><a href="#github"><span class="toc-n">08a</span>AI4Science 项目</a></li>
+<li><a href="#news"><span class="toc-n">08c</span>国内外研究进展</a></li>
+<li><a href="#prior"><span class="toc-n">08b</span>往期已报</a></li>
+<li><a href="#method"><span class="toc-n">09</span>检索与核实</a></li>
+</ol>
+<div class="filter"><h2>按方向筛选</h2>
+<div class="filter-btns"><button class="fbtn" data-filter="all" aria-pressed="true">全部方向</button></div>
+<p class="fgroup">核心方向</p><div class="filter-btns">
+<button class="fbtn" data-filter="d1" aria-pressed="false">抗病基因定位与克隆</button>
+<button class="fbtn" data-filter="d2" aria-pressed="false">GWAS / 关联分析</button>
+<button class="fbtn" data-filter="d3" aria-pressed="false">泛基因组</button>
+<button class="fbtn" data-filter="d4" aria-pressed="false">水稻与作物抗病基因</button>
+<button class="fbtn" data-filter="d5" aria-pressed="false">NLR 与植物免疫受体</button>
+</div><p class="fgroup">专项追踪</p><div class="filter-btns">
+<button class="fbtn" data-filter="t1" aria-pressed="false">作物抗病基因克隆与挖掘</button>
+<button class="fbtn" data-filter="t2" aria-pressed="false">群体水平泛基因组</button>
+<button class="fbtn" data-filter="t3" aria-pressed="false">大规模 GWAS 分析</button>
+<button class="fbtn" data-filter="t4" aria-pressed="false">AI / 大语言模型应用</button>
+<button class="fbtn" data-filter="t5" aria-pressed="false">AF3 结构预测与蛋白设计</button>
+<button class="fbtn" data-filter="t6" aria-pressed="false">免疫机制与 NLR-ID 演化</button>
+<button class="fbtn" data-filter="t7" aria-pressed="false">免疫 Decoy 诱饵蛋白</button>
+</div></div></nav>
+<main id="main">
+<div class="empty" id="emptyState">当前方向筛选下没有论文。</div>
+<section class="section" id="overview">
+<div class="section-head"><span class="sh-k">00</span><h2>本日速览</h2><span class="sh-count">2 篇 / 12 方向</span></div>
+<div class="alert"><h3>⚠️ 必读：本期是「主题综述」而不是「当日新增清单」</h3><p>从本期起改为<b>隔日出刊的主题聚合模式</b>：每期聚焦一个主题，把<b>已收录的历史论文</b>重新组织成有脉络的综述。所以「本日新增」这个数字<b>不再是本期的重点</b>，新增为 0 或很少都<b>不影响出刊</b>。</p><p>本期主题：<b>AI／大模型在植物基因组学（T07）</b>。综述正文见下方 05 主题综述章节。</p></div>
+<div class="alert"><h3>本期新增与分层</h3><p>本期生成完整论文卡片 <b>2 篇</b>；另有 <b>G 层 58 个 GitHub 项目</b>与 <b>N 层 165 条期刊动态</b>（其中 19 条命中方向）。</p><p>检索窗口的新增量与筛选口径见 08e 覆盖说明。G/N 两层<b>不是同行评议文献</b>，已与主榜论文严格分层标注，不得作为结论引用。</p></div>
+<ol class="takeaways">
+</ol>
+<div class="coverage"><h3 class="cov-title">12 方向覆盖表</h3>
+<p class="cov-note">本期为<b>主题聚合模式</b>（T07 AI／大模型在植物基因组学）。<b>先说一个必须交代的事实</b>：本期修正了主题匹配逻辑——关键词 <code>AI</code> 原按子串匹配，命中了 <b>maize</b>（含「ai」）等大量无关词，导致 T07 候选池虚高到 28 篇；改用词边界匹配后真实候选仅 <b>5 篇</b>。进一步在全台账（含往期延期条目）按严格规则检索，只找到 <b>10 篇</b>涉及 AI/机器学习的论文——<b>这印证了 t4 在期刊文献中长期近乎为零</b>。因此本期采用<b>双层读法</b>：论文层（10 篇）+ <b>G 层 58 个开源项目</b>并列，其中 G 层已明确标注「非同行评议」。卡片 4 张（2 主榜 + 2 延伸），全部为 AI 主题直接相关。</p>
+<p class="cov-group">核心方向</p>
+<div class="cov-row zero" data-dir="d1"><span class="dirdot"></span><span class="cov-dir">抗病（抗性）基因定位与克隆</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row" data-dir="d2"><span class="dirdot"></span><span class="cov-dir">GWAS / 关联分析</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p2">#p2</a></span></div>
+<div class="cov-row zero" data-dir="d3"><span class="dirdot"></span><span class="cov-dir">泛基因组</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="d4"><span class="dirdot"></span><span class="cov-dir">水稻与作物抗病基因</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="d5"><span class="dirdot"></span><span class="cov-dir">NLR 与植物免疫受体</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<p class="cov-group">专项追踪</p>
+<div class="cov-row zero" data-dir="t1"><span class="dirdot"></span><span class="cov-dir">作物抗病基因克隆与挖掘</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t2"><span class="dirdot"></span><span class="cov-dir">群体水平泛基因组</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row" data-dir="t3"><span class="dirdot"></span><span class="cov-dir">大规模 GWAS 分析</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p2">#p2</a></span></div>
+<div class="cov-row" data-dir="t4"><span class="dirdot"></span><span class="cov-dir">人工智能 / 大语言模型在植物基因组与遗传学中的应用</span><span class="cov-n">1</span><span class="cov-refs"><a href="#p1">#p1</a></span></div>
+<div class="cov-row zero" data-dir="t5"><span class="dirdot"></span><span class="cov-dir">植物蛋白结构预测（AlphaFold3 等）与蛋白结构设计改造</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t6"><span class="dirdot"></span><span class="cov-dir">植物免疫机制与 NLR-ID 演化进化</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+<div class="cov-row zero" data-dir="t7"><span class="dirdot"></span><span class="cov-dir">植物免疫 Decoy 诱饵蛋白研究</span><span class="cov-n">0</span><span class="cov-refs">本日无命中</span></div>
+</div>
+<div class="table-wrap"><table class="glance"><caption>速览表 · 一行一篇</caption>
+<thead><tr><th>#</th><th>方向</th><th>论文</th><th>期刊</th><th>日期</th></tr></thead><tbody>
+<tr><td class="g-n">01</td><td class="g-d">t4</td><td class="g-t"><a href="#p1">大型语言模型与基础模型在预测性植物育种中的应用：能力、证据与前景</a></td><td class="g-j">Molecular Plant<br>IF=25</td><td class="g-dt">2026-11-10</td></tr>
+<tr><td class="g-n">02</td><td class="g-d">d2 t3</td><td class="g-t"><a href="#p2">HiEGP：一个环境知情的基因组预测框架，助力大豆基因库材料的育种利用</a></td><td class="g-j">Molecular Plant<br>IF=25</td><td class="g-dt">2026-11-10</td></tr>
+</tbody></table></div>
+</section>
+<section class="section" id="theme">
+<div class="section-head"><span class="sh-k">05</span><h2>主题综述 · AI／大模型在植物基因组学</h2><span class="sh-count">T07</span></div>
+<div class="theme-intro"><p>这个主题有一个<b>必须先说清楚的事实</b>：在期刊文献里，真正把 AI 用于植物基因组学、并且给出可验证结果的工作<b>非常少</b>。本期主题工具修正匹配逻辑后，T07 候选池从 28 篇直降到 <b>5 篇</b>——原因是关键词 <code>AI</code> 作为子串 命中了 <b>maize</b>（含「ai」）等大量无关词汇。进一步在全台账（含历年延期条目）中按严格规则检索，只找到 <b>10 篇</b>涉及 AI/机器学习的论文。</p><p>因此本期的做法是<b>双层读法</b>：把 <b>10 篇期刊论文</b>（其中 <b>8 篇为预印本或未出卡</b>）按「综述与证据审计—基因组预测—可解释 AI—视觉表型—结构预测与候选排序」五个层面组织；同时把 <b>G 层（GitHub 开源项目）</b>提到与论文层并列的位置——因为在这个方向上，<b>模型、工具与基准的真实进展大量发生在代码仓库里，而不是期刊上</b>。G 层的条目<b>不是同行评议文献</b>，本章已严格分层标注。</p></div>
+<h3 class="theme-h3">一、最重要的一篇：给「LLM 用于育种」做一次证据审计</h3>
+<p><i>Molecular Plant</i> 的这篇综述（同行评议，<b>2026-11-11</b>）是本期<b>最该先读</b>的一篇，因为它做了一件少见的事——<b>不是罗列可能性，而是审计证据强度</b>。</p><p>它的框架是：植物育种正进入<b>多模态时代</b>，基因组、表型、环境与多组学数据与快速膨胀的文献同时产生。<b>文本 LLM</b>、<b>检索增强生成（RAG）</b>、<b>知识图谱</b>与<b>生物基础模型（Bio-FM）</b>提供的是<b>互补</b>能力——分别用于组织证据、表征生物关系、从分子数据学习。作者按<b>知识挖掘、预测建模、智能育种设计</b>三层组织这些技术。</p><p><b>然后是关键部分：系统证据审计（systematic evidence audit）</b>。作者刻意区分三类陈述——① 该模型家族<b>直接证明</b>了什么；② 结论<b>依赖相邻的、非 LLM 的证据</b>；③ 仍存在<b>关键验证空白</b>的地方。审计结果非常清醒：</p><ul><li><b>文本 LLM 的直接证据集中在「检索、问答、证据组织」</b>——即帮人找和整理，而不是自己做出生物学发现；</li><li><b>分子预测类任务</b>（功能注释、变异效应预测）主要靠 <b>Bio-FM</b>；</li><li><b>基因组预测与 G×E 的定量证据，仍然主要来自数量遗传学与深度学习模型</b>（而不是 LLM）；</li><li>因此 <b>LLM 驱动的基因组预测、亲本选择、育种设计目前仍是「前瞻性」的（prospective）</b>，尚未落地。</li></ul><p>作者给出三条落地前提：<b>可靠的数据溯源（provenance）</b>、<b>恰当的基准测试</b>、以及<b>与输出相匹配的验证</b>（从计算评估一直到实验与田间试验）。最后一句话是全篇立场：<b>LLM 与 Bio-FM 的输出应当「支持」而非「替代」科学解释与育种决策</b>。</p><p><b>对你的意义</b>：如果你打算用 LLM 做文献挖掘或候选基因整理，这篇文章给了现成的<b>「什么能说、什么不能说」的分级标准</b>；如果你读到别人宣称「LLM 预测了某性状」，可以用它的三层标准去检验。</p>
+<h3 class="theme-h3">二、基因组预测：把「环境」从混杂因素变成模型输入</h3>
+<p>基因组预测（GP）是 AI 在植物育种里<b>落地最实</b>的方向。本期 <b>HiEGP</b> 的工作（<i>Molecular Plant</i>，同行评议，<b>2026-11-10</b>）代表了当前的进展水平。</p><p>问题背景说得很实在：种质库保存的生物多样性对育种至关重要，但<b>只有很小一部分种质被充分表征</b>——因为表型鉴定低通量、成本高，尤其是<b>区域特异的产量相关性状</b>。对大豆这类<b>光周期与温度敏感</b>的作物，这个问题更严重（同一基因型在不同纬度表现完全不同）。</p><p>数据集规格：<b>1,421 份</b>多样大豆种质，<b>6 个</b>关键育种性状，跨 <b>9 个地点</b>（纬度 <b>28.53°–45.64°</b>），并整合<b>生物气候与土壤数据</b>。</p><p>方法上，<b>HiEGP</b>（High-dimensional Environmental Factor Integration for Genomic Prediction）是一个<b>特征工程的层级式 G×E 预测框架</b>，把四类信息整合起来：<b>环境主效应</b>、<b>基因型特异的環境响应</b>、<b>基因组背景</b>、<b>环境相似性</b>。</p><p>性能与几个值得注意的延伸：</p><ul><li>预测<b>已观测环境中的未测基因型</b>，按性状的汇总相关平均 <b>0.871</b>；预测<b>未观测环境中的未测基因型</b>（更难的场景）仍达 <b>0.775</b>，整体优于所评估的方法；</li><li>在<b>外部 USDA 大豆面板</b>上表现稳定：百粒重按环境的相关在 <b>0.70–0.81</b> 之间（外部验证是这类工作可信度的关键）；</li><li>它还能做<b>「环境响应型 GWAS」</b>：重现了已知的成熟期位点，并鉴定出 <b>175 个</b>与环境响应模式相关的候选区域；其中部分候选基因的优先级得到<b>EMS 突变体表型</b>的支持。</li></ul><p><b>对你的可借鉴点</b>：你做的抗病性状同样存在强烈的<b>环境与年份依赖</b>（不同年份病害压力不同）。传统做法是「分环境建模再平均」，而 HiEGP 的思路是<b>把环境变量作为特征直接喂进模型</b>——如果你的抗性表型来自多点多时，这个思路值得试。</p>
+<h3 class="theme-h3">三、可解释 AI：回答「为什么」，而且能在分布重叠时找出关键特征</h3>
+<p>预测准确率高不等于有用。本期 <i>Science Advances</i> 的工作（同行评议，<b>2026-11-11</b>）展示了<b>可解释 AI（XAI）</b>在植物基因组学里的正确用法。</p><p>科学问题本身很硬：<b>多倍化</b>（全基因组加倍）会通过<b>偏倚的基因丢失</b>与<b>调控重连</b>重塑基因组，但<b>亚基因组间偏倚分配的驱动因素</b>此前不清楚。作者用<b>玉米</b>与<b>白菜（<i>Brassica rapa</i>）</b>作为模型异源多倍体，分别整理了 <b>60 个</b>与 <b>45 个</b>基因组/表观基因组特征，构建监督学习模型<b>按亚基因组身份对基因分类</b>。</p><p><b>结果里最有价值的一点是一个方法学发现</b>：在两个物种中，XAI 都判定<b>重组率（recombination rate）是最有影响力、且互联程度最高的特征</b>——而它在<b>亚基因组组间的均值差异并不显著</b>。也就是说，<b>「均值检验不显著」并不等于「不重要」</b>；一个特征可以主要通过<b>与其他特征的协变/交互</b>发挥作用，而这类作用在传统单变量比较里完全看不见。</p><p>进入前十的特征还包括：<b>染色体位置</b>、<b>转座子密度</b>，以及<b>染色质相关特征</b>——特别是<b>开放染色质区域到基因的距离</b>，以及<b>活跃组蛋白标记 H3K9ac 与 H3K27ac</b>。XAI 导出的协变与交互网络进一步显示，<b>重组率是连接各显著特征的枢纽节点</b>。</p><p><b>对你的启示（这条我认为最实用）</b>：如果你做抗病性状的多特征分析（比如同时有表达、表观、SV、重复序列、染色质数据），<b>不要只做逐特征的单变量检验</b>。一个特征在组间均值相同、却通过与其他特征的交互影响表型，这种情况用 XAI 能抓出来，用 t 检验抓不出来。</p>
+<h3 class="theme-h3">四、视觉与表型：AI 在植物上最成熟的落地形态</h3>
+<p>如果问「AI 在植物领域哪个环节真正可用了」，答案大概率是<b>图像识别与表型采集</b>——因为这类任务的<b>标注明确、评价标准清楚、可立即验证</b>。</p><p>本期 <b>ACHC</b> 的工作（<i>Plant Cell Reports</i>，同行评议，<b>2026-11-13</b>）是典型代表：针对番茄叶部病害识别，对经典 <b>AlexNet</b> 做轻量化改造，再插入两类注意力模块——<b>坐标注意力（coordinate attention）</b>置于 Conv1 与 Conv3 之后以改善<b>病斑区域的空间定位</b>；<b>混合通道–空间注意力</b>置于 Conv2 与 Conv4 之后以加强跨通道的判别性特征学习。平均测试准确率 <b>99.62%</b>，优于 MobileNetV3 与 ResNet50 等网络，且模型更轻量。</p><p><b>对这类工作需要保持的判断</b>：99.62% 是在<b>特定数据集</b>上的结果，实际田间的光照、遮挡、病斑早期形态都会显著降低性能；它解决的是<b>「已知病害的分类」</b>，不是<b>「新病害的发现」</b>。但它作为<b>表型采集的自动化工具</b>已经足够实用。</p><p>同一方向今日还有一篇把 <b>多平台 LiDAR 表型与 GWAS 结合</b>的工作（预印本，<b>2026-11-10</b>），把三维表型数据用于关联定位——这是「表型通量提升 → 关联分析分辨率提升」这条链的实际体现，与 T06 主题（定位与 GWAS）直接相接。</p>
+<h3 class="theme-h3">五、结构预测与候选排序：AI 已经进入机制研究，但角色是「提假设」</h3>
+<p>这一层是 AI 与植物免疫<b>结合最紧</b>的部分，也是我此前多期反复提到的。</p><p><b>AlphaFold 3 的实际用法</b>：在已收录的工作里，AF3 几乎都不是用来「证明结构」，而是用来<b>在大量候选中排序、或提出与实验相容的模型</b>：</p><ul><li><b>向日葵 FLS2</b>（预印本，<b>2026-10-08</b>）：用 AF3 对 <b>256 个</b>天然 FLS2 同源物与 flg22<sub>Xcc</sub> 做结构筛选，把 HaFLS2-1 排到首位，再用生化与免疫实验验证；</li><li><b>HREZ 抗 ToBRFV</b>（预印本，<b>2026-10-06</b>）：AF3 建模<b>支持</b>一个五聚体抗病小体模型，但作者同时用生化与 8 个 MPs 的活性数据做正交支撑；</li><li><b>Tie1–OsTLP7</b>（预印本，<b>2026-10-16</b>）：AF3 结构预测<b>结合等位变异</b>，界定了位于 PIP₂ 结合位点之外的候选互作界面。</li></ul><p><b>另一类：直接用深度学习做候选排序。</b><b>DREM</b>（预印本，<b>2026-10-22</b>）用两个带注意力的双向 LSTM（一个做抗病性二分类、一个做抗病结构域多标签分类），在 RefPlantNLR 上<b>召回 99.8%</b>，在 15,000 个留出蛋白上 MCC <b>0.938 vs PRGminer 0.820</b>；跨 5 个植物蛋白组鉴定出 4,046 个高置信或候选蛋白，其中 <b>992 个带强信号但检测不到 Pfam 结构域</b>。</p><p><b>需要保持的分寸</b>：AF3 给的是<b>假设</b>，DREM 给的是<b>候选</b>。前者需要交联质谱/电镜等实验补证，后者那 992 个无结构域蛋白<b>功能证据几乎为零</b>。这一点与第一节那篇综述的立场完全一致——<b>模型的输出支持而非替代判断</b>。</p>
+<h3 class="theme-h3">六、G 层：这个方向真正的进展发生地（开源项目）</h3>
+<p><b>本节内容不是同行评议文献</b>，而是 GitHub 上的开源项目动态，与文中的论文<b>严格分层</b>，不得作为学术结论引用。</p><p>之所以把这个方向单列，是因为一个持续观察到的反差：<b>期刊层本期严格筛选后只有 10 篇</b>，而 G 层在同样时间窗内监测到 <b>58 个</b>符合条件的项目（窗口 <b>45 天</b>、星数阈值 <b>30</b>、<b>27 个检索主题</b>、<b>抓取失败 0 个</b>）——其中与 AI/模型直接相关的有 <b>35 个</b>。<b>AI 在生命科学中的真实进展，大量以代码与模型权重的形式发布，而不是先写成论文。</b></p><p><b>本期 G 层的分组分布</b>（按项目数）：<b>AI4Science 基础设施 15</b>、<b>蛋白质设计与结构预测 12</b>、<b>单细胞基础模型 6</b>、<b>GWAS/关联分析 4</b>、<b>大语言模型 4</b>、<b>基因组学工具 4</b>、<b>植物表型与图像 4</b>、泛基因组 2、植物基因组学 2、蛋白质语言模型 2、机器学习方法 1、基础模型 1、基因组选择 1。</p><p><b>几个值得注意的项目（按星数，星数为 G 层抓取时的实测值）</b>：</p><ul><li><b>google-deepmind/alphafold3</b>（★8783）：AF3 推理流程——即第 5 节里被反复用作「假设生成器」的工具本体；</li><li><b>RosettaCommons/RFdiffusion</b>（★3142）与 <b>sokrypton/ColabFold</b>（★2990）：蛋白设计与可及化折叠计算，是结构改造方向的主力工具；</li><li><b>synthetic-sciences/openscience</b>（★4391）与 <b>ai4s-research/open-science</b>（★2103）：面向科研的 AI 工作台/桌面环境，属「基础设施」类；</li><li><b>本期新出现</b>：<b>songlab-cal/gpn</b>（★387）——Genomic Pretrained Network（基因组预训练网络），是「核酸基础模型」这一族的新成员，与 nucleotide-transformer、RiNALMo、DNA-Diffusion 同类，<b>也是 t4 方向最接近落地的形态</b>。</li></ul><p><b>怎么用这一层</b>：把它当作<b>「技术雷达」而非「证据来源」</b>——看到值得关注的项目后，去它的论文、基准与文档里核实，再决定是否引入自己的分析流程。本期 08a 分区列出了完整项目清单（含星数、分组与描述），附录表另有全量数据。</p>
+<h3 class="theme-h3">七、共识、分歧、空白与可操作含义</h3>
+<p><b>共识</b></p><ul><li><b>AI 在植物上最成熟的落地是「表型/图像」与「基因组预测」</b>，而不是「自动发现生物学机制」；</li><li><b>环境必须进入模型</b>：HiEGP 的 G×E 框架说明把环境作为特征能显著提升跨环境预测；</li><li><b>「可解释」比「准确」更能产生科学价值</b>：XAI 在均值无差异的情况下找到了重组率这一枢纽特征；</li><li><b>结构预测模型（AF3 等）的角色是提出假设</b>，需要正交实验补证。</li></ul><p><b>分歧与未定</b></p><ul><li><b>LLM 在育种决策中的实际价值</b>：综述明确指出仍属「前瞻性」，而产业界与部分预印本的表述要乐观得多——这个落差本身值得警惕；</li><li><b>基础模型（Bio-FM）与传统深度学习</b>在具体任务上的优劣缺少统一基准（这正是综述呼吁的 benchmarking 问题）；</li><li><b>视觉模型的真实田间性能</b>：实验室数据集 99%+ 的准确率与田间表现之间的差距很少被系统报告。</li></ul><p><b>空白（本期确认缺的）</b></p><ul><li><b>面向抗病性状的多模态基础模型</b>几乎空白（多数 Bio-FM 做的是序列层面的通用任务）；</li><li><b>植物领域的标准化基准数据集</b>严重不足，导致方法之间难以公平比较；</li><li><b>AI 预测结果的前瞻性验证</b>（先预测、再做实验、再报告命中率）在植物中极少；</li><li><b>LLM 在中文/非英语文献中的知识挖掘</b>缺少评估。</li></ul><p><b>对你（作物抗病基因研究）的可操作含义</b></p><ul><li><b>把 AI 用在你已有的数据流上，而不是追逐新模型。</b>最直接的两个切入点：① <b>表型自动化</b>（病斑图像识别/计数）；② <b>多环境基因组预测</b>（把年份、地点、病害压力作为环境特征）。</li><li><b>做多特征分析时，用可解释方法而不只做单变量检验。</b>XAI 案例说明：均值不显著的特征可能是真正的枢纽（重组率）。</li><li><b>把 AF3/DREM 这类工具当「排序器」用，写文章时措辞降一级</b>——「预测提示」而非「证明」。</li><li><b>关注 G 层的基础模型项目，但先核实基准再采用。</b>核酸基础模型（nucleotide-transformer 类）是最有可能迁移到植物启动子/调控元件建模的一族。</li><li><b>用 LLM 做文献挖掘时，明确它的证据边界</b>：它擅长检索与组织，不擅长替你判断证据强度——后者仍需你自己做（正如本期第一节那篇综述所做的）。</li></ul>
+</section>
+<section class="section" id="d2" data-dir="d2">
+<div class="section-head"><span class="sh-k">d2</span><h2>GWAS / 关联分析</h2><span class="sh-count">1 篇</span></div>
+<article class="paper" data-dir="d2" data-tags="d2 t3" id="p2"><div class="paper-head"><div class="paper-top"><span class="paper-idx">02</span><span class="paper-kind">研究论文 · Molecular Plant · 把环境写进基因组预测</span></div><h3>HiEGP：一个环境知情的基因组预测框架，助力大豆基因库材料的育种利用</h3><p class="orig"><span class="zh">英文原题</span>HiEGP: An environment-informed genomic prediction framework that facilitates soybean genebank germplasm evaluation and climate-smart breeding</p><p class="src"><span class="journal">Molecular Plant</span><time datetime="2026-11-10">2026-11-10</time><span class="badge">IF=25</span><span class="tier">A 层 · 顶刊白名单</span><a href="https://doi.org/10.1016/j.molp.2026.11.003">10.1016/j.molp.2026.11.003</a></p><div class="dirchips"><span class="chip" data-c="d2"><span class="chip-dot"></span>d2 · GWAS / 关联分析</span><span class="chip" data-c="t3"><span class="chip-dot"></span>t3 · 大规模 GWAS 分析</span></div><p class="authors"><span class="lbl">作者</span>Yingpu Che（第一作者） 等 19 人；通讯作者：<b>Ying-Hui Li、Li-Juan Qiu</b>。<br>主要单位：State Key Laboratory of Crop Gene Resources and Breeding/The National Key Facility for Crop Gene Resources and Genetic Improvement (NFCRI)/ Key Laboratory of Grain Crop Genetic Resources Evaluation and Utilization (MARA), Institute of Crop Sciences, Chinese Academy of Agricultural Sciences, Beijing 100081, China.</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Yingpu Che</p><p class="bio-unit">State Key Laboratory of Crop Gene Resources and Breeding/The National Key Facility for Crop Gene Resources and Genetic Improvement (NFCRI)/ Key Laboratory of Grain Crop Genetic Resources Evaluation and Utilization (MARA), Institute of Crop Sciences, Chinese Academy of Agricultural Sciences, Beijing 100081, China.</p><p class="bio-dir"><span>主要研究方向</span>（<b>由发表记录归纳，非作者自述</b>）论文主题集中在：Remote Sensing in Agriculture、Smart Agriculture and AI、Leaf Properties and Growth Measurement、Soybean genetics and cultivation；高频关键词：UAV imagery、maize、leaf area index、high-throughput phenotyping；OpenAlex 收录其论文 18 篇</p></div><div class="bio"><div class="bio-role warn">通讯作者</div><p class="bio-name">Ying-Hui Li</p><p class="bio-unit">State Key Laboratory of Crop Gene Resources and Breeding/The National Key Facility for Crop Gene Resources and Genetic Improvement (NFCRI)/ Key Laboratory of Grain Crop Genetic Resources Evaluation and Utilization (MARA), Institute of Crop Sciences, Chinese Academy of Agricultural Sciences, Beijing 100081, China.cn.</p></div><div class="bio"><div class="bio-role warn">通讯作者</div><p class="bio-name">Li-Juan Qiu</p><p class="bio-unit">State Key Laboratory of Crop Gene Resources and Breeding/The National Key Facility for Crop Gene Resources and Genetic Improvement (NFCRI)/ Key Laboratory of Grain Crop Genetic Resources Evaluation and Utilization (MARA), Institute of Crop Sciences, Chinese Academy of Agricultural Sciences, Beijing 100081, China.cn.</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">The biodiversity preserved in gene banks drives crop improvement and strengthens climate resilience for feeding the future.</p><p class="s-zh">基因库中保存的<b>生物多样性</b>驱动作物改良并增强气候韧性，以保障未来粮食供给。</p></div><div class="pair"><p class="s-en" lang="en">However, only a limited fraction of germplasm has been well characterized, because phenotyping remains low-throughput and costly, especially for region-specific yield-related traits.</p><p class="s-zh">然而，<b>只有很小一部分种质被充分表征</b>——因为表型鉴定仍<b>低通量且成本高</b>，尤其是<b>区域特异的产量相关性状</b>。</p></div><div class="pair"><p class="s-en" lang="en">This gap hinders the utilization of gene bank biodiversity in breeding, particularly for photoperiod and temperature-sensitive crops like soybean.</p><p class="s-zh">这一缺口阻碍了基因库多样性在育种中的利用，<b>对大豆这类光周期与温度敏感的作物尤为突出</b>。</p></div><div class="pair"><p class="s-en" lang="en">Here, we constructed a multi-environment soybean dataset integrating phenotypes, genotypes, and environmental covariates for 1,421 diverse soybean germplasm accessions.</p><p class="s-zh">本文构建了一个<b>多环境大豆数据集</b>，整合了 <b>1,421 份</b>多样大豆种质的<b>表型、基因型与环境协变量</b>。</p></div><div class="pair"><p class="s-en" lang="en">It includes six key breeding traits collected across nine locations (latitudes 28.53°-45.64°), along with bioclimatic and soil data.</p><p class="s-zh">该数据集包含跨 <b>9 个地点</b>（纬度 <b>28.53°–45.64°</b>）采集的 <b>6 个</b>关键育种性状，并配有<b>生物气候与土壤数据</b>。</p></div><div class="pair"><p class="s-en" lang="en">We developed HiEGP (High-dimensional Environmental Factor Integration for Genomic Prediction), a feature-engineered hierarchical G×E prediction framework that integrates environmental main effects, genotype-specific environmental responses, genomic background, and environmental similarity.</p><p class="s-zh">我们开发了 <b>HiEGP</b>（High-dimensional Environmental Factor Integration for Genomic Prediction）——一个<b>特征工程的层级式 G×E 预测框架</b>，整合<b>环境主效应</b>、<b>基因型特异的環境响应</b>、<b>基因组背景</b>与<b>环境相似性</b>。</p></div><div class="pair"><p class="s-en" lang="en">HiEGP achieved high predictive performance under both validation settings, reaching average trait-wise pooled correlations of 0.871 for predicting untested genotypes in observed environments and 0.775 for predicting untested genotypes in unobserved environments, outperforming the evaluated methods overall.</p><p class="s-zh">HiEGP 在两种验证设置下都取得高预测性能：预测<b>已观测环境中的未测基因型</b>时，按性状的汇总相关平均达 <b>0.871</b>；预测<b>未观测环境中的未测基因型</b>时达 <b>0.775</b>，整体优于所评估的方法。</p></div><div class="pair"><p class="s-en" lang="en">In the external USDA soybean panel, HiEGP showed stable prediction for 100-seed weight, with environment-wise correlations ranging from 0.70 to 0.81.</p><p class="s-zh">在<b>外部 USDA 大豆面板</b>中，HiEGP 对<b>百粒重</b>表现出稳定预测，按环境的相关在 <b>0.70–0.81</b> 之间。</p></div><div class="pair"><p class="s-en" lang="en">HiEGP enabled environment-response genome-wide association studies, recovering known maturity loci and identifying 175 candidate regions associated with environmental-response patterns.</p><p class="s-zh">HiEGP 还支持<b>环境响应型全基因组关联研究</b>，<b>重现了已知的成熟期位点</b>，并鉴定出 <b>175 个</b>与环境响应模式相关的候选区域。</p></div><div class="pair"><p class="s-en" lang="en">Phenotypic evidence from ethyl methanesulfonate mutants supported the prioritization of selected candidate genes.</p><p class="s-zh"><b>EMS 突变体的表型证据</b>支持了所选候选基因的优先级排序。</p></div><div class="pair"><p class="s-en" lang="en">HiEGP supported regional adaptation assessment under the observed environmental conditions.</p><p class="s-zh">HiEGP 还可支持在已观测环境条件下的<b>区域适应性评估</b>。</p></div><div class="pair"><p class="s-en" lang="en">This capability offers a scalable strategy to improve the characterization and breeding use of underexplored gene bank germplasm for environment-informed soybean breeding.</p><p class="s-zh">这一能力提供了一种<b>可扩展的策略</b>，用于改善<b>探索不足的基因库种质</b>的表征与育种利用，服务于<b>环境知情的大豆育种</b>。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>如何用有限表型数据预测大量未测种质在不同环境下的表现</strong>。核心问题是：基因库里有大量种质，但表型鉴定低通量高成本，尤其产量性状还强烈依赖环境——<strong>如何在不测的情况下预测它在哪里表现好</strong>。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>这是本期<b>T07 主题里落地最实</b>的一篇（d2/t3/t4）。它的关键思路是把<b>环境从「需要分开建模的麻烦」变成「模型的特征输入」</b>。传统做法是分环境建模再平均，而 HiEGP 显式整合了四类信息：环境主效应、基因型特异的環境响应、基因组背景、环境相似性。两个数据点最能说明水平：① 预测<b>未观测环境</b>中的未测基因型（最难场景）相关仍达 <b>0.775</b>；② 在<b>外部 USDA 面板</b>上验证（外部验证是这类工作可信度的分水岭），百粒重按环境相关 0.70–0.81。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>数据：<b>1,421 份</b>大豆种质 × <b>6 个</b>育种性状 × <b>9 个地点</b>（纬度 28.53°–45.64°）+ 生物气候与土壤数据；</li><li>框架：<b>HiEGP</b> = 特征工程的层级式 G×E 预测，整合<b>环境主效应 / 基因型特异响应 / 基因组背景 / 环境相似性</b>；</li><li>性能：已观测环境未测基因型 <b>0.871</b>；<b>未观测环境</b>未测基因型 <b>0.775</b>；</li><li>外部验证：USDA 面板百粒重按环境相关 <b>0.70–0.81</b>；</li><li>延伸：支持<b>环境响应型 GWAS</b>，重现已知成熟期位点 + 鉴定 <b>175 个</b>候选区域，部分候选获 <b>EMS 突变体</b>支持。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>把环境当作特征</strong>而不是分组依据——这是 G×E 建模思路上的实质改进。</li><li><strong>外部独立面板验证</strong>：不是只在自建数据上跑交叉验证，这是可信度的关键。</li><li><strong>预测模型反向产出可验证的候选</strong>：环境响应型 GWAS 找出 175 个区域，并用突变体做部分验证，形成闭环。</li><li><strong>直接服务种质利用</strong>：目标不是发方法，而是让「未表征的基因库材料」变得可用。</li><li>局限：性状为大豆产量相关，<b>抗病性状是否同样适用未验证</b>；依赖高质量的环境协变量数据。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇对你有<b>直接可迁移</b>的价值。三个可带走点：① <b>你的抗病表型也强烈依赖环境</b>（不同年份病害压力、不同地点菌量不同）——传统做法是「分年份/分地点建模」，HiEGP 的思路是<b>把年份/地点/气候变量作为特征喂进模型</b>，值得试；② <b>外部独立面板验证</b>是这类工作能否被信任的分水岭，你若做预测模型，务必留一套独立材料做外部验证；③ <b>预测模型可以反向产出可检验的候选位点</b>（环境响应型 GWAS → 175 个区域 → EMS 突变体验证），这条「预测→候选→验证」的闭环是当前 AI 类工作最受认可的结构。同行评议文献（Molecular Plant）。</div></article>
+</section>
+<section class="section" id="t4" data-dir="t4">
+<div class="section-head"><span class="sh-k">t4</span><h2>人工智能 / 大语言模型在植物基因组与遗传学中的应用</h2><span class="sh-count">1 篇</span></div>
+<article class="paper" data-dir="t4" data-tags="t4" id="p1"><div class="paper-head"><div class="paper-top"><span class="paper-idx">01</span><span class="paper-kind">综述 · Molecular Plant · 给 LLM 育种应用做证据审计</span></div><h3>大型语言模型与基础模型在预测性植物育种中的应用：能力、证据与前景</h3><p class="orig"><span class="zh">英文原题</span>Large language and foundation models in predictive plant breeding: Capabilities, evidence, and challenges</p><p class="src"><span class="journal">Molecular Plant</span><time datetime="2026-11-10">2026-11-10</time><span class="badge">IF=25</span><span class="tier">B 层 · 专业期刊</span><a href="https://doi.org/10.1016/j.molp.2026.10.020">10.1016/j.molp.2026.10.020</a></p><div class="dirchips"><span class="chip" data-c="t4"><span class="chip-dot"></span>t4 · 人工智能 / 大语言模型在植物基因组与遗传学中的应用</span></div><p class="authors"><span class="lbl">作者</span>Jiheon Han（第一作者） 等 7 人；通讯作者：<b>Scott A Jackson、Kyung Do Kim</b>。<br>主要单位：Department of Integrative Biological Sciences and Industry, Sejong University, Seoul 05006, Republic of Korea.</p></div><div class="bios"><div class="bio"><div class="bio-role">第一作者</div><p class="bio-name">Jiheon Han</p><p class="bio-unit">Department of Integrative Biological Sciences and Industry, Sejong University, Seoul 05006, Republic of Korea.</p><p class="bio-dir"><span>主要研究方向</span>（<b>由发表记录归纳，非作者自述</b>）论文主题集中在：Genetic and phenotypic traits in livestock、Smart Agriculture and AI、Artificial Intelligence in Healthcare and Education；高频关键词：large language models、retrieval-augmented generation、knowledge graphs、genomic prediction；OpenAlex 收录其论文 1 篇</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Scott A Jackson</p><p class="bio-unit">Department of Crop and Soil Sciences, University of Georgia, Athens GA, United States.edu.</p><p class="bio-dir"><span>主要研究方向</span>（<b>由发表记录归纳，非作者自述</b>）论文主题集中在：Genetic and phenotypic traits in livestock、Smart Agriculture and AI、Artificial Intelligence in Healthcare and Education；高频关键词：large language models、retrieval-augmented generation、knowledge graphs、genomic prediction；OpenAlex 收录其论文 1 篇</p></div><div class="bio"><div class="bio-role">通讯作者</div><p class="bio-name">Kyung Do Kim</p><p class="bio-unit">Department of Integrative Biological Sciences and Industry, Sejong University, Seoul 05006, Republic of Korea; Institute for Advanced Plant Breeding and Phytochemicals (IAPBP), Sejong University, Seoul 05006, Republic of Korea.ac.kr.</p><p class="bio-dir"><span>主要研究方向</span>（<b>由发表记录归纳，非作者自述</b>）论文主题集中在：Chromosomal and Genetic Variations、Soybean genetics and cultivation、Ferroelectric and Negative Capacitance Devices、Ferroelectric and Piezoelectric Materials；高频关键词：soybean、DNA methylation、transposable elements、whole-genome duplication；OpenAlex 收录其论文 130 篇</p></div></div><section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Plant breeding is entering a multimodal era in which genomic, phenotypic, environmental, and multi-omics data are generated alongside a rapidly expanding scientific literature.</p><p class="s-zh">植物育种正进入一个<b>多模态时代</b>——基因组、表型、环境与多组学数据，与快速膨胀的科学文献<b>同时</b>产生。</p></div><div class="pair"><p class="s-en" lang="en">Text-based large language models (LLMs), retrieval-augmented generation, knowledge graphs, and biological foundation models (Bio-FMs) offer complementary capabilities for organizing evidence, representing biological relationships, and learning from molecular data.</p><p class="s-zh"><b>文本大语言模型（LLM）</b>、<b>检索增强生成</b>、<b>知识图谱</b>与<b>生物基础模型（Bio-FM）</b>提供了<b>互补</b>的能力：分别用于<b>组织证据</b>、<b>表征生物关系</b>与<b>从分子数据学习</b>。</p></div><div class="pair"><p class="s-en" lang="en">Here, we review these technologies across knowledge mining, predictive modeling, and intelligent breeding design, and apply a systematic evidence audit to distinguish what each model family has directly demonstrated, where conclusions depend on adjacent or non-LLM evidence, and where key validation gaps remain.</p><p class="s-zh">本文按<b>知识挖掘、预测建模与智能育种设计</b>三个层面综述这些技术，并开展<b>系统性证据审计</b>，以区分：各模型家族<b>直接证明了什么</b>、哪些结论<b>依赖相邻或非 LLM 的证据</b>、以及何处仍存在<b>关键验证空白</b>。</p></div><div class="pair"><p class="s-en" lang="en">The audit shows that direct text-based LLM evidence is concentrated in retrieval, question answering, and evidence organization.</p><p class="s-zh">审计表明，<b>直接的文本 LLM 证据集中在检索、问答与证据组织</b>。</p></div><div class="pair"><p class="s-en" lang="en">Molecular prediction tasks, such as functional annotation and variant-effect prediction, rely mainly on Bio-FMs, whereas quantitative evidence for genomic prediction and G×E still comes largely from quantitative-genetic and deep-learning models.</p><p class="s-zh"><b>分子预测任务</b>（如功能注释与变异效应预测）主要依赖 <b>Bio-FM</b>；而<b>基因组预测与 G×E</b> 的定量证据仍主要来自<b>数量遗传学与深度学习模型</b>。</p></div><div class="pair"><p class="s-en" lang="en">LLM-informed genomic prediction, parental selection, and breeding design therefore remain prospective.</p><p class="s-zh">因此，<b>LLM 驱动的基因组预测、亲本选择与育种设计目前仍属前瞻性（prospective）</b>。</p></div><div class="pair"><p class="s-en" lang="en">Moving them into practice will require reliable provenance, appropriate benchmarking, and validation matched to each output, from computational evaluation to experiments and field trials.</p><p class="s-zh">要将其推向实践，需要<b>可靠的数据溯源</b>、<b>恰当的基准测试</b>，以及<b>与各输出相匹配的验证</b>——从计算评估一直到实验与田间试验。</p></div><div class="pair"><p class="s-en" lang="en">LLM and Bio-FM outputs should support, rather than replace, scientific interpretation and breeder decision-making.</p><p class="s-zh">LLM 与 Bio-FM 的输出应当<b>支持</b>而非<b>替代</b>科学解释与育种决策。</p></div></section><div class="prompts"><section class="prompt"><h4><span class="pk">Prompt 1</span>文献核心概括</h4><p>研究主题是<strong>LLM 与生物基础模型在植物育种中到底已经做到了什么</strong>。这不是一篇「展望未来」的综述，而是做了一次<b>证据审计</b>——把「模型能做到的」与「被证明能做到的」分开。核心方法是区分三类陈述：直接证明的、依赖相邻证据的、以及仍属验证空白的。</p></section><section class="prompt"><h4><span class="pk">Prompt 2</span>研究背景与重要性</h4><p>这是本期<b>最该先读</b>的一篇（t4）。它的价值不在技术介绍，而在<b>立场与分级</b>。对我印象最深的是它敢于把结论说得保守：<b>文本 LLM 的直接证据只在检索/问答/证据组织</b>；<b>分子预测靠 Bio-FM</b>；<b>基因组预测与 G×E 的定量证据仍来自数量遗传学与深度学习</b>；而「LLM 驱动的育种设计」<b>目前仍是前瞻性的</b>。这与产业界的乐观宣传形成明显落差，而这个落差本身就是重要信息。落地三前提也提得具体：<b>数据溯源、基准测试、与输出匹配的验证</b>。</p></section><section class="prompt"><h4><span class="pk">Prompt 3</span>文献主要贡献</h4><ul><li>背景：育种进入<b>多模态时代</b>（基因组/表型/环境/多组学 + 文献）；</li><li>技术族：<b>文本 LLM、RAG、知识图谱、Bio-FM</b>——互补而非替代；</li><li>应用三层：<b>知识挖掘 / 预测建模 / 智能育种设计</b>；</li><li>审计结论一：<b>文本 LLM 的直接证据 = 检索、问答、证据组织</b>；</li><li>审计结论二：<b>分子预测（功能注释、变异效应）主要靠 Bio-FM</b>；</li><li>审计结论三：<b>基因组预测与 G×E 的定量证据仍来自数量遗传学 + 深度学习</b>；</li><li>审计结论四：<b>LLM 驱动的基因组预测/亲本选择/育种设计仍是前瞻性</b>；</li><li>落地前提：<b>溯源 + 基准 + 匹配验证</b>（计算→实验→田间）。</li></ul></section><section class="prompt"><h4><span class="pk">Prompt 16</span>文献优点与亮点</h4><ul><li><strong>「证据审计」这个做法本身就值得学</strong>：把「模型能做什么」与「被证明能做什么」分开陈述。</li><li><strong>四层分工清晰</strong>：检索用 LLM、分子预测用 Bio-FM、基因组预测用数量遗传学、育种决策仍靠人。</li><li><strong>承认落差</strong>：明确写下 LLM 育种应用「仍是前瞻性」，这在综述里很少见。</li><li><strong>落地前提具体可执行</strong>：溯源、基准、匹配验证三条都不是空话。</li><li>局限：综述性质，<b>无新实验数据</b>；对 Bio-FM 的具体模型优劣未做横向基准。</li></ul></section></div><div class="readnote"><b>可借鉴点：</b>这篇给你的不是技术，而是<b>判断标准</b>。三个可带走点：① <b>用它的三层标准去检验任何「AI 用于育种」的说法</b>——是在做检索整理（LLM 擅长），还是在做分子预测（Bio-FM），还是在做基因组预测（那是数量遗传学的地盘，别挂 LLM 的名）；② <b>如果你要用 LLM 做文献挖掘</b>，明确它的边界：<b>擅长找和整理，不擅长替你判断证据强度</b>；③ <b>落地三前提可以直接当作你做 AI 相关工作的自查清单</b>：数据溯源清楚吗？有合适的基准吗？验证匹配输出层级吗（计算→实验→田间）？同行评议文献（Molecular Plant）。</div></article>
+</section>
+<section class="section" id="top3">
+<div class="section-head"><span class="sh-k">06</span><h2>值得精读 Top 3</h2><span class="sh-count">3 篇</span></div>
+<ol class="rank">
+<li><span class="rk">1</span><div class="rb"><p class="rt">给「LLM 用于育种」做一次证据审计——结论比宣传保守得多（Molecular Plant）</p><p class="rw">本期<b>最该先读</b>的一篇。它不罗列可能性，而是做<b>系统性证据审计</b>，把「模型能做到的」与「被证明能做到的」分开。四条审计结论：① <b>文本 LLM 的直接证据只在检索、问答、证据组织</b>；② <b>分子预测（功能注释、变异效应）主要靠 Bio-FM</b>；③ <b>基因组预测与 G×E 的定量证据仍来自数量遗传学与深度学习</b>；④ 因此 <b>LLM 驱动的基因组预测、亲本选择与育种设计目前仍是「前瞻性」的</b>。落地三前提也很具体：<b>可靠溯源、恰当基准、与输出匹配的验证</b>（计算→实验→田间）。<b>这个与产业宣传的落差值本身就是重要信息。</b></p></div></li>
+<li><span class="rk">2</span><div class="rb"><p class="rt">把环境从「分组依据」变成「模型特征」：HiEGP 的 G×E 框架（Molecular Plant）</p><p class="rw">本期 T07 里<b>落地最实</b>的一篇。<b>1,421 份</b>大豆种质 × <b>6 个</b>性状 × <b>9 个地点</b>（纬度 28.53°–45.64°）+ 气候与土壤数据。HiEGP 显式整合四类信息：<b>环境主效应 / 基因型特异响应 / 基因组背景 / 环境相似性</b>。两个关键数字：预测<b>未观测环境</b>中的未测基因型（最难场景）相关仍达 <b>0.775</b>；在<b>外部 USDA 面板</b>上百粒重按环境相关 <b>0.70–0.81</b>。更值得学的是它形成了闭环：<b>环境响应型 GWAS → 175 个候选区域 → EMS 突变体表型验证</b>。<b>你的抗病表型同样强烈依赖年份/地点，这个思路可直接迁移。</b></p></div></li>
+<li><span class="rk">3</span><div class="rb"><p class="rt">可解释 AI 的关键提醒：均值不显著 ≠ 不重要（Science Advances）</p><p class="rw">本期<b>方法学上最实用</b>的一条。用玉米（60 个特征）与白菜（45 个特征）做多倍体亚基因组分类，XAI 判定<b>重组率</b>为最有影响力且互联程度最高的特征——而它在<b>亚基因组组间的均值差异并不显著</b>。<b>含义：一个特征可以主要通过与其他特征的协变/交互起作用，这类作用在传统单变量检验里完全看不见。</b>对其他前列特征（染色体位置、转座子密度、开放染色质到基因的距离、H3K9ac/H3K27ac）也一并给出了排序，并发现<b>重组率是连接各显著特征的枢纽节点</b>。</p></div></li>
+</ol></section>
+<section class="section" id="teams">
+<div class="section-head"><span class="sh-k">07</span><h2>建议跟踪的团队</h2><span class="sh-count">3 组</span></div>
+<div class="team"><h3>AI 方法落地与证据标准方向（本期主题）</h3><p class="tu">见 Molecular Plant 原文（本简报未核实作者单位）</p><p class="tw">本期两篇 <i>Molecular Plant</i>（2026-11-10 / 11-11）分别代表这个方向的<b>两端</b>：一篇做<b>证据审计</b>（什么能说、什么不能说），一篇做<b>工程落地</b>（把环境写进预测模型）。若你要在抗病研究中引入 AI，先读审计那篇定标准，再看 HiEGP 的做法。</p></div>
+<div class="team"><h3>可解释 AI 与多组学整合方向（本期延伸）</h3><p class="tu">见 Science Advances 原文（本简报未核实作者单位）</p><p class="tw">该工作在<b>60/45 个多维特征</b>上做监督学习并用 XAI 解释，核心结论（重组率是隐藏枢纽）具有普适的方法学意义。若你做<b>多特征关联分析（t4/t3）</b>，「均值不显著≠不重要」这条要记住。</p></div>
+<div class="team"><h3>本期 G 层对 T07 的特别意义</h3><p class="tu">GitHub 开源项目（非同行评议）</p><p class="tw">G 层本期监测到 <b>58 个</b>项目、其中 <b>AI/模型相关 35 个</b>，而期刊层严格筛选后只有 <b>10 篇</b>论文——这个反差是本期的核心论点。<b>本期新出现</b>：<b>songlab-cal/gpn</b>（★387，Genomic Pretrained Network），属「核酸基础模型」一族，是 t4 方向最接近落地的形态。<b>G 层不作为学术结论引用</b>，仅作技术雷达。</p></div>
+</section>
+<section class="section" id="more">
+<div class="section-head"><span class="sh-k">08</span><h2>延伸阅读</h2><span class="sh-count">2 条</span></div>
+<p class="cov-note">以下为 <b>C 层预印本</b>，<b>未经同行评审</b>，不得与主榜论文同等看待；列出仅供快速跟进前沿动态。标有「相关性提示（较弱）」者与 12 个方向仅间接相关，优先级低。</p>
+<article class="paper ext" data-dir="d1" data-tags="t4" id="E1">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E1</span><span class="paper-kind">B 层 · 专业期刊</span></div>
+<h3>可解释 AI 将重组与染色质环境识别为亚基因组分化的关键预测因子</h3>
+<p class="orig"><span class="zh">英文原题</span>Explainable AI identifies recombination and chromatin environment as key predictors of subgenome evolution in maize and Brassica</p>
+<p class="src"><span class="journal">Science Advances</span><time datetime="2026-11-06">2026-11-06</time><a href="https://doi.org/10.1126/sciadv.aee9459">10.1126/sciadv.aee9459</a></p>
+<div class="dirchips"><span class="chip" data-c="t4"><span class="chip-dot"></span>t4 · 人工智能 / 大语言模型在植物基因组与遗传学中的应用</span></div>
+<p class="authors"><span class="lbl">作者</span>Layla A. Schuster（第一作者） 等 6 人；通讯作者：<b>Meixia Zhao</b>。<br>主要单位：Department of Microbiology and Cell Science, Institute of Food and Agricultural Sciences, University of Florida, Gainesville, FL 32611, USA.</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">Polyploidy, or whole genome duplication, reshapes genomes through biased gene loss and regulatory rewiring, yet the drivers of biased fractionation among subgenomes remain unclear.</p><p class="s-zh"><b>多倍化</b>（全基因组加倍）通过<b>偏倚的基因丢失</b>与<b>调控重连</b>重塑基因组，但<b>亚基因组间偏倚分配的驱动因素</b>此前不清楚。</p></div><div class="pair"><p class="s-en" lang="en">Using maize and Brassica rapa as model allopolyploids, we compiled 60 genomic and epigenomic features in maize and 45 in B. rapa and constructed supervised machine learning models to classify genes by subgenome identity.</p><p class="s-zh">以<b>玉米</b>与<b>白菜（<i>Brassica rapa</i>）</b>作为模型异源多倍体，我们整理了玉米的 <b>60 个</b>、白菜的 <b>45 个</b>基因组与表观基因组特征，并构建<b>监督机器学习模型</b>按<b>亚基因组身份</b>对基因进行分类。</p></div><div class="pair"><p class="s-en" lang="en">In both species, eXplainable Artificial Intelligence (XAI) approaches identified recombination rate as the most influential and highly interconnected feature despite nonsignificant mean differences between subgenome groups.</p><p class="s-zh">在两个物种中，<b>可解释人工智能（XAI）</b>方法都鉴定出<b>重组率</b>为<b>最有影响力且互联程度最高</b>的特征——<b>尽管它在亚基因组组间的均值差异并不显著</b>。</p></div><div class="pair"><p class="s-en" lang="en">Chromosome location, transposon density, and chromatin-associated features, including the proximity of accessible chromatin regions to genes and active histone marks such as H3K9ac and H3K27ac, consistently ranked among the top contributors to subgenome classification.</p><p class="s-zh"><b>染色体位置</b>、<b>转座子密度</b>以及<b>染色质相关特征</b>——包括<b>开放染色质区域到基因的距离</b>与<b>活跃组蛋白标记 H3K9ac、H3K27ac</b>——始终位列亚基因组分类的前列贡献者。</p></div><div class="pair"><p class="s-en" lang="en">XAI-derived covariation and interaction networks further revealed recombination rate as the central node connecting significant features.</p><p class="s-zh">XAI 导出的<b>协变与交互网络</b>进一步揭示<b>重组率是连接各显著特征的枢纽节点</b>。</p></div><div class="pair"><p class="s-en" lang="en">Together, these results highlight recombination and chromatin environment as major predictors of subgenome divergence in polyploid genomes.</p><p class="s-zh">综上，这些结果凸显<b>重组与染色质环境</b>是多倍体基因组中亚基因组分化的主要预测因子。</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b>命中 <b>t4/t3</b>，是<b>可解释 AI 在植物基因组学里的正确用法</b>。它最有价值的发现是<b>方法学层面</b>的：XAI 判定<b>重组率</b>为最有影响力且互联程度最高的特征，<b>而它在亚基因组组间的均值差异并不显著</b>——即<b>「均值检验不显著」不等于「不重要」</b>。一个特征可以主要通过<b>与其他特征的协变/交互</b>起作用，这在传统单变量比较里完全看不见。对你的启示：若你做抗病性状的多特征分析（表达、表观、SV、重复序列、染色质），<b>不要只做逐特征的单变量检验</b>；一个均值相同的特征可能是真正的枢纽。同行评议文献（Science Advances）。</div>
+</article>
+<article class="paper ext" data-dir="d1" data-tags="t4" id="E2">
+<div class="paper-head"><div class="paper-top"><span class="paper-idx">E2</span><span class="paper-kind">B 层 · 专业期刊</span></div>
+<h3>ACHC：一个用于番茄叶部病害识别的新型深度学习模型</h3>
+<p class="orig"><span class="zh">英文原题</span>ACHC: a novel deep learning model for tomato leaf disease</p>
+<p class="src"><span class="journal">Plant Cell Reports</span><time datetime="2026-11-13">2026-11-13</time><a href="https://doi.org/10.1007/s00299-026-04038-7">10.1007/s00299-026-04038-7</a></p>
+<div class="dirchips"><span class="chip" data-c="t4"><span class="chip-dot"></span>t4 · 人工智能 / 大语言模型在植物基因组与遗传学中的应用</span></div>
+<p class="authors"><span class="lbl">作者</span>Laixiang Xu（第一作者） 等 6 人；通讯作者：<b>Junmin Zhao</b>。<br>主要单位：School of Computer and Artificial Intelligence, Henan University of Urban Construction, Pingdingshan, 467036, China.</p>
+</div>
+<section class="abstract"><div class="abs-head">摘要 · 逐句中英对照</div><div class="pair"><p class="s-en" lang="en">The expansion of commercial tomato cultivation creates a pressing need for accurate, automated disease diagnosis to support modern agriculture.</p><p class="s-zh">商业化番茄种植的扩张带来了对<b>准确、自动化病害诊断</b>的迫切需求，以支撑现代农业。</p></div><div class="pair"><p class="s-en" lang="en">To address this, we developed an enhanced AlexNet model integrated with Coordinate and Hybrid Channel-spatial attention (ACHA) for tomato leaf disease recognition.</p><p class="s-zh">为此我们开发了一个增强的 <b>AlexNet</b> 模型，整合<b>坐标注意力与混合通道–空间注意力（ACHA）</b>，用于<b>番茄叶部病害识别</b>。</p></div><div class="pair"><p class="s-en" lang="en">The classical AlexNet was first streamlined to reduce computational overhead, tailored to the characteristics of tomato disease imagery.</p><p class="s-zh">首先对经典 AlexNet 做<b>轻量化改造</b>以降低计算开销，并针对番茄病害图像的特点做了适配。</p></div><div class="pair"><p class="s-en" lang="en">A coordinate attention module was then inserted after Conv1 and Conv3 to improve spatial localization of lesion areas.</p><p class="s-zh">随后在 <b>Conv1 与 Conv3 之后</b>插入<b>坐标注意力模块</b>，以改善<b>病斑区域的空间定位</b>。</p></div><div class="pair"><p class="s-en" lang="en">Additionally, a hybrid channel-spatial attention module was incorporated after Conv2 and Conv4 to strengthen discriminative feature learning across channels.</p><p class="s-zh">此外，在 <b>Conv2 与 Conv4 之后</b>加入<b>混合通道–空间注意力模块</b>，以增强<b>跨通道的判别性特征学习</b>。</p></div><div class="pair"><p class="s-en" lang="en">Experimental results demonstrate that our approach achieves an average test accuracy of 99.62%, outperforming several state-of-the-art deep learning networks such as MobileNetV3 and ResNet50.</p><p class="s-zh">实验结果表明，该方法平均测试准确率达 <b>99.62%</b>，优于 MobileNetV3 与 ResNet50 等多个当前最优深度学习网络。</p></div><div class="pair"><p class="s-en" lang="en">This work provides an effective and lightweight solution for automated disease monitoring, contributing to more precise and sustainable tomato production systems.</p><p class="s-zh">本工作为<b>自动化病害监测</b>提供了一个有效且轻量的方案，有助于建立更精准、更可持续的番茄生产体系。</p></div></section>
+<div class="readnote"><b>为何延伸阅读：</b>命中 <b>t4</b>，代表 AI 在植物上<b>最成熟的落地形态</b>——图像识别与表型采集。技术路线清楚：在轻量化 AlexNet 上，<b>Conv1/Conv3 之后插坐标注意力</b>（改善病斑空间定位）、<b>Conv2/Conv4 之后插混合通道–空间注意力</b>（加强判别性特征），平均测试准确率 <b>99.62%</b>，优于 MobileNetV3 与 ResNet50 且更轻量。<b>需要保持的判断</b>：99.62% 是特定数据集上的结果，田间光照、遮挡与早期病斑会显著拉低性能；它解决的是<b>「已知病害的分类」</b>而非<b>「新病害的发现」</b>。但作为<b>表型采集自动化工具</b>已足够实用。同行评议文献（Plant Cell Reports）。</div>
+</article>
+</section>
+<section class="section" id="github">
+<div class="section-head"><span class="sh-k">08a</span><h2>AI4Science 开源项目动态（GitHub）</h2><span class="sh-count">58 个项目</span></div>
+<div class="alert"><h3>⚠️ 来源分层说明</h3><p>本层为 GitHub 开源项目动态，<b>不是同行评议文献</b>，与主榜论文严格分层，不得同等引用。星数/活跃度仅供筛选参考，不代表质量。</p><p>筛选口径：topic 检索 + 领域词/方法词三层闸门；活跃窗口 <b>45 天</b>，星数门槛 <b>≥30</b>。星数仅用于筛选，<b>不代表质量或适用性</b>。数据经 GitHub API 获取（日期为 UTC）。</p></div>
+<div class="table-wrap"><table class="glance"><caption>重点观察名单优先（本领域主流工具），其余按星数排序（共 18 个；完整清单见下方附录）</caption>
+<thead><tr><th>项目</th><th>分组</th><th>★</th><th>最近推送</th><th>说明</th></tr></thead><tbody>
+<tr><td class="g-t"><a href="https://github.com/google-deepmind/alphafold3">google-deepmind/alphafold3</a><br><span class="tier">Python</span></td><td class="g-d">蛋白质设计与结构预测 · 观察名单</td><td class="g-dt">8783</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">AlphaFold 3 inference pipeline.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/RosettaCommons/RFdiffusion">RosettaCommons/RFdiffusion</a><br><span class="tier">Python</span></td><td class="g-d">蛋白质设计与结构预测 · 观察名单</td><td class="g-dt">3142</td><td class="g-dt">2026-10-28 <span class="tier">活跃</span></td><td class="g-j">Code for running RFdiffusion</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ComparativeGenomicsToolkit/cactus">ComparativeGenomicsToolkit/cactus</a><br><span class="tier">Python</span></td><td class="g-d">泛基因组 · 观察名单</td><td class="g-dt">717</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">Official home of genome aligner based upon notion of Cactus graphs</td></tr>
+<tr><td class="g-t"><a href="https://github.com/pangenome/pggb">pangenome/pggb</a><br><span class="tier">Shell</span></td><td class="g-d">泛基因组 · 观察名单</td><td class="g-dt">520</td><td class="g-dt">2026-07-24 <span class="tier">一年内</span></td><td class="g-j">the pangenome graph builder</td></tr>
+<tr><td class="g-t"><a href="https://github.com/schneebergerlab/plotsr">schneebergerlab/plotsr</a><br><span class="tier">Python</span></td><td class="g-d">植物基因组学 · 观察名单</td><td class="g-dt">360</td><td class="g-dt">2026-07-27 <span class="tier">一年内</span></td><td class="g-j">Tool to plot synteny and structural rearrangements between genomes</td></tr>
+<tr><td class="g-t"><a href="https://github.com/tangerzhang/ALLHiC">tangerzhang/ALLHiC</a><br><span class="tier">Perl</span></td><td class="g-d">植物基因组学 · 观察名单</td><td class="g-dt">181</td><td class="g-dt">2024-10-20 <span class="tier">⚠ 停更 2 年</span></td><td class="g-j">ALLHiC: phasing and scaffolding polyploid genomes based on Hi-C data</td></tr>
+<tr><td class="g-t"><a href="https://github.com/limix/limix">limix/limix</a><br><span class="tier">Python</span></td><td class="g-d">GWAS / 关联分析 · 观察名单</td><td class="g-dt">119</td><td class="g-dt">2026-10-16 <span class="tier">活跃</span></td><td class="g-j">Linear mixed model for genomic analyses.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/AI-sandbox/snputils">AI-sandbox/snputils</a><br><span class="tier">Python</span></td><td class="g-d">GWAS / 关联分析 · 观察名单</td><td class="g-dt">54</td><td class="g-dt">2026-09-10 <span class="tier">一年内</span></td><td class="g-j">Python toolkit for fast genotype I/O, ancestry analysis, population-genetics statistics, genotype QC, GWAS, and visualization</td></tr>
+<tr><td class="g-t"><a href="https://github.com/dougspeed/LDAK">dougspeed/LDAK</a><br><span class="tier">C</span></td><td class="g-d">GWAS / 关联分析 · 观察名单</td><td class="g-dt">53</td><td class="g-dt">2026-10-22 <span class="tier">活跃</span></td><td class="g-j"></td></tr>
+<tr><td class="g-t"><a href="https://github.com/streamlit/streamlit">streamlit/streamlit</a><br><span class="tier">Python</span></td><td class="g-d">机器学习方法</td><td class="g-dt">46396</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">Streamlit — The agent-native framework for data apps and dashboards.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/synthetic-sciences/openscience">synthetic-sciences/openscience</a><br><span class="tier">TypeScript</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">4391</td><td class="g-dt">2026-11-15 <span class="tier">活跃</span></td><td class="g-j">The open-source AI workbench for scientific research</td></tr>
+<tr><td class="g-t"><a href="https://github.com/sokrypton/ColabFold">sokrypton/ColabFold</a><br><span class="tier">Jupyter Notebook</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">2990</td><td class="g-dt">2026-11-09 <span class="tier">活跃</span></td><td class="g-j">Making Protein folding accessible to all!</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ai4s-research/open-science">ai4s-research/open-science</a><br><span class="tier">TypeScript</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">2103</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">Open Science Desktop — local-first, model-agnostic AI research workbench for macOS, Windows &amp; Linux. Open-source Claude Science desktop alternative built on Tauri + MCP + agent skills.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/zi-yue-1129/DATAGEN">zi-yue-1129/DATAGEN</a><br><span class="tier">Python</span></td><td class="g-d">大语言模型</td><td class="g-dt">1816</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">DATAGEN: AI-driven multi-agent research assistant automating hypothesis generation, data analysis, and report writing.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/scverse/scvi-tools">scverse/scvi-tools</a><br><span class="tier">Python</span></td><td class="g-d">单细胞基础模型</td><td class="g-dt">1729</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">Deep probabilistic analysis of single-cell and spatial omics data</td></tr>
+<tr><td class="g-t"><a href="https://github.com/BradyAJohnston/MolecularNodes">BradyAJohnston/MolecularNodes</a><br><span class="tier">Python</span></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">1414</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">Toolbox for molecular animations in Blender, powered by Geometry Nodes.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/opensim-org/opensim-core">opensim-org/opensim-core</a><br><span class="tier">C++</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">1155</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">SimTK OpenSim C++ libraries and command-line applications, and Java/Python wrapping.</td></tr>
+<tr><td class="g-t"><a href="https://github.com/xuzhougeng/wisp-science">xuzhougeng/wisp-science</a><br><span class="tier">Rust</span></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">1076</td><td class="g-dt">2026-11-16 <span class="tier">活跃</span></td><td class="g-j">Open-source, local-first desktop AI research workbench for scientific computing with Python/R, MCP bioinformatics tools, SSH/WSL/GPU runtimes, and OpenAI/Anthropic models.</td></tr>
+</tbody></table></div>
+<details class="morebox"><summary>其余 40 个项目（点击展开）</summary><div class="table-wrap"><table class="glance"><tbody>
+<tr><td class="g-t"><a href="https://github.com/3dmol/3Dmol.js">3dmol/3Dmol.js</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★1039</td><td class="g-dt">2026-11-15</td></tr>
+<tr><td class="g-t"><a href="https://github.com/instadeepai/nucleotide-transformer">instadeepai/nucleotide-transformer</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★943</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/tanghaibao/jcvi">tanghaibao/jcvi</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★939</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/saeyslab/nichenetr">saeyslab/nichenetr</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★691</td><td class="g-dt">2026-11-05</td></tr>
+<tr><td class="g-t"><a href="https://github.com/cafferychen777/mLLMCelltype">cafferychen777/mLLMCelltype</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★663</td><td class="g-dt">2026-11-09</td></tr>
+<tr><td class="g-t"><a href="https://github.com/opencobra/cobrapy">opencobra/cobrapy</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★600</td><td class="g-dt">2026-11-12</td></tr>
+<tr><td class="g-t"><a href="https://github.com/pinellolab/DNA-Diffusion">pinellolab/DNA-Diffusion</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★491</td><td class="g-dt">2026-10-28</td></tr>
+<tr><td class="g-t"><a href="https://github.com/gao-lab/GLUE">gao-lab/GLUE</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★488</td><td class="g-dt">2026-11-03</td></tr>
+<tr><td class="g-t"><a href="https://github.com/RosettaCommons/rosetta">RosettaCommons/rosetta</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★487</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/HKU-BAL/Clair3">HKU-BAL/Clair3</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★399</td><td class="g-dt">2026-11-10</td></tr>
+<tr><td class="g-t"><a href="https://github.com/OmicsML/dance">OmicsML/dance</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★391</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/datamllab/OpenEBFM">datamllab/OpenEBFM</a></td><td class="g-d">大语言模型</td><td class="g-dt">★389</td><td class="g-dt">2026-11-03</td></tr>
+<tr><td class="g-t"><a href="https://github.com/songlab-cal/gpn">songlab-cal/gpn</a></td><td class="g-d">基因组学工具</td><td class="g-dt">★387</td><td class="g-dt">2026-11-13</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Boom5426/Awesome-Virtual-Cell">Boom5426/Awesome-Virtual-Cell</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★337</td><td class="g-dt">2026-10-28</td></tr>
+<tr><td class="g-t"><a href="https://github.com/heise3/ExtremaRank">heise3/ExtremaRank</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★288</td><td class="g-dt">2026-10-07</td></tr>
+<tr><td class="g-t"><a href="https://github.com/DISCO-design/DISCO">DISCO-design/DISCO</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★226</td><td class="g-dt">2026-11-10</td></tr>
+<tr><td class="g-t"><a href="https://github.com/FonaTech/Project_Chronos">FonaTech/Project_Chronos</a></td><td class="g-d">大语言模型</td><td class="g-dt">★207</td><td class="g-dt">2026-11-13</td></tr>
+<tr><td class="g-t"><a href="https://github.com/lbcb-sci/RiNALMo">lbcb-sci/RiNALMo</a></td><td class="g-d">基础模型</td><td class="g-dt">★181</td><td class="g-dt">2026-10-08</td></tr>
+<tr><td class="g-t"><a href="https://github.com/zjunlp/SciAtlas">zjunlp/SciAtlas</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★173</td><td class="g-dt">2026-10-22</td></tr>
+<tr><td class="g-t"><a href="https://github.com/IAAR-Shanghai/ICSFSurvey">IAAR-Shanghai/ICSFSurvey</a></td><td class="g-d">大语言模型</td><td class="g-dt">★170</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/TianGzlab/OmicsClaw">TianGzlab/OmicsClaw</a></td><td class="g-d">单细胞基础模型</td><td class="g-dt">★161</td><td class="g-dt">2026-10-07</td></tr>
+<tr><td class="g-t"><a href="https://github.com/MSDLLCpapers/ovo">MSDLLCpapers/ovo</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★143</td><td class="g-dt">2026-10-30</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Rockman6/CellSim">Rockman6/CellSim</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★132</td><td class="g-dt">2026-11-02</td></tr>
+<tr><td class="g-t"><a href="https://github.com/PaddlePaddle/PaddleMaterials">PaddlePaddle/PaddleMaterials</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★130</td><td class="g-dt">2026-11-09</td></tr>
+<tr><td class="g-t"><a href="https://github.com/moritztng/tt-bio">moritztng/tt-bio</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★129</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/001TMF/blatant-why">001TMF/blatant-why</a></td><td class="g-d">AI4Science 基础设施</td><td class="g-dt">★122</td><td class="g-dt">2026-10-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/nf-core/proteinfold">nf-core/proteinfold</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★116</td><td class="g-dt">2026-11-11</td></tr>
+<tr><td class="g-t"><a href="https://github.com/PlantSimulationLab/Helios">PlantSimulationLab/Helios</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★115</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/salilab/imp">salilab/imp</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★81</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/ssinder/bioinformatics-agent-skills">ssinder/bioinformatics-agent-skills</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★76</td><td class="g-dt">2026-10-27</td></tr>
+<tr><td class="g-t"><a href="https://github.com/labstructbioinf/pLM-BLAST">labstructbioinf/pLM-BLAST</a></td><td class="g-d">蛋白质语言模型</td><td class="g-dt">★66</td><td class="g-dt">2026-10-22</td></tr>
+<tr><td class="g-t"><a href="https://github.com/K-Dense-AI/drug-discovery-agent-skills">K-Dense-AI/drug-discovery-agent-skills</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★56</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Tomasz-Lab/Metagenomic-DeepFRI">Tomasz-Lab/Metagenomic-DeepFRI</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★55</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/Degiacomi-Lab/molearn">Degiacomi-Lab/molearn</a></td><td class="g-d">蛋白质设计与结构预测</td><td class="g-dt">★52</td><td class="g-dt">2026-11-12</td></tr>
+<tr><td class="g-t"><a href="https://github.com/IBM/AutoPeptideML">IBM/AutoPeptideML</a></td><td class="g-d">蛋白质语言模型</td><td class="g-dt">★42</td><td class="g-dt">2026-10-25</td></tr>
+<tr><td class="g-t"><a href="https://github.com/maize-genetics/tassel-r">maize-genetics/tassel-r</a></td><td class="g-d">GWAS / 关联分析</td><td class="g-dt">★35</td><td class="g-dt">2026-10-21</td></tr>
+<tr><td class="g-t"><a href="https://github.com/PlantSimulationLab/PyHelios">PlantSimulationLab/PyHelios</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★17</td><td class="g-dt">2026-11-16</td></tr>
+<tr><td class="g-t"><a href="https://github.com/UTokyo-FieldPhenomics-Lab/SPROUT">UTokyo-FieldPhenomics-Lab/SPROUT</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★10</td><td class="g-dt">2026-10-29</td></tr>
+<tr><td class="g-t"><a href="https://github.com/djaliloh/FrontVegV2">djaliloh/FrontVegV2</a></td><td class="g-d">植物表型与图像</td><td class="g-dt">★8</td><td class="g-dt">2026-11-10</td></tr>
+<tr><td class="g-t"><a href="https://github.com/oumarkme/TSDFGS">oumarkme/TSDFGS</a></td><td class="g-d">基因组选择</td><td class="g-dt">★5</td><td class="g-dt">2026-11-05</td></tr>
+</tbody></table></div></details>
+</section>
+<section class="section" id="news">
+<div class="section-head"><span class="sh-k">08c</span><h2>国内外研究进展（期刊动态 · 新闻）</h2><span class="sh-count">19 条命中方向（其中新增 0）</span></div>
+<div class="alert"><h3>⚠️ 来源分层说明</h3><p>本层为期刊新闻/研究动态 RSS 与预印本趋势，<b>属于动态线索而非同行评议结论的转述</b>；凡由 web_search 补充的条目须另标「未逐条核实」。</p><p>本层来自期刊官方 RSS（Cell / Science / Nature 系 / Wiley 等），窗口 <b>30 天</b>。「命中方向」= 标题/摘要出现 12 方向的关键词；「仅植物学相关」= 属本领域但不落在 12 个方向上，见下方附录。<b>RSS 条目标题由期刊提供，本简报未逐条核实其结论。</b></p></div>
+<div class="table-wrap"><table class="glance"><caption>命中 12 方向的最新动态</caption>
+<thead><tr><th>日期</th><th>来源</th><th>标题</th><th>方向</th><th>链接</th></tr></thead><tbody>
+<tr><td class="g-dt">2026-11-14</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t">An NLR Associated With Defence Against Turnip Mosaic Virus in Nicotiana benthamiana</td><td class="g-d">d5 </td><td class="g-dt"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70385?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-j">Nature Plants</td><td class="g-t">The global distribution of plant diversity</td><td class="g-d"> t4</td><td class="g-dt"><a href="https://www.nature.com/articles/s41477-026-02463-w">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t">Proposed approach for diagnosing obesity outperforms old method</td><td class="g-d"> t3</td><td class="g-dt"><a href="https://www.nature.com/articles/d41586-026-03425-0">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t">A plant RNA-binding protein senses 2′,3′-cNMP produced by insect effectors</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://www.nature.com/articles/s41586-026-11259-z">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t">The Rcs System Is Required for Virulence and Colonization of the Poplar Canker Bacterium Lonsdalea populi</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70381?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">Plant Journal</td><td class="g-t">Waterlogging stress disarms nicotine‐mediated defense to herbivores through the bHLH1‐ERF1 transcriptional switch</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71192?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t">Avirulence genes of Magnaporthe oryzae are a pathogen defense arsenal shaped by cognate rice resistance genes in the field</td><td class="g-d">d4 t1</td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71586?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t">Differential ubiquitin modifications of ESCRT‐I subunits VPS37‐1 and VPS28‐2 positively regulate plant immunity</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71590?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t">Subversion of plant endomembrane trafficking by a Plasmodiophora brassicae effector PbALE that recruits membrane components at the host–pathogen interface to aid in colonization</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71595?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t">Engineering crop immunity: cyclic nucleotide‐gated channels as promising targets for broad‐spectrum disease resistance</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71735?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t">Oviposition fluid protein NlOFP1 in the brown planthopper suppresses rice plant defenses</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71704?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">ZmPHO2‐Mediated Phosphorus Homeostasis Modulates PAMP‐Triggered Immunity and Disease Resistance in Maize</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70778?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-04</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">Harnessing Host‐Pathogen Evolutionary Dynamics to Engineer Bacterial Blight and Leaf Streak Resistance in Basmati Rice</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70786?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-03</td><td class="g-j">New Phytologist</td><td class="g-t">PELOTA at the crossroads of tomato fertility and viral resistance</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71715?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">Converging GWAS and Genome Editing Decrypts MsCBF8‐MsGolS2 Regulatory Module for Drought Tolerance Without Yield Penalty in Medicago sativa</td><td class="g-d">d2 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70756?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">Multiplexed Engineering of Disease Resistance and Lodging Tolerance in Wheat Via a Single Xylan Modifying Glycosyltransferase</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70747?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-11-02</td><td class="g-j">Plant Journal</td><td class="g-t">Multi‐locus genetic basis of stomatal density and size in maize revealed by integrated QTL and GWAS</td><td class="g-d">d2 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71187?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-10-30</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t">Assessing Zymoseptoria tritici Candidate Effectors in the Non‐Host Nicotiana benthamiana Reveals Immune Recognition and Potential Host‐Independent Activities</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70344?af=R">原文</a></td></tr>
+<tr><td class="g-dt">2026-10-21</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t">The Cytosolic Iron–Sulfur Cluster Assembly Targeting Complex Is Hijacked by Magnaporthe Effector AvrPi9 to Suppress Rice Resistance</td><td class="g-d">d4 </td><td class="g-dt"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70773?af=R">原文</a></td></tr>
+</tbody></table></div>
+<details class="morebox"><summary>仅植物学相关、未落在 12 方向的 146 条（点击展开，可作为领域背景）</summary><div class="table-wrap"><table class="glance"><tbody>
+<tr><td class="g-dt">2026-11-16</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02501-7">Banana boost</a></td></tr>
+<tr><td class="g-dt">2026-11-16</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70386?af=R">CfBap31 Is an ERAD‐Associated Protein Promoting Ubiquitination of Misfolded Proteins and Is Required for Appressorium‐Mediated Penetration in Colletotrichum fructicola</a></td></tr>
+<tr><td class="g-dt">2026-11-16</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70382?af=R">The Beta vulgaris Resistance Protein Rz2 Recognises a Conserved Region in the TGB1 Protein From Diverse Plant Viruses Suggesting High Resistance Durability</a></td></tr>
+<tr><td class="g-dt">2026-11-16</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71202?af=R">Life without anthocyanins</a></td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03684-x">Daily briefing: Are one-person firms the future of biotech?</a></td></tr>
+<tr><td class="g-dt">2026-11-14</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71751?af=R">Experimental context shapes interpretation of immune outputs in Arabidopsis</a></td></tr>
+<tr><td class="g-dt">2026-11-14</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70383?af=R">The StWRKY70‐StAOS Module Confers Resistance to Alternaria solani in Potato via Activating the Jasmonic Acid Signalling Pathway and Enhancing Antioxidant Enzyme Activity</a></td></tr>
+<tr><td class="g-dt">2026-11-13</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71762?af=R">EMS‐induced amino acid substitutions in Arabidopsis proteins: what we get and what we miss</a></td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71743?af=R">Targeted rewiring of the rhizosphere metabolite–microbe axis restores phosphorus acquisition in inefficient citrus rootstock</a></td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71731?af=R">The ZmNAC41‐ZmABC‐ZmCP regulatory module mediates jasmonate‐dependent resistance to southern corn rust in maize</a></td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70361?af=R">Comparative Peptidomic Identification of a Noncanonical PSK3 Precursor‐Derived Peptide That Enhances Antiviral Defence Through MAPK‐Dependent ROS Signalling in Tobacco</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02496-1">Teosinte allele extends maize husk blade</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02488-1">No one-size-fits-all in pollination</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03671-2">Too dry for cacti: extreme droughts could push iconic species to extinction</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03660-5">Even giant anteaters in remote Brazil have microplastics in their blood</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03637-4">Microplastics change the colour of the sea near the Great Pacific Garbage Patch</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03641-8">Engineered bacteria are weaning farms away from synthetic fertilizers</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/d41586-026-03409-0">Can green technologies deliver energy security in an unstable world?</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/s41586-026-11308-7">Bistable regulation of adipocyte heterogeneity governs thermogenesis</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t"><a href="https://www.nature.com/articles/s41586-026-11285-x">Human land use drives microplastic abundance in terrestrial wildlife</a></td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71217?af=R">Beyond leaf mass per area: anatomical and economic drivers of toughness in evergreen and deciduous oaks</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02497-0">Glycan perception</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02486-3">A novel transducer of the hypoxia response</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02459-6">Virus-induced DCL2b relocalization strengthens antiviral defence in tomato</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71719?af=R">Strigolactones modulate iron uptake in plants</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70368?af=R">Potato Virus Y Coat Protein Interacts With Cytosolic Phosphoglucomutase and Reprogrammes Host Primary Metabolism During Disease Development</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70789?af=R">In Planta Haploid Induction by Genome Editing of DMP8 in Pennisetum alopecuroides</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71242?af=R">Deciphering the contributions of hybridization and genome dosage to vegetative vigor in perennial forage maize</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71208?af=R">In conversation with Dr. María Fernanda Gómez</a></td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71194?af=R">Single‐nucleus transcriptomics reveals transcriptional dynamics underlying maize ligule development</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">Nature Plants</td><td class="g-t"><a href="https://www.nature.com/articles/s41477-026-02467-6">Northern Hemisphere permafrost vegetation is greening but becoming less resilient</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71738?af=R">PGCopilot: an AI‐assisted research agent for plant functional genomics</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71733?af=R">C2H2 zinc‐finger transcription factor FveJAG cooperates with SIMPLE LEAF1 to regulate compound leaf morphogenesis in strawberry</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70367?af=R">SUMOylation of Movement Protein Contributes to Systemic Movement and Mechanical Transmission of a Begomovirus</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70384?af=R">The Rice CBP60 Protein OsCBP609 Interacts With Pik1‐H4 and Supports Salicylic Acid‐Responsive Immunity Against Magnaporthe oryzae</a></td></tr>
+<tr><td class="g-dt">2026-11-09</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71213?af=R">Expression of a chimeric OXR protein remodels rice architecture for enhanced grain yield by modulating redox and hormonal pathways</a></td></tr>
+<tr><td class="g-dt">2026-11-07</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70364?af=R">Mutations in the SdhB and SdhD Genes Confer Resistance to Succinate Dehydrogenase Inhibitor Fungicides in Australian Populations of Leptosphaeria maculans</a></td></tr>
+<tr><td class="g-dt">2026-11-07</td><td class="g-j">Plant Biotechnology Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/pbi.70788?af=R">Discovery and Deployment of Herbicide Tolerance in Domesticated Pennycress (Thlaspi arvense L.) to Enable Modern Agronomic Integration</a></td></tr>
+<tr><td class="g-dt">2026-11-07</td><td class="g-j">Plant Journal</td><td class="g-t"><a href="https://onlinelibrary.wiley.com/doi/10.1111/tpj.71243?af=R">Altered plastidial fatty‐acid condensation is associated with changes in membrane composition and postembryonic leaf development in Arabidopsis</a></td></tr>
+<tr><td class="g-dt">2026-11-06</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71741?af=R">The CitRWP–CsWUS regulatory axis governs citrus plant regeneration in association with chromatin remodeling</a></td></tr>
+<tr><td class="g-dt">2026-11-06</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71722?af=R">Jasmonate control of barley grain size across generations</a></td></tr>
+<tr><td class="g-dt">2026-11-06</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71726?af=R">Navigating through complexity: a roadmap to disentangle multi‐level drivers of intraspecific seed‐trait variability and prioritise research efforts</a></td></tr>
+<tr><td class="g-dt">2026-11-06</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70366?af=R">The LRR Receptor‐Like Kinase MdRLKT23 Confers Valsa Canker Resistance by Regulating the Degradation of the Susceptibility Factor MdSTK1 in Apple (Malus domestica)</a></td></tr>
+<tr><td class="g-dt">2026-11-06</td><td class="g-j">Molecular Plant Pathology</td><td class="g-t"><a href="https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/mpp.70363?af=R">Negative Role of the Receptor‐Like Kinase GbMIK2 in Regulating Cotton Verticillium Wilt Resistance</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71527?af=R">Seeing the unseen: hyperspectral imaging opens a new window into the root economics space</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71599?af=R">Genetic and molecular networks mediating potato tuber development</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71639?af=R">Roots to simplicity: when evolution removes a key organ</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71569?af=R">Unraveling the genome of NC292: a maize inbred line conferring resistance to multiple foliar diseases</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71597?af=R">Stepwise evolution of the developmental and symbiotic functions of DELLA in land plants</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71453?af=R">Ecological determinants of stability in dryland plant communities</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71574?af=R">STRONG3 promotes lignin biosynthesis and culm strength in rice</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71600?af=R">Distinct targeting of 5mC and 6mA DNA methylation during the onset of Flg22‐induced immunity between Arabidopsis and rice</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71602?af=R">Climate drivers of mesophyll conductance: temperature and water deficit alter CO2 diffusion and leaf anatomy in cotton</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71608?af=R">Petal infrared transmission warms flowers and reduces microbial abundance</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71616?af=R">Disrupting two Arabidopsis thaliana xylosyltransferase genes results in plants deficient in thermomorphogenesis</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71617?af=R">Intraspecific variation in an arbuscular mycorrhizal fungus affects a plant and an AMF community</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71619?af=R">Mimicry of mantis and Selaginella from Cretaceous provides new evidence for the deep‐time co‐evolution of insects and plants</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71366?af=R">A novel method based on high‐resolution imaging spectroscopy to predict fine‐root traits and the economics space of fresh tree roots</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71628?af=R">Harnessing genetic variation for grain quality from diverse wheat landraces</a></td></tr>
+<tr><td class="g-dt">2026-11-05</td><td class="g-j">New Phytologist</td><td class="g-t"><a href="https://nph.onlinelibrary.wiley.com/doi/10.1111/nph.71596?af=R">Apoplast multi‐omics profiling during fungal infection uncovers new players of basal and early induced immunity in Arabidopsis thaliana</a></td></tr>
+</tbody></table></div></details>
+</section>
+<section class="section" id="prior">
+<div class="section-head"><span class="sh-k">08b</span><h2>往期已报（不重复）</h2><span class="sh-count">5 条</span></div>
+<p class="cov-note">以下条目在本轮检索窗口内命中，但<b>已在往期简报中报道过</b>，故不重复列出卡片，仅保留清单备查（避免连续几期重复同一批论文）。</p>
+<div class="table-wrap"><table class="glance"><caption>本轮窗口内已在往期简报报道过的条目</caption>
+<thead><tr><th>日期</th><th>期刊</th><th>论文</th><th>DOI</th></tr></thead><tbody>
+<tr><td class="g-dt">2026-11-12</td><td class="g-j">Science</td><td class="g-t">A trapped catalytic product acts as molecular glue for innate immune signalosome assembly</td><td class="g-dt">10.1126/science.aef3150</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Nature</td><td class="g-t">A plant RNA-binding protein senses 2&#x27;,3&#x27;-cNMP produced by insect effectors</td><td class="g-dt">10.1038/s41586-026-11259-z</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">The Plant Cell</td><td class="g-t">A pathogen-induced UGT genomic locus contributes to sinapic acid glycosylation and gray blight resistance in tea plant</td><td class="g-dt">10.1093/plcell/koag348</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-j">Research Square</td><td class="g-t">Pan-genome-wide identification and evolutionary analysis of SPX gene family reveal distinct phosphorus adaptation regulatory strategies in foxtail millet</td><td class="g-dt">10.21203/rs.3.rs-11331519/v1</td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-j">预印本</td><td class="g-t">A population-scale isoform atlas enables isoform-based trait association and regulatory analysis in lettuce</td><td class="g-dt">10.64898/2026.11.07.765046</td></tr>
+</tbody></table></div>
+</section>
+<section class="section" id="coverage">
+<div class="section-head"><span class="sh-k">08e</span><h2>本期覆盖说明</h2><span class="sh-count">人工声明</span></div>
+<div class="alert alert-warn"><h3>论文层覆盖情况</h3><p>本期为<b>主题聚合模式</b>（T07 AI／大模型在植物基因组学）。<b>先说一个必须交代的事实</b>：本期修正了主题匹配逻辑——关键词 <code>AI</code> 原按子串匹配，命中了 <b>maize</b>（含「ai」）等大量无关词，导致 T07 候选池虚高到 28 篇；改用词边界匹配后真实候选仅 <b>5 篇</b>。进一步在全台账（含往期延期条目）按严格规则检索，只找到 <b>10 篇</b>涉及 AI/机器学习的论文——<b>这印证了 t4 在期刊文献中长期近乎为零</b>。因此本期采用<b>双层读法</b>：论文层（10 篇）+ <b>G 层 58 个开源项目</b>并列，其中 G 层已明确标注「非同行评议」。卡片 4 张（2 主榜 + 2 延伸），全部为 AI 主题直接相关。</p></div>
+</section>
+<section class="section" id="priority">
+<div class="section-head"><span class="sh-k">08d</span><h2>优先方向补网记录</h2><span class="sh-count">23 条被排除</span></div>
+<div class="alert"><h3>说明</h3><p>当常规检索连续多日空窗时，会用<b>优先方向专项检索</b>（d5/t5/t6/t7 的窄术语 + 预印本平台）补网。补网按术语召回，会带进与 12 方向<b>仅术语层面相关</b>的条目——下表如实列出<b>被排除</b>的条目与原因，避免「悄悄丢掉」。</p></div>
+<div class="table-wrap"><table class="glance"><caption>补网召回但未纳入主榜/延伸的条目</caption>
+<thead><tr><th>日期</th><th>DOI</th><th>标题</th><th>排除原因</th></tr></thead><tbody>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.1038/s41477-026-02463-w</td><td class="g-t">The global distribution of plant diversity</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.1126/science.aed8712</td><td class="g-t">AI-monitored bioadhesive for sutureless microvascular anastomosis</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-dt">10.1126/sciadv.aej8837</td><td class="g-t">Structural insights into light harvesting and photosystem II evolution in the basal streptophyte Mesostigma viride</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-dt">10.1126/sciadv.aeh7015</td><td class="g-t">The ZmJAZ14-ZmMYC2 module regulates anthesis-silking synchrony in maize</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-15</td><td class="g-dt">10.1111/jipb.70446</td><td class="g-t">From cold-tolerance gene discovery to designing complex adaptive traits</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-15</td><td class="g-dt">10.1016/j.plantsci.2026.113596</td><td class="g-t">Stress Memory and Adaptive Intelligence in Plants from Signaling Networks to Crop Improvement under Climate Change</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-13</td><td class="g-dt">10.1093/plphys/kiag849</td><td class="g-t">A secreted protein UvWSC1 from Ustilaginoidea virens elicits plant immunity in an OsCPK13-dependent manner</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-13</td><td class="g-dt">10.1093/plcell/koag351</td><td class="g-t">OsMED25-OsWRI1 Fine-Tunes Fatty Acid Biosynthesis: A Key Strategy via Intron Retention</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.1016/j.plantsci.2026.113597</td><td class="g-t">MhAFB2-MhIAA1_like module mediates auxin-associated modulation of apple immunity against Alternaria alternata</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.1093/plcell/koag353</td><td class="g-t">Passport to protection: Xa1 must enter the nucleus to fight bacterial blight in rice</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-dt">10.1016/j.plantsci.2026.113589</td><td class="g-t">A natural mutation in CsCYP90A1 causes a super-compact plant architecture in cucumber (Cucumis sativus L.)</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-dt">10.1016/j.cub.2026.10.052</td><td class="g-t">A CONSTANS-like transcriptional co-activator couples ethylene signaling to jasmonate biosynthesis and is targeted by a fungal effector</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-13</td><td class="g-dt">10.64898/2026.11.12.766145</td><td class="g-t">Leaf ionomic stability shapes drought adaptation in pearl millet</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-13</td><td class="g-dt">10.64898/2026.11.12.766089</td><td class="g-t">EveD, a vesicle-associated rhizobial candidate effector shaping nodulation competitiveness and host genotype responses</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-13</td><td class="g-dt">10.21203/rs.3.rs-11486955/v1</td><td class="g-t">Spatio-Temporal Repeat-Induced Point Mutation (RIP) Dynamics in Global Parastagonospora nodorum Pan-genomes</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.64898/2026.11.05.764543</td><td class="g-t">Ancestral polyploidy and non-linear dosage shifts define the photosynthetic transition in the Heliantheae alliance</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.64898/2026.11.10.765595</td><td class="g-t">RabA- and RabE-mediated trafficking define distinct branches of plant pre-invasive immunity</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.64898/2026.11.11.765837</td><td class="g-t">Seed mycobiome assembly varies across mother trees with contrasting levels of resistance to Dutch elm disease</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.21203/rs.3.rs-11702485/v1</td><td class="g-t">Annotation of Specific Genes in Olimarabidopsis pumila</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-12</td><td class="g-dt">10.21203/rs.3.rs-11459093/v1</td><td class="g-t">Unravelling Genetic Diversity and Population Structure in Cowpea [Vigna unguiculata (L.) Walp.] Germplasm Using SSR Markers</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-11</td><td class="g-dt">10.21203/rs.3.rs-11381357/v1</td><td class="g-t">PhenoFrame: Phenotyping Plant Descriptor and Software Suite</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-dt">10.64898/2026.11.07.765025</td><td class="g-t">Melanoidins Suppress Cucumber and Tomato Diseases Incited by Pathogens that are Oomycetes, Bacteria and a Virus</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+<tr><td class="g-dt">2026-11-10</td><td class="g-dt">10.21203/rs.3.rs-11462274/v1</td><td class="g-t">Integrating multi-platform LiDAR phenotyping and GWAS reveals PSK6, AUG8, and WDL4 as key regulators of growth in Populus deltoides</td><td class="g-j">本期未生成卡片（T07 主题综述 + 4 张 AI 卡片已占满人工复核时间）；**建议下期复核**。</td></tr>
+</tbody></table></div></section>
+<section class="section" id="method">
+<div class="section-head"><span class="sh-k">09</span><h2>检索与核实说明</h2><span class="sh-count">口径 · 方法 · 局限</span></div>
+<div class="methodblock"><h3>1 · 时间窗口与「当天发表」的实际含义</h3><p>出刊日为 <b>2026-11-17</b>（Asia/Shanghai）。你的需求是检索「当天发表」的论文，但实测：<b>出刊日前 24 小时内，A/B/C 三层来源中没有任何一篇的实际首发日等于出刊日</b>。</p><p><b>原因</b>：Europe PMC 对最近 1–4 天的文献收录不完整，新论文从上线到入库通常滞后数天。这与工作区《论文周报/配置.md》第 5 节记录的实测经验一致。</p><p><b>本简报口径</b>：回看窗口设为 <b>7 天</b>（2026-11-16 → 2026-11-17），取该窗口内全部可索引到的、落在 12 个方向上的文献；<b>每篇均标注真实首发日</b>（卡片与速览表内），供你自行判断新鲜度。因此本日篇数是<b>下界而非全量</b>，且必然与次日/次轮出刊存在窗口重叠。</p></div>
+<div class="methodblock"><h3>2 · 来源分层（A / B / C）</h3><p><b>A 层（顶刊白名单，1 篇）</b>：Nature、Science、Cell、Nature Genetics、Nature Plants、Nature Communications、Science Advances、Molecular Plant、Nature Methods、Cell Host &amp;amp; Microbe。</p><p><b>B 层（专业期刊，1 篇）</b>：The Plant Cell、Plant Journal、Journal of Experimental Botany、New Phytologist、Plant Biotechnology Journal、Theoretical and Applied Genetics、Genome Biology、Horticulture Research、Plant Physiology、Plant Communications、Molecular Plant Pathology、Plant Cell Reports、Plant Science 等。</p><p><b>C 层（预印本，2 条）</b>：bioRxiv、Research Square、Preprints.org。<b>未经同行评审</b>，单独放入「延伸阅读」，不与主榜同等看待。</p><p>分层依据为期刊名映射——Europe PMC 返回的是缩写刊名（如 <code>Mol Plant</code>），必须先归一化再判定层级，映射表见 <code>fetch_daily.py</code> 的 <code>JOURNAL_MAP</code>。</p></div>
+<div class="methodblock"><h3>3 · 检索通道与可复现流程</h3><p><b>主通道</b>：Europe PMC REST API（<code>resultType=core</code> 取摘要原文）。按「期刊白名单 × 植物词 × 日期」与「方向检索式 × 期刊 × 日期」两轮交叉检索，再对预印本单独检索（<code>SRC:&amp;quot;PPR&amp;quot;</code>）。</p><p><b>作者与通讯作者</b>：Europe PMC 的 <code>authorList</code> <b>不提供通讯作者字段</b>，且对本批论文的 affiliation 为空；Crossref 的 <code>sequence</code> 也只区分 first/additional，<b>不是</b>通讯标记。因此通讯作者改用 <b>NCBI PubMed XML</b> 中 <code>Electronic address: &amp;lt;email&amp;gt;</code> 这一<b>出版商官方标记</b>判定；无该标记者回退「末位作者」惯例并明确标注为<b>推断</b>。姓名与单位另由 Crossref 补齐。</p><p><b>可复现流程</b>：<code>fetch_daily.py</code>（检索）→ <code>classify.py</code>（方向分类，含 13 例回归测试）→ <code>fetch_authors.py</code> + <code>fetch_corresponding.py</code>（作者）→ <code>merge_authors.py</code> → <code>assemble.py</code> → <code>build_report.py</code>（生成 HTML）→ <code>selfcheck.py</code>（自检）。</p></div>
+<div class="methodblock"><h3>4 · 已知局限与未核实项</h3><ul><li><b>索引延迟</b>：最近 1–4 天收录不完整，本日篇数为<b>下界</b>。</li><li><b>方向分类为关键词规则</b>（<code>classify.py</code>），已用 13 个真实样本做回归测试，并设置多层语境门（d1 须有基因层语境、d4 须有病害专有词或分子免疫证据、d5 须有免疫语境）以压制误标；但仍可能有漏标或误标，卡片内附「证据词」字段，便于复核判断依据。</li><li><b>通讯作者</b>：标 <b>通讯作者</b> 者依据 PubMed 官方 <code>Electronic address</code> 标记或期刊全文 <code>corresp</code> 字段；标<b>（推断）</b>者仅据末位作者惯例，<b>未经官方确认</b>。Wiley 系期刊部分文章网页被 Cloudflare 拦截，无法二次核对是否另有共同通讯。</li><li><b>作者「主要研究方向」</b>：仅在有明确公开来源时填写，并标注 confidence（confirmed / inferred / unconfirmed）；标 <b>unconfirmed</b> 者写明「未查到可靠公开信息」。<b>未展示任何年龄信息</b>（无可靠公开来源，且按你的要求省略）。</li><li><b>IF 值</b>为<b>整数近似值</b>，仅用于快速分层，不构成精确引用依据。</li><li><b>摘要</b>：英文为 Europe PMC <code>abstractText</code> <b>逐字原文</b>；若原文在数据库中截断（本次有数篇预印本出现），卡片内已明确标注截断位置，<b>不补写、不推测</b>缺失内容。</li></ul></div>
+</section>
+</main></div>
+<script>
+
+(function(){
+  "use strict";
+  var papers   = Array.prototype.slice.call(document.querySelectorAll('.paper'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section[id]'));
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('#tocList a'));
+  var segs     = Array.prototype.slice.call(document.querySelectorAll('.seg'));
+  var fbtns    = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var state    = document.querySelector('#filterState');
+  var empty    = document.querySelector('#emptyState');
+
+  var LABEL = {
+    all:'全部方向',
+    d1:'核心 · 抗病基因定位与克隆', d2:'核心 · GWAS 与关联分析', d3:'核心 · 泛基因组',
+    d4:'核心 · 水稻与作物抗病基因', d5:'核心 · NLR 与免疫受体',
+    t1:'专项 · 作物抗病基因克隆与挖掘', t2:'专项 · 群体水平泛基因组', t3:'专项 · 大规模 GWAS 分析',
+    t4:'专项 · AI / 大语言模型应用', t5:'专项 · AF3 结构预测与蛋白设计',
+    t6:'专项 · 免疫机制与 NLR-ID 演化', t7:'专项 · 免疫 Decoy 诱饵蛋白'
+  };
+
+  function matches(p, dir){
+    if (dir === 'all') return true;
+    if (p.dataset.dir === dir) return true;
+    return (p.dataset.tags || '').split(/\s+/).indexOf(dir) !== -1;
+  }
+
+  function applyFilter(dir){
+    papers.forEach(function(p){
+      p.classList.toggle('is-hidden', !matches(p, dir));
+    });
+    fbtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.filter === dir)); });
+    segs.forEach(function(s){ s.setAttribute('aria-pressed', String(s.dataset.dir === dir)); });
+    if (state) state.textContent = LABEL[dir] || LABEL.all;
+
+    var shown = papers.filter(function(p){ return !p.classList.contains('is-hidden'); }).length;
+    if (empty) empty.classList.toggle('is-on', shown === 0);
+
+    sections.forEach(function(sec){
+      var body = sec.querySelectorAll('.paper');
+      if (!body.length) return;
+      var visible = Array.prototype.filter.call(body, function(p){
+        return !p.classList.contains('is-hidden');
+      }).length;
+      sec.style.display = (dir !== 'all' && visible === 0) ? 'none' : '';
+    });
+  }
+
+  fbtns.forEach(function(b){
+    b.addEventListener('click', function(){ applyFilter(b.dataset.filter); });
+  });
+  segs.forEach(function(s){
+    s.addEventListener('click', function(){
+      var next = s.getAttribute('aria-pressed') === 'true' ? 'all' : s.dataset.dir;
+      applyFilter(next);
+    });
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setActive(id){
+    tocLinks.forEach(function(a){
+      a.classList.toggle('is-active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if ('IntersectionObserver' in window){
+    var seen = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ seen[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var best = null, bestRatio = 0;
+      Object.keys(seen).forEach(function(k){
+        if (seen[k] > bestRatio){ bestRatio = seen[k]; best = k; }
+      });
+      if (best) setActive(best);
+    }, { rootMargin:'-15% 0px -60% 0px', threshold:[0, .12, .3, .6] });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  tocLinks.forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var el = document.querySelector(a.getAttribute('href'));
+      if (!el) return;
+      ev.preventDefault();
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+      setActive(a.getAttribute('href').slice(1));
+    });
+  });
+})();
+
+</script>
+</body></html>

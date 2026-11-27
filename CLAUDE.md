@@ -10,7 +10,10 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 
 ```
 ├── index.html                      # English resume homepage (single-page sections + hero)
+├── 404.html                        # Branded 404 page (standalone, inline styles)
+├── robots.txt / sitemap.xml        # Search engine crawl + index
 ├── blog/
+│   ├── index.html                  # Blog listing page (all posts)
 │   ├── gwas-analysis.html          # Blog: GWAS analysis tutorial
 │   ├── rice-disease-resistance.html # Blog: Rice disease resistance review
 │   ├── pangenome-research.html     # Blog: Pan-genome research notes
@@ -19,11 +22,10 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 │   ├── index.html                  # Daily literature briefing archive index (zh-CN, client-side search)
 │   └── 2026-MM-DD-日报.html        # Self-contained daily briefing issues (12 direction tags)
 ├── assets/
-│   ├── css/resume.css              # Single stylesheet (~1020 lines)
+│   ├── css/resume.css              # Single stylesheet (~1450 lines)
 │   └── js/resume.js                # Nav toggle + scroll-spy active link + [data-year] auto year
-├── images/                         # Favicons, profile photo, publication figures
-├── robots.txt / sitemap.xml        # Search-engine crawling (31 URLs)
-├── 404.html                        # Custom GitHub Pages 404 (zh-CN)
+├── images/                         # Favicons, profile photo, publication figures, og-image.jpg
+├── pdf/                            # Publication PDFs (linked from homepage)
 ├── .github/FUNDING.yml
 ├── .nojekyll                       # Disables Jekyll processing for GitHub Pages
 └── .gitignore
@@ -57,7 +59,7 @@ Personal academic portfolio site for Jiwen Zhao — a bioinformatics and crop di
 - Every page carries `canonical`, `robots`, `keywords` (include name variants: 赵记稳 / Jiwen Zhao / zhao jiwen / zhaojiwen / CropCoder), and OpenGraph/Twitter meta.
 - `index.html` has JSON-LD `Person`; blog pages and daily issues have JSON-LD `Article`; `newpaper/index.html` has JSON-LD `Blog`.
 - Footer copyright uses `<span data-year>` — `resume.js` fills in the current year; don't hard-code years.
-- After structural changes, regenerate `sitemap.xml` (31 URLs as of 2026-11).
+- After structural changes, regenerate `sitemap.xml` (43 URLs as of 2026-11, daily issues use their publish date as `lastmod`).
 
 ## Common commands
 
